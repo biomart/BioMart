@@ -15,7 +15,7 @@
     <title>${labels.document_title}</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" type="text/css" href="mart-visual-enrichment/app/css/bootstrap/bootstrap.mod.css">
-    <link rel="stylesheet" href="mart-visual-enrichment/app/css/screen.core.css"/>
+    <link rel="stylesheet" href="mart-visual-enrichment/app/css/app.css"/>
     <c:import url="/_head.jsp?path=../" context="/"/>
 </head>
 <body ng-app="martVisualEnrichment">

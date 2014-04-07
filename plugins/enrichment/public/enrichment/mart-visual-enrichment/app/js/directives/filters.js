@@ -27,7 +27,7 @@ function putTextPromise($q, evt) {
 
 
 app.directive("uploadFilter",
-          ["$q", "queryStore", "sanitize", function ($q, qs, sanitize) {
+          ["$q", "queryStore", "sanitize", "$location", function ($q, qs, sanitize, $loc) {
     return {
         restrict: "E",
         templateUrl: partialsDir + "/upload-filter.html",
@@ -36,7 +36,7 @@ app.directive("uploadFilter",
             scope.filter = scope.$parent.$eval(attrs.filter);
             // Get data from storage.
             qs.filter(scope.filter.name).then(function (text) {
-                scope.textareaValue = text;
+                scope.setFilter(text);
             });
             iElement.find("input").on("change", function onChange (evt) {
                 var p = putTextPromise($q, evt);
@@ -50,8 +50,9 @@ app.directive("uploadFilter",
             });
 
             scope.setFilter = function (value) {
-                scope.filter.value = scope.textareaValue = value ? value : "";
-                qs.filter(scope.filter.name, value && value !== "" ? value : null);
+                scope.filter.value = scope.textareaValue = value && value !== "" ? value : null;
+                $loc.search(scope.filter.function, scope.filter.value ? 1 : null);
+                qs.filter(scope.filter.name, scope.filter.value);
             };
         }
     };

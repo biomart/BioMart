@@ -1,12 +1,7 @@
 <div class="container">
 
-        <div class="enrichment container" ng-controller="EnrichmentCtrl as enr">
+<div class="enrichment container" ng-controller="EnrichmentCtrl as enr">
             <h1 class="mve-title">Enrichment</h1>
-            <div class="button-container" ng-controller="QueryCtrl as ctrl">
-                <button class="btn btn-default" ng-click="ctrl.clear()">Clear</button>
-                <button class="btn btn-default" ng-click="ctrl.showQuery()">Get XML Query</button>
-                <button class="btn btn-danger" ng-click="ctrl.submit()">Submit</button>
-            </div>
             <div class="mve-species row" ng-controller="SpeciesCtrl">
                 <div class="col-md-6">
                     <select class="form-control"
@@ -14,6 +9,11 @@
                         ng-options="s.displayName for s in species"
                         ng-change="updateSpecies(selectedSpecies)">
                     </select>
+                </div>
+                <div class="col-md-3"  ng-controller="QueryCtrl as ctrl">
+                    <button class="btn btn-default" ng-click="ctrl.clear()">Clear</button>
+                    <button class="btn btn-default" ng-click="ctrl.showQuery()">Get XML Query</button>
+                    <button class="btn btn-danger" ng-click="ctrl.submit()">Submit</button>
                 </div>
             </div>
             <!-- sets -->
@@ -113,11 +113,6 @@
                         </tab>
                     </tabset>
                 </div>
-            </div>
-            <div class="button-container" ng-controller="QueryCtrl as ctrl">
-                <button class="btn btn-default" ng-click="ctrl.clear()">Clear</button>
-                <button class="btn btn-default" ng-click="ctrl.showQuery()">Get XML Query</button>
-                <button class="btn btn-danger" ng-click="ctrl.submit()">Submit</button>
             </div>
         </div>
 </div>
