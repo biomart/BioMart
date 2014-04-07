@@ -1,0 +1,1493 @@
+{
+   "graphs":{
+      "Gene Ontology (GO)":{
+         "edges":[
+            {
+               "source":"HLA-A",
+               "target":"REACT_11103"
+            },
+            {
+               "source":"HLA-A",
+               "target":"REACT_11103"
+            },
+            {
+               "source":"TNF",
+               "target":"REACT_1432"
+            },
+            {
+               "source":"TNF",
+               "target":"REACT_1432"
+            },
+            {
+               "source":"HLA-A",
+               "target":"REACT_11149"
+            },
+            {
+               "source":"HLA-A",
+               "target":"REACT_11149"
+            },
+            {
+               "source":"HLA-A",
+               "target":"REACT_111168"
+            },
+            {
+               "source":"HLA-A",
+               "target":"REACT_111168"
+            },
+            {
+               "source":"CASC5",
+               "target":"REACT_22186"
+            },
+            {
+               "source":"CASC5",
+               "target":"REACT_22344"
+            },
+            {
+               "source":"GNAS",
+               "target":"REACT_23946"
+            },
+            {
+               "source":"SLC39A4",
+               "target":"REACT_20603"
+            },
+            {
+               "source":"SLC2A9",
+               "target":"REACT_19281"
+            },
+            {
+               "source":"ALOX5AP",
+               "target":"REACT_150209"
+            },
+            {
+               "source":"HLA-A",
+               "target":"REACT_6835"
+            },
+            {
+               "source":"HLA-A",
+               "target":"REACT_6835"
+            },
+            {
+               "source":"EPB41L1",
+               "target":"REACT_18307"
+            },
+            {
+               "source":"MYO6",
+               "target":"REACT_18307"
+            },
+            {
+               "source":"EPB41L1",
+               "target":"REACT_18347"
+            },
+            {
+               "source":"MYO6",
+               "target":"REACT_18347"
+            },
+            {
+               "source":"ATP7A",
+               "target":"REACT_172715"
+            },
+            {
+               "source":"SOD1",
+               "target":"REACT_172715"
+            },
+            {
+               "source":"COMT",
+               "target":"REACT_6959"
+            },
+            {
+               "source":"GSS",
+               "target":"REACT_6959"
+            },
+            {
+               "source":"UGT2B17",
+               "target":"REACT_6959"
+            },
+            {
+               "source":"APRT",
+               "target":"REACT_1923"
+            },
+            {
+               "source":"PNP",
+               "target":"REACT_1923"
+            },
+            {
+               "source":"CD81",
+               "target":"REACT_11152"
+            },
+            {
+               "source":"HLA-A",
+               "target":"REACT_11152"
+            },
+            {
+               "source":"HLA-A",
+               "target":"REACT_11152"
+            },
+            {
+               "source":"MICB",
+               "target":"REACT_11152"
+            },
+            {
+               "source":"UGT2B17",
+               "target":"REACT_6784"
+            },
+            {
+               "source":"SLC1A3",
+               "target":"REACT_13594"
+            },
+            {
+               "source":"NEUROG3",
+               "target":"REACT_13673"
+            },
+            {
+               "source":"SLC1A3",
+               "target":"REACT_13639"
+            },
+            {
+               "source":"STAR",
+               "target":"REACT_11038"
+            },
+            {
+               "source":"GNAS",
+               "target":"REACT_18377"
+            },
+            {
+               "source":"SLC9A6",
+               "target":"REACT_19314"
+            },
+            {
+               "source":"CCT5",
+               "target":"REACT_17050"
+            },
+            {
+               "source":"OR2J3",
+               "target":"REACT_15488"
+            },
+            {
+               "source":"RXFP2",
+               "target":"REACT_21314"
+            },
+            {
+               "source":"COMT",
+               "target":"REACT_15548"
+            },
+            {
+               "source":"COMT",
+               "target":"REACT_15511"
+            },
+            {
+               "source":"LDHB",
+               "target":"REACT_121117"
+            },
+            {
+               "source":"LPIN2",
+               "target":"REACT_120919"
+            },
+            {
+               "source":"ALOX5AP",
+               "target":"REACT_150320"
+            },
+            {
+               "source":"TERT",
+               "target":"REACT_7974"
+            },
+            {
+               "source":"TNF",
+               "target":"REACT_1619"
+            },
+            {
+               "source":"TNF",
+               "target":"REACT_1619"
+            },
+            {
+               "source":"TNF",
+               "target":"REACT_1059"
+            },
+            {
+               "source":"TNF",
+               "target":"REACT_1059"
+            },
+            {
+               "source":"FGB",
+               "target":"REACT_1439"
+            },
+            {
+               "source":"THBD",
+               "target":"REACT_1439"
+            },
+            {
+               "source":"FGF23",
+               "target":"REACT_9452"
+            },
+            {
+               "source":"FGF23",
+               "target":"REACT_9484"
+            },
+            {
+               "source":"GNAS",
+               "target":"REACT_1665"
+            },
+            {
+               "source":"CDKN1B",
+               "target":"REACT_9003"
+            },
+            {
+               "source":"GNAS",
+               "target":"REACT_1946"
+            },
+            {
+               "source":"SLC39A4",
+               "target":"REACT_20530"
+            },
+            {
+               "source":"COMT",
+               "target":"REACT_15514"
+            },
+            {
+               "source":"FGF23",
+               "target":"REACT_111247"
+            },
+            {
+               "source":"BRAF",
+               "target":"REACT_111080"
+            },
+            {
+               "source":"ALOX5AP",
+               "target":"REACT_150420"
+            },
+            {
+               "source":"DRD5",
+               "target":"REACT_16968"
+            },
+            {
+               "source":"RPL26",
+               "target":"REACT_1797"
+            },
+            {
+               "source":"RPL35A",
+               "target":"REACT_1797"
+            },
+            {
+               "source":"RPL26",
+               "target":"REACT_1986"
+            },
+            {
+               "source":"RPL35A",
+               "target":"REACT_1986"
+            },
+            {
+               "source":"RPL26",
+               "target":"REACT_1477"
+            },
+            {
+               "source":"RPL35A",
+               "target":"REACT_1477"
+            }
+         ],
+         "nodes":[
+            {
+               "id":"REACT_11103",
+               "description":"Nef mediated downregulation of MHC class I complex cell surface expression",
+               "pvalue":"0.0445553",
+               "type":"term",
+               "bpvalue":"1"
+            },
+            {
+               "id":"HLA-A",
+               "Transcript count":"8",
+               "Strand":"1",
+               "Status (gene)":"KNOWN",
+               "Gene Start (bp)":"29898417",
+               "Gene Biotype":"protein_coding",
+               "Gene End (bp)":"29903057",
+               "description":"major histocompatibility complex, class I, A [Source:HGNC Symbol;Acc:4931]",
+               "type":"gene",
+               "Chromosome Name":"HSCHR6_MHC_QBL"
+            },
+            {
+               "id":"REACT_1432",
+               "description":"TNF signaling",
+               "pvalue":"0.0637105",
+               "type":"term",
+               "bpvalue":"1"
+            },
+            {
+               "id":"TNF",
+               "Transcript count":"1",
+               "Strand":"1",
+               "Status (gene)":"KNOWN",
+               "Gene Start (bp)":"31533585",
+               "Gene Biotype":"protein_coding",
+               "Gene End (bp)":"31536356",
+               "description":"tumor necrosis factor [Source:HGNC Symbol;Acc:11892]",
+               "type":"gene",
+               "Chromosome Name":"HSCHR6_MHC_QBL"
+            },
+            {
+               "id":"REACT_11149",
+               "description":"Nef-mediates down modulation of cell surface receptors by recruiting them to clathrin adapters",
+               "pvalue":"0.0637105",
+               "type":"term",
+               "bpvalue":"1"
+            },
+            {
+               "id":"REACT_111168",
+               "description":"Endosomal/Vacuolar pathway",
+               "pvalue":"0.0637105",
+               "type":"term",
+               "bpvalue":"1"
+            },
+            {
+               "id":"REACT_22186",
+               "description":"Deposition of New CENPA-containing Nucleosomes at the Centromere",
+               "pvalue":"0.0719139",
+               "type":"term",
+               "bpvalue":"1"
+            },
+            {
+               "id":"CASC5",
+               "Transcript count":"12",
+               "Strand":"1",
+               "Status (gene)":"KNOWN",
+               "Gene Start (bp)":"40886218",
+               "Gene Biotype":"protein_coding",
+               "Gene End (bp)":"40956540",
+               "description":"cancer susceptibility candidate 5 [Source:HGNC Symbol;Acc:24054]",
+               "type":"gene",
+               "Chromosome Name":"15"
+            },
+            {
+               "id":"REACT_22344",
+               "description":"Nucleosome assembly",
+               "pvalue":"0.0719139",
+               "type":"term",
+               "bpvalue":"1"
+            },
+            {
+               "id":"REACT_23946",
+               "description":"Prostacyclin signalling through prostacyclin receptor",
+               "pvalue":"0.0719139",
+               "type":"term",
+               "bpvalue":"1"
+            },
+            {
+               "id":"GNAS",
+               "Transcript count":"67",
+               "Strand":"1",
+               "Status (gene)":"KNOWN",
+               "Gene Start (bp)":"57414773",
+               "Gene Biotype":"protein_coding",
+               "Gene End (bp)":"57486247",
+               "description":"GNAS complex locus [Source:HGNC Symbol;Acc:4392]",
+               "type":"gene",
+               "Chromosome Name":"20"
+            },
+            {
+               "id":"REACT_20603",
+               "description":"Zinc influx into cells by the SLC39 gene family",
+               "pvalue":"0.0719139",
+               "type":"term",
+               "bpvalue":"1"
+            },
+            {
+               "id":"SLC39A4",
+               "Transcript count":"9",
+               "Strand":"-1",
+               "Status (gene)":"KNOWN",
+               "Gene Start (bp)":"145635126",
+               "Gene Biotype":"protein_coding",
+               "Gene End (bp)":"145642279",
+               "description":"solute carrier family 39 (zinc transporter), member 4 [Source:HGNC Symbol;Acc:17129]",
+               "type":"gene",
+               "Chromosome Name":"8"
+            },
+            {
+               "id":"REACT_19281",
+               "description":"Class II GLUTs",
+               "pvalue":"0.0719139",
+               "type":"term",
+               "bpvalue":"1"
+            },
+            {
+               "id":"SLC2A9",
+               "Transcript count":"13",
+               "Strand":"-1",
+               "Status (gene)":"KNOWN",
+               "Gene Start (bp)":"9772777",
+               "Gene Biotype":"protein_coding",
+               "Gene End (bp)":"10056560",
+               "description":"solute carrier family 2 (facilitated glucose transporter), member 9 [Source:HGNC Symbol;Acc:13446]",
+               "type":"gene",
+               "Chromosome Name":"4"
+            }
+         ]
+      },
+      "OMIMDiseases":{
+         "edges":[
+            {
+               "source":"HLA-A",
+               "target":"REACT_11103"
+            },
+            {
+               "source":"HLA-A",
+               "target":"REACT_11103"
+            },
+            {
+               "source":"TNF",
+               "target":"REACT_1432"
+            },
+            {
+               "source":"TNF",
+               "target":"REACT_1432"
+            },
+            {
+               "source":"HLA-A",
+               "target":"REACT_11149"
+            },
+            {
+               "source":"HLA-A",
+               "target":"REACT_11149"
+            },
+            {
+               "source":"HLA-A",
+               "target":"REACT_111168"
+            },
+            {
+               "source":"HLA-A",
+               "target":"REACT_111168"
+            },
+            {
+               "source":"CASC5",
+               "target":"REACT_22186"
+            },
+            {
+               "source":"CASC5",
+               "target":"REACT_22344"
+            },
+            {
+               "source":"GNAS",
+               "target":"REACT_23946"
+            },
+            {
+               "source":"SLC39A4",
+               "target":"REACT_20603"
+            },
+            {
+               "source":"SLC2A9",
+               "target":"REACT_19281"
+            },
+            {
+               "source":"ALOX5AP",
+               "target":"REACT_150209"
+            },
+            {
+               "source":"HLA-A",
+               "target":"REACT_6835"
+            },
+            {
+               "source":"HLA-A",
+               "target":"REACT_6835"
+            },
+            {
+               "source":"EPB41L1",
+               "target":"REACT_18307"
+            },
+            {
+               "source":"MYO6",
+               "target":"REACT_18307"
+            },
+            {
+               "source":"EPB41L1",
+               "target":"REACT_18347"
+            },
+            {
+               "source":"MYO6",
+               "target":"REACT_18347"
+            },
+            {
+               "source":"ATP7A",
+               "target":"REACT_172715"
+            },
+            {
+               "source":"SOD1",
+               "target":"REACT_172715"
+            },
+            {
+               "source":"COMT",
+               "target":"REACT_6959"
+            },
+            {
+               "source":"GSS",
+               "target":"REACT_6959"
+            },
+            {
+               "source":"UGT2B17",
+               "target":"REACT_6959"
+            },
+            {
+               "source":"APRT",
+               "target":"REACT_1923"
+            },
+            {
+               "source":"PNP",
+               "target":"REACT_1923"
+            },
+            {
+               "source":"CD81",
+               "target":"REACT_11152"
+            },
+            {
+               "source":"HLA-A",
+               "target":"REACT_11152"
+            },
+            {
+               "source":"HLA-A",
+               "target":"REACT_11152"
+            },
+            {
+               "source":"MICB",
+               "target":"REACT_11152"
+            },
+            {
+               "source":"UGT2B17",
+               "target":"REACT_6784"
+            },
+            {
+               "source":"SLC1A3",
+               "target":"REACT_13594"
+            },
+            {
+               "source":"NEUROG3",
+               "target":"REACT_13673"
+            },
+            {
+               "source":"SLC1A3",
+               "target":"REACT_13639"
+            },
+            {
+               "source":"STAR",
+               "target":"REACT_11038"
+            },
+            {
+               "source":"GNAS",
+               "target":"REACT_18377"
+            },
+            {
+               "source":"SLC9A6",
+               "target":"REACT_19314"
+            },
+            {
+               "source":"CCT5",
+               "target":"REACT_17050"
+            },
+            {
+               "source":"OR2J3",
+               "target":"REACT_15488"
+            },
+            {
+               "source":"RXFP2",
+               "target":"REACT_21314"
+            },
+            {
+               "source":"COMT",
+               "target":"REACT_15548"
+            },
+            {
+               "source":"COMT",
+               "target":"REACT_15511"
+            },
+            {
+               "source":"LDHB",
+               "target":"REACT_121117"
+            },
+            {
+               "source":"LPIN2",
+               "target":"REACT_120919"
+            },
+            {
+               "source":"ALOX5AP",
+               "target":"REACT_150320"
+            },
+            {
+               "source":"TERT",
+               "target":"REACT_7974"
+            },
+            {
+               "source":"TNF",
+               "target":"REACT_1619"
+            },
+            {
+               "source":"TNF",
+               "target":"REACT_1619"
+            },
+            {
+               "source":"TNF",
+               "target":"REACT_1059"
+            },
+            {
+               "source":"TNF",
+               "target":"REACT_1059"
+            },
+            {
+               "source":"FGB",
+               "target":"REACT_1439"
+            },
+            {
+               "source":"THBD",
+               "target":"REACT_1439"
+            },
+            {
+               "source":"FGF23",
+               "target":"REACT_9452"
+            },
+            {
+               "source":"FGF23",
+               "target":"REACT_9484"
+            },
+            {
+               "source":"GNAS",
+               "target":"REACT_1665"
+            },
+            {
+               "source":"CDKN1B",
+               "target":"REACT_9003"
+            },
+            {
+               "source":"GNAS",
+               "target":"REACT_1946"
+            },
+            {
+               "source":"SLC39A4",
+               "target":"REACT_20530"
+            },
+            {
+               "source":"COMT",
+               "target":"REACT_15514"
+            },
+            {
+               "source":"FGF23",
+               "target":"REACT_111247"
+            },
+            {
+               "source":"BRAF",
+               "target":"REACT_111080"
+            },
+            {
+               "source":"ALOX5AP",
+               "target":"REACT_150420"
+            },
+            {
+               "source":"DRD5",
+               "target":"REACT_16968"
+            },
+            {
+               "source":"RPL26",
+               "target":"REACT_1797"
+            },
+            {
+               "source":"RPL35A",
+               "target":"REACT_1797"
+            },
+            {
+               "source":"RPL26",
+               "target":"REACT_1986"
+            },
+            {
+               "source":"RPL35A",
+               "target":"REACT_1986"
+            },
+            {
+               "source":"RPL26",
+               "target":"REACT_1477"
+            },
+            {
+               "source":"RPL35A",
+               "target":"REACT_1477"
+            }
+         ],
+         "nodes":[
+            {
+               "id":"REACT_11103",
+               "description":"Nef mediated downregulation of MHC class I complex cell surface expression",
+               "pvalue":"0.0445553",
+               "type":"term",
+               "bpvalue":"1"
+            },
+            {
+               "id":"HLA-A",
+               "Transcript count":"8",
+               "Strand":"1",
+               "Status (gene)":"KNOWN",
+               "Gene Start (bp)":"29898417",
+               "Gene Biotype":"protein_coding",
+               "Gene End (bp)":"29903057",
+               "description":"major histocompatibility complex, class I, A [Source:HGNC Symbol;Acc:4931]",
+               "type":"gene",
+               "Chromosome Name":"HSCHR6_MHC_QBL"
+            },
+            {
+               "id":"REACT_1432",
+               "description":"TNF signaling",
+               "pvalue":"0.0637105",
+               "type":"term",
+               "bpvalue":"1"
+            },
+            {
+               "id":"TNF",
+               "Transcript count":"1",
+               "Strand":"1",
+               "Status (gene)":"KNOWN",
+               "Gene Start (bp)":"31533585",
+               "Gene Biotype":"protein_coding",
+               "Gene End (bp)":"31536356",
+               "description":"tumor necrosis factor [Source:HGNC Symbol;Acc:11892]",
+               "type":"gene",
+               "Chromosome Name":"HSCHR6_MHC_QBL"
+            },
+            {
+               "id":"REACT_11149",
+               "description":"Nef-mediates down modulation of cell surface receptors by recruiting them to clathrin adapters",
+               "pvalue":"0.0637105",
+               "type":"term",
+               "bpvalue":"1"
+            },
+            {
+               "id":"REACT_111168",
+               "description":"Endosomal/Vacuolar pathway",
+               "pvalue":"0.0637105",
+               "type":"term",
+               "bpvalue":"1"
+            },
+            {
+               "id":"REACT_22186",
+               "description":"Deposition of New CENPA-containing Nucleosomes at the Centromere",
+               "pvalue":"0.0719139",
+               "type":"term",
+               "bpvalue":"1"
+            },
+            {
+               "id":"CASC5",
+               "Transcript count":"12",
+               "Strand":"1",
+               "Status (gene)":"KNOWN",
+               "Gene Start (bp)":"40886218",
+               "Gene Biotype":"protein_coding",
+               "Gene End (bp)":"40956540",
+               "description":"cancer susceptibility candidate 5 [Source:HGNC Symbol;Acc:24054]",
+               "type":"gene",
+               "Chromosome Name":"15"
+            },
+            {
+               "id":"REACT_22344",
+               "description":"Nucleosome assembly",
+               "pvalue":"0.0719139",
+               "type":"term",
+               "bpvalue":"1"
+            },
+            {
+               "id":"REACT_23946",
+               "description":"Prostacyclin signalling through prostacyclin receptor",
+               "pvalue":"0.0719139",
+               "type":"term",
+               "bpvalue":"1"
+            },
+            {
+               "id":"GNAS",
+               "Transcript count":"67",
+               "Strand":"1",
+               "Status (gene)":"KNOWN",
+               "Gene Start (bp)":"57414773",
+               "Gene Biotype":"protein_coding",
+               "Gene End (bp)":"57486247",
+               "description":"GNAS complex locus [Source:HGNC Symbol;Acc:4392]",
+               "type":"gene",
+               "Chromosome Name":"20"
+            },
+            {
+               "id":"REACT_20603",
+               "description":"Zinc influx into cells by the SLC39 gene family",
+               "pvalue":"0.0719139",
+               "type":"term",
+               "bpvalue":"1"
+            },
+            {
+               "id":"SLC39A4",
+               "Transcript count":"9",
+               "Strand":"-1",
+               "Status (gene)":"KNOWN",
+               "Gene Start (bp)":"145635126",
+               "Gene Biotype":"protein_coding",
+               "Gene End (bp)":"145642279",
+               "description":"solute carrier family 39 (zinc transporter), member 4 [Source:HGNC Symbol;Acc:17129]",
+               "type":"gene",
+               "Chromosome Name":"8"
+            },
+            {
+               "id":"REACT_19281",
+               "description":"Class II GLUTs",
+               "pvalue":"0.0719139",
+               "type":"term",
+               "bpvalue":"1"
+            },
+            {
+               "id":"SLC2A9",
+               "Transcript count":"13",
+               "Strand":"-1",
+               "Status (gene)":"KNOWN",
+               "Gene Start (bp)":"9772777",
+               "Gene Biotype":"protein_coding",
+               "Gene End (bp)":"10056560",
+               "description":"solute carrier family 2 (facilitated glucose transporter), member 9 [Source:HGNC Symbol;Acc:13446]",
+               "type":"gene",
+               "Chromosome Name":"4"
+            },
+            {
+               "id":"REACT_150209",
+               "description":"Synthesis of 5-eicosatetraenoic acids",
+               "pvalue":"0.0719139",
+               "type":"term",
+               "bpvalue":"1"
+            },
+            {
+               "id":"ALOX5AP",
+               "Transcript count":"2",
+               "Strand":"1",
+               "Status (gene)":"KNOWN",
+               "Gene Start (bp)":"31309645",
+               "Gene Biotype":"protein_coding",
+               "Gene End (bp)":"31338556",
+               "description":"arachidonate 5-lipoxygenase-activating protein [Source:HGNC Symbol;Acc:436]",
+               "type":"gene",
+               "Chromosome Name":"13"
+            },
+            {
+               "id":"REACT_6835",
+               "description":"The role of Nef in HIV-1 replication and disease pathogenesis",
+               "pvalue":"0.0850539",
+               "type":"term",
+               "bpvalue":"1"
+            },
+            {
+               "id":"REACT_18307",
+               "description":"Trafficking of AMPA receptors",
+               "pvalue":"0.0850539",
+               "type":"term",
+               "bpvalue":"1"
+            },
+            {
+               "id":"EPB41L1",
+               "Transcript count":"17",
+               "Strand":"1",
+               "Status (gene)":"KNOWN",
+               "Gene Start (bp)":"34679426",
+               "Gene Biotype":"protein_coding",
+               "Gene End (bp)":"34820721",
+               "description":"erythrocyte membrane protein band 4.1-like 1 [Source:HGNC Symbol;Acc:3378]",
+               "type":"gene",
+               "Chromosome Name":"20"
+            },
+            {
+               "id":"MYO6",
+               "Transcript count":"6",
+               "Strand":"1",
+               "Status (gene)":"KNOWN",
+               "Gene Start (bp)":"76458909",
+               "Gene Biotype":"protein_coding",
+               "Gene End (bp)":"76629254",
+               "description":"myosin VI [Source:HGNC Symbol;Acc:7605]",
+               "type":"gene",
+               "Chromosome Name":"6"
+            },
+            {
+               "id":"REACT_18347",
+               "description":"Glutamate Binding, Activation of AMPA Receptors and Synaptic Plasticity",
+               "pvalue":"0.0850539",
+               "type":"term",
+               "bpvalue":"1"
+            },
+            {
+               "id":"REACT_172715",
+               "description":"Detoxification of Reactive Oxygen Species",
+               "pvalue":"0.0850539",
+               "type":"term",
+               "bpvalue":"1"
+            },
+            {
+               "id":"ATP7A",
+               "Transcript count":"3",
+               "Strand":"1",
+               "Status (gene)":"KNOWN",
+               "Gene Start (bp)":"77166194",
+               "Gene Biotype":"protein_coding",
+               "Gene End (bp)":"77305892",
+               "description":"ATPase, Cu++ transporting, alpha polypeptide [Source:HGNC Symbol;Acc:869]",
+               "type":"gene",
+               "Chromosome Name":"X"
+            },
+            {
+               "id":"SOD1",
+               "Transcript count":"4",
+               "Strand":"1",
+               "Status (gene)":"KNOWN",
+               "Gene Start (bp)":"33031935",
+               "Gene Biotype":"protein_coding",
+               "Gene End (bp)":"33041244",
+               "description":"superoxide dismutase 1, soluble [Source:HGNC Symbol;Acc:11179]",
+               "type":"gene",
+               "Chromosome Name":"21"
+            },
+            {
+               "id":"REACT_6959",
+               "description":"Phase II conjugation",
+               "pvalue":"0.102669",
+               "type":"term",
+               "bpvalue":"1"
+            },
+            {
+               "id":"COMT",
+               "Transcript count":"11",
+               "Strand":"1",
+               "Status (gene)":"KNOWN",
+               "Gene Start (bp)":"19929130",
+               "Gene Biotype":"protein_coding",
+               "Gene End (bp)":"19957498",
+               "description":"catechol-O-methyltransferase [Source:HGNC Symbol;Acc:2228]",
+               "type":"gene",
+               "Chromosome Name":"22"
+            },
+            {
+               "id":"GSS",
+               "Transcript count":"3",
+               "Strand":"-1",
+               "Status (gene)":"KNOWN",
+               "Gene Start (bp)":"33516236",
+               "Gene Biotype":"protein_coding",
+               "Gene End (bp)":"33543620",
+               "description":"glutathione synthetase [Source:HGNC Symbol;Acc:4624]",
+               "type":"gene",
+               "Chromosome Name":"20"
+            },
+            {
+               "id":"UGT2B17",
+               "Transcript count":"1",
+               "Strand":"-1",
+               "Status (gene)":"KNOWN",
+               "Gene Start (bp)":"69402902",
+               "Gene Biotype":"protein_coding",
+               "Gene End (bp)":"69434245",
+               "description":"UDP glucuronosyltransferase 2 family, polypeptide B17 [Source:HGNC Symbol;Acc:12547]",
+               "type":"gene",
+               "Chromosome Name":"4"
+            },
+            {
+               "id":"REACT_1923",
+               "description":"Purine salvage",
+               "pvalue":"0.108174",
+               "type":"term",
+               "bpvalue":"1"
+            },
+            {
+               "id":"APRT",
+               "Transcript count":"11",
+               "Strand":"-1",
+               "Status (gene)":"KNOWN",
+               "Gene Start (bp)":"88875747",
+               "Gene Biotype":"protein_coding",
+               "Gene End (bp)":"88878352",
+               "description":"adenine phosphoribosyltransferase [Source:HGNC Symbol;Acc:626]",
+               "type":"gene",
+               "Chromosome Name":"16"
+            },
+            {
+               "id":"PNP",
+               "Transcript count":"8",
+               "Strand":"1",
+               "Status (gene)":"KNOWN",
+               "Gene Start (bp)":"20937113",
+               "Gene Biotype":"protein_coding",
+               "Gene End (bp)":"20945253",
+               "description":"purine nucleoside phosphorylase [Source:HGNC Symbol;Acc:7892]",
+               "type":"gene",
+               "Chromosome Name":"14"
+            },
+            {
+               "id":"REACT_11152",
+               "description":"Immunoregulatory interactions between a Lymphoid and a non-Lymphoid cell",
+               "pvalue":"0.112161",
+               "type":"term",
+               "bpvalue":"1"
+            },
+            {
+               "id":"CD81",
+               "Transcript count":"17",
+               "Strand":"1",
+               "Status (gene)":"KNOWN",
+               "Gene Start (bp)":"2397407",
+               "Gene Biotype":"protein_coding",
+               "Gene End (bp)":"2418649",
+               "description":"CD81 molecule [Source:HGNC Symbol;Acc:1701]",
+               "type":"gene",
+               "Chromosome Name":"11"
+            },
+            {
+               "id":"MICB",
+               "Transcript count":"4",
+               "Strand":"1",
+               "Status (gene)":"KNOWN",
+               "Gene Start (bp)":"31456185",
+               "Gene Biotype":"protein_coding",
+               "Gene End (bp)":"31469201",
+               "description":"MHC class I polypeptide-related sequence B [Source:HGNC Symbol;Acc:7091]",
+               "type":"gene",
+               "Chromosome Name":"HSCHR6_MHC_QBL"
+            }
+         ]
+      },
+      "Reactome Pathways":{
+         "edges":[
+            {
+               "source":"HLA-A",
+               "target":"REACT_11103"
+            },
+            {
+               "source":"HLA-A",
+               "target":"REACT_11103"
+            },
+            {
+               "source":"TNF",
+               "target":"REACT_1432"
+            },
+            {
+               "source":"TNF",
+               "target":"REACT_1432"
+            },
+            {
+               "source":"HLA-A",
+               "target":"REACT_11149"
+            },
+            {
+               "source":"HLA-A",
+               "target":"REACT_11149"
+            },
+            {
+               "source":"HLA-A",
+               "target":"REACT_111168"
+            },
+            {
+               "source":"HLA-A",
+               "target":"REACT_111168"
+            },
+            {
+               "source":"CASC5",
+               "target":"REACT_22186"
+            },
+            {
+               "source":"CASC5",
+               "target":"REACT_22344"
+            },
+            {
+               "source":"GNAS",
+               "target":"REACT_23946"
+            },
+            {
+               "source":"SLC39A4",
+               "target":"REACT_20603"
+            },
+            {
+               "source":"SLC2A9",
+               "target":"REACT_19281"
+            },
+            {
+               "source":"ALOX5AP",
+               "target":"REACT_150209"
+            },
+            {
+               "source":"HLA-A",
+               "target":"REACT_6835"
+            },
+            {
+               "source":"HLA-A",
+               "target":"REACT_6835"
+            },
+            {
+               "source":"EPB41L1",
+               "target":"REACT_18307"
+            },
+            {
+               "source":"MYO6",
+               "target":"REACT_18307"
+            },
+            {
+               "source":"EPB41L1",
+               "target":"REACT_18347"
+            },
+            {
+               "source":"MYO6",
+               "target":"REACT_18347"
+            },
+            {
+               "source":"ATP7A",
+               "target":"REACT_172715"
+            },
+            {
+               "source":"SOD1",
+               "target":"REACT_172715"
+            },
+            {
+               "source":"COMT",
+               "target":"REACT_6959"
+            },
+            {
+               "source":"GSS",
+               "target":"REACT_6959"
+            },
+            {
+               "source":"UGT2B17",
+               "target":"REACT_6959"
+            },
+            {
+               "source":"APRT",
+               "target":"REACT_1923"
+            },
+            {
+               "source":"PNP",
+               "target":"REACT_1923"
+            },
+            {
+               "source":"CD81",
+               "target":"REACT_11152"
+            },
+            {
+               "source":"HLA-A",
+               "target":"REACT_11152"
+            },
+            {
+               "source":"HLA-A",
+               "target":"REACT_11152"
+            },
+            {
+               "source":"MICB",
+               "target":"REACT_11152"
+            },
+            {
+               "source":"UGT2B17",
+               "target":"REACT_6784"
+            },
+            {
+               "source":"SLC1A3",
+               "target":"REACT_13594"
+            },
+            {
+               "source":"NEUROG3",
+               "target":"REACT_13673"
+            },
+            {
+               "source":"SLC1A3",
+               "target":"REACT_13639"
+            },
+            {
+               "source":"STAR",
+               "target":"REACT_11038"
+            },
+            {
+               "source":"GNAS",
+               "target":"REACT_18377"
+            },
+            {
+               "source":"SLC9A6",
+               "target":"REACT_19314"
+            },
+            {
+               "source":"CCT5",
+               "target":"REACT_17050"
+            },
+            {
+               "source":"OR2J3",
+               "target":"REACT_15488"
+            },
+            {
+               "source":"RXFP2",
+               "target":"REACT_21314"
+            },
+            {
+               "source":"COMT",
+               "target":"REACT_15548"
+            },
+            {
+               "source":"COMT",
+               "target":"REACT_15511"
+            },
+            {
+               "source":"LDHB",
+               "target":"REACT_121117"
+            },
+            {
+               "source":"LPIN2",
+               "target":"REACT_120919"
+            },
+            {
+               "source":"ALOX5AP",
+               "target":"REACT_150320"
+            },
+            {
+               "source":"TERT",
+               "target":"REACT_7974"
+            },
+            {
+               "source":"TNF",
+               "target":"REACT_1619"
+            },
+            {
+               "source":"TNF",
+               "target":"REACT_1619"
+            },
+            {
+               "source":"TNF",
+               "target":"REACT_1059"
+            },
+            {
+               "source":"TNF",
+               "target":"REACT_1059"
+            },
+            {
+               "source":"FGB",
+               "target":"REACT_1439"
+            },
+            {
+               "source":"THBD",
+               "target":"REACT_1439"
+            },
+            {
+               "source":"FGF23",
+               "target":"REACT_9452"
+            },
+            {
+               "source":"FGF23",
+               "target":"REACT_9484"
+            },
+            {
+               "source":"GNAS",
+               "target":"REACT_1665"
+            },
+            {
+               "source":"CDKN1B",
+               "target":"REACT_9003"
+            },
+            {
+               "source":"GNAS",
+               "target":"REACT_1946"
+            },
+            {
+               "source":"SLC39A4",
+               "target":"REACT_20530"
+            },
+            {
+               "source":"COMT",
+               "target":"REACT_15514"
+            },
+            {
+               "source":"FGF23",
+               "target":"REACT_111247"
+            },
+            {
+               "source":"BRAF",
+               "target":"REACT_111080"
+            },
+            {
+               "source":"ALOX5AP",
+               "target":"REACT_150420"
+            },
+            {
+               "source":"DRD5",
+               "target":"REACT_16968"
+            },
+            {
+               "source":"RPL26",
+               "target":"REACT_1797"
+            },
+            {
+               "source":"RPL35A",
+               "target":"REACT_1797"
+            },
+            {
+               "source":"RPL26",
+               "target":"REACT_1986"
+            },
+            {
+               "source":"RPL35A",
+               "target":"REACT_1986"
+            },
+            {
+               "source":"RPL26",
+               "target":"REACT_1477"
+            },
+            {
+               "source":"RPL35A",
+               "target":"REACT_1477"
+            }
+         ],
+         "nodes":[
+            {
+               "id":"REACT_11103",
+               "description":"Nef mediated downregulation of MHC class I complex cell surface expression",
+               "pvalue":"0.0445553",
+               "type":"term",
+               "bpvalue":"1"
+            },
+            {
+               "id":"HLA-A",
+               "Transcript count":"8",
+               "Strand":"1",
+               "Status (gene)":"KNOWN",
+               "Gene Start (bp)":"29898417",
+               "Gene Biotype":"protein_coding",
+               "Gene End (bp)":"29903057",
+               "description":"major histocompatibility complex, class I, A [Source:HGNC Symbol;Acc:4931]",
+               "type":"gene",
+               "Chromosome Name":"HSCHR6_MHC_QBL"
+            },
+            {
+               "id":"REACT_1432",
+               "description":"TNF signaling",
+               "pvalue":"0.0637105",
+               "type":"term",
+               "bpvalue":"1"
+            },
+            {
+               "id":"TNF",
+               "Transcript count":"1",
+               "Strand":"1",
+               "Status (gene)":"KNOWN",
+               "Gene Start (bp)":"31533585",
+               "Gene Biotype":"protein_coding",
+               "Gene End (bp)":"31536356",
+               "description":"tumor necrosis factor [Source:HGNC Symbol;Acc:11892]",
+               "type":"gene",
+               "Chromosome Name":"HSCHR6_MHC_QBL"
+            },
+            {
+               "id":"REACT_11149",
+               "description":"Nef-mediates down modulation of cell surface receptors by recruiting them to clathrin adapters",
+               "pvalue":"0.0637105",
+               "type":"term",
+               "bpvalue":"1"
+            },
+            {
+               "id":"REACT_111168",
+               "description":"Endosomal/Vacuolar pathway",
+               "pvalue":"0.0637105",
+               "type":"term",
+               "bpvalue":"1"
+            },
+            {
+               "id":"REACT_22186",
+               "description":"Deposition of New CENPA-containing Nucleosomes at the Centromere",
+               "pvalue":"0.0719139",
+               "type":"term",
+               "bpvalue":"1"
+            },
+            {
+               "id":"CASC5",
+               "Transcript count":"12",
+               "Strand":"1",
+               "Status (gene)":"KNOWN",
+               "Gene Start (bp)":"40886218",
+               "Gene Biotype":"protein_coding",
+               "Gene End (bp)":"40956540",
+               "description":"cancer susceptibility candidate 5 [Source:HGNC Symbol;Acc:24054]",
+               "type":"gene",
+               "Chromosome Name":"15"
+            },
+            {
+               "id":"REACT_22344",
+               "description":"Nucleosome assembly",
+               "pvalue":"0.0719139",
+               "type":"term",
+               "bpvalue":"1"
+            },
+            {
+               "id":"REACT_23946",
+               "description":"Prostacyclin signalling through prostacyclin receptor",
+               "pvalue":"0.0719139",
+               "type":"term",
+               "bpvalue":"1"
+            },
+            {
+               "id":"GNAS",
+               "Transcript count":"67",
+               "Strand":"1",
+               "Status (gene)":"KNOWN",
+               "Gene Start (bp)":"57414773",
+               "Gene Biotype":"protein_coding",
+               "Gene End (bp)":"57486247",
+               "description":"GNAS complex locus [Source:HGNC Symbol;Acc:4392]",
+               "type":"gene",
+               "Chromosome Name":"20"
+            },
+            {
+               "id":"REACT_20603",
+               "description":"Zinc influx into cells by the SLC39 gene family",
+               "pvalue":"0.0719139",
+               "type":"term",
+               "bpvalue":"1"
+            },
+            {
+               "id":"SLC39A4",
+               "Transcript count":"9",
+               "Strand":"-1",
+               "Status (gene)":"KNOWN",
+               "Gene Start (bp)":"145635126",
+               "Gene Biotype":"protein_coding",
+               "Gene End (bp)":"145642279",
+               "description":"solute carrier family 39 (zinc transporter), member 4 [Source:HGNC Symbol;Acc:17129]",
+               "type":"gene",
+               "Chromosome Name":"8"
+            },
+            {
+               "id":"REACT_19281",
+               "description":"Class II GLUTs",
+               "pvalue":"0.0719139",
+               "type":"term",
+               "bpvalue":"1"
+            },
+            {
+               "id":"SLC2A9",
+               "Transcript count":"13",
+               "Strand":"-1",
+               "Status (gene)":"KNOWN",
+               "Gene Start (bp)":"9772777",
+               "Gene Biotype":"protein_coding",
+               "Gene End (bp)":"10056560",
+               "description":"solute carrier family 2 (facilitated glucose transporter), member 9 [Source:HGNC Symbol;Acc:13446]",
+               "type":"gene",
+               "Chromosome Name":"4"
+            },
+            {
+               "id":"REACT_150209",
+               "description":"Synthesis of 5-eicosatetraenoic acids",
+               "pvalue":"0.0719139",
+               "type":"term",
+               "bpvalue":"1"
+            },
+            {
+               "id":"ALOX5AP",
+               "Transcript count":"2",
+               "Strand":"1",
+               "Status (gene)":"KNOWN",
+               "Gene Start (bp)":"31309645",
+               "Gene Biotype":"protein_coding",
+               "Gene End (bp)":"31338556",
+               "description":"arachidonate 5-lipoxygenase-activating protein [Source:HGNC Symbol;Acc:436]",
+               "type":"gene",
+               "Chromosome Name":"13"
+            },
+            {
+               "id":"REACT_6835",
+               "description":"The role of Nef in HIV-1 replication and disease pathogenesis",
+               "pvalue":"0.0850539",
+               "type":"term",
+               "bpvalue":"1"
+            }
+         ]
+      }
+   }
+}

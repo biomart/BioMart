@@ -1,0 +1,1 @@
+<!DOCTYPE Query><Query client="biomartclient" processor="TSV" limit="5" header="1"><Processor></Processor><Dataset name="pathway" config="pathway_config"><Attribute name="stableidentifier_identifier"/><Attribute name="species__displayname"/></Dataset></Query>

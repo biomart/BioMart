@@ -1,0 +1,7 @@
+<config>
+	<oauth openid="https://me.yahoo.com/a/IyINRct235wr0Il0NtQMUcKwenvgzIUqbyaA"/>
+	<datasets>
+		<dataset name="tcgaLAML" database="dcc_tcgaLAML4c" dbhost="dcc-qa.oicr.on.ca" dbport="3306" dbuser="dcc_web" password="sgg32fde"/>
+		<dataset name="tcgaCOAD" database="dcc_tcgaCOAD4c" dbhost="dcc-qa.oicr.on.ca" dbport="3306" dbuser="dcc_web" password="sgg32fde"/>
+	</datasets>
+</config>

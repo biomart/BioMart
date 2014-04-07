@@ -1,0 +1,9 @@
+<div>
+    <div>
+        <p class="lead">{{filter.displayName}}</p>
+        <!-- <p>{{filter.description}}</p> -->
+    </div>
+    <select class="form-control mve-select" ng-model="selected" ng-options="f.displayName for f in options" ng-change="onSelect(selected)">
+        <option value="">----</option>
+    </select>
+</div>

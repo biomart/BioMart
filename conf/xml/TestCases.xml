@@ -1,0 +1,13 @@
+<testcases>
+	<!-- default location: ../../../registry, otherwirse put an absolute path -->
+	<!-- make sure that key is in the same location-->
+	<sourcefile xml="icgc3.xml" key=".icgc3" location="default" enabled="true"> 
+	
+		<testcase description="simple test" enabled="true">
+			<Query client="webbrowser" processor="TSV" limit="-1" header="1"><Dataset name="hsapiens_gene_ensembl_tcgaLAML" config="hsapiens_gene_ensembl_5_1"><Attribute name="cancertype"/><Attribute name="assemblyversion"/><Attribute name="ensembl_gene_id"/><Attribute name="hgnc_symbol"/><Attribute name="description"/><Attribute name="chromosome_name"/><Attribute name="start_position"/><Attribute name="end_position"/><Attribute name="strand"/></Dataset></Query>
+		</testcase>
+		<testcase description="error" enabled="true">
+			<Query client="webbrowser" processor="TSV" limit="-1" header="1"><Dataset name="sample_tcgaLAML" config="sample_3_1"><Filter name="sample_type_bad" value="blood"/><Filter name="sample__mutation_summary_bool__dm__has_meth__1_bool" value="only"/><Attribute name="donor_id"/><Attribute name="diagnosis_id"/><Attribute name="sample_id"/><Attribute name="cancertype"/><Attribute name="sample_type"/></Dataset></Query>
+		</testcase>
+	</sourcefile>
+</testcases>

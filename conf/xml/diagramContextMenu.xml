@@ -1,0 +1,15 @@
+<contextMenu>
+	<datasettable>
+		<menuItem name="explaintable" title="Explain Table" disabled="0" mnemonic=""/>
+		<menuItem name="properties" title="properties" disabled="0"/>
+	</datasettable>
+	<datasetcolumn>
+		<menuItem name="properties" title="properties" disabled="0"/>	
+	</datasetcolumn>
+	<targetdiagram>
+		<menuItem name="findtable" title="find table..." disabled="0"/>
+	</targetdiagram>
+	<schemadiagram>
+		<menuItem name="findtable" title="find table..." disabled="0"/>
+	</schemadiagram>
+</contextMenu>

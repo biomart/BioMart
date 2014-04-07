@@ -1,0 +1,1 @@
+<!DOCTYPE Query><Query client="biomartclient" processor="TSV" limit="-1" header="1"><Processor></Processor><Dataset name="pathway" config="pathway_config"><Filter name="referencepeptidesequence_uniprot_id_list" value="P25205"/><Attribute name="stableidentifier_identifier"/><Attribute name="species__displayname"/></Dataset></Query>

@@ -1,0 +1,14 @@
+<contextMenu>
+	<ptmenu>
+		<menuItem name="clonecolumn" title="Clone" disabled="0"/> 
+		<menuItem name="newColumn" title="New Column" disabled="0"/>
+		<menuItem name="update" title="Update" disabled="0"/>
+		<menuItem name="newrow" title="new row" disabled="0"/>
+		<Separator/>
+		<menuItem name="references" title="references" disabled="0"/>
+	</ptmenu>
+	<datasourcemanagement>
+		<!--<menuItem name="remove" title="Remove" disabled="1"/> -->
+		<!-- <menuItem name="update" title="Update" disabled="0"/> -->
+	</datasourcemanagement>
+</contextMenu>

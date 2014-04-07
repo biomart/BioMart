@@ -1,0 +1,26 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+PREFIX accesspoint: <http://central.biomart.org/martsemantics/snp_config/ontology#>
+PREFIX class: <biomart://central.biomart.org/martsemantics/snp_config/ontology/class#>
+PREFIX dataset: <biomart://central.biomart.org/martsemantics/snp_config/ontology/dataset#>
+PREFIX attribute: <biomart://central.biomart.org/martsemantics/snp_config/ontology/attribute#>
+
+SELECT ?a0 ?a1 ?a2 ?a3 ?a4 ?a5 ?a6 ?a7 ?a8 ?a9 ?a10 ?a11 
+FROM dataset:fcatus_snp
+WHERE {
+  ?mart attribute:refsnp_id ?a0 .
+  ?mart attribute:dbsnp ?a1 .
+  ?mart attribute:chr_name ?a2 .
+  ?mart attribute:chrom_start ?a3 .
+  ?mart attribute:chrom_strand ?a4 .
+  ?mart attribute:allele ?a5 .
+  ?mart attribute:ensembl_gene_stable_id ?a6 .
+  ?mart attribute:consequence_type_tv ?a7 .
+  ?mart attribute:ensembl_type ?a8 .
+  ?mart attribute:cdna_start ?a9 .
+  ?mart attribute:translation_start ?a10 .
+  ?mart attribute:cds_start ?a11
+}
+LIMIT 10

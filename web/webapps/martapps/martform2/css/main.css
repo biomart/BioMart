@@ -1,0 +1,16 @@
+#biomart-wrapper h4 {
+    padding-left: 0;
+}
+
+#biomart-datasets .content {
+    margin-bottom: 10px;
+    padding: 0 40px;
+}
+
+#biomart-datasets .item {
+    margin-bottom: 10px;
+}
+
+.biomart .biomart-results-show {
+    margin: 0 auto;
+}

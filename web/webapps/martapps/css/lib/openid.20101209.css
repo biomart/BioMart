@@ -1,0 +1,97 @@
+#openid {
+  background: url(../../images/openid/indicator.gif) center center no-repeat;
+  margin: 0 auto;
+  width: 440px;
+  height: 162px;
+}
+
+#openid_inputarea {
+  clear: both;
+  display: none;
+  background-color: #000;
+  color: white;
+  margin-top: 35px;
+  padding: 15px 10px;
+  -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px;
+}
+
+#openid_inputarea .oidlabel {
+    display: block;
+    line-height: 1.5em;
+    margin-bottom: 5px;
+}
+
+#openid_inputarea #openid_username {
+  margin-right: 4px;
+  width: 300px;
+}
+
+#openid_btns, #openid_btns br {
+  clear: both;
+}
+
+#openid_highlight {
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  padding: 2px;
+  background-color: #FFFCC9;
+  float: left;
+}
+
+.openid_large_btn, .openid_small_btn {
+  background: url(../../images/openid/openid-icons-20101209.png) no-repeat;
+  margin: 3px;
+  float: left;
+}
+
+.openid_large_btn {
+  width: 91px;
+  height: 51px;
+}
+
+.openid_small_btn {
+  width: 16px;
+  height: 16px;
+}  
+
+.Google { background-position: 0 0; }
+.Yahoo { background-position: 0 -51px; }
+.AOL { background-position: 0 -102px; }
+.OpenID { background-position: 0 -153px; }
+.Gmail { background-position: 0 -204px; }
+.MyOpenID { background-position: 0 -255px; }
+.Flickr { background-position: 0 -271px; }
+.Technorati { background-position: -17px -271px; }
+.Wordpress { background-position: -17px -255px; }
+.Blogger { background-position: -34px -255px; }
+.Verisign { background-position: -51px -271px; }
+.Vidoop { background-position: -34px -271px; }
+.ClaimID { background-position: -68px -255px; }
+.LiveJournal { background-position: -51px -255px; }
+.MySpace { background-position: -68px -271px; }
+
+a.openid_large_btn:focus {
+  outline: none;
+  -moz-outline-style: none;
+}
+
+#login-wrap {
+    width: 500px;
+    margin: 20px auto 0;
+}
+
+#login-wrap p.help .ui-icon {
+    float: left;
+}
+
+.login .ui-dialog-titlebar {
+    display: none;
+}
+.login-info {
+    font-size: 16px !important;
+    padding: 10px 85px 0 !important;
+}
+.login-help {
+    padding: 10px 85px 0 !important;
+    font-size: 14px;
+}

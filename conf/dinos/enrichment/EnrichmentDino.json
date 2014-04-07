@@ -1,0 +1,54 @@
+{
+    "enrichment_bin": "conf/dinos/enrichment/hypg",
+
+    "display": {
+
+        "gene": {
+            "filter": "ensembl_gene_id",
+            "gene_attribute": "external_gene_id",
+            "description_attribute": "description",
+            "other_attributes": ["status", "gene_biotype", "chromosome_name", "start_position", "end_position", "strand", "transcript_count"]
+        },
+
+        "annotation": {
+
+            "Gene Ontology (GO)": {
+                "filter": "goslim_goa_accession",
+                "annotation_attribute": "goslim_goa_accession",
+                "description_attribute": "goslim_goa_description",
+                "other_attributes": []
+            },
+
+            "OMIMDiseasesHuman": {
+                "filter": "mims__mim_morbid_accession_101",
+                "annotation_attribute": "mims__mim_morbid_accession_101",
+                "description_attribute": "mims__mim_morbid_description_101",
+                "other_attributes": []
+            },
+
+            "OMIMDiseases": {
+                "filter": "mims__mim_morbid_accession_101",
+                "annotation_attribute": "mims__mim_morbid_accession_101",
+                "description_attribute": "mims__mim_morbid_description_101",
+                "other_attributes": []
+            },
+
+            "REACTOME (HUMAN)": {
+                "filter": "reactome_human__pathway_id_101",
+                "annotation_attribute": "reactome_human__pathway_id_101",
+                "description_attribute": "reactome_human__pathway_name_101",
+                "other_attributes": []
+            },
+
+            "Reactome Pathways": {
+                "filter": "pathway_id_list",
+                "annotation_attribute": "stableidentifier_identifier",
+                "description_attribute": "_displayname",
+                "other_attributes": []
+            }
+        }
+
+    },
+
+    "front-end": "web/webapps/martapps/mart-visual-enrichment/app/index.html"
+}

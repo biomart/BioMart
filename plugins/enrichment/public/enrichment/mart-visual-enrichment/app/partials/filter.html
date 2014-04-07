@@ -1,0 +1,9 @@
+<div ng-switch on="filter.type" class="mve-filter">
+    <boolean-filter filter="filter" ng-switch-when="boolean"></boolean-filter>
+    <text-filter filter="filter" ng-switch-when="text"></text-filter>
+    <upload-filter filter="filter" ng-switch-when="upload"></upload-filter>
+    <single-select-upload-filter filter="filter" ng-switch-when="singleSelectUpload"></single-select-upload-filter>
+    <multi-select-filter filter="filter" ng-switch-when="multiSelect"></multi-select-filter>
+    <single-select-boolean-filter filter="filter" ng-switch-when="singleSelectBoolean"></single-select-boolean-filter>
+    <single-select-filter filter="filter" ng-switch-when="singleSelect"></single-select-filter>
+</div>

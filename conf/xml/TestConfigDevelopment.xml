@@ -1,0 +1,384 @@
+
+<config>
+	<datadirectory name="testdata"/>
+	<ignore pass="true"/>
+	<referencexml regenerate="true"></referencexml>
+	
+	<!-- Source Schema -->
+	<testcase name="createsavexml_source_mysql" category="TestAddingSource" ignore="true">
+		<usergroup>anonymous</usergroup>
+		<connection type="Source Schema">
+			<db type="mysql" jdbcurl="jdbc:mysql://biomartdb-dev.res.oicr.on.ca:3306/" username="martadmin" password="Bi0M4rt" 
+				database="homo_sapiens_core_59_37d" schema="homo_sapiens_core_59_37d" tables="gene,transcript,translation"/>
+		</connection>
+		<sourcexml>source_mysql.xml</sourcexml>
+	</testcase>
+	
+	<testcase name="createsavexml_source_pg" category="TestAddingSource" ignore="true">
+		<usergroup>anonymous</usergroup>
+		<connection type="Source Schema">
+			<db type="PostGreSQL" jdbcurl="jdbc:postgresql://biomartdb-dev.res.oicr.on.ca:5432/" username="martadmin" password="Bi0M4rt" 
+				database="homo_sapiens_vega_58_37c" schema="public" tables="gene,transcript,translation"/>
+		</connection>
+		<sourcexml>source_pg.xml</sourcexml>
+	</testcase>
+	
+	<testcase name="createsavexml_source_mssql" category="TestAddingSource" ignore="true">
+		<usergroup>anonymous</usergroup>
+		<connection type="Source Schema">
+			<db type="SQL Server" jdbcurl="jdbc:sqlserver://arektest.res.oicr.on.ca:1509" username="martadmin" password="Bi0M4rt" 
+				database="homo_sapiens_vega_58_37c" schema="dbo" tables="gene,transcript,translation"/>
+		</connection>
+		<sourcexml>source_mssql.xml</sourcexml>
+	</testcase>
+	
+	<testcase name="createsavexml_source_db2" category="TestAddingSource" ignore="true">
+		<usergroup>anonymous</usergroup>
+		<connection type="Source Schema">
+			<db type="DB2" jdbcurl="jdbc:db2://biomartdb-dev.res.oicr.on.ca:50000/" username="martadm" password="Bi0M4rt" 
+				database="vega58hs" schema="MARTADM" tables="GENE,TRANSCRIPT,TRANSLATION"/>
+		</connection>
+		<sourcexml>source_db2.xml</sourcexml>
+	</testcase>
+	
+	<testcase name="createsavexml_source_oracle" category="TestAddingSource" ignore="true">
+		<usergroup>anonymous</usergroup>
+		<connection type="Source Schema">
+			<db type="oracle" jdbcurl="jdbc:oracle:thin:@//biomartdb-dev.res.oicr.on.ca:1521/" username="martadmin" password="Bi0M4rt" 
+				database="vega58hsap" schema="MARTADMIN" tables="GENE,TRANSCRIPT,TRANSLATION"/>
+		</connection>
+		<sourcexml>source_oracle.xml</sourcexml>
+	</testcase>
+	
+	<!-- Relational Mart -->
+	<!-- naive -->
+	<testcase name="createsavexml_mart_naive_mysql" category="TestAddingSource" ignore="true">
+		<usergroup>anonymous</usergroup>
+		<connection type="Relational Mart">
+			<db type="mysql" jdbcurl="jdbc:mysql://biomartdb-dev.res.oicr.on.ca:3306/" username="martadmin" password="Bi0M4rt" 
+				database="vega_mart_58" schema="vega_mart_58" tables="hsapiens_gene_vega__gene__main" naive="true"/>
+		</connection>
+		<sourcexml>mart_naive_mysql.xml</sourcexml>
+	</testcase>
+	
+	<testcase name="createsavexml_mart_naive_pg" category="TestAddingSource" ignore="true">
+		<usergroup>anonymous</usergroup>
+		<connection type="Relational Mart">
+			<db type="PostGreSQL" jdbcurl="jdbc:postgresql://biomartdb-dev.res.oicr.on.ca:5432/" username="martadmin" password="Bi0M4rt" 
+				database="vega_mart_58" schema="public" tables="hsapiens_gene_vega__gene__main" naive="true"/>
+		</connection>
+		<sourcexml>mart_naive_pg.xml</sourcexml>
+	</testcase>
+	
+	<testcase name="createsavexml_mart_naive_db2" category="TestAddingSource" ignore="true">
+		<usergroup>anonymous</usergroup>
+		<connection type="Relational Mart">
+			<db type="DB2" jdbcurl="jdbc:db2://biomartdb-dev.res.oicr.on.ca:50000/" username="martadm" password="Bi0M4rt" 
+				database="vega_58" schema="MARTADM" tables="HSAPIENS_GENE_VEGA__GENE__MAIN" naive="true"/>
+		</connection>
+		<sourcexml>mart_naive_db2.xml</sourcexml>
+	</testcase>
+	
+		
+	<testcase name="createsavexml_mart_naive_oracle" category="TestAddingSource" ignore="true">
+		<usergroup>anonymous</usergroup>
+		<connection type="Relational Mart">
+			<db type="oracle" jdbcurl="jdbc:oracle:thin:@//biomartdb-dev.res.oicr.on.ca:1521/" username="martadmin" password="Bi0M4rt" 
+				database="vega58" schema="MARTADMIN" tables="AU_B_C__AB__MAIN" naive="true"/>
+		</connection>
+		<sourcexml>mart_naive_oracle.xml</sourcexml>		
+	</testcase>
+
+	<testcase name="createsavexml_mart_naive_mssql" category="TestAddingSource" ignore="true">
+		<usergroup>anonymous</usergroup>
+		<connection type="Relational Mart">
+			<db type="SQL Server" jdbcurl="jdbc:sqlserver://arektest.res.oicr.on.ca:1509" username="martadmin" password="Bi0M4rt" 
+				database="vega_mart_58" schema="dbo" tables="hsapiens_gene_vega__gene__main" naive="true"/>
+		</connection>
+		<sourcexml>mart_naive_mssql.xml</sourcexml>		
+	</testcase>
+	
+	<!-- bc -->
+	<testcase name="createsavexml_mart_bc_mysql" category="TestAddingSource" ignore="true">
+		<usergroup>anonymous</usergroup>
+		<connection type="Relational Mart">
+			<db type="mysql" jdbcurl="jdbc:mysql://biomartdb-dev.res.oicr.on.ca:3306/" username="martadmin" password="Bi0M4rt" 
+				database="vega_mart_58" schema="vega_mart_58" tables="meta_conf__dataset__main, meta_conf__interface__dm, meta_conf__user__dm, meta_conf__xml__dm, meta_template__template__main, meta_template__xml__dm, meta_version__version__main" naive="false"/>
+		</connection>
+		<sourcexml>createsavexml_mart_bc_mysql.xml</sourcexml>		
+	</testcase>
+	
+		
+	<!-- URL Mart -->
+	<testcase name="createLink_url"  category="TestAddingSource" ignore="true">
+		<usergroup>anonymous</usergroup>
+		<connection type="URL Mart">
+			<url host="http://bm-test.res.oicr.on.ca" port="9002" path="/biomart/martservice">
+				<mart name="vega_mart_60" datasets="all"/>
+				<mart name="test_reactome_mart" datasets="all"/>
+			</url>
+		</connection>	
+		<sourcexml>mart_url.xml</sourcexml>
+	</testcase>
+	
+	<testcase name="test_link"  category="TestLink" ignore="false">
+		<usergroup>anonymous</usergroup>
+		<connection type="URL Mart">
+			<url host="http://bm-test.res.oicr.on.ca" port="9002" path="/biomart/martservice">
+				<mart name="vega_mart_60" datasets="all"/>
+				<mart name="test_reactome_mart" datasets="all"/>
+			</url>
+		</connection>
+		<create type="link">
+			<source config="pathway" attribute="referencedatabase_ensembl">
+					<attribute name="stableidentifier_identifier"></attribute>				
+					<filter name="_displayname"></filter>
+			</source>
+			<target config="hsapiens_gene_vega" attribute="ens_hs_gene">
+					<attribute name="vega_gene_id"></attribute>
+					<filter name="chromosome_name"></filter>
+			</target>
+		</create>	
+		<Query client=\"webbrowser\" processor=\"TSV\" limit=\"-1\" header=\"1\"><Dataset name=\"pathway\" config=\"pathway_config\"><Filter name=\"_displayname\" value=\"ABC-family proteins mediated transport\"/><Filter name=\"chromosome_name\" value=\"1\"/><Attribute name=\"vega_gene_id\"/><Attribute name=\"stableidentifier_identifier\"/></Dataset></Query>
+		<Query client=\"webbrowser\" processor=\"TSV\" limit=\"-1\" header=\"1\"><Dataset name=\"hsapiens_gene_vega\" config=\"hsapiens_gene_vega_config\"><Filter name=\"_displayname\" value=\"ABC-family proteins mediated transport\"/><Filter name=\"chromosome_name\" value=\"1\"/><Attribute name=\"vega_gene_id\"/><Attribute name=\"stableidentifier_identifier\"/></Dataset></Query>	
+		<sourcexml>test4_reference.xml</sourcexml>
+	</testcase>
+	
+	<testcase name="test_addconfig" category="TestAddConfig" ignore="true">
+		<usergroup>anonymous</usergroup>
+		<!-- no multiple marts -->
+		<connection type="Relational Mart">
+			<db type="mysql" jdbcurl="jdbc:mysql://biomartdb-dev.res.oicr.on.ca:3306/" username="martadmin" password="Bi0M4rt" 
+				database="vega_mart_58" schema="vega_mart_58" tables="meta_conf__dataset__main, meta_conf__interface__dm, meta_conf__user__dm, meta_conf__xml__dm, meta_template__template__main, meta_template__xml__dm, meta_version__version__main" naive="false"/>
+		</connection>
+		<newconfig name="gene_vega_config_1"/>
+		<sourcexml>addconfig.xml</sourcexml>		
+	</testcase>
+	
+	<!-- rename attribute displayname from master -->
+	<testcase name="syn_master_displayname_change" category="TestSynchronize" ignore="true">
+		<usergroup>anonymous</usergroup>
+		<!-- no multiple marts -->
+		<connection type="Relational Mart">
+			<db type="mysql" jdbcurl="jdbc:mysql://biomartdb-dev.res.oicr.on.ca:3306/" username="martadmin" password="Bi0M4rt" 
+				database="vega_mart_58" schema="vega_mart_58" tables="meta_conf__dataset__main, meta_conf__interface__dm, meta_conf__user__dm, meta_conf__xml__dm, meta_template__template__main, meta_template__xml__dm, meta_version__version__main" naive="false"/>
+		</connection>
+		<newconfig name="gene_vega_config_1"/>
+		<rename config="gene_vega" type="attribute" name="vega_gene_id" newvalue="vega_gene_id_rename_test"/>
+		<sourcexml>syn_master_displayname_change.xml</sourcexml>		
+	</testcase>
+	
+	<testcase name="syn_derived_delete_attribute" category="TestSynchronize" ignore="true">
+		<usergroup>anonymous</usergroup>
+		<!-- no multiple marts -->
+		<connection type="Relational Mart">
+			<db type="mysql" jdbcurl="jdbc:mysql://biomartdb-dev.res.oicr.on.ca:3306/" username="martadmin" password="Bi0M4rt" 
+				database="vega_mart_58" schema="vega_mart_58" tables="meta_conf__dataset__main, meta_conf__interface__dm, meta_conf__user__dm, meta_conf__xml__dm, meta_template__template__main, meta_template__xml__dm, meta_version__version__main" naive="false"/>
+		</connection>
+		<newconfig name="gene_vega_config_1"/>
+		<delete config="gene_vega_config_1" type="attribute" name="external_gene_id"/>
+		<sourcexml>syn_derived_delete_attribute.xml</sourcexml>		
+	</testcase>
+	
+	<!-- jira772 -->
+	<testcase name="syn_derived_displayname_change" category="TestSynchronize" ignore="true">
+		<usergroup>anonymous</usergroup>
+		<!-- no multiple marts -->
+		<connection type="Relational Mart">
+			<db type="mysql" jdbcurl="jdbc:mysql://biomartdb-dev.res.oicr.on.ca:3306/" username="martadmin" password="Bi0M4rt" 
+				database="vega_mart_58" schema="vega_mart_58" tables="meta_conf__dataset__main, meta_conf__interface__dm, meta_conf__user__dm, meta_conf__xml__dm, meta_template__template__main, meta_template__xml__dm, meta_version__version__main" naive="false"/>
+		</connection>
+		<newconfig name="gene_vega_config_1"/>
+		<rename config="gene_vega_config_1" type="attribute" name="vega_gene_id" newvalue="vega_gene_id_rename_test"/>
+		<sourcexml>syn_derived_displayname_change.xml</sourcexml>		
+	</testcase>
+	
+		<!-- jira774 -->
+	<testcase name="syn_master_attribute_hide" category="TestSynchronize" ignore="true">
+		<usergroup>anonymous</usergroup>
+		<!-- no multiple marts -->
+		<connection type="Relational Mart">
+			<db type="mysql" jdbcurl="jdbc:mysql://biomartdb-dev.res.oicr.on.ca:3306/" username="martadmin" password="Bi0M4rt" 
+				database="vega_mart_58" schema="vega_mart_58" tables="meta_conf__dataset__main, meta_conf__interface__dm, meta_conf__user__dm, meta_conf__xml__dm, meta_template__template__main, meta_template__xml__dm, meta_version__version__main" naive="false"/>
+		</connection>
+		<newconfig name="gene_vega_config_1"/>
+		<hide config="gene_vega" type="attribute" name="vega_gene_id"/>
+		<sourcexml>syn_master_attribute_hide.xml</sourcexml>		
+	</testcase>
+	
+        <!-- jira775 -->
+        <testcase name="syn_vega_human_hide_attr" category="TestSynchronize" ignore="true">
+                <usergroup>anonymous</usergroup>
+                <!-- no multiple marts -->
+                <connection type="Relational Mart">
+                        <db type="mysql" jdbcurl="jdbc:mysql://biomartdb-dev.res.oicr.on.ca:3306/" username="martadmin" password="Bi0M4rt"
+                                database="vega_mart_58" schema="vega_mart_58" tables="meta_conf__dataset__main, meta_conf__interface__dm, meta_conf__user__dm, meta_conf__xml__dm, meta_template__template__main, meta_template__xml__dm, meta_version__version__main" naive="false"/>
+                </connection>
+                <newconfig name="gene_vega_config_1"/>
+                <hide config="gene_vega_config_1" type="attribute" name="vega_gene_id"/>
+                <sourcexml>syn_vega_human_hide_attr.xml</sourcexml>
+        </testcase>
+
+        <!-- jira776 -->
+	<testcase name="lnk_vega_reactome_url_attr"  category="TestAddingSource" ignore="true">
+		<usergroup>anonymous</usergroup>
+                <connection type="Relational Mart">
+                        <db type="mysql" jdbcurl="jdbc:mysql://biomartdb-dev.res.oicr.on.ca:3306/" username="martadmin" password="Bi0M4rt"
+                                database="vega_mart_58" schema="vega_mart_58" tables="meta_conf__dataset__main, meta_conf__interface__dm, meta_conf__user__dm, meta_conf__xml__dm, meta_template__template__main, meta_template__xml__dm, meta_version__version__main" naive="false"/>
+                </connection>
+		<connection type="URL Mart">
+			<url host="http://bm-test.res.oicr.on.ca" port="9002" path="/biomart/martservice">
+				<mart name="REACTOME" datasets="all"/>
+			</url>
+		</connection>
+                <newconfig name="gene_vega_config_1"/>
+                <import config="gene_vega_config_1" type="attribute" name="literaturereference__dm_pubmedidentifier" dataset="reaction"/>
+		<sourcexml>lnk_vega_reactome_url_attr.xml</sourcexml>
+	</testcase>
+	
+	<testcase name="test_filter"  category="TestSynchronize" ignore="true">
+		<usergroup>anonymous</usergroup>
+		<connection type="Relational Mart">
+			<db type="mysql" jdbcurl="jdbc:mysql://biomartdb-dev.res.oicr.on.ca:3306/" username="martadmin" password="Bi0M4rt" 
+				database="vega_mart_58" schema="vega_mart_58" tables="meta_conf__dataset__main, meta_conf__interface__dm, meta_conf__user__dm, meta_conf__xml__dm, meta_template__template__main, meta_template__xml__dm, meta_version__version__main" naive="false"/>
+		</connection>
+		<delete config="gene_vega_config" type="attribute" name="chromosome_name"/>		
+		<sourcexml>filter_test_reference.xml</sourcexml>
+	</testcase>
+	
+	<!-- pass if the size > 0 -->
+	<testcase name="test_query"  category="TestQuery" ignore="true">
+		<usergroup>anonymous</usergroup>						
+		<sourcexml>filter_test_reference.xml</sourcexml>
+		<Query client="webbrowser" processor="TSV" limit="-1" header="1"><Dataset name="hsapiens_gene_ensembl_tcgaLAML" config="hsapiens_gene_ensembl_5_1"><Attribute name="cancertype"/><Attribute name="assemblyversion"/><Attribute name="ensembl_gene_id"/><Attribute name="hgnc_symbol"/><Attribute name="description"/><Attribute name="chromosome_name"/><Attribute name="start_position"/><Attribute name="end_position"/><Attribute name="strand"/></Dataset></Query>
+	</testcase>
+	
+	<testcase name="syn_master_attribute_list" category="TestSynchronizeAttrList" ignore="true">
+		<usergroup>anonymous</usergroup>
+		<!-- no multiple marts -->
+		<connection type="Relational Mart">
+			<db type="mysql" jdbcurl="jdbc:mysql://biomartdb-dev.res.oicr.on.ca:3306/" username="martadmin" password="Bi0M4rt" 
+				database="vega_mart_60" schema="vega_mart_60" tables="meta_conf__dataset__main, meta_conf__interface__dm, meta_conf__user__dm, meta_conf__xml__dm, meta_template__template__main, meta_template__xml__dm, meta_version__version__main" naive="false"/>
+		</connection>
+		<create config="gene_vega_config" type="attributelist" name="attribute_list" displayname="attribute_list">
+			<attribute name="vega_gene_id"/>
+			<attribute name="vega_transcript_id"/>
+		</create>
+		<rename config="gene_vega" type="attribute" name="vega_transcript_id" newvalue="vega_t_id"/>
+		<sourcexml>syn_master_attributelist.xml</sourcexml>		
+	</testcase>
+	
+	<testcase name="syn_derived_attribute_list" category="TestSynchronizeAttrList" ignore="true">
+		<usergroup>anonymous</usergroup>
+		<!-- no multiple marts -->
+		<connection type="Relational Mart">
+			<db type="mysql" jdbcurl="jdbc:mysql://biomartdb-dev.res.oicr.on.ca:3306/" username="martadmin" password="Bi0M4rt" 
+				database="vega_mart_60" schema="vega_mart_60" tables="meta_conf__dataset__main, meta_conf__interface__dm, meta_conf__user__dm, meta_conf__xml__dm, meta_template__template__main, meta_template__xml__dm, meta_version__version__main" naive="false"/>
+		</connection>
+		
+		<create config="gene_vega_config" type="attributelist" name="attribute_list" displayname="attribute_list">
+			<attribute name="vega_gene_id"/>
+			<attribute name="vega_transcript_id"/>
+		</create>
+		<rename config="gene_vega_config" type="attribute" name="vega_transcript_id" newvalue="vega_t_id"/>
+		<sourcexml>syn_derived_attributelist.xml</sourcexml>		
+	</testcase>
+	
+	<testcase name="syn_master_filter_list" category="TestSynchronizeFilterList" ignore="true">
+		<usergroup>anonymous</usergroup>
+		<!-- no multiple marts -->
+		<connection type="Relational Mart">
+			<db type="mysql" jdbcurl="jdbc:mysql://biomartdb-dev.res.oicr.on.ca:3306/" username="martadmin" password="Bi0M4rt" 
+				database="vega_mart_60" schema="vega_mart_60" tables="meta_conf__dataset__main, meta_conf__interface__dm, meta_conf__user__dm, meta_conf__xml__dm, meta_template__template__main, meta_template__xml__dm, meta_version__version__main" naive="false"/>
+		</connection>
+		<create config="gene_vega_config" type="filterlist" name="filter_list" displayname="filter_list">
+			<filter name="strand"/>
+			<filter name="chromosome_name"/>
+		</create>
+		<rename config="gene_vega" type="filter" name="chromosome_name" newvalue="chro_name"/>
+		<sourcexml>syn_master_filterlist.xml</sourcexml>		
+	</testcase>
+	
+	<testcase name="syn_derived_filter_list" category="TestSynchronizeFilterList" ignore="true">
+		<usergroup>anonymous</usergroup>
+		<!-- no multiple marts -->
+		<connection type="Relational Mart">
+			<db type="mysql" jdbcurl="jdbc:mysql://biomartdb-dev.res.oicr.on.ca:3306/" username="martadmin" password="Bi0M4rt" 
+				database="vega_mart_60" schema="vega_mart_60" tables="meta_conf__dataset__main, meta_conf__interface__dm, meta_conf__user__dm, meta_conf__xml__dm, meta_template__template__main, meta_template__xml__dm, meta_version__version__main" naive="false"/>
+		</connection>
+		<create config="gene_vega_config" type="filterlist" name="filter_list" displayname="filter_list">
+			<filter name="strand"/>
+			<filter name="chromosome_name"/>
+		</create>
+		<rename config="gene_vega_config" type="filter" name="chromosome_name" newvalue="chro_name"/>
+		<sourcexml>syn_derived_filterlist.xml</sourcexml>		
+	</testcase>
+	
+	<testcase name="syn_master_container" category="TestSynchronizeContainer" ignore="true">
+		<usergroup>anonymous</usergroup>
+		<!-- no multiple marts -->
+		<connection type="Relational Mart">
+			<db type="mysql" jdbcurl="jdbc:mysql://biomartdb-dev.res.oicr.on.ca:3306/" username="martadmin" password="Bi0M4rt" 
+				database="vega_mart_60" schema="vega_mart_60" tables="meta_conf__dataset__main, meta_conf__interface__dm, meta_conf__user__dm, meta_conf__xml__dm, meta_template__template__main, meta_template__xml__dm, meta_version__version__main" naive="false"/>
+		</connection>
+		<create config="gene_vega_config" type="container" name="testContainer1" parent="root"></create>
+		<create config="gene_vega_config" type="container" name="testContainer2" parent="root"></create>
+		<sourcexml>syn_master_container.xml</sourcexml>		
+	</testcase>
+	
+	<testcase name="drag_and_drop_filter" category="TestDragAndDropFilter" ignore="true">
+		<usergroup>anonymous</usergroup>
+		<!-- no multiple marts -->
+		<connection type="Relational Mart">
+			<db type="mysql" jdbcurl="jdbc:mysql://biomartdb-dev.res.oicr.on.ca:3306/" username="martadmin" password="Bi0M4rt" 
+				database="vega_mart_60" schema="vega_mart_60" tables="meta_conf__dataset__main, meta_conf__interface__dm, meta_conf__user__dm, meta_conf__xml__dm, meta_template__template__main, meta_template__xml__dm, meta_version__version__main" naive="false"/>
+		</connection>
+		<move config="gene_vega_config" type="filter" name="with_signal_domain" offset="2"></move>
+		<sourcexml>drag_and_drop_filter.xml</sourcexml>		
+	</testcase>
+	
+	<testcase name="mart_materialize_mysql" category="TestMartMaterialize" ignore="true">
+	<usergroup>anonymous</usergroup>
+		<connection type="Source Schema">
+			<db type="mysql" jdbcurl="jdbc:mysql://biomartdb-dev.res.oicr.on.ca:3306/" username="martadmin" password="Bi0M4rt" 
+				database="homo_sapiens_core_60_37e" schema="homo_sapiens_core_60_37e" tables="gene,transcript,translation"/>
+		</connection>
+		<sourcesql>mart_materialize_mysql.sql</sourcesql>
+	</testcase>
+	
+	<testcase name="mart_materialize_pg" category="TestMartMaterialize" ignore="true">
+	<usergroup>anonymous</usergroup>
+		<connection type="Source Schema">
+			<db type="PostGreSQL" jdbcurl="jdbc:postgresql://biomartdb-dev.res.oicr.on.ca:5432/" username="martadmin" password="Bi0M4rt" 
+				database="homo_sapiens_vega_58_37c" schema="public" tables="gene,transcript,translation"/>
+		</connection>
+		<sourcesql>mart_materialize_pg.sql</sourcesql>
+	</testcase>
+	
+	<testcase name="mart_materialize_mssql" category="TestMartMaterialize" ignore="true">
+	<usergroup>anonymous</usergroup>
+		<connection type="Source Schema">
+			<db type="SQL Server" jdbcurl="jdbc:sqlserver://arektest.res.oicr.on.ca:1509" username="martadmin" password="Bi0M4rt" 
+				database="homo_sapiens_vega_58_37c" schema="dbo" tables="gene,transcript,translation"/>
+		</connection>
+		<sourcesql>mart_materialize_mssql.sql</sourcesql>
+	</testcase>
+	
+	<testcase name="mart_materialize_db2" category="TestMartMaterialize" ignore="true">
+	<usergroup>anonymous</usergroup>
+		<connection type="Source Schema">
+			<db type="DB2" jdbcurl="jdbc:db2://biomartdb-dev.res.oicr.on.ca:50000/" username="martadm" password="Bi0M4rt" 
+				database="vega58hs" schema="MARTADM" tables="GENE,TRANSCRIPT,TRANSLATION"/>
+		</connection>
+		<sourcesql>mart_materialize_db2.sql</sourcesql>
+	</testcase>
+	
+	<testcase name="mart_materialize_oracle" category="TestMartMaterialize" ignore="true">
+	<usergroup>anonymous</usergroup>
+		<connection type="Source Schema">
+			<db type="oracle" jdbcurl="jdbc:oracle:thin:@//biomartdb-dev.res.oicr.on.ca:1521/" username="martadmin" password="Bi0M4rt" 
+				database="vega58hsap" schema="MARTADMIN" tables="GENE,TRANSCRIPT,TRANSLATION"/>
+		</connection>
+		<sourcesql>mart_materialize_oracle.sql</sourcesql>
+	</testcase>
+</config>

@@ -1,0 +1,90 @@
+svg, g {
+    background-color: #fff;
+}
+
+/* Remove rules applied by .biomart .data li */
+.network-tabs li.ui-state-default {
+    width: auto;
+    margin: auto;
+}
+
+.network-tabs li.ui-state-default a {
+    font-size: 1.2em;
+}
+
+text.network-shadow, text.network-text {
+    /*font-family: sans-serif, verdana, times new roman, tahoma;*/
+    font-size: 1em;
+    letter-spacing: 0.14em;
+    text-anchor: middle;
+    shape-rendering: geometricPrecision;
+}
+
+text.network-text {
+    stroke: #fff;
+    fill: #fff;
+    stroke-width: 1px;
+}
+
+text.network-text:hover {
+    stroke: #B3705D;
+}
+
+text.network-shadow {
+    stroke: #000;
+    stroke-width: 5px;
+}
+
+.network-edge {
+    stroke: #C8B50B;
+    /*stroke-width: 1px;*/
+ }
+
+ .enrichment-edge {
+    stroke: #333;
+    stroke-width: 1px;
+ }
+
+.network-bubble {
+    stroke-width: 3;
+    stroke: #fff;
+    fill: #69054B;
+    cursor: move;
+}
+
+.zoom-container {
+    fill: none;
+    pointer-events: all;
+    stroke-width: 2;
+    stroke: #999999;
+}
+
+
+.network-report-table, .network-wrapper {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.network-report-table {
+    border-left: 1px dashed #333;
+    padding-left: 15px;
+    width: 23% !important;
+}
+
+.network-wrapper {
+    width: 70%;
+}
+
+.rtb-tooltip {
+    text-align: center;
+    width: 150px;
+    padding: 2px;
+    font: 12px sans-serif;
+    background: lightsteelblue;
+    border: 0px;
+    border-radius: 8px;
+}
+
+.rtb-tooltip-hidden {
+    display: none;
+}

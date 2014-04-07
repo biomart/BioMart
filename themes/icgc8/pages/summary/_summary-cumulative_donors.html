@@ -1,0 +1,140 @@
+      <div style='width: 960px; text-align: center;'><h3>ICGC Data Portal Cumulative Donor Count for Member Projects</h3></div>
+        <div id='donorplotdiv' style='width: 960px'>
+        </div>
+      </div>
+
+    <script type="text/javascript">
+var p = [20, 50, 30, 20],
+    w = 960 - p[1] - p[3],
+    h = 400 - p[0] - p[2],
+    x = d3.time.scale().range([0, w]),
+    y = d3.scale.linear().range([h, 0]),
+    z = d3.scale.ordinal().range(["red","tomato","darkorange","gold", "yellow","forestgreen","green","mediumseagreen","blue","darkslateblue","blueviolet", "indigo"]),
+    
+    labels = d3.scale.ordinal().range([
+            "Chronic Lymphocytic Leukemia (CNIO, ES)",
+            "Myeloproliferative Disorders (WTSI, UK)",
+            "Pediatric Brain Tumors (DKFZ, DE)",
+            "Breast Carcinoma (WTSI, UK)",
+            "Liver Cancer (INCa, FR)",
+            "Liver Cancer (NCC, JP)",
+            "Liver Cancer (RIKEN, JP)",
+            "Small Cell Lung Carcinoma (WTSI, UK)",
+            "Pancreatic Cancer (OICR, CA)", 
+            "Pancreatic Cancer (QCMG, AU)",
+            "Malignant Melanoma (WTSI, UK)",
+            "Gastric Cancer (CCGC, CN)",
+            "Breast Invasive Carcinoma (TCGA, US)",
+            "Colon Adenocarcinoma (TCGA, US)",
+            "Glioblastoma Multiforme (TCGA, US)",
+            "Kidney Renal Clear Cell Carcinoma (TCGA, US)", 
+            "Kidney Renal Papillary Cell Carcinoma (TCGA, US)",
+            "Acute Myeloid Leukemia (TCGA, US)",
+            "Lung Adenocarcinoma (TCGA, US)",
+            "Lung Squamous Cell Carcinoma (TCGA, US)",
+            "Ovarian Serous Cystadenocarcinoma (TCGA, US)",
+            "Rectum Adenocarcinoma (TCGA, US)",
+            "Stomach Adenocarcinoma (TCGA, US)", 
+            "Uterine Corpus Endometrioid Carcinoma (TCGA, US)"
+            ]),
+    
+    parse = d3.time.format("%m/%Y").parse,
+    format = d3.time.format("%b");
+
+var svg = d3.select("#donorplotdiv").append("svg")
+    .attr("width", w)
+    .attr("height", h)
+    .append("g")
+    .attr("transform", "translate(" + p[3] + "," + p[0] + ")");
+
+d3.csv("icgc.csv", function(icgc) {
+
+    var icgcdata = d3.layout.stack()([
+            "esCLL", 
+            "sangerMDS",
+            "dePedbrain",
+            "sangerBreast",
+            "frLiver",
+            "jpNCCLiver",
+            "jpRikenLiver",
+            "sangerLung",
+            "oicrPanc",
+            "qcmgPanc",
+            "sangerMelanoma",
+            "ccgcGastric",
+            "tcgaBRCA",
+            "tcgaCOAD",
+            "tcgaGBM",
+            "tcgaKIRC",
+            "tcgaKIRP",
+            "tcgaLAML",
+            "tcgaLUAD",
+            "tcgaLUSC",
+            "tcgaOV",
+            "tcgaREAD",
+            "tcgaSTAD",
+            "tcgaUCEC"
+
+            ].map(function(dcol) {
+                
+    return icgc.map(function(d) {
+      return {x: parse(d.date), y: +d[dcol]};
+    });
+  }));
+                    
+
+  // Compute the x-domain (by date) and y-domain (by top).
+  x.domain([icgcdata[0][0].x, icgcdata[0][icgcdata[0].length - 1].x]);
+  y.domain([0, d3.max(icgcdata[icgcdata.length - 1], function(d) { return d.y0 + d.y; })]);
+
+  // Add an area for each cause.
+  svg.selectAll("path.area")
+      .data(icgcdata)
+    .enter().append("path")
+        .attr("class", "area")
+        .attr("title", function(d, i) { return labels(i); })
+      .style("fill", function(d, i) { return z(i); })
+      .attr("d", d3.svg.area()
+      .x(function(d) { return x(d.x); })
+      .y0(function(d) { return y(d.y0); })
+      .y1(function(d) { return y(d.y0 + d.y); }));
+
+  // Add a line for each cause.
+  svg.selectAll("path.line")
+      .data(icgcdata)
+    .enter().append("path")
+      .attr("class", "line")
+      .style("stroke", function(d, i) { return d3.rgb(z(i)).darker(); })
+      .attr("d", d3.svg.line()
+      .x(function(d) { return x(d.x); })
+      .y(function(d) { return y(d.y0 + d.y); }));
+
+  // Add a label per date.
+  svg.selectAll("text")
+      .data(x.ticks(12))
+    .enter().append("text")
+      .attr("x", x)
+      .attr("y", h + 6)
+      .attr("text-anchor", "middle")
+      .attr("dy", ".71em")
+      .text(x.tickFormat(12));
+
+  // Add y-axis rules.
+  var rule = svg.selectAll("g.rule")
+      .data(y.ticks(5))
+    .enter().append("g")
+      .attr("class", "rule")
+      .attr("transform", function(d) { return "translate(0," + y(d) + ")"; });
+
+  rule.append("line")
+      .attr("x2", w)
+      .style("stroke", function(d) { return d ? "#fff" : "#000"; })
+      .style("stroke-opacity", function(d) { return d ? .7 : null; });
+
+  rule.append("text")
+      .attr("x", w + 6)
+      .attr("dy", ".35em")
+      .text(d3.format(",d"));
+        });
+    </script>
+

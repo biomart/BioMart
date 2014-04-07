@@ -1,0 +1,56 @@
+#biomart-header header {
+    position: relative;
+    margin: 5px 10px;
+}
+#biomart-header .subheading {
+    height: 75px;
+    overflow: hidden;
+    float: left;
+}
+#biomart-header h1 a {
+    float: left;
+    height: 73px;
+    width: 200px;
+    background: transparent url(logo-icgc.png) no-repeat 0 0;
+}
+#biomart-header h1 {
+    width: 200px;
+}
+#biomart-header p {
+    width: 75px;
+    color: #3383a1;
+    float: left;
+    font-size: 25px;
+    margin-left: 0;
+    margin-right: 20px;
+    margin-top: 8px;
+}
+#biomart-header #main-logo {
+    width: 600px;
+    position: absolute;
+    right: 75px;
+}
+#biomart-header #country-flag {
+    width: 50px;
+    margin-right: 10px;
+    float: right;
+}
+#biomart-header #country-flag img {
+    margin-top: 25px;
+}
+
+#biomart-header nav {
+    line-height: 1.2;
+}
+
+#biomart-footer {
+    line-height :1.2;
+}
+
+.ui-tabs .ui-state-default a {
+    background: none repeat scroll 0 0 #DDDDDD;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+.ui-tabs .ui-state-active a {
+    background: none repeat scroll 0 0 #FFFFFF;
+}

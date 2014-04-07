@@ -1,0 +1,21 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+PREFIX accesspoint: <http://central.biomart.org/martsemantics/markers_config_2/ontology#>
+PREFIX class: <biomart://central.biomart.org/martsemantics/markers_config_2/ontology/class#>
+PREFIX dataset: <biomart://central.biomart.org/martsemantics/markers_config_2/ontology/dataset#>
+PREFIX attribute: <biomart://central.biomart.org/martsemantics/markers_config_2/ontology/attribute#>
+
+SELECT ?a0 ?a1 ?a2 ?a3 ?a4 ?a5 ?a6 
+FROM dataset:markers
+WHERE {
+  ?mart attribute:marker_name_107 ?a0 .
+  ?mart attribute:mgi_marker_id_att ?a1 .
+  ?mart attribute:chromosome_107 ?a2 .
+  ?mart attribute:rep_genome_start_102 ?a3 .
+  ?mart attribute:rep_genome_end_102 ?a4 .
+  ?mart attribute:rep_genome_strand_102 ?a5 .
+  ?mart attribute:marker_type_107 ?a6
+}
+LIMIT 10

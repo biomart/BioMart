@@ -1,0 +1,37 @@
+#search-theme-form {
+background: transparent url(/files/icgc/searchform-back-icgc.png) no-repeat scroll left center;
+}
+#logo {
+background-image:url(/files/icgc/logo-icgc.png);
+float:left;
+height:67px;
+width:507px;
+}
+#accordion-icgc {
+ height: 290px;
+}
+img#nature-img {
+margin:-3px 12px -8px -6px;
+}
+#nature-img-shadow {
+}
+img#map-img {
+margin:-3px 6px 6px -6px;
+}
+#map-img-shadow {
+}
+#search-theme-form .form-text {
+color: #349281;
+}
+#book-block-menu-1214 {
+display:none;
+}
+div#book-block-menu-124  {
+-moz-border-radius:5px 5px 5px 5px;
+background:none repeat scroll 0 0 #F1F5FA;
+border:1px solid #0066B3;
+padding:5px;
+}
+div#book-block-menu-124 ul li#menu-item-custom-id-14 {
+list-style:none outside none;
+}

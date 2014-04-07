@@ -1,0 +1,280 @@
+/* User Controls */
+.biomart select.marts,
+.biomart select.datasets {
+    font-size: 12px;
+    width: 25.3em;
+}
+
+.biomart .items .item {
+    font-size: 12px;
+    margin: 0 3px 5px;
+    padding: 4px 2px;
+    border-bottom: 1px dotted #ccc;
+}
+.biomart .items .item.ui-active {
+    background-color: #eee;
+}
+.biomart .items .item-name {
+    font-size: 14px;
+    cursor: pointer;
+}
+.biomart .items .item input, 
+.biomart .items .item label {
+    margin: 0 .2em;
+}
+.biomart .items .item .checkbox {
+    float: left;
+}
+.biomart .selected-items {
+    clear: both;
+    font-size: 12px;
+    margin-top: 1em;
+}
+.biomart .selected-items .item {
+    padding: 5px;
+    margin: .3em 0;
+}
+
+.biomart .item .ui-autocomplete-input {
+    width: 253px;
+}
+
+/* Datasets and Marts */
+.biomart .marts .item .item-name,
+.biomart .datasets .item .item-name {
+    font-size: 14px;
+    cursor: default;
+    float: left;
+    margin-right: 1em;
+    height: 24px;
+    min-width: 18em;
+    width: 12em;
+}
+.biomart .marts .items .item,
+.biomart .datasets .items .item {
+    border-bottom: none;
+}
+
+
+/* Filters */
+.biomart .filters .item .checkbox{
+    margin-top: .4em;
+}
+.biomart .filters .item {
+    padding: 10px 2px;
+}
+.biomart .filters .item .field,
+.biomart .filters .item .filter-list {
+    margin-left: 1em;
+}
+.biomart .filters .item .group {
+    clear: left;
+    margin: .5em 0 .5em 4em;
+}
+.biomart .filters .item .item-name {
+    font-size: 12px;
+    cursor: default;
+    float: left;
+    margin-top: .5em;
+    margin-right: 1em;
+    line-height: 1.1em;
+    width: 18em;
+}
+.biomart .filters .items .item.multiSelect select {
+    min-width: 10em;
+}
+.biomart .filters .items .item.singleSelectBoolean select {
+    float: left;
+}
+.biomart .filters .item.singleSelectBoolean .group label,
+.biomart .filters .item.singleSelectBoolean .group input {
+    float: left;
+}
+.biomart .filters .item.singleSelectBoolean .subgroup {
+    float: left;
+    margin-top: 1px;
+}
+.biomart .filters .item.simplerfilter {
+    padding: 4px 3px;
+    margin-bottom: 4px;
+    position: relative;
+}
+.biomart .filters .item.simplerfilter input.checkbox {
+     display: none;
+}
+.biomart .filters .item.simplerfilter .group {
+    margin: 0;
+    float: left;
+    clear: none;
+}
+.biomart .filters .item.simplerfilter.multiSelect select {
+    width: 270px;
+}
+.biomart .filters .item.simplerfilter .upload-subgroup {
+    display: block;
+    padding-top: .5em;
+}
+.biomart .filters .item.simplerfilter .subgroup .upload-field {
+    height: 5em;
+    line-height: 1.2em;
+}
+.biomart .filters .item.simplerfilter .field,
+.biomart .filters .item.simplerfilter .filter-list {
+    margin: 0;
+}
+.biomart .filters .item.simplerfilter.singleSelectBoolean .subgroup input.field {
+     margin: .1em .3em;
+}
+.biomart .filters .item.simplerfilter.boolean {
+     line-height: 24px;
+}
+.biomart .filters .item.simplerfilter.boolean input.field {
+     margin: .1em .3em;
+}
+.biomart .filters .item.simplerfilter .remove {
+    position: absolute;
+    top: 50%;
+    right: 5px;
+    margin-top: -8px;
+    visibility: hidden;
+}
+.biomart .filters .item.simplerfilter.ui-active .remove {
+    visibility: visible;
+}
+.biomart .filters .item.simplerfilter .remove .ui-icon {
+    cursor: pointer;
+}
+.biomart .filters .item.simplerfilter .field.text {
+    height: 20px;
+}
+.biomart .filters .item.simplerfilter .field.text,
+.biomart .filters .item.simplerfilter textarea.field {
+    line-height: 2em;
+    height: 2em;
+    width: 260px;
+}
+.biomart .filters .item.simplerfilter textarea.field {
+    width: 270px;
+}
+.biomart .filters .item.simplerfilter a.uploader {
+    display: block;
+    color: #666;
+    margin: 5px auto;
+    text-decoration: underline;
+}
+.biomart .filters .item.simplerfilter a.uploader.hover {
+    text-decoration: none;
+    color: #5c9ccc;
+}
+.biomart .filters .item.simplerfilter .ui-active a.uploader {
+    color: #fff;
+}
+.biomart .filters .item.simplerfilter .ui-autocomplete-input.ui-state-focus {
+    background-image: none;
+    background-color: #fff;
+}
+.biomart .item.simplerfilter .checkbox,
+.biomart .item.limitedfilter .checkbox,
+.biomart .item.limitedfilter.singleSelectBoolean .item-name,
+.biomart .item.limitedfilter.singleSelectUpload .item-name {
+    display: none;
+}
+.biomart .item.simplerfilter .subgroup {
+    clear: left;
+    float: left;
+    margin: 5px 0 0 0;
+}
+.biomart .item .ui-widget-content .ui-state-default, 
+.biomart .item .ui-state-default {
+    border-color: #aaa;
+}
+.biomart .item .ui-widget-content .ui-state-focus, 
+.biomart .item .ui-state-focus {
+    border-color: #fbcb09;
+}
+.biomart .item .field.text {
+    font-size: 12px;
+    height: 2em;
+    line-height: 2em;
+    padding: 0 5px;
+}
+.ui-prettybox {
+    float: left;
+    position: relative;
+}
+.ui-prettybox .ui-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+.biomart .item .subgroup {
+    float: left;
+    margin-left: 10px;
+}
+.biomart .item.singleSelectUpload .subgroup {
+    float: none;
+    display: block;
+    margin-left: 0;
+}
+.biomart .item.simplerfilter .subgroup .upload {
+    margin-top: 3px;
+    display: block;
+    text-decoration: underline;
+    color: #999;
+}
+.biomart .item.simplerfilter .value.group {
+     float: left;
+}
+.biomart .item .subgroup .uploader {
+    color: #999999;
+    display: block;
+    margin-top: 3px;
+    text-decoration: underline;
+}
+.biomart .item.simplerfilter .field.text {
+    width: 30em;
+}
+.biomart .container .filters {
+    margin: 10px auto;
+}
+.biomart .container .filters .value.group,
+.biomart .container .filters .item-name {
+    float: left;
+    line-height: 2em;
+    margin-right: .5em;
+}
+.biomart .ui-required .item-name {
+    font-weight: bold;
+}
+
+/* Attributes */
+.attributes .attribute-container {
+    background-color: transparent;
+    float: left;
+    width: 20em;
+    border-bottom: 1px dotted #ccc;
+    margin: .2em;
+    padding: .1em;
+}
+.attributes .attribute-container.ui-active {
+    background-color: #eee;
+}
+.biomart .attributes .attribute-container .item-name {
+    font-size: 14px;
+    color: #666;
+}
+.attributes .attribute-container:hover .item-name {
+    color: #e17009;
+}
+.attributes .attribute-container.ui-active .item-name {
+    color: #000;
+    text-decoration: none;
+}
+
+/* Containers */
+.ui-singlecontainer-item {
+    padding: 0;
+    border: none;
+    -moz-border-radius: 0; -webkit-border-radius: 0; border-radius: 0;
+}
+

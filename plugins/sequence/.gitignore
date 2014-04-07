@@ -1,0 +1,7 @@
+*.class
+*.tmp
+*.swp
+nbbuild
+build.xml
+manifest.mf
+nbproject

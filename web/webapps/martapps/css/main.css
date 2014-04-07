@@ -1,0 +1,126 @@
+.biomart {}
+.col-b .ui-widget-header { 
+    border-color: #999;
+    background: -moz-linear-gradient(top, #ccc 0%, #777 100%);
+    background: -webkit-gradient(linear, left top, left bottom, from(#ccc), to(#777));
+    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr='#cccccc', endColorstr='#777777');
+    -ms-filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr='#cccccc', endColorstr='#777777');
+}
+.marts li {
+    margin: .3em 0;
+}
+.main #biomart-content {
+    padding: 0;
+}
+#biomart-content .ui-widget-content {
+    border-top: none;
+    font-size: 14px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-color: #ccc;
+    -moz-border-radius-bottomleft:4px !important;
+    -moz-border-radius-bottomright:4px !important;
+    -webkit-border-radius-bottomleft:4px !important;
+    -webkit-border-radius-bottomright:4px !important;
+    border-radius-bottomleft:4px !important;
+    border-radius-bottomright:4px !important;
+}
+#biomart-content .level-1,
+.col-b h3, .col-b .ui-widget-content {
+    -webkit-box-shadow: 0 0 3px #ccc;
+    -moz-box-shadow: 0 0 3px #ccc;
+    box-shadow: 0 0 3px #ccc;
+}
+#biomart-content p.description {
+    font-size: 12px;
+    padding: 5px 0;
+}
+.main #biomart-content h3 {
+    text-align: center;
+    margin: 0 !important;
+    padding: 3px 6px !important;
+    height: 27px !important;
+    line-height: 27px;
+    -moz-border-radius: 5px 5px 0 0; -webkit-border-radius: 5px 5px 0 0; border-radius: 5px 5px 0 0;
+    border-bottom: none;
+}
+#biomart-content .subcontainer {
+    border: none;
+}
+#biomart-content .ui-tabs {
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+}
+.container-tabs {
+    padding-left: .2em !important;
+    background-color: #eee !important;
+    border-color: #ccc !important;
+}
+.container-tabs li {
+    background-color: #f4f4f4 !important;
+    background-image: none !important;
+}
+.container-tabs li.ui-tabs-selected {
+    background-color: #fff !important;
+}
+
+.ui-tabs .item-1 a {
+    color: #080;
+}
+.ui-tabs .item-2 a {
+    color: #800;
+}
+.ui-tabs .item-3 a {
+    color: #008;
+}
+.ui-tabs .item-4 a {
+    color: #cf8300;
+}
+.ui-tabs .item-5 a {
+    color: #8f008c;
+}
+.ui-tabs .item-6 a {
+    color: #11868f;
+}
+.ui-tabs .item-7 a {
+    color: #0c0;
+}
+.ui-tabs .item-8 a {
+    color: #c00;
+}
+.ui-tabs .item-9 a {
+    color: #00c;
+}
+.ui-tabs .item-10 a {
+    color: #555;
+}
+
+#biomart-content .ui-tabs {
+    padding: 0;
+}
+#biomart-content .ui-tabs p.description {
+    background-color: #eee;
+}
+.col-b pre, .col-b p {
+    font-family: HelveticaNeue, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    line-height: 1.2em;
+}
+#biomart-wrapper h3 {
+    z-index: 1;
+}
+
+#biomart-wrapper h4 {
+    margin-top: 1px;
+}
+
+#biomart-content .ui-accordion .ui-widget-content {
+    margin-bottom: 2px;
+}
+
+#biomart-content .ui-accordion .ui-state-active {
+    background: url("images/ui-bg_glass_100_fdf5ce_1x400.png") repeat-x scroll 50% 50% #FDF5CE;
+    border: 1px solid #FBCB09;
+    color: #C77405;
+}
+

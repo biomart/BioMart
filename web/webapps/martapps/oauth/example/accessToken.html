@@ -1,0 +1,27 @@
+<HTML>
+  <head>
+    <script type="text/javascript" src="sha1.js"></script>
+    <script type="text/javascript" src="../../js/lib/oauth.js"></script>
+    <script type="text/javascript" src="consumer.js"></script>
+  </head>
+  <body onLoad="consumer.initializeForm(document.request, document.etc, 'accessToken')">
+    <form name="request" method="POST" onSubmit="consumer.signForm(this, document.etc)" style="margin:0">
+        <input type="submit" value="Get Access Token"/><br/>
+        <input name="oauth_consumer_key"     type="hidden" size="64"/><br/>
+        request token:    <input name="oauth_token"            type="text" size="64"/><br/>
+        verifier:    <input name="oauth_verifier"            type="text" size="64"/><br/>
+        signature method: <input name="oauth_signature_method" type="text"/>
+                          <input name="oauth_timestamp"        type="hidden"/>
+                          <input name="oauth_nonce"            type="hidden"/>
+                          <input name="oauth_signature"        type="hidden"/>
+    </form>
+    <form name="etc" style="margin:0">
+        <select name="selector" onChange="consumer.initializeForm(document.request, document.etc, 'accessToken')" style="display:none">
+            <option value="example">Example Provider
+        </select>
+        URL:              <input name="URL"                    type="text" size="80"/>
+        <input name="consumerSecret"         type="hidden" size="64"/><br/>
+        token secret:     <input name="tokenSecret"            type="text" size="64"/>
+    </form>
+  </body>
+</HTML>

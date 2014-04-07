@@ -1,0 +1,21 @@
+<query processor="TSV" start="0" offset="100">
+	<dataset name="gene_ensembl" partitions="hsapiens_gene_ensembl">
+		<attribute name="ensembl_gene_id" />
+		<attribute name="ensembl_transcript_id" />
+		<filter name="chromosome_name" value="1" />
+	</dataset>
+	<dataset name="pathway">
+		<attribute name="stableidentifier_identifier" />
+		<attribute name="referencedatabase_ensembl" />
+	</dataset>
+</query>
+
+<!--
+<query processor="TSV" start="0" size="100">
+	<dataset name="gene_ensembl" partitions="hsapiens_gene_ensembl,mmusculus_gene_ensembl">
+		<attribute name="ensembl_gene_id" />
+		<attribute name="ensembl_transcript_id" />
+		<filter name="chromosome_name" value="1" />
+	</dataset>
+</query>
+-->

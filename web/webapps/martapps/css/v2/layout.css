@@ -1,0 +1,201 @@
+/* General layout */
+.biomart .col-a {
+    float: left;
+    width: 500px;
+}
+.biomart .col-b {
+    float: right;
+    width: 490px;
+}
+.biomart .panel {
+     margin-bottom: 10px;
+}
+#biomart-wrapper {
+    position: relative;
+    color: #333;
+    background-image: none;
+    background-color: #fff;
+    -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px;
+}
+#biomart-wrapper h2 {
+    overflow: hidden;
+    text-shadow: 1px 1px 2px #ddccb5;
+    color: #897048;
+    font-size: 24px;
+    font-weight: normal;
+    font-variant: small-caps;
+    text-align: center;
+    position: relative;
+    border: 1px solid #ccc;
+    padding: 5px;
+    -moz-border-radius-topright: 4px; -webkit-border-top-right-radius: 4px; border-top-right-radius: 4px;
+    -moz-border-radius-topleft: 4px; -webkit-border-top-left-radius: 4px; border-top-left-radius: 4px;
+}
+#biomart-wrapper h3 {
+    position: relative;
+    text-align: center;
+    font-weight: normal;
+    font-size: 20px;
+    font-variant: small-caps;
+    padding: 5px;
+    margin: 0 0 5px 0;
+    text-transform: capitalize;
+    z-index: 101;
+    -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px;
+}
+#biomart-wrapper h4 {
+    position: relative;
+    font-weight: normal;
+    margin: 0;
+    padding: 3px 20px;
+    font-size: 16px;
+    z-index: 101;
+}
+#biomart-top-wrapper {
+    padding-bottom: 30px; /* To accomodate the toolbar */
+}
+#biomart-top-wrapper.wide {
+    width: 99% !important;
+}
+#biomart-wrapper h3 .ui-icon {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    margin-top: -9px;
+    background-image: url("../lib/ui/aristo/images/ui-icons_222222_256x240.png");
+}
+#biomart-header {
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+#biomart-content {
+    position: relative;
+    border-top: none;
+    border-bottom: none;
+    font-weight: normal;
+    color: inherit;
+    padding: 4px;
+    font-size: 14px;
+    min-height: 100px;
+}
+#biomart-footer {
+    font-size: 12px;
+    margin-top: 10px;
+}
+#biomart-content-footer {
+    padding: 10px 5px 5px;
+    text-shadow: 1px 1px 3px #fff;
+    border-top: none;
+    font-weight: normal;
+    color: inherit;
+}
+#biomart-content-footer .version {
+    font-size: 13px;
+    line-height: 25px;
+    text-align: right;
+    padding: 10px 5px 0 0;
+    color: #777;
+}
+#biomart-content-footer .version a {
+    display: block;
+    float: right;
+    margin-left: .5em;
+    background: transparent url(../../images/biomart_logo_trans.png) no-repeat 0 0;
+    width: 85px;
+    height: 25px;
+    text-align: left;
+    text-indent: -10000px;
+}
+#biomart-footer .content {
+    float: left;
+    font-size: 12px;
+}
+#biomart-footer .content p {
+     padding: 10px;
+}
+
+/* Layout 1 */
+.layout1 #biomart-top-wrapper {
+    margin-left: auto;
+    margin-right: auto;
+    width: 1000px;
+}
+
+/* Layout 2 */
+.layout2 #biomart-top-wrapper {
+    margin-left: auto;
+    margin-right: auto;
+    width: 99%;
+    min-width: 1000px;
+}
+
+/* Layout 3 */
+.layout3 #biomart-top-wrapper {
+    margin-left: auto;
+    margin-right: auto;
+    width: 800px;
+}
+/* 
+ * Default martanalysis-type layout, might become a generic Backbone view layout.
+ * If this is to remain specific, then might want to move this elsewhere, like martanalysis/css/main.css.
+ */
+#biomart-content .panel.datasets {
+    padding-right: 48px;
+    background: transparent url(../../images/arrowright32.png) no-repeat 100% 100px;
+    float: left;
+    width: 300px;
+    min-height: 200px;
+}
+#biomart-content .panel.views,
+#biomart-content .panel.filters,
+#biomart-content .panel.attributes {
+     float: right;
+    width: 630px;
+}
+#biomart-content .panel.views,
+#biomart-content .panel.attributes {
+    padding-bottom: 40px;
+    background: transparent url(../../images/arrowdown32.png) no-repeat 50% 100%;
+}
+#biomart-content .panel.output {
+     float: right;
+    width: 630px;
+}
+#biomart-submit .awesome {
+    font-size: 28px;
+    width: 8em;
+    display: block;
+    margin: 0 auto;
+}
+#biomart-content .datasets .ui-selectee {
+    border: 1px dotted #ccc;
+    background-color: #fef1ec;
+    text-align: center;
+    margin: 3px 3px;
+    padding : 5px 0;
+    font-size: 12px;
+    color: #999;
+    -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px;
+}
+#biomart-content .datasets .ui-selected {
+     background-color: #e17009;
+    color: #fff;
+    border-style: solid;
+    border-color: #000;
+}
+#biomart-content .datasets .ui-selecting {
+     background-color: #feca40;
+    color: #000;
+    border-style: solid;
+    border-color: #999;
+}
+#biomart-content .datasets .error {
+     background-color: transparent;
+}
+#biomart-content .datasets .error .ui-selectee {
+     color: #af7878;
+}
+#biomart-content .datasets .error .ui-selected {
+     color: #fff;
+}
+

@@ -1,0 +1,120 @@
+<!-- inViews = "" -->
+<contextMenu>
+	<node name="martRegistry">
+		<menuItem name="updateAll" title="update"  disabled="1"/>
+	</node>
+	<node name="users">
+		<menuItem name="addUser" title="add user"  />
+	</node>
+	<node name="guicontainer">
+		<menuItem name="addGuiContainer" title="add guicontainer" />
+		<menuItem name="addMartPointer" title="add martpointer" />
+		<menuItem name="delete" title="delete" />
+<!--		<menuItem name="setGuiType" title="set GUIType" >
+			<menuItem name="martview" title="Mart View" />
+			<menuItem name="martsearch" title="Mart Search" />
+			<menuItem name="martwizard" title="Mart Wizard" />
+		</menuItem> -->
+		<menuItem name="updatelinks" title="Update Links" />
+	</node>
+	<node name="martpointer">
+		<menuItem name="moveup" title="move up" />
+		<menuItem name="movedown" title="move down" />	
+		<menuItem name="orderdataset" title="order dataset" >
+			<menuItem name="orderdatasetbyname" title="by name" />
+			<menuItem name="orderdatasetbydisplayname" title="by displayname" />
+		</menuItem>
+		<menuItem name="delete" title="delete" />
+		<menuItem name="createLink" title="create link"  disabled="1"/>
+		<menuItem name="addDatasetInMartPointer" title="add dataset" />
+	</node>
+	<node name="processors">
+		<menuItem name="addProcessor" title="add processor" />
+		<menuItem name="editsource" title="Edit Source" />
+	</node>
+	<node name="processor">
+		<menuItem name="makeDefaultProcessor" title="make default" />
+	</node>
+	<node name="config">
+<!--		<menuItem name="createImportables" title="create importables" />
+		<menuItem name="createExportables" title="create exportables" /> -->
+<!--		<menuItem name="createlink" title="create link" />
+		<menuItem name="refactor" title="Refactor" >
+			<menuItem name="rename" title="rename..." />
+		</menuItem>
+		<menuItem name="exportconfig" title="export config" />
+		<menuItem name="exportoptions" title="export options" /> -->
+		<!--<menuItem name="setmaster" title="Set Master" type="checkbox"  property="master"/> -->
+	</node>
+	<node name="container">
+		<menuItem name="addContainer" title="Add container" />
+		<menuItem name="hide" title="Hide"  type="checkbox" property="hide"/>
+		<!--<menuItem name="hide4user" title="Hide for current user"  disabled="1"/>-->
+		<menuItem name="paste" title="Paste" />
+		<menuItem name="delete" title="Remove" />
+		<menuItem name="moveup" title="Move up" />
+		<menuItem name="movedown" title="Move down" />			
+		<Separator/>
+		<menuItem name="createAttributeList" title="Create attribute list" disabled="0"/>
+		<menuItem name="createFilterList" title="Create filter list" disabled="0"/>
+		<menuItem name="createAttribute" title="Create pseudo attribute" disabled="0"/>
+		<!--<menuItem name="refactor" title="Refactor"  disabled="1">
+			<menuItem name="rename" title="rename..." />
+		</menuItem> -->
+	</node>
+	<node name="filter">
+		<menuItem name="hide" title="Hide"  type="checkbox" property="hide"/>
+		<!--<menuItem name="hide4user" title="Hide for current user" />-->
+		<menuItem name="dropDown" title="Dropdown list" />
+		<menuItem name="copyFilter" title="Copy" />
+		<menuItem name="cutFilter" title="Cut" />
+	<!--	<menuItem name="createlink" title="create link" /> -->
+		<menuItem name="delete" title="Remove" /> 
+		<Separator/>
+		<menuItem name="moveup" title="Move up" />
+		<menuItem name="movedown" title="Move down" />
+		<menuItem name="references" title="Show all filters" />		
+	<!--	<menuItem name="mergeFilters" title="merge filters" />		
+		<Separator/>
+		<menuItem name="refactor" title="Refactor" >
+			<menuItem name="rename" title="rename..." />
+		</menuItem> -->
+	</node>
+	<node name="attribute">
+		<menuItem name="hide" title="Hide"  type="checkbox" property="hide"/>
+		<menuItem name="copyAttribute" title="Copy" />
+		<menuItem name="cutAttribute" title="Cut" />
+		<menuItem name="delete" title="Remove" />
+		<menuItem name="createFilterFromAttribute" title="Create filter"/>
+	<!--	<menuItem name="createlink" title="create link" />-->
+		<Separator/>
+		<menuItem name="moveup" title="Move up" />
+		<menuItem name="movedown" title="Move down" />	
+		<menuItem name="references" title="Show all references" />
+	<!--	<menuItem name="refactor" title="Refactor" >
+			<menuItem name="rename" title="rename..." />
+		</menuItem>-->
+	</node>
+	<node name="mart">		
+	</node>
+	<node name="importable">
+		<menuItem name="remove importable" title="remove importable"/>
+		<menuItem name="references" title="References" />
+	</node>
+	<node name="exportable">
+		<menuItem name="remove exportable" title="remove exportable"/>
+		<menuItem name="references" title="References" />
+	</node>	
+	<node name="table">
+		<menuItem name="groupDimensionTable" title="group dimension table"  disabled="1"/>
+		<menuItem name="references" title="References" />
+		<menuItem name="hide" title="Hide"  type="checkbox" property="hide"/>
+	</node>
+	<node name="column">
+		<menuItem name="references" title="References" />
+		<menuItem name="donaiveattribute" title="Create Naive Attribute &amp; Filter" />
+	</node>
+	<node name="link">
+		<menuItem name="delete" title="delete" />
+	</node>
+</contextMenu>

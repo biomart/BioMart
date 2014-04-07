@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE MartRegistry>
+<MartRegistry>
+<virtualSchema name="default" displayName="default" default="1" visible="1">
+
+<MartDBLocation databaseType="mysql" host="biomartdb-dev.res.oicr.on.ca" database="vega_mart_60" name="vega" displayName="VEGA 41 
+(SANGER UK)" port="3306" schema="vega_mart_60" user="martadmin" password="Bi0M4rt" visible="1" default="0" martUser="" 
+includeDatasets="" />
+
+ <MartURLLocation database="test_reactome_mart" default="" displayName="REACTOME (CSHL US)" host="reactome.oicr.on.ca" includeDatasets="complex" martUser="" name="REACTOME" path="/biomart/martservice" port="5555" redirect="1" serverVirtualSchema="default" visible="1" />
+
+</virtualSchema>
+
+</MartRegistry>

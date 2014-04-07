@@ -1,0 +1,55 @@
+. gene_ensembl_config
+  AC005837.1	ENSG00000251282	17	74730199	74733413	1	q25.1	1	lincRNA	KNOWN
+  AC111170.1	ENSG00000250022	17	75464643	75468852	-1	q25.3	1	lincRNA	KNOWN
+  AC021683.1	ENSG00000249845	17	75543023	75559325	1	q25.3	2	lincRNA	KNOWN
+  AC104981.1	ENSG00000249218	17	75718954	75724641	-1	q25.3	1	lincRNA	KNOWN
+  AC100791.3	ENSG00000248706	17	77889984	77900524	-1	q25.3	1	lincRNA	KNOWN
+  AC027601.1	ENSG00000250297	17	78313698	79329659	-1	q25.3	1	lincRNA	NOVEL
+  AC016245.1	ENSG00000247501	17	78775440	78779420	-1	q25.3	1	lincRNA	KNOWN
+  AC139530.1	ENSG00000246747	17	79604197	79606203	1	q25.3	1	lincRNA	KNOWN
+  AC145207.1	ENSG00000247329	17	79885705	79888628	1	q25.3	1	lincRNA	KNOWN
+  AC132872.4	ENSG00000248630	17	80172103	80175228	-1	q25.3	1	lincRNA	KNOWN
+. gene_vega_config
+  WU:AC157543.3	OTTMUSG00000030059	1	3044314	3044814	1	A1	1	transcribed_unprocessed_pseudogene	
+  Xkr4	OTTMUSG00000026353	1	3195982	3661579	-1	A1	3	protein_coding	KNOWN
+  WU:1.3000001-3776472.1	OTTMUSG00000026352	1	3456668	3503634	1	A1	1	processed_transcript	PUTATIVE
+  Mrpl15	OTTMUSG00000029329	1	4763287	4775820	-1	A1	6	protein_coding	KNOWN
+  Lypla1	OTTMUSG00000021562	1	4797869	4876851	1	A1	9	protein_coding	KNOWN
+  Rgs20	OTTMUSG00000029338	1	4899657	5060366	-1	A1	7	protein_coding	KNOWN
+  WU:RP24-141F9.1	OTTMUSG00000035898	1	4917109	4917380	-1	A1	1	transcribed_processed_pseudogene	
+  AC102242.1	OTTMUSG00000029344	1	4960938	4966901	1	A1	1	processed_transcript	NOVEL
+  WU:RP24-363O2.1	OTTMUSG00000035899	1	5053141	5054728	1	A1	1	transcribed_processed_pseudogene	
+  Oprk1	OTTMUSG00000034734	1	5578574	5596212	1	A1	4	protein_coding	KNOWN
+. hgnc_config
+  poly(A) binding protein, cytoplasmic 1 pseudogene 4	poly(A)-binding protein-like 2", "poly(A) binding protein, cytoplasmic pseudogene 5	
+  transcription elongation factor A (SII)-like 7		CCDS14506.1
+  chromosome 11 open reading frame 68		CCDS8122.2, CCDS44652.1
+  3-hydroxy-3-methylglutaryl-CoA reductase	3-hydroxy-3-methylglutaryl-Coenzyme A reductase	CCDS4027.1, CCDS47234.1
+  ELKS/RAB6-interacting/CAST family member 2		CCDS46851.1
+  symbol withdrawn, see ETS1		
+  Lix1 homolog (chicken)	chromosome 5 open reading frame 11", "Lix1 homolog (mouse)	CCDS4088.1
+  entry withdrawn		
+  nibrin	Nijmegen breakage syndrome 1 (nibrin)	CCDS6249.1
+  symbol withdrawn, see CELSR2		
+. markers_config_2
+  DNA segment, Chr X, Massachusetts Institute of Technology 148	MGI:100000	X	99921716	99922060		DNA segment
+  DNA segment, Chr X, Massachusetts Institute of Technology 147	MGI:100001	X	84461654	84461870		DNA segment
+  DNA segment, Chr X, Massachusetts Institute of Technology 146a	MGI:100002	X	70477137	70477284		DNA segment
+  DNA segment, Chr X, Massachusetts Institute of Technology 145	MGI:100003	X	72029650	72029807		DNA segment
+  DNA segment, Chr X, Massachusetts Institute of Technology 144	MGI:100004	X	61237013	61237136		DNA segment
+  DNA segment, Chr X, Massachusetts Institute of Technology 143	MGI:100005	X				DNA segment
+  DNA segment, Chr X, Massachusetts Institute of Technology 142	MGI:100006	X	67107453	67107779		DNA segment
+  DNA segment, Chr X, Massachusetts Institute of Technology 141	MGI:100007	X	56684877	56685020		DNA segment
+  DNA segment, Chr X, Massachusetts Institute of Technology 140	MGI:100008	X	56909923	56910035		DNA segment
+  DNA segment, Chr X, Massachusetts Institute of Technology 139	MGI:100009	X	13740629	13740778		DNA segment
+. snp_config
+  	ss68435130	rs43773831		scaffold_72437	492	1	T/C				
+  	ss68435131	rs43773832		scaffold_111449	517	1	C/T				
+  	ss68435132	rs43773833		scaffold_98639	3470	1	C/T				
+  	ss68435133	rs43773834		scaffold_98639	3379	1	A/G				
+  	ss68435134	rs43773835		scaffold_143677	34513	1	G/A				
+  	ss68435135	rs43773836		scaffold_213043	44313	1	T/C				
+  	ss68435136	rs43773837		scaffold_98529	1041	1	G/T				
+  	ss68435137	rs43773838		scaffold_143727	320	1	T/C				
+  	ss68435138	rs43773839		scaffold_143728	3269	1	G/A				
+  	ss68435139	rs43773840		scaffold_143728	3407	1	A/G				

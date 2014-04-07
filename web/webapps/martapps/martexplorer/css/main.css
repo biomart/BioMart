@@ -1,0 +1,46 @@
+@import url(../../martwizard/css/main.css);
+
+#biomart-step-info {
+    margin-left: 350px;
+}
+
+#biomart-content-wrapper {
+    padding: 5px 2px;
+}
+
+#biomart-main {
+    overflow: auto;
+}
+
+#biomart-summary, #biomart-main {
+    padding: 5px 5px 7px;
+}
+
+.steps {
+    position: relative;
+}
+.item-content {
+    padding: 0 2px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin-left: 300px;
+}
+.item-tree {
+    width: 300px;
+    font-size: 12px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: auto;
+    border: 1px solid #ccc;
+    -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px;
+    background-color: #eee !important;
+}
+
+#biomart-summary li .ui-icon {
+    cursor: pointer;
+}
+#biomart-summary li .ui-icon-circle-arrow-w {
+    right: 15px;
+}
+

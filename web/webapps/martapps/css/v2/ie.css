@@ -1,0 +1,99 @@
+.ui-widget-header {
+    zoom: 1;
+}
+
+#results {
+     zoom: 1;
+}
+
+.filters .items li .remove {
+     right: 0;
+}
+
+.gradient-grey {
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#dddddd') !important;
+}
+.gradient-lightgrey {
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#eeeeee') !important;
+}
+.gradient-grey-reverse {
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#efefef', endColorstr='#ffffff') !important;
+}
+
+.biomart .awesome .ui-icon {
+    float: left;
+}
+
+.biomart .heatmap canvas div {
+     top: -4px;
+}
+.biomart .heatmap canvas div div {
+    top: auto;
+}
+
+.ie6 .ui-fixed-tl {
+    position: absolute; /* position fixed for ie6 */ 
+    top: expression(0+((e=document.documentElement.scrollTop)?e:document.body.scrollTop)+'px'); 
+    left: expression(0+((e=document.documentElement.scrollLeft)?e:document.body.scrollLeft)+'px'); 
+}
+.ie6 .ui-fixed-tr {
+    position: absolute; /* position fixed for ie6 */ 
+    top: expression(0+((e=document.documentElement.scrollTop)?e:document.body.scrollTop)+'px'); 
+    right: expression(0+((e=document.documentElement.scrollLeft)?e:document.body.scrollLeft)+'px'); 
+}
+.ie6 .ui-fixed-bl {
+    position: absolute; /* position fixed for ie6 */ 
+    bottom: expression(0+((e=document.documentElement.scrollTop)?e:document.body.scrollTop)+'px'); 
+    left: expression(0+((e=document.documentElement.scrollLeft)?e:document.body.scrollLeft)+'px'); 
+}
+.ie6 .ui-fixed-br {
+    position: absolute; /* position fixed for ie6 */ 
+    bottom: expression(0+((e=document.documentElement.scrollTop)?e:document.body.scrollTop)+'px'); 
+    right: expression(0+((e=document.documentElement.scrollLeft)?e:document.body.scrollLeft)+'px'); 
+}
+
+.ie6 .ui-prettybox .ui-button,
+.ie7 .ui-prettybox .ui-button {
+    margin-top: -1px;
+}
+
+.ui-autocomplete.ui-menu {
+    border: 1px solid #999 !important;
+}
+
+.ie6 #biomart-breadcrumbs li,
+.ie7 #biomart-breadcrumbs li {
+    background-image: url("../images/gt.gif");
+    background-repeat: no-repeat;
+    background-position: 0 50%;
+    padding: 0 0.5em 0 1em;
+    margin: 0 1em 0 -1em;
+}
+.ie6 #biomart-breadcrumbs li.first,
+.ie7 #biomart-breadcrumbs li.first {
+    background-image: none;
+}
+.ie6 #biomart-breadcrumbs, .ie7 #biomart-breadcrumbs { height: 1%; }
+.ie6 #biomart-breadcrumbs li,
+.ie7 #biomart-breadcrumbs li {
+    display: block;
+    float: left;
+}
+
+#biomart-topnav .others li {
+    border-right: none;
+}
+
+.ie6 #biomart-auth-info,
+.ie7 #biomart-auth-info {
+    top: 20px;
+}
+
+.ie6 #biomart-view-xml textarea,
+.ie7 #biomart-view-xml textarea,
+.ie6 #biomart-view-sparql textarea,
+.ie7 #biomart-view-sparql textarea,
+.ie6 #biomart-view-java textarea,
+.ie7 #biomart-view-java textarea {
+    height: 390px;
+}

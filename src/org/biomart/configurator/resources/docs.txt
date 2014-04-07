@@ -1,0 +1,48 @@
+MartBuilder is a powerful tool for transforming relational 
+databases into denormalised marts. It is part of the BioMart
+suite of software tools.
+
+Full documentation is available on the BioMart website at:
+
+  http://www.biomart.org/
+  
+The main concepts in MartBuilder are:
+
+  Mart - a collection of schemas and datasets built from 
+     those schemas.
+  
+  Schema - a representation of a real database somewhere.
+  
+  Dataset - a representation of the transformation process 
+     applied to one or more schemas to denormalise them.
+  
+  Main table - the main table of a dataset is the focal point
+     of that dataset and contains the most useful info.
+     
+  Dimension table - extra info about records in the main table
+     which is not best included in the main table.
+     
+  Subclass table - an extension of a main table with extra
+     columns.
+     
+  Partition table - a source of data to use when dividing up
+     datasets or dimension tables into smaller related units.
+     
+Essentially the process of transformation goes like this:
+
+  1. Create a new, blank, mart.
+  2. Add your schema to it.
+  3. Locate the table you wish to be the central focal point
+      of your transformed data.
+  4. Right-click that table and choose Create Datasets and hit
+      the OK button.
+  5. Your dataset is now designed and shown on screen.
+  6. Use the Save SQL menu option to generate SQL to build
+      that dataset.
+      
+A tool is provided for automatically running the generated SQL 
+and monitoring its progress. That tool is called MartRunner.
+
+Full documentation of MartBuilder and MartRunner can be found
+along with documentation for all the rest of the BioMart 
+software tools on the BioMart website, as mentioned above.

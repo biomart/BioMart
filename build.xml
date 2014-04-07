@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<project name="BioMart" default="dist" basedir=".">
+  <target name="-load.properties" description="Load">
+    <property file="ant.properties"/>
+    <path id="project.classpath">
+      <fileset dir="${lib.dir}">
+        <patternset id="project.jars">
+          <include name="*.jar"/>
+          <include name="test/*.jar"/>
+        </patternset>
+      </fileset>
+    </path>
+  </target>
+  <target name="-init" depends="-load.properties">
+    <tstamp/>
+    <mkdir dir="${build.classes}/main/META-INF"/>
+    <mkdir dir="${build.classes}/start"/>
+    <mkdir dir="${build.lib}"/>
+    <mkdir dir="${dist.web.dir}/work"/>
+    <mkdir dir="${dist.dir}/logs"/>
+    <mkdir dir="${dist.dir}/registry/linkindices"/>
+  	<mkdir dir="${build.classes}/icgc"/>
+    <trim input="${theme}" property="theme.trimmed"/>
+  </target>
+  <target name="clean" depends="-load.properties">
+    <available property="serverIsRunning" file="${dist.dir}/biomart.pid"/>
+    <fail if="serverIsRunning" message="Jetty is running. Please stop it first by running 'biomart-server.sh stop' ('biomart-server.bat stop' in Windows)."/>
+    <delete dir="${dist.dir}"/>
+    <delete dir="${build.dir}"/>
+  </target>
+  <!-- Compiles the source directory -->
+  <target name="compile.main" depends="-init">
+    <javac srcdir="${src.dir}" sourcepath="" destdir="${build.classes}/main" deprecation="${build.deprecation}" depend="no" debug="true" source="1.6" includeantruntime="no">
+      <exclude name="**/queryEngine/v2/**" />
+      <classpath>
+        <path refid="project.classpath"/>
+      </classpath>
+    </javac>
+    <copy todir="${build.classes}/main/org/biomart/common/resources">
+      <fileset dir="${src.dir}/org/biomart/common/resources/" casesensitive="yes">
+        <exclude name="**/*.java"/>
+      </fileset>
+    </copy>
+    <copy todir="${build.classes}/main/org/biomart/configurator/resources">
+      <fileset dir="${src.dir}/org/biomart/configurator/resources/" casesensitive="yes">
+        <exclude name="**/*.java"/>
+      </fileset>
+    </copy>
+    <copy todir="${build.classes}/main/org/biomart/runner/resources">
+      <fileset dir="${src.dir}/org/biomart/runner/resources/" casesensitive="yes">
+        <exclude name="**/*.java"/>
+      </fileset>
+    </copy>
+    <copy file="${src.dir}/org/biomart/oauth/provider/core/provider.properties" tofile="${build.classes}/main/org/biomart/oauth/provider/core/provider.properties"/>
+    <copy todir="${build.lib}">
+      <fileset dir="${lib.dir}">
+        <patternset refid="project.jars"/>
+      </fileset>
+    </copy>
+    <copy todir="${build.classes}/main/images">
+      <fileset dir="${images.dir}" casesensitive="yes"/>
+    </copy>
+  </target>
+  <target name="jar.main" depends="compile.main">
+    <copy todir="${build.classes}/main/META-INF">
+      <fileset dir="${src.dir}/META-INF" includes="**/*"/>
+    </copy>
+    <jar destfile="${build.lib}/${name}-${version}.jar" basedir="${build.classes}/main/">
+      <manifest>
+        <attribute name="Main-Class" value="org.biomart.api.rest.server.Bootstrapper"/>
+      </manifest>
+    </jar>
+  </target>
+  <target name="compile.start" depends="jar.main">
+    <javac srcdir="${start.dir}" destdir="${build.classes}/start" deprecation="${build.deprecation}" depend="no" debug="true" source="1.6">
+      <classpath>
+        <fileset dir="${basedir}/lib">
+          <include name="*.jar"/>
+        </fileset>
+        <fileset dir="${build.lib}" includes="${name}-${version}.jar"/>
+      </classpath>
+    </javac>
+  </target>
+  <target name="jar.start" depends="compile.start">
+    <jar destfile="${build.lib}/${name}-start.jar" basedir="${build.classes}/start/">
+      <manifest>
+        <attribute name="Main-Class" value="org.biomart.start.Main"/>
+      </manifest>
+    </jar>
+  </target>
+  <target name="dist" depends="jar.main,jar.start,jar.icgc,web-cond-if,web-cond-else">
+    <copy todir="${dist.dir}/registry/linkindices" overwrite="yes">
+      <fileset dir="${basedir}/registry/linkindices" includes="*"/>
+    </copy>
+    <copy todir="${dist.dir}/lib" overwrite="yes">
+      <fileset dir="${lib.dir}">
+        <patternset refid="project.jars"/>
+      </fileset>
+    </copy>
+    <copy todir="${dist.web.dir}/etc" preservelastmodified="yes">
+      <fileset dir="${web.dir}/etc" includes="**/*"/>
+    </copy>
+    <copy todir="${dist.dir}/conf/xml">
+      <fileset dir="${conf.dir}/xml" casesensitive="yes"/>
+    </copy>
+    <copy todir="${dist.dir}/conf/dinos">
+      <fileset dir="${conf.dir}/dinos" casesensitive="yes"/>
+    </copy>
+    <copy file="${dist.dir}/biomart.properties" tofile="${dist.dir}/biomart.properties.${DSTAMP}${TSTAMP}" failonerror="no"/>
+    <copy file="${conf.dir}/files/biomart.properties" todir="${dist.dir}"/>
+    <copy todir="${dist.dir}/images">
+      <fileset dir="${images.dir}" casesensitive="yes"/>
+    </copy>
+    <copy todir="${dist.dir}/scripts">
+      <fileset dir="${scripts.dir}" casesensitive="yes"/>
+    </copy>
+    <copy file="${build.lib}/${name}-start.jar" todir="${dist.dir}/scripts"/>
+    <copy file="${build.lib}/${name}-${version}.jar" todir="${dist.dir}/lib"/>
+    <copy file="${build.lib}/icgc.jar" todir="${dist.dir}/lib"/>
+    <mkdir dir="${dist.dir}/lib/extras"/>
+    <copy file="${lib.dir}/extras/libsetuid.so" todir="${dist.dir}/lib/extras"/>
+    <chmod perm="+x" file="${dist.dir}/scripts/martconfigurator.sh"/>
+    <chmod perm="+x" file="${dist.dir}/scripts/martrunner.sh"/>
+    <chmod perm="+x" file="${dist.dir}/scripts/updateICGC.sh"/>
+    <chmod perm="+x" file="${dist.dir}/scripts/mergeICGC.sh"/>
+    <chmod perm="+x" file="${dist.dir}/scripts/biomart-server.sh"/>
+    <chmod perm="+x" file="${dist.dir}/scripts/generate-password.sh"/>
+    <replace file="${dist.dir}/biomart.properties" token="/path/to/registry_file" value="${registry.file}"/>
+    <replace file="${dist.dir}/biomart.properties" token="/path/to/registry_key_file" value="${registry.key.file}"/>
+    <!-- copy default theme -->
+    <copy todir="${dist.web.dir}/includes" preservelastmodified="yes">
+      <fileset dir="${web.dir}/includes">
+        <include name="**/*"/>
+      </fileset>
+    </copy>
+    <copy todir="${dist.web.dir}/pages" preservelastmodified="yes">
+      <fileset dir="${web.dir}/pages">
+        <include name="**/*"/>
+      </fileset>
+    </copy>
+    <!-- copy theme files -->
+    <copy todir="${dist.web.dir}" overwrite="yes" failonerror="no">
+      <fileset dir="${themes.dir}/${theme.trimmed}">
+        <include name="**/*"/>
+        <exclude name="**/_*"/>
+      </fileset>
+    </copy>
+    <copy todir="${dist.web.dir}" preservelastmodified="yes" failonerror="no">
+      <fileset dir="${themes.dir}/${theme.trimmed}">
+        <include name="**/_*"/>
+      </fileset>
+    </copy>
+    <copy file="${web.apps.dir}/martapps/_js_includes.jsp" todir="${dist.webapps.dir}/martapps" overwrite="yes"/>
+    <copy todir="${dist.dir}/plugins">
+      <fileset dir="${basedir}/plugins">
+        <include name="**/*"/>
+        <exclude name="**/src/**"/>
+      </fileset>
+    </copy>
+  </target>
+  <target name="compile.icgc" depends="jar.start">
+    <javac srcdir="${icgc.dir}" destdir="${build.classes}/icgc" deprecation="${build.deprecation}" depend="no" debug="true" source="1.6" includeantruntime="no">
+      <classpath>
+        <path refid="project.classpath"/>
+        <fileset dir="${build.lib}" includes="${name}-${version}.jar"/>
+      	<fileset dir="${build.lib}" includes="${name}-start.jar"/>
+      </classpath>
+    </javac>
+  </target>
+  <target name="jar.icgc" depends="compile.icgc">
+    <jar destfile="${build.lib}/icgc.jar" basedir="${build.classes}/icgc/">
+      <manifest>
+        <attribute name="Main-Class" value="org.biomart.configurator.test.UpdateCLI"/>
+      </manifest>
+    </jar>
+  </target>
+  <!-- copy webapp files and include test -->
+  <target name="web-cond-if" depends="web-cond-check" if="do-include-test">
+    <echo message="Including qunit tests"/>
+    <copy todir="${dist.webapps.dir}">
+      <fileset dir="${web.apps.dir}">
+        <include name="**/*"/>
+        <exclude name="**/tmp/**"/>
+      </fileset>
+    </copy>
+  </target>
+  <!-- copy webapp files but exclude test -->
+  <target name="web-cond-else" depends="web-cond-check" unless="do-include-test">
+    <copy todir="${dist.webapps.dir}">
+      <fileset dir="${web.apps.dir}">
+        <include name="**/*"/>
+        <exclude name="**/tests/**"/>
+        <exclude name="**/tmp/**"/>
+      </fileset>
+    </copy>
+  </target>
+  <!-- sets property if test is to be included -->
+  <target name="web-cond-check">
+    <condition property="do-include-test">
+      <equals arg1="${withtests}" arg2="true" />
+    </condition>
+  </target>
+
+  <!-- Extensions -->
+  <target name="compile.session" depends="-init">
+    <mkdir dir="${build.classes}/session"/>
+    <javac srcdir="${basedir}/ext/session/src" destdir="${build.classes}/session" deprecation="${build.deprecation}" depend="no" debug="true" source="1.6" includeantruntime="no">
+      <classpath>
+        <path refid="project.classpath"/>
+        <fileset dir="${dist.dir}/lib">
+          <include name="biomart-0.8.jar"/>
+        </fileset>
+      </classpath>
+    </javac>
+  </target>
+  <target name="jar.session" depends="compile.session">
+    <mkdir dir="${build.lib}"/>
+    <jar destfile="${build.lib}/jetty-session-ext.jar" basedir="${build.classes}/session/"/>
+  </target>
+
+	<target name="javadocs" depends="dist" description="generates javadoc and also UML Diagram">
+		<mkdir dir="${reports.dir}/javadoc"/>
+	        <javadoc sourcepath="${src.dir}" packagenames="org.biomart.*" destdir="${reports.dir}/javadoc"
+	        	classpathref="project.classpath" private="true">
+	        	   <doclet name="org.umlgraph.doclet.UmlGraphDoc"
+	        		  path="lib/UMLGraph.jar">
+	        	        <param name="-attributes" />
+	        	        <param name="-operations" />
+	        	        <param name="-qualify" />
+	        	        <param name="-types" />
+	        	        <param name="-visibility" />
+	        	    </doclet>
+	        	  </javadoc>
+		  <apply executable="dot" dest="${reports.dir}" parallel="false">
+		    <arg value="-Tpng"/>
+		    <arg value="-o"/>
+		     <targetfile/>
+		     <srcfile/>
+		     <fileset dir="${reports.dir}" includes="*.dot"/>
+		     <mapper type="glob" from="*.dot" to="*.png"/>
+		  </apply>
+	</target>
+  <macrodef name="trim">
+    <attribute name="input" />
+    <attribute name="property" />
+    <sequential>
+      <tempfile property="temp.file" />
+      <echo file="${temp.file}" message="@{input}" />
+      <move file="${temp.file}" tofile="${temp.file}.2">
+        <filterchain>
+          <trim/>
+        </filterchain>
+      </move>
+      <loadfile property="@{property}" srcFile="${temp.file}.2" />
+      <delete file="${temp.file}.2" failonerror="false" />
+    </sequential>
+  </macrodef>
+</project>

@@ -1,0 +1,8 @@
+<guitype>
+  <item name="martsearch" displayname="Mart Search" url="martsearch/#!/%s"/>
+  <item name="martanalysis" displayname="Mart Analysis" url="martanalysis/#!/%s/%s"/>
+  <item name="martform" displayname="Mart Form" url="martform/#!/%s/%s"/>
+  <item name="martwizard" displayname="Mart Wizard" url="martwizard/#!/%s?mart=%s"/>
+  <item name="martexplorer" displayname="Mart Explorer" url="martexplorer/#!/%s?mart=%s"/>
+  <item name="martreport" displayname="Mart Report" url="martreport/?report=%s&amp;mart=%s"/>
+</guitype>

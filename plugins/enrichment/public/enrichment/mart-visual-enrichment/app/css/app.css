@@ -1,0 +1,125 @@
+@font-face {
+  font-family: "Pacifico";
+  src: url("fonts/Pacifico.ttf");
+}
+
+@font-face {
+  font-family: "OpenSans";
+  src: url("fonts/Open_Sans/OpenSans-Italic.ttf");
+}
+
+body {
+    margin: 0.2em auto 12em auto;
+}
+
+h1, h2, h3, h4 {
+    font-family: OpenSans;
+    color: #d45354;
+}
+
+.left-panel {
+    border-right: 1px solid #FEDED9;
+}
+
+.right-panel {
+    /*border: 1px solid #909DC7;*/
+}
+
+.table td {
+    text-align: center;
+}
+
+input[type=text] {
+    margin-top: 10px;
+}
+
+.modal-dialog {
+    width: 80%;
+}
+
+.collapse-symbol {
+    float: left;
+    color: #556270;
+    opacity: 0.8;
+    font-size: 2.6em;
+
+}
+
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+
+
+.enrichment {
+    margin: auto auto 3em auto;
+    padding: 2em 0em 4em 1em;
+    border: 1px solid black;
+    border-radius: 7px;
+    background-color: #fbfbfb;
+}
+
+.enrichment h2 {
+    text-align: center;
+    margin: 100px auto 45px auto;
+}
+
+.mv-table-container {
+    overflow-y: auto;
+    /*height: 40%;*/
+}
+
+.mve-title {
+    font-family: "Pacifico";
+    text-align: center;
+    font-size: 2em;
+    margin-bottom: 1em;
+    color: #303030;
+}
+
+.mve-perimeter {
+    border: 1px solid #556270;
+    border-radius: 15px;
+}
+
+.mve-species {
+    margin-bottom: 2em;
+}
+
+.mve-select {
+    margin: 20px auto 20px auto;
+}
+
+.mve-filter h3 {
+    margin-top: 1.5em;
+    font-weight: bold;
+    color: #2fcad8;
+}
+
+.mve-filter p {
+    margin-top: 1.5em;
+    color: #303030;
+}
+
+
+.mve-annotations {
+    padding: 2em 1em;
+}
+.mve-annotations input[type="checkbox"] {
+    margin: 0.8em 0.5em 0.8em 1.2em;
+}
+
+
+/*.active h1, .active h2, .active h3, .active h4 {
+    color: #4599BC;
+}*/
+
+
+@media (min-width: 1024px) {
+
+    .query-buttons {
+        position: fixed;
+        top: 3em;
+        right: 6em;
+        border-bottom: 1px dashed #303030;
+        padding-bottom: 1.35em;
+    }
+
+}

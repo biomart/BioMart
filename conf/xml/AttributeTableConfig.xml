@@ -1,0 +1,401 @@
+<config>
+	<node name="martregistry">
+		<item name="name" editable="0" visible="1"/>
+		<item name="internalname" editable="1" visible="1"/>
+		<item name="displayname" editable="1" visible="1"/>
+		<item name="description" editable="1" visible="1"/>
+	</node>
+	<node name="portal">
+		<item name="name" editable="0" visible="1"/>
+		<item name="internalname" editable="0" visible="1"/>
+		<item name="displayname" editable="0" visible="1"/>
+		<item name="description" editable="0" visible="1"/>
+	</node>
+	<node name="users">
+		<item name="name" editable="0" visible="1"/>
+		<item name="internalname" editable="0" visible="1"/>
+		<item name="displayname" editable="0" visible="1"/>
+		<item name="description" editable="0" visible="1"/>
+	</node>
+	<node name="group">
+		<item name="name" editable="0" visible="1"/>
+		<item name="internalname" editable="0" visible="1"/>
+		<item name="displayname" editable="0" visible="1"/>
+		<item name="description" editable="0" visible="1"/>
+		<item name="password" editable="0" visible="1"/>
+		<item name="config" editable="0" visible="1"/>
+		<item name="hide" editable="0" visible="1"/>
+		<item name="location" editable="1" visible="1"/>
+	</node>
+	<node name="user">
+		<item name="name" editable="0" visible="1"/>
+		<item name="internalname" editable="0" visible="1"/>
+		<item name="displayname" editable="0" visible="1"/>
+		<item name="description" editable="0" visible="1"/>
+		<item name="password" editable="0" visible="1"/>
+		<item name="hide" editable="0" visible="1"/>
+		<item name="openid" editable="0" visible="1"/>
+	</node>
+	<node name="linkindices"></node>
+	<node name="guicontainer">
+		<item name="name" editable="1" visible="1"/>
+		<item name="internalname" editable="1" visible="1"/>
+		<item name="displayname" editable="1" visible="1"/>
+		<item name="description" editable="1" visible="1"/>
+		<item name="hide" editable="1" visible="1">
+			<editor type="boolean"/>
+		</item>
+		<item name="guitype" editable="0" visible="1"/>
+		<item name="entrylayout" editable="1" visible="1">
+			<editor type="enum" class="org.biomart.objects.enums.EntryLayout">
+
+			</editor>
+		</item>
+		<item name="inusers" editable="0" visible="1"/>
+	</node>
+	<node name="martpointer">
+		<item name="name" editable="0" visible="1"/>
+		<item name="internalname" editable="1" visible="1"/>
+		<item name="displayname" editable="1" visible="1"/>
+		<item name="description" editable="1" visible="1"/>
+		<item name="hide" editable="0" visible="1">
+			<editor type="boolean"/>
+		</item>
+		<item name="mart" editable="0" visible="1"/>
+		<item name="config" editable="0" visible="1"/>
+		<item name="operation" editable="1" visible="1">
+			<editor type="enum" class="org.biomart.api.enums.Operation">
+
+			</editor>
+		</item>
+		<item name="icon" editable="1" visible="1"/>
+		<item name="independentquerying" editable="1" visible="1"/>
+		<item name="inusers" editable="1" visible="1"/>
+		<item name="group" editable="1" visible="1" autosave="true"/>
+		<doubleclickitem name="datasets"/>
+	</node>
+	<node name="link">
+		<item name="name" editable="0" visible="1"/>
+		<item name="internalname" editable="0" visible="1"/>
+		<item name="displayname" editable="1" visible="1"/>
+		<item name="description" editable="1" visible="1"/>
+		<item name="pointedmart" editable="1" visible="1">
+			<editor type="dropdown" method="getMartsDropDown">
+			</editor>
+		</item>
+		<item name="pointedconfig" editable="1" visible="1"/>
+		<item name="filters" editable="1" visible="1"/>
+		<item name="attributes" editable="1" visible="1"/>
+		<item name="datasets" editable="1" visible="1"/>
+	</node>
+	<node name="configlink">
+		<item name="name" editable="" visible="1"/>
+		<item name="internalname" editable="1" visible="1"/>
+		<item name="displayname" editable="1" visible="1"/>
+		<item name="description" editable="1" visible="1"/>
+		<item name="pointedmart" editable="1" visible="1">
+			<editor type="dropdown" method="getMartsDropDown">
+			</editor>
+		</item>
+		<item name="pointedconfig" editable="1" visible="1"/>
+		<item name="filters" editable="1" visible="1"/>
+		<item name="attributes" editable="1" visible="1"/>
+		<item name="datasets" editable="1" visible="1"/>
+	</node>
+
+	<node name="processorgroup">
+		<item name="name" editable="0" visible="1"/>
+		<item name="internalname" editable="0" visible="1"/>
+		<item name="displayname" editable="0" visible="1"/>
+		<item name="description" editable="0" visible="1"/>
+		<item name="hide" editable="1" visible="1"/>
+		<item name="default" editable="1" visible="1"/>
+	</node>
+	<node name="processor">
+		<item name="name" editable="0" visible="1"/>
+		<item name="internalname" editable="0" visible="1"/>
+		<item name="displayname" editable="0" visible="1"/>
+		<item name="description" editable="0" visible="1"/>
+		<item name="hide" editable="1" visible="1"/>
+		<item name="containers" editable="0" visible="1"/>
+		<item name="export" editable="0" visible="1"/>
+	</node>
+	<node name="sourcecontainers">
+		<item name="name" editable="0" visible="1" autosave="true"/>
+		<item name="internalname" editable="0" visible="1" autosave="true"/>
+		<item name="displayname" editable="0" visible="1" autosave="true"/>
+		<item name="description" editable="0" visible="1" autosave="true"/>
+		<item name="hide" editable="1" visible="1" autosave="true">
+			<editor type="boolean"/>
+		</item>
+	</node>
+	<node name="sourcecontainer">
+		<item name="name" editable="0" visible="1" autosave="true"/>
+		<item name="internalname" editable="0" visible="1" autosave="true"/>
+		<item name="displayname" editable="0" visible="1" autosave="true"/>
+		<item name="description" editable="0" visible="1" autosave="true"/>
+		<item name="hide" editable="1" visible="1" autosave="true">
+			<editor type="boolean"/>
+		</item>
+		<item name="group" editable="1" visible="1" autosave="true"/>
+	</node>
+	<node name="mart">
+		<item name="name" editable="0" visible="1"/>
+		<item name="internalname" editable="1" visible="1"/>
+		<item name="displayname" editable="1" visible="1"/>
+		<item name="description" editable="1" visible="1"/>
+		<item name="hide" editable="1" visible="1">
+					<editor type="boolean"/>
+		</item>
+		<item name="optimiser" editable="0" visible="1"/>
+		<item name="indexoptimised" editable="0" visible="1"/>
+		<item name="virtual" editable="0" visible="1"/>
+		<item name="centraltable" editable="0" visible="1"/>
+		<item name="selectedtables" editable="0" visible="1"/>
+		<item name="searchfromtarget" editable="0" visible="1"/>
+		<item name="id" editable="0" visible="1"/>
+		<item name="group" editable="0" visible="1"/>
+	</node>
+	<node name="partitiontable">
+		<item name="name" editable="0" visible="1"/>
+		<item name="internalname" editable="0" visible="1"/>
+		<item name="displayname" editable="0" visible="1"/>
+		<item name="description" editable="0" visible="1"/>
+		<item name="type" editable="0" visible="1"/>
+		<item name="rows" editable="0" visible="1"/>
+		<item name="cols" editable="0" visible="1"/>
+	</node>
+	<node name="sourceschema">
+		<item name="name" editable="0" visible="1"/>
+		<item name="internalname" editable="0" visible="1"/>
+		<item name="displayname" editable="0" visible="1"/>
+		<item name="description" editable="0" visible="1"/>
+		<item name="id" editable="0" visible="1"/>
+	</node>
+	<node name="table">
+		<item name="name" editable="1" visible="1"/>
+		<item name="internalname" editable="1" visible="1"/>
+		<item name="displayname" editable="1" visible="1"/>
+		<item name="description" editable="1" visible="1"/>
+		<item name="type" editable="0" visible="1"/>
+		<item name="hide" editable="0" visible="1"/>
+		<item name="inpartitions" editable="1" visible="1"/>
+		<item name="subpartition" editable="1" visible="1"/>
+		<item name="id" editable="0" visible="1"/>
+	</node>
+	<node name="column">
+		<item name="name" editable="0" visible="1"/>
+		<item name="internalname" editable="0" visible="1"/>
+		<item name="displayname" editable="0" visible="1"/>
+		<item name="description" editable="0" visible="1"/>
+		<item name="inpartitions" editable="0" visible="1"/>
+		<item name="hide" editable="0" visible="1"/>
+	</node>
+	<node name="primarykey">
+		<item name="name" editable="0" visible="1"/>
+		<item name="internalname" editable="0" visible="1"/>
+		<item name="displayname" editable="0" visible="1"/>
+		<item name="description" editable="0" visible="1"/>
+		<item name="column" editable="0" visible="1"/>
+	</node>
+	<node name="foreignkey">
+		<item name="name" editable="0" visible="1"/>
+		<item name="internalname" editable="0" visible="1"/>
+		<item name="displayname" editable="0" visible="1"/>
+		<item name="description" editable="0" visible="1"/>
+		<item name="column" editable="0" visible="1"/>
+	</node>
+	<node name="relation">
+		<item name="name" editable="0" visible="0"/>
+		<item name="internalname" editable="0" visible="1"/>
+		<item name="displayname" editable="0" visible="1"/>
+		<item name="description" editable="0" visible="1"/>
+		<item name="firsttable" editable="0" visible="1"/>
+		<item name="secondtable" editable="0" visible="1"/>
+		<item name="firstkey" editable="0" visible="1"/>
+		<item name="secondkey" editable="0" visible="1"/>
+		<item name="type" editable="0" visible="1"/>
+	</node>
+	<node name="config">
+		<item name="name" editable="0" visible="1"/>
+		<item name="internalname" editable="1" visible="1"/>
+		<item name="displayname" editable="1" visible="1"/>
+		<item name="description" editable="1" visible="1"/>
+		<item name="hide" editable="1" visible="1">
+			<editor type="boolean"/>
+		</item>
+		<item name="default" editable="1" visible="1"/>
+		<item name="metainfo" editable="1" visible="1"/>
+		<item name="datasetdisplayname" editable="1" visible="1"/>
+		<item name="datasethidevalue" editable="1" visible="1"/>
+		<item name="master" editable="0" visible="1">
+			<editor type="boolean"/>
+		</item>
+		<item name="readonly" editable="0" visible="1"/>
+		<item name="password" editable="0" visible="1"/>
+		<item name="rdf" editable="1" visible="1" autosave="true"/>
+		<item name="processor" editable="0" visible="1" autosave="true"/>
+		<item name="rdfclass" editable="1" visible="1" />
+		<doubleclickitem name="processor"/>
+		<item name="dino" editable="1" visible="1" autosave="true" />
+	</node>
+	<!-- importable/exportable for backwardcompatibility -->
+	<node name="importable">
+		<item name="name" editable="1" visible="1"/>
+		<item name="internalname" editable="1" visible="1"/>
+		<item name="displayname" editable="1" visible="1"/>
+		<item name="description" editable="1" visible="1"/>
+		<item name="version" editable="1" visible="1"/>
+		<item name="filters" editable="0" visible="1"/>
+		<item name="orderby" editable="1" visible="1"/>
+		<item name="linkversion" editable="1" visible="1"/>
+		<item name="type" editable="1" visible="1"/>
+		<item name="linkversions" editable="0" visible="0"/>
+	</node>
+	<node name="exportable">
+		<item name="name" editable="1" visible="1"/>
+		<item name="internalname" editable="1" visible="1"/>
+		<item name="displayname" editable="1" visible="1"/>
+		<item name="description" editable="1" visible="1"/>
+		<item name="version" editable="1" visible="1"/>
+		<item name="attributes" editable="0" visible="1"/>
+		<item name="orderby" editable="1" visible="1"/>
+		<item name="linkversion" editable="1" visible="1"/>
+		<item name="type" editable="1" visible="1"/>
+		<item name="default" editable="1" visible="1"/>
+		<item name="linkversions" editable="0" visible="0"/>
+	</node>
+	<!--  -->
+	<node name="importable.item">
+		<item name="name" editable="1" visible="1"/>
+		<item name="internalname" editable="1" visible="1"/>
+		<item name="displayname" editable="1" visible="1"/>
+		<item name="description" editable="1" visible="1"/>
+		<item name="version" editable="1" visible="1"/>
+		<item name="filters" editable="0" visible="1"/>
+		<item name="orderby" editable="1" visible="1"/>
+		<item name="linkversion" editable="1" visible="1"/>
+		<item name="type" editable="1" visible="1"/>
+		<item name="linkversions" editable="0" visible="0"/>
+	</node>
+	<node name="exportable.item">
+		<item name="name" editable="1" visible="1"/>
+		<item name="internalname" editable="1" visible="1"/>
+		<item name="displayname" editable="1" visible="1"/>
+		<item name="description" editable="1" visible="1"/>
+		<item name="version" editable="1" visible="1"/>
+		<item name="attributes" editable="0" visible="1"/>
+		<item name="orderby" editable="1" visible="1"/>
+		<item name="linkversion" editable="1" visible="1"/>
+		<item name="type" editable="1" visible="1"/>
+		<item name="default" editable="1" visible="1"/>
+		<item name="linkversions" editable="0" visible="0"/>
+	</node>
+	<node name="container">
+		<item name="name" editable="1" visible="1"/>
+		<item name="internalname" editable="1" visible="1"/>
+		<item name="displayname" editable="1" visible="1"/>
+		<item name="description" editable="1" visible="1"/>
+		<item name="hide" editable="1" visible="1">
+					<editor type="boolean"/>
+		</item>
+<!--		<item name="queryrestriction" editable="1" visible="1"/> -->
+		<item name="independentquerying" editable="1" visible="1"/>
+		<item name="maxcontainers" 	editable="1" visible="1"/>
+		<item name="maxattributes" 	editable="1" visible="1"/>
+	</node>
+	<node name="attribute">
+		<item name="name" editable="1" visible="1" autosave="true"/>
+		<item name="internalname" editable="1" visible="1" autosave="true"/>
+		<item name="displayname" editable="1" visible="1" autosave="true"/>
+		<item name="description" editable="1" visible="1" autosave="true"/>
+		<item name="mart" editable="0" visible="1"/>
+		<item name="config" editable="0" visible="1"/>
+		<item name="pointer" editable="0" visible="1"/>
+		<item name="hide" editable="1" visible="1" autosave="true">
+					<editor type="boolean"/>
+		</item>
+		<item name="default" editable="1" visible="1">
+					<editor type="boolean"/>
+		</item>
+		<item name="column" editable="0" visible="1" autosave="true"/>
+		<item name="table" editable="0" visible="1" autosave="true"/>
+		<item name="pointedmart" editable="1" visible="1">
+			<editor type="dropdown" method="getMartsDropDown">
+			</editor>
+		</item>
+		<item name="pointedconfig" editable="0" visible="1"/>
+		<item name="pointeddataset" editable="1" visible="1"/>
+		<item name="pointedattribute" editable="0" visible="1"/>
+		<item name="attributelist" editable="0" visible="1" autosave="true"/>
+		<item name="linkouturl" editable="1" visible="1" autosave="true"/>
+		<item name="value" editable="1" visible="1" autosave="true"/>
+		<item name="inusers" editable="1" visible="1" autosave="true"/>
+		<item name="rdf" editable="1" visible="1" autosave="true"/>
+		<item name="datatype" editable="1" visible="1">
+			<editor type="enum" class="org.biomart.configurator.utils.type.AttributeDataType"/>
+		</item>
+		<item name="pointerinsource" editable="0" visible="1" autosave="true"/>
+		<doubleclickitem name="attributelist"/>
+<!--		<doubleclickitem name="value"/> -->
+		<item name="function" editable="1" visible="1" autosave="true" />
+	</node>
+	<node name="filter">
+		<item name="name" editable="1" visible="1"/>
+		<item name="internalname" editable="1" visible="1"/>
+		<item name="displayname" editable="1" visible="1"/>
+		<item name="description" editable="1" visible="1"/>
+		<item name="default" editable="0" visible="1"/>
+		<item name="mart" editable="0" visible="1"/>
+		<item name="config" editable="0" visible="1"/>
+		<item name="pointer" editable="0" visible="1"/>
+		<item name="hide" editable="1" visible="1">
+					<editor type="boolean"/>
+		</item>
+		<item name="attribute" editable="1" visible="1"/>
+		<item name="type" editable="1" visible="1">
+			<editor type="enum" class="org.biomart.objects.enums.FilterType">
+			</editor>
+		</item>
+		<item name="spliton" editable="1" visible="1"/>
+		<item name="operation" editable="1" visible="1">
+			<editor type="enum" class="org.biomart.objects.enums.FilterOperation">
+			</editor>
+		</item>
+		<item name="datafile" editable="1" visible="1"/>
+		<item name="filterlist" editable="0" visible="1"/>
+		<item name="qualifier" editable="1" visible="1">
+			<editor type="enum" class="org.biomart.queryEngine.OperatorType">
+			</editor>
+		</item>
+		<item name="pointedmart" editable="1" visible="1">
+			<editor type="dropdown" method="getMartsDropDown">
+			</editor>
+		</item>
+		<item name="pointedconfig" editable="1" visible="1"/>
+		<item name="pointeddataset" editable="1" visible="1"/>
+		<item name="pointedfilter" editable="0" visible="1"/>
+		<item name="only" editable="0" visible="1"/>
+		<item name="excluded" editable="0" visible="1"/>
+		<item name="refcontainer" editable="0" visible="1"/>
+		<item name="inusers" editable="1" visible="1"/>
+		<item name="dependson" editable="1" visible="1"/>
+		<item name="rdf" editable="1" visible="1" autosave="true"/>
+		<item name="required" editable="1" visible="1" autosave="true">
+			<editor type="boolean"/>
+		</item>
+		<item name="pointerinsource" editable="0" visible="1" autosave="true"/>
+		<doubleclickitem name="filterlist"/>
+		<item name="function" editable="1" visible="1" autosave="true" />
+	</node>
+	<node name="rdfclass">
+		<item name="name" editable="0" visible="1" autosave="true"/>
+		<item name="internalname" editable="1" visible="1" autosave="true"/>
+		<item name="displayname" editable="1" visible="1" autosave="true"/>
+		<item name="description" editable="1" visible="1" autosave="true"/>
+		<item name="hide" editable="1" visible="1" autosave="true"/>
+		<item name="value" editable="1" visible="1" autosave="true"/>
+		<item name="uniqueid" editable="0" visible="1" autosave="true"/>
+		<item name="subclassof" editable="0" visible="1"/>
+	</node>
+</config>

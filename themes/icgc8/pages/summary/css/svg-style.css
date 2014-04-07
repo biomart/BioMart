@@ -1,0 +1,13 @@
+svg {
+  width: 960px;
+  height: 400px;
+  font: 10px sans-serif;
+}
+
+.rule {
+  shape-rendering: crispEdges;
+}
+
+path.line {
+  fill: none;
+}

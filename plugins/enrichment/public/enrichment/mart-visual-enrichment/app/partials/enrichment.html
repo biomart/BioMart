@@ -1,0 +1,123 @@
+<div class="container">
+
+        <div class="enrichment container" ng-controller="EnrichmentCtrl as enr">
+            <h1 class="mve-title">Enrichment</h1>
+            <div class="button-container" ng-controller="QueryCtrl as ctrl">
+                <button class="btn btn-default" ng-click="ctrl.clear()">Clear</button>
+                <button class="btn btn-default" ng-click="ctrl.showQuery()">Get XML Query</button>
+                <button class="btn btn-danger" ng-click="ctrl.submit()">Submit</button>
+            </div>
+            <div class="mve-species row" ng-controller="SpeciesCtrl">
+                <div class="col-md-6">
+                    <select class="form-control"
+                        ng-model="selectedSpecies"
+                        ng-options="s.displayName for s in species"
+                        ng-change="updateSpecies(selectedSpecies)">
+                    </select>
+                </div>
+            </div>
+            <!-- sets -->
+            <div class="row">
+                <div class="col-md-6">
+                    <tabset>
+                        <tab active>
+                            <tab-heading>
+                                <h3>Gene List</h3>
+                            </tab-heading>
+                            <div mv-filter="{{enr.getFilter('sets')}}">
+                            </div>
+                        </tab>
+                        <tab>
+                            <tab-heading>
+                                <h3>BED File</h3>
+                            </tab-heading>
+                            <div class="col-md-6"
+                                 mv-filter="{{enr.getFilter('bed_regions')}}">
+                             </div>
+                             <div class="col-md-4">
+                                <div mv-filter="{{enr.getFilter('upstream')}}">
+                                 </div>
+                                <div mv-filter="{{enr.getFilter('downstream')}}">
+                                 </div>
+                             </div>
+                        </tab>
+                    </tabset>
+                </div>
+            </div>
+
+            <!-- background -->
+            <div class="row">
+                <div class="col-md-6">
+                    <hr/>
+                    <tabset type="pills" justified="true">
+                        <tab>
+                            <tab-heading>
+                                <h3 ng-click="enr.onClickBackground()">
+                                    <span class="collapse-symbol">
+                                        {{enr.backgroundIsCollapsed ? "+" : "–"}}
+                                    </span>
+                                    Background
+                                </h3>
+                            </tab-heading>
+                            <div collapse="enr.backgroundIsCollapsed" mv-filter="{{enr.getFilter('background')}}">
+                             </div>
+                        </tab>
+                    </tabset>
+                </div>
+            </div>
+
+            <!-- cutoff and the rest -->
+            <div class="row">
+                <div class="col-md-6">
+                    <hr/>
+                    <tabset type="pills" justified="true">
+                        <tab>
+                            <tab-heading>
+                                <h3 ng-click="enr.onClickCutoff()">
+                                    <span class="collapse-symbol">
+                                        {{enr.cutoffIsCollapsed ? "+" : "–"}}
+                                    </span>
+                                    Filters
+                                </h3>
+                            </tab-heading>
+                            <div collapse="enr.cutoffIsCollapsed">
+                                <div mv-filter="{{enr.getFilter('cutoff')}}"></div>
+                                <div mv-filter="{{enr.getFilter('bonferroni')}}"></div>
+                                <div mv-filter="{{enr.getFilter('gene_type')}}"></div>
+                                <div mv-filter="{{enr.getFilter('gene_limit')}}"></div>
+                                <div mv-filter="{{enr.getFilter('homolog')}}"></div>
+                            </div>
+                        </tab>
+                    </tabset>
+                </div>
+            </div>
+
+            <!-- annotations -->
+            <div class="row">
+                <div class="col-md-6">
+                    <hr/>
+                    <tabset type="pills" justified="true">
+                        <tab>
+                            <tab-heading>
+                                <h3 ng-click="enr.onClickAnnotation()">
+                                    <span class="collapse-symbol">
+                                        {{enr.annotationIsCollapsed ? "+" : "–"}}
+                                    </span>
+                                    Annotations
+                                </h3>
+                            </tab-heading>
+                            <div class="mve-annotations" collapse="enr.annotationIsCollapsed">
+                                <div ng-repeat="a in enr.getAttributes('annotation')"
+                                     mv-attribute="a"></div>
+                            </div>
+                        </tab>
+                    </tabset>
+                </div>
+            </div>
+            <div class="button-container" ng-controller="QueryCtrl as ctrl">
+                <button class="btn btn-default" ng-click="ctrl.clear()">Clear</button>
+                <button class="btn btn-default" ng-click="ctrl.showQuery()">Get XML Query</button>
+                <button class="btn btn-danger" ng-click="ctrl.submit()">Submit</button>
+            </div>
+        </div>
+</div>

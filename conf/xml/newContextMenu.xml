@@ -1,0 +1,66 @@
+<contextMenu>
+	<mart>
+		<menuItem name="datasourcemanage" title="Dataset Source Management" disabled="0"/>
+		<menuItem name="createconfig" title="Create Config" disabled="0" multiselect="true"/>
+		<menuItem name="updatemart" title="Update" disabled="0"/>
+		<menuItem name="linkManagement" title="Link Info" disabled="0"/>
+		<menuItem name="createLinkIndex" title="Link Index" disabled="0"/>
+		<!-- <menuItem name="removeLinkIndex" title="Remove Link Index" disabled="0"/> -->
+		<menuItem name="removemart" title="Remove" disabled="0" multiselect="true"/>
+		<menuItem name="renamemart" title="Rename" disabled="0"/>
+		<Separator/>
+		<menuItem name="schemaeditor" title="Schema Editor" disabled="0"/>
+		<menuItem name="schemastructure" title="Schema Structure" disabled="0" advanced="true"/>
+		<menuItem name="showoptions" title="Show Options" disabled="0" advanced="true"/>
+		<Separator/>
+		<menuItem name="materialize" title="Materialize" disabled="0"/>		
+
+		<Separator/>
+			
+		<!-- <menuItem name="importconfig" title="import config" disabled="0"/> 
+		<menuItem name="importoptions" title="import options to master" disabled="0"/>
+		<Separator/>-->
+		
+		
+	</mart>
+
+	<config>
+		<menuItem name="showconfig" title="Edit" disabled="0" multiselect="false"/>
+		<menuItem name="changedisplayname" title="Rename" disabled="0" multiselect="true"/>
+		<menuItem name="remove" title="Remove" disabled="0" multiselect="true"/>
+		<menuItem name="cut" title="Cut" disabled="0" multiselect="true"/>
+		<menuItem name="copy" title="Copy" disabled="0" multiselect="true"/>
+		<menuItem name="paste" title="Paste" disabled="0"/>
+		<menuItem name="mpproperties" title="Properties" disabled="0" multiselect="false"/>
+		<menuItem name="generateontology" title="Generate Semantics" disable="0" multiselect="true"/>
+        <menuItem name="loadontology" title="Load Ontology" disable="0" multiselect="true"/>
+		<!-- <menuItem name="orderdsbydisplayname" title="order dataset by displayname" disabled="0"/> -->
+	</config>
+	<partitiontable>
+		<menuItem name="clonecolumn" title="Clone" disabled="0"/> 
+		<menuItem name="newColumn" title="New Column" disabled="0"/>
+		<menuItem name="references" title="references" disabled="0"/>
+	</partitiontable>
+	<guicontainer>
+		<menuItem name="rename" title="Rename" disabled="0"/>
+		<menuItem name="remove" title="Remove" disabled="0"/>
+<!--		<menuItem name="reordertab" title="reorder tab" disabled="0"/> -->
+		<menuItem name="paste" title="Paste" disabled="0"/>
+		<!-- <menuItem name="updatelink" title="update link" disabled="0"/> -->
+		<menuItem name="editproperties" title="Properties" disabled="0"/>
+		<Separator/>
+	</guicontainer>
+	<guipanel>
+		<menuItem name="paste" title="Paste" disabled="0"/>
+	</guipanel>
+	<sourcecontainer>
+		<menuItem name="rename" title="Rename" disabled="0"/>
+		<menuItem name="newgroup" title="New source container" disabled="0"/>
+		<menuItem name="searchsource" title="Search" disabled="0"/>
+		<menuItem name="collapseall" title="Collapse All" disabled="0"/>
+	</sourcecontainer>
+	<checkboxlist>
+		<menuItem name="checkall" title="Check all" disabled="0" />	
+		<menuItem name="uncheckall" title="Uncheck all" disabled="0" />
+	</checkboxlist>
+</contextMenu>

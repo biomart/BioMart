@@ -1,0 +1,119 @@
+#biomart-wrapper {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    -moz-box-shadow: 1px 1px 3px #ccc; -webkit-box-shadow: 1px 1px 3px #ccc; box-shadow: 1px 1px 3px #ccc;
+    border: 1px solid #ccc;
+}
+#converter #biomart-wrapper h2 {
+    font-weight: normal;
+    color: #897048;
+    text-shadow: 0 0 2px #ccc;
+    padding: 0;
+    border: none;
+}
+#biomart-wrapper header {
+    padding: 7px 5px;
+}
+#biomart-wrapper header h2 {
+    font-size: 20px;
+    text-align: center;
+}
+#biomart-content {
+    position: relative;
+    overflow: hidden;
+    border: none;
+    padding: 5px;
+    background: #fff url(../../images/arrowright32.png) no-repeat 50% 80px;
+}
+#biomart-content h3 {
+    text-align: left;
+    font-size: 20px;
+    font-weight: normal;
+    padding: .2em;
+    margin: .3em 0;
+    text-shadow: 0 0 2px #fff;
+}
+#biomart-content-footer {
+    border-left: 0;
+    border-right: 0;
+}
+
+.remove {
+    display: none;
+}
+
+#biomart-datasets {
+    width: 420px;
+}
+#biomart-from, #biomart-to {
+    float: left;
+    width: 420px;
+    margin: 0 25px;
+    padding: 10px;
+    background-color: #f7f7f7;
+    border: 1px solid #ccc;
+    -moz-box-shadow: inset 1px 1px 3px #ccc; -webkit-box-shadow: inset 1px 1px 3px #ccc; box-shadow: inset 1px 1px 3px #ccc;
+}
+
+#biomart-from label {
+    float: none;
+}
+#biomart-from .value.group {
+    float: none;
+}
+#biomart-from .text .value.group {
+    float: left;
+}
+#biomart-from .text label {
+    float: left;
+    margin-right: 5px;
+}
+
+#biomart-to .ui-prettybox .ui-autocomplete-input {
+    width: 22em;
+}
+
+#biomart-submit {
+    padding-top: 10px;
+    clear: left;
+}
+
+label {
+    line-height: 1.5em;
+}
+
+textarea.field {
+    width: 22em;
+    height: 10em;
+    margin: 10px 0;
+}
+
+.paginator {
+    margin: 10px 0;
+    font-size: 14px;
+    float: left;
+}
+
+#biomart-datasets {
+    margin: 10px 30px;
+}
+#biomart-datasets label {
+    float: left;
+    margin-right: 10px;
+}
+#biomart-datasets .ui-autocomplete-input {
+    width: 300px;
+}
+
+#biomart-results {
+    margin-bottom: 10px;
+}
+
+.actions {
+    font-size: 14px;
+    margin: 10px 0;
+    float: right;
+}
+.actions .ui-icon {
+    float: left;
+}

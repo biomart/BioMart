@@ -1,0 +1,1 @@
+String2LongSet object for hashing Strings into Java Long objects. This is a more efficient way to test for membership than using a HashSet or other built-in Java types.

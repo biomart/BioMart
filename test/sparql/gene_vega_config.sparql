@@ -1,0 +1,24 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+PREFIX accesspoint: <http://central.biomart.org/martsemantics/gene_vega_config/ontology#>
+PREFIX class: <biomart://central.biomart.org/martsemantics/gene_vega_config/ontology/class#>
+PREFIX dataset: <biomart://central.biomart.org/martsemantics/gene_vega_config/ontology/dataset#>
+PREFIX attribute: <biomart://central.biomart.org/martsemantics/gene_vega_config/ontology/attribute#>
+
+SELECT ?a0 ?a1 ?a2 ?a3 ?a4 ?a5 ?a6 ?a7 ?a8 ?a9 
+FROM dataset:mmusculus_gene_vega
+WHERE {
+  ?mart attribute:external_gene_id ?a0 .
+  ?mart attribute:vega_gene_id ?a1 .
+  ?mart attribute:chromosome_name ?a2 .
+  ?mart attribute:start_position ?a3 .
+  ?mart attribute:end_position ?a4 .
+  ?mart attribute:strand ?a5 .
+  ?mart attribute:band ?a6 .
+  ?mart attribute:transcript_count ?a7 .
+  ?mart attribute:gene_biotype ?a8 .
+  ?mart attribute:status ?a9
+}
+LIMIT 10

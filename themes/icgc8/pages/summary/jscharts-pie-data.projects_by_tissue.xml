@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<JSChart>
+    <dataset type="pie">
+        <data unit="Blood" value="2"/>
+        <data unit="Brain" value="2"/>
+        <data unit="Breast" value="3"/>
+        <data unit="Colon" value="2"/>
+        <data unit="Kidney" value="2"/>
+        <data unit="Liver" value="2"/>
+        <data unit="Lung" value="4"/>
+        <data unit="Ovary" value="1"/>
+        <data unit="Pancreas" value="3"/>
+        <data unit="Rectum" value="1"/>
+        <data unit="Skin" value="1"/>
+        <data unit="Stomach" value="1"/>
+        <data unit="Uterus" value="1"/>
+    </dataset>
+    <colorset>
+        <color value="#FF0000"/>
+        <color value="#FF3300"/> 
+        <color value="#FF6600"/> 
+        <color value="#FF9900"/>
+        <color value="#FFCC00"/> 
+        <color value="#FFFF00"/> 
+        <color value="#CCFF00"/> 
+        <color value="#99FF00"/> 
+        <color value="#33FF00"/> 
+        <color value="#00FF66"/> 
+        <color value="#00FF99"/> 
+        <color value="#00FFCC"/> 
+        <color value="#6699CC"/> 
+    </colorset>
+    <optionset>
+        <option set="setSize" value="340,220"/>
+        <option set="setTextPaddingTop" value="0"/>
+        <option set="setTextPaddingLeft" value="0"/>
+        <option set="setTextPaddingBottom" value="0"/>
+        <option set="setPieRadius" value="75"/>
+        <option set="setTitle" value="'Cancer Projects by Tissue'"/>
+        <option set="setPieUnitsColor" value="'#0A0A0A'"/>
+        <option set="setPieUnitsFontSize" value="8"/> <!-- default 8 -->
+        <option set="setPieUnitsOffset" value="5"/>
+        <option set="setPieValuesColor" value="'#0A0A0A'"/>
+        <option set="setPieValuesFontSize" value="8"/> <!-- default 8 -->
+        <option set="setTitleColor" value="'#0A0A0A'"/>
+        <option set="setTitleFontSize" value="11"/>
+    </optionset>
+</JSChart>

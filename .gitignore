@@ -1,0 +1,18 @@
+
+# /
+/dist
+/build
+/reports
+/nbproject
+/nbbuild.xml
+
+# /src/org/biomart/common/resources/
+/src/org/biomart/common/resources/.Resources.java.swp
+manifest.mf
+
+.DS_Store
+nohup.out
+.classpath
+.project
+.settings
+*node_modules*

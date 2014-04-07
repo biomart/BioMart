@@ -1,0 +1,125 @@
+body {
+    padding: 5px;
+}
+
+#martsearch #biomart-content {
+    padding-top: 20px;
+    min-height: 100px;
+}
+
+#biomart-results {
+    position: relative;
+    font-size: 12px;
+    min-height: 200px;
+}
+
+p.info, .pagination {
+     font-size: 12px;
+    color: #555;
+    text-shadow: 1px 1px 3px #ccc;
+    margin-bottom: .5em;
+}
+
+.fetched {
+    color: #999;
+    font-size: 12px;
+}
+
+div.loading {
+     background-color: transparent;
+}
+
+#biomart-results span {
+     padding: .3em;
+    -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px;
+}
+#biomart-results span.container {
+    font-variant: small-caps;
+    background-color: #555;
+    color: #fff;
+    margin-right: .3em;
+    white-space: nowrap;
+}
+#biomart-results span.key {
+    font-variant: small-caps;
+    background-color: #eee;
+    color: #999;
+    margin-right: .3em;
+    white-space: nowrap;
+}
+#biomart-results span.value {
+     white-space: nowrap;
+}
+#biomart-results span.value.match {
+    font-weight: bold;
+}
+#biomart-results span.value:hover {
+    background-color: #ccc;
+    cursor: help;
+}
+
+.results {
+    padding-left: 2em;
+}
+
+.results li {
+    list-style-type: decimal;
+    position: relative;
+     margin: .7em 0;
+    line-height: 1.9em;
+}
+
+.pagination {
+    font-size: 13px;
+    text-align: center;
+}
+
+.pagination span {
+     cursor: pointer;
+}
+
+.pagination span.hide {
+     visibility: hidden;
+}
+
+.in-progress .info ,
+.in-progress .pagination {
+    visibility: hidden;
+}
+
+#biomart-form {
+    text-align: center;
+    margin: 0 auto;
+    width: 600px;
+}
+
+#biomart-query {
+    width: 80%;
+}
+
+.biomart .hint {
+     margin: 0 auto;
+    width: 550px;
+    font-size: 12px;
+    padding: .5em 0;
+    color: #999;
+    line-height: 15px;
+}
+
+#biomart-progressbar {
+    position: absolute;
+    top: -5px;
+    width: 570px;
+    left: 50%;
+    margin-left: -285px;
+}
+
+#biomart-results a {
+     color: #5c9ccc;
+    text-decoration: underline;
+}
+#biomart-results a:hover {
+    color: #2e6e9e;
+    text-decoration: none;
+}
+

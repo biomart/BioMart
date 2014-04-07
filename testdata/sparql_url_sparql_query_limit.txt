@@ -1,0 +1,17 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+PREFIX config: <http://localhost:9998/martsemantics/pathway_config/ontology#>
+PREFIX class: <biomart://localhost:9998/martsemantics/pathway_config/ontology/class#>
+PREFIX dataset: <biomart://localhost:9998/martsemantics/pathway_config/ontology/dataset#>
+PREFIX attribute: <biomart://localhost:9998/martsemantics/pathway_config/ontology/attribute#>
+
+SELECT ?a0 ?a2 
+FROM dataset:pathway
+WHERE {
+  ?mart attribute:stableidentifier_identifier ?a0 .
+  ?mart attribute:species__displayname ?a2
+}
+LIMIT 5
+

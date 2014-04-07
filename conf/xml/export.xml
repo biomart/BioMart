@@ -1,0 +1,13 @@
+<export>
+	<format martregistry="1"
+		portal="0"
+		partitiontable="0"
+		table="0"
+		config="1"
+		importable="0"
+		exportable="0"
+		container="1"
+		filter="0"
+		attribute="0">
+	</format>
+</export>

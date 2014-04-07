@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<martregistry name="martregistry" internalname="martregistry" displayname="martregistry" description="martregistry">
+	<portal name="portal" internalname="portal" displayname="portal" description="portal">
+		<users name="users" internalname="users" displayname="users" description="users">
+			<group name="anonymous" internalname="anonymous" displayname="anonymous" description="anonymous" hide="false">
+				<user name="anonymous" internalname="anonymous" displayname="anonymous" description="anonymous" password="" config="" hide="false"/>
+			</group>
+		</users>
+		<linkindices/>
+		<guicontainer name="root" internalname="root" displayname="root" description="" hide="false">
+			<guicontainer name="default" internalname="default" displayname="default" description="default" hide="false" guitype="martform" inusers="anonymous"/>
+			<guicontainer name="report" internalname="report" displayname="report" description="report" hide="false" guitype="martreport" inusers="anonymous"/>
+		</guicontainer>
+	</portal>
+	<sourcecontainers name="root" internalname="root" displayname="root" description="" hide="false">
+		<sourcecontainer name="default" internalname="default" displayname="default" description="default" hide="false" group="false">
+		</sourcecontainer>
+	</sourcecontainers>
+
+</martregistry>

@@ -1,0 +1,43 @@
+ <div class="container-fluid" ng-controller="VisualizationCtrl as vis">
+    <div ng-controller="ProgressCtrl as prog">
+        <div ng-if="prog.currentState !== prog.states.DONE">
+            <progressbar class="progress-striped" animate="false" type="info" max="max" value="progressbarValue">
+                <b>{{progressbarValue}}</b>
+            </progressbar>
+        </div>
+
+        <div ng-if="prog.currentState === prog.states.ERROR">
+            <p class="lead">There has been an error: {{errorMessage}}</p>
+        </div>
+
+        <div>
+            <tabset>
+                <tab ng-repeat="mvTab in mvTabs">
+                  <tab-heading><a href="">{{mvTab.title}}</a></tab-heading>
+                    <div class="row">
+                        <div class="col-md-3 left-panel" >
+                            <div ng-controller="ResultsTableCtrl">
+                                <div>
+                                    <input class="form-control" type="text" ng-model="pattern"
+                                           ng-change="filterByDescription(pattern)"
+                                           ng-trim="false"
+                                           placeholder="Search by description...">
+                                </div>
+                                <hr />
+                                <div class="mv-table-container">
+                                    <mv-results-table></mv-results-table>
+                                </div>
+                            </div>
+                            <hr />
+
+                        </div>
+
+                        <div class="col-md-9 right-panel" ng-controller="GraphCtrl">
+                            <mv-graph nodes="nodes" edges="edges" filter-pattern="search"></mv-graph>
+                        </div>
+                    </div>
+                </tab>
+            </tabset>
+        </div>
+    </div>
+</div>

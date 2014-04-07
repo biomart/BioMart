@@ -1,0 +1,218 @@
+#biomart-wrapper {
+    color: #333;
+    background-image: none;
+    background-color: #fff;
+    -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px;
+    -moz-box-shadow: 0 0 3px #ccc; -webkit-box-shadow: 0 0 3px #ccc; box-shadow: 0 0 3px #ccc;
+}
+#biomart-content-footer {
+    border: none;
+}
+#biomart-top-wrapper.wide .data {
+    width: 100% !important;
+}
+
+#biomart-wrapper h2 {
+    font-size: 14px !important;
+    line-height: 24px;
+    border-right: none !important;
+    border-left: none !important;
+    border-top: none !important;
+    -moz-border-radius-topright: 4px; -webkit-border-top-right-radius: 4px; border-top-right-radius: 4px;
+    -moz-border-radius-topleft: 4px; -webkit-border-top-left-radius: 4px; border-top-left-radius: 4px;
+}
+#biomart-wrapper h2 span.title {
+    float: left;
+    font-weight: normal;
+}
+#biomart-wrapper h2.ui-state-default a:hover {
+    color: #cd0a0a !important;
+}
+#biomart-wrapper h2.ui-state-default a:hover .ui-icon {
+    background-image: url("../../css/ui/aristo/images/ui-icons_cd0a0a_256x240.png") !important; 
+}
+#biomart-wrapper h2 .meta { 
+    font-size: 18px;
+    clear: both;
+}
+#biomart-wrapper h2 .meta .ui-prettybox {
+    float: left;
+}
+#biomart-wrapper h2 .meta .ui-prettybox a,
+#biomart-wrapper h2 .meta .ui-prettybox input {
+    font-size: 16px;
+    float: left;
+    cursor: pointer;
+    height: 32px;
+}
+#biomart-wrapper h2 .meta .ui-prettybox .ui-button-text {
+    height: 32px;
+}
+.ui-autocomplete.views.ui-menu  {
+     font-size: 16px;
+}
+
+#biomart-top-wrapper h3 {
+    font-size: 20px;
+    font-weight: normal;
+    padding: 4px;
+    text-align: center;
+    text-shadow: 0 0 1px #fff;
+}
+#biomart-top-wrapper.wide h3 {
+    background-color: transparent;
+    color: #897048;
+    font-weight: normal;
+    text-shadow: 0 0 2px #fff;
+    padding: 0;
+    text-align: left !important;
+}
+#biomart-wrapper h3 span {
+    font-size: 22px !important;
+    color: #fff !important;
+}
+#biomart-wrapper h3.error {
+    background-color: #4f0000;
+}
+#biomart-wrapper h3 .icons a {
+     color: #fff;
+    border-right: 1px dotted #c5dbec;
+    padding-right: 4px;
+}
+#biomart-wrapper h3 .icons a:last-child {
+    border-right: none;
+}
+#biomart-wrapper h3 .ui-icon {
+     background-image: url("../../css/lib/ui/aristo/images/ui-icons_ffffff_256x240.png");
+}
+#biomart-wrapper .filters h3 {
+    /*background-color: #9e2e2e;*/
+}
+#biomart-wrapper .attributes h3 {
+    /*background-color: #555;*/
+}
+
+#biomart-wrapper .filters .content {
+     padding-left: 8px;
+     padding-right: 8px;
+}
+
+#biomart-wrapper .icons {
+    font-weight: normal;
+    bottom: 5px;
+    font-size: 12px;
+    line-height: 15px;
+    position: absolute;
+    right: 5px;
+}
+
+.ui-icon,
+a.icon {
+    float: left;
+}
+
+#biomart-content {
+    font-weight: normal;
+    color: inherit;
+    background: transparent none;
+    padding: 4px;
+    border: none;
+}
+
+.ui-dialog-title {
+    font-size: 20px;
+}
+
+#biomart-help p {
+    margin: 1em 0;
+    font-size: 16px;
+}
+
+#biomart-wrapper h2.ui-state-default a, 
+#biomart-wrapper h2.ui-state-default a:link, 
+#biomart-wrapper h2.ui-state-default a:visited {
+    color: #222;
+}
+
+#biomart-wrapper a.help {
+    margin-left: 5px;
+    padding-left: 5px;
+}
+
+.panel {
+    margin-bottom: 10px;
+}
+.panel.datasets select {
+    width: 100%;
+}
+.panel.actions {
+    text-align: center;
+}
+
+.error {
+    text-align: left;
+}
+
+.items li {
+    border-bottom: none !important;
+    position: relative;
+    -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px;
+}
+
+.items li .item-name {
+    color: #2e6e9e;
+}
+
+.items li.active {
+    background-color: transparent;
+}
+.items li.active:hover {
+    background-color: #effaff;
+}
+
+#biomart-configure .ui-widget-content {
+    font-size: 12px;
+}
+
+#biomart-nav {
+    font-size: 14px;
+    margin-bottom: 10px;
+    padding: 0 .1em;
+}
+#biomart-nav a {
+    display: block;
+    padding: .4em .6em;
+    margin: .4em .1em;
+    text-decoration: none;
+    color: #5c9ccc;
+}
+#biomart-nav a.ui-state-hover {
+    color: #2e6e9e;
+}
+#biomart-nav a.ui-state-active {
+     cursor: text;
+    color: #e17009;
+}
+
+.mart-select .ui-dialog-title,
+.mart-select .ui-dialog-buttonpane button {
+    font-size: 12px; 
+}
+
+#biomart-export-form, 
+#biomart-export-iframe {
+    display: none;
+}
+
+#biomart-datasets-container {
+    overflow-y: auto;
+    max-height: 30em;
+}
+.ie6 #biomart-datasets-container,
+.ie7 #biomart-datasets-container {
+    height: 30em;
+}
+.ios #biomart-datasets-container {
+    max-height: none;
+    overflow-y: visible;
+}

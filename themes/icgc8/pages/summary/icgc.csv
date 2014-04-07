@@ -1,0 +1,6 @@
+date,esCLL,sangerMDS,dePedbrain,sangerBreast,frLiver,jpNCCLiver,jpRikenLiver,sangerLung,oicrPanc,qcmgPanc,sangerMelanoma,ccgcGastric,tcgaBRCA,tcgaCOAD,tcgaGBM,tcgaKIRC,tcgaKIRP,tcgaLAML,tcgaLUAD,tcgaLUSC,tcgaOV,tcgaREAD,tcgaSTAD,tcgaUCEC
+5/2011,0,0,0,24,0,1,1,1,5,5,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+6/2011,4,0,0,24,0,1,1,1,5,5,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+7/2011,4,0,0,24,0,11,14,1,26,5,1,0,358,207,460,179,17,188,44,59,524,69,83,70
+12/2011,109,0,0,24,0,11,14,1,35,5,1,10,358,207,460,179,17,188,44,59,524,69,83,70
+3/2012,109,129,125,124,125,11,64,1,44,67,1,10,358,207,460,179,17,188,44,59,524,69,83,70

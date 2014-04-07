@@ -1,0 +1,497 @@
+/*
+ * CSS for BioMart Apps 0.8
+ *
+ * Colours used:
+ *  - 0d456f (darkest blue)
+ *  - 2e6e9e (darker blue)
+ *     - 5c9ccc (dark blue)
+ *  - c5dbec (blue)
+ *  - effaff (light blue)
+ *  - 999999 (grey)
+ *  - 333333 (dark grey)
+ *  - f9db01 (light orange)
+ *  - e17009 (orange)
+ *
+ */
+
+html {
+    overflow-y: scroll;
+}
+.biomart {
+    margin: 0;
+    padding: 5px;
+    font-family: HelveticaNeue, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    line-height: 1;
+}
+
+/* slightly enhanced, universal clearfix hack */
+.clearfix:after {
+     visibility: hidden;
+     display: block;
+     font-size: 0;
+     content: " ";
+     clear: both;
+     height: 0;
+     }
+.clearfix { display: inline-block; }
+/* start commented backslash hack \*/
+* html .clearfix { height: 1%; }
+.clearfix { display: block; }
+/* close commented backslash hack */
+h1, h2, h3, h4, h5, h6 {
+    font-family: Optima, Arial, sans-serif;
+    line-height: 1.2em;
+}
+
+/* Global styles */
+a {
+     color: #3b6bef;
+    text-decoration: none;
+}
+a:hover {
+     color: #6f96ff;
+    text-decoration: underline;
+}
+h1 {
+     font-size: 48px;
+}
+h2 {
+     font-size: 24px;
+}
+h3 {
+     font-size: 18px;
+}
+h4 {
+     font-size: 14px;
+}
+label {
+    vertical-align: top;
+}
+.meta {
+    font-size: 14px;
+}
+.empty {
+    color: #999;
+}
+.biomart .logo a {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: transparent url(../../images/biomart_logo_trans.png) no-repeat 0 0;
+    width: 82px;
+    display: block;
+    z-index: 103;
+    height: 25px;
+    text-indent: -100000px;
+}
+.hidden { display: none; visibility: hidden; }
+.invisible {
+    visibility: hidden;
+}
+.info {
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", Helvetica, Arial, sans-serif;
+}
+.description {
+    text-align: right;
+    font-size: 12px;
+    margin: .5em;
+    color: #999;
+}
+.error {
+    color: #af7878;
+}
+.awesome:hover {
+    text-decoration: none;
+}
+.awesome .wrapper {
+    line-height: 16px;
+    position: relative;
+    padding-left: 20px;
+}
+.awesome .wrapper .ui-icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/* Gradients (also check ie.css for older IE support) */
+.gradient-grey {
+    background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#ddd)); /* oebkit */
+    background: -moz-linear-gradient(top,  #fff,  #ddd); /* firefox 3.6+ */
+}
+.gradient-lightgrey {
+    background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#eee)); /* webkit */
+    background: -moz-linear-gradient(top,  #fff,  #eee); /* firefox 3.6+ */
+}
+.gradient-grey-reverse {
+    background: -webkit-gradient(linear, left top, left bottom, from(#eee), to(#fff)); /* webkit */
+    background: -moz-linear-gradient(top,  #eee,  #fff); /* firefox 3.6+ */
+}
+.gradient-darkgrey-reverse {
+    background: -webkit-gradient(linear, left top, left bottom, from(#ccc), to(#ddd)); /* webkit */
+    background: -moz-linear-gradient(top,  #ccc,  #ddd); /* firefox 3.6+ */
+}
+
+/* jQuery UI overrides */
+.ui-state-default a,
+.ui-widget-content a {
+     color: #1c94c4;
+}
+.ui-state-default a:hover,
+.ui-widget-content a:hover {
+    color: #c77405;
+}
+
+/* UI helpers */
+.ui-icon-none {
+     background-image: none !important;
+}
+.ui-fixed-tl {
+    position: fixed;
+    left: 0;
+    top: 0;
+}
+.ui-fixed-tr {
+    position: fixed;
+    right: 0;
+    top: 0;
+}
+.ui-fixed-bl {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+}
+.ui-fixed-br {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+}
+
+/* Loading animation, etc. */
+div.loading {
+    z-index: 100;
+    width: 100%;
+    height: 100%;
+    background: #fff url(../../images/loading.gif) no-repeat 20px 20px;
+    position: absolute;
+}
+span.loading {
+    background: transparent url(../../images/loading.gif) no-repeat 0 0;
+    display: block;
+    width: 43px;
+    height: 11px;
+}
+span.loading.with-msg {
+    float: left;
+    margin-right: 5px;
+}
+span.loading-msg {
+    color: #555;
+    float: left;
+    font-size: 14px;
+}
+.blockUI span.loading {
+    margin: 0 auto;
+}
+.blockUI.blockMsg.blockElement {
+    -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px;
+}
+#biomart-loading {
+    z-index: 10000;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+#biomart-loading .message {
+    margin-bottom: 5px;
+    margin-left: 8px;
+    margin-top: 10px;
+    float: left;
+}
+#biomart-loading .loading {
+    margin-top: 12px;
+    margin-left: 10px;
+    float:left; 
+}
+
+/* Context Bar / Login */
+#biomart-context-bar {
+    position: absolute;
+    background-color: #f3f3f3;
+    border: 1px solid #999;
+    top: 5px;
+    right: 5px;
+    font-size: 11px;
+    height: 25px;
+    line-height: 25px;
+    font-weight: normal;
+    overflow: visible;
+    -moz-box-shadow: 1px 1px 3px #ccc; -webkit-box-shadow: 1px 1px 3px #ccc; box-shadow: 1px 1px 3px #ccc;
+}
+#biomart-context-bar ul {
+    padding-left: 3px;
+}
+#biomart-context-bar li {
+    float: left;
+    margin-right: 3px;
+    padding-right: 3px;
+    border-right: 1px dotted #999;
+}
+#biomart-context-bar li:last-child {
+    border-right: none;
+}
+#biomart-auth-info .ui-icon-close {
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+#biomart-login-dialog {
+    position: relative;
+    padding: 0;
+}
+#biomart-login-dialog form {
+     padding: 25px 85px 5px;
+}
+#biomart-login-dialog .loading { 
+    position: absolute;
+    top: 0;
+}
+#biomart-login-dialog .help {
+    line-height: 15px;
+}
+#biomart-login-dialog .help a {
+    float: right;
+}
+#biomart-login-dialog .help .ui-icon-help {
+     float: right;
+}
+#biomart-context-bar a {
+    color: #1c94c4;
+}
+#biomart-context-bar a:hover {
+    color: #c77405;
+}
+#biomart-login {
+    position: relative;
+}
+#biomart-auth-info {
+    right: 0;
+    position: absolute;
+    z-index: 10001;
+    width: 30em;
+    padding: .5em;
+    font-size: 11px;
+    border: 1px solid #999;
+    background-color: #fff;
+    -moz-box-shadow: 1px 1px 3px #ccc;
+    -webkit-box-shadow: 1px 1px 3px #ccc;
+    box-shadow: 1px 1px 3px #ccc;
+}
+#biomart-auth-info p {
+    line-height: 1.2em;
+    margin: .5em 0;
+}
+#biomart-auth-info span {
+    color: #999;
+    font-family: monospace;
+}
+#biomart-login-dialog .error {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+/* Top Navigation */
+#biomart-topnav {
+    z-index: 1002;
+    overflow: visible;
+    font-size: 12px;
+    height: 30px;
+    line-height: 20px;
+    position: relative;
+}
+#biomart-topnav span,
+#biomart-topnav input,
+#biomart-topnav label,
+#biomart-topnav li {
+    vertical-align: bottom;
+}
+#biomart-topnav .others {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+#biomart-topnav .others li {
+    float: left;
+    padding-right: 5px;
+    margin-right: 5px;
+    border-right: 1px dotted #999;
+}
+#biomart-topnav .others li:last-child {
+    border-right: none;
+    margin-right: 0;
+    padding-right: 0;
+}
+#biomart-breadcrumbs {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+#biomart-breadcrumbs li {
+    display: inline;
+    padding: 0;
+    margin: 0;
+}
+#biomart-breadcrumbs li:before { content: " > "; }
+#biomart-breadcrumbs li:first-child:before { content: ""; }
+.biomart p.info {
+    margin: .5em 0;
+    font-size: 12px;
+    color: #999;
+    padding: 0;
+    line-height: 1.3em;
+}
+
+/* Growl-style notification */
+#jGrowl {
+     top: 20px
+}
+
+/* UI widgets */
+.ui-widget .ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button {
+    font-family: inherit;
+}
+.ui-widget-overlay {
+    background-color: #5c5c5c;
+    background-image: url(../lib/ui/aristo/images/ui-bg_flat_0_5c5c5c_40x100.png);
+}
+.ui-dialog {
+     font-size: 12px;
+}
+.ui-dialog .ui-dialog-buttonpane button {
+    font-size: 16px;
+}
+.ui-autocomplete.ui-menu {
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 20em;
+    z-index: 103 !important;
+    font-size: 12px;
+}
+.ui-autocomplete.ui-menu li {
+    border-bottom: 1px dotted #999;
+}
+.ui-autocomplete.ui-menu li:last-child {
+    border-bottom: none;
+}
+.ui-autocomplete.ui-menu li a {
+    font-weight: normal !important;
+}
+.ui-prettybox .ui-button,
+.ui-prettybox .ui-autocomplete-input {
+    font-size: 12px;
+    position: relative;
+    float: left;
+    line-height: 2em;
+    padding: 0;
+    height: 2em;
+}
+.ui-prettybox .ui-button-text {
+    font-size: 12px;
+}
+.ui-prettybox .ui-autocomplete-input {
+    margin: 0;
+    padding-left: .5em;
+    padding-right: .5em;
+}
+.ui-prettybox .ui-state-default {
+    border: none;
+}
+.ui-prettybox .ui-button {
+    margin: 0;
+    -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px;
+}
+.ui-prettybox .ui-button .ui-button-text {
+    font-size: inherit;
+    font-weight: normal;
+    height: 2em;
+    padding: 0;
+    margin: 0;
+    margin-top: -1px;
+    margin-right: -1px;
+}
+.ui-dialog.details .ui-dialog-content {
+    padding: 0;
+}
+
+/* Error dialog */
+.ui-dialog.error {
+    z-index: 100010 !important;
+}
+.ui-dialog.error .ui-dialog-titlebar {
+    display: none;
+}
+#biomart-error-dialog {
+    font-size: 16px;
+    line-height: 1.5em;
+}
+#biomart-error-dialog p {
+    margin: 1em 0;
+}
+#biomart-error-dialog p.button {
+    text-align: right;
+}
+#biomart-error-dialog button {
+    border: 1px solid #999;
+    font-size: 18px;
+    padding: .2em 1em;
+}
+#biomart-error-dialog button:active {
+    margin-top: 1px;
+}
+
+/* Flash messages */
+#biomart-flash-message {
+    border: 1px solid #fff47f;
+    background-color: #fffcdf;
+    color: #333;
+    font-size: 14px;
+    margin: 10px 0;
+    padding: 10px;
+    -moz-box-shadow: 1px 1px 3px #999;
+    -webkit-box-shadow: 1px 1px 3px #999;
+    box-shadow: 1px 1px 3px #999;
+    position: relative;
+}
+#biomart-flash-message .ui-icon {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    cursor: pointer;
+}
+
+/* Warning messages */
+#biomart-warning {
+    position: relative;
+}
+#biomart-warning p {
+     margin: .7em 0;
+    line-height: 1.5em;
+    font-size: 14px;
+}
+#biomart-warning .remember {
+    font-size: 12px;
+    text-align: right;
+    position: absolute;
+    right: .5em;
+    bottom: 0;
+    line-height: 2em;
+}
+#biomart-warning input {
+    vertical-align: text-top;
+    margin: 0 .3em 0 0;
+}
+

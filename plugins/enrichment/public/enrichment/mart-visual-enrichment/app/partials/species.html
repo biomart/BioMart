@@ -1,0 +1,7 @@
+<div class="mve-species">
+    <h2>Input Species Available</h2>
+    <select class="form-control mve-select"
+            ng-model="selectedSpecies"
+            ng-options="s.displayName for s in species"
+            ng-change="updateSpecies(selectedSpecies)"/>
+</div>

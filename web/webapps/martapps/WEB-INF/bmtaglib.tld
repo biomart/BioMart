@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE taglib PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.1//EN" 
+	"http://java.sun.com/j2ee/dtds/web-jsptaglibrary_1_1.dtd">
+
+<taglib>
+   <tlibversion>1.0</tlibversion>
+   <jspversion>1.1</jspversion>
+   <shortname>first</shortname>
+   <uri></uri>
+   <info>A simple tab library for the examples</info>
+  <tag>
+    <name>message</name>
+    <tagclass>org.biomart.web.MessageTag</tagclass>
+    <bodycontent>empty</bodycontent>
+    <info>Messages</info>
+    <attribute>
+      <name>code</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>empty</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>capitalize</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>plural</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+  </tag>         
+  <tag>
+    <name>locale</name>
+    <tagclass>org.biomart.web.LocaleTag</tagclass>
+    <bodycontent>empty</bodycontent>
+    <info>Locale</info>
+  </tag>         
+  <tag>
+    <name>locationCode</name>
+    <tagclass>org.biomart.web.LocationCodeTag</tagclass>
+    <bodycontent>empty</bodycontent>
+    <info>Location</info>
+  </tag>         
+</taglib>

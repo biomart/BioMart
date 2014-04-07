@@ -1,0 +1,90 @@
+SUP {
+    font-size: 0.8em;
+    vertical-align: super;
+}
+.citation-list {
+    padding-top: 0.2em;
+}
+.citation-list li {
+    padding: 0.3em 1em;
+    font-size: 0.9em;
+}
+.dataset-summary th.project-col {
+   width: 30%;
+}
+.dataset-summary tbody tr:hover td.data-org:hover {
+    background: #FFF;
+}
+.dataset-summary tbody tr:hover td.data-org {
+    background: #FFF;
+}
+.dataset-summary td.data-org {
+   text-align: center !important; 
+   border: 0px;
+   background: #FFF;
+}
+.dataset-summary th.verticall {
+    font-weight: 900;
+    font-size: 1.1em;
+    border: 0;
+    background: transparent;
+}
+.dataset-summary td.verticall {
+    font-weight: 900;
+    font-size: 1.1em;
+    border: 0;
+    background: transparent;
+}
+td.vertical {
+    height: 2em;
+    z-index: -1;
+    cell-height: 10px;
+    cell-width: 10px;
+    background-color: #FFFFFF;
+}
+td.vertical:hover {
+    background-color: #FFFFFF;
+}
+.dataset-summary th {
+   border: 2px solid #000000;
+   font-weight: 600;
+   vertical-align: middle;
+}
+.dataset-summary tr.top-row {
+    border-top: 2px solid #000000;
+}
+.dataset-summary tr.bottom-row {
+    border-bottom: 2px solid #000000;
+}
+table.dataset-summary td {
+    text-align: center;
+    font-weight: 600;
+    border-bottom: 0;
+    padding: 2px;
+}
+table.dataset-summary {
+   font-family: serif;
+    border: 2px solid #000000;
+    font-size: 0.85em;
+}
+table.dataset-summary caption {
+    padding: 5px;
+    font-size: 1.3em;
+}
+.dataset-summary td.project-name {
+   text-align: left;
+   background: #E0E0E0;
+   border-left: 2px solid #000000;
+   border-right: 2px solid #000000;
+   font-weight: 900;
+}
+.project-center {
+    font-size: 0.8em;
+    font-weight: 200;
+}
+.dataset-summary td.tissue {
+   border-right: 2px solid #000000;
+}
+.empty {
+    color: #999999;
+}

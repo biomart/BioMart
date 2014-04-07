@@ -1,0 +1,36 @@
+<script type="text/javascript" src="/pages/js/jscharts.js"></script>
+
+<style type="text/css">
+    .pie-container {
+        padding-top: 10px;
+        width: 400px;
+        height: 400px;
+        margin: auto;
+    }
+</style>
+
+<h3 class="ui-widget-header ui-corner-top level-1" style="background: -moz-linear-gradient(center top , #7BC9ED 0%, #3592BA 100%) repeat scroll 0 0 transparent; border-color: #8AB0C6 #8AB0C6 -moz-use-text-color; background-position: 0 -33px;">
+    ICGC Dataset Version 7 (December 6<sup>th</sup>, 2011)
+</h3>
+
+<div class="ui-widget-content ui-corner-bottom">
+    <p>
+    Cancer Projects: <strong>26</strong> 
+    </p>
+
+    <a href='/pages/summary/'><div class='pie-container' id="pie-donors_by_tissue">This feature requires JavaScript to view.</div></a>
+   
+    <p>
+    Total Donors: <strong>2,961</strong> 
+    </p>
+
+</div>
+
+<script type="text/javascript">
+    /*
+       use JSChart to render pie charts
+     */
+    var samplesChart = new JSChart('pie-donors_by_tissue', 'pie');
+    samplesChart.setDataXML("/pages/summary/jscharts-pie-data.donors_by_tissue.xml");
+    samplesChart.draw();
+</script>

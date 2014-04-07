@@ -1,0 +1,364 @@
+*{
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
+	-o-box-sizing: border-box;    /* Firefox, other Gecko */
+	box-sizing: border-box;   
+        -webkit-font-smoothing:antialiased;
+}
+
+html{
+    background: #262C36;
+color: white;
+/*-webkit-box-shadow: black 0px 10px 10px -10px inset;
+-moz-box-shadow: black 0px 10px 10px -10px inset;
+box-shadow: black 0px 10px 10px -10px inset;*/
+font-size: 20px;
+color: #111;
+text-shadow: rgba(102, 120, 138, 0.45) 0px 1px 0px;
+padding:0;
+margin:0;
+
+     font-family:HelveticaNeue, "Helvetica Neue", Helvetica, Arial, sans-serif;
+     
+     background: white;
+color: #333;
+}
+
+body{
+    padding:0;
+    margin:0;
+    min-width:320px;
+}
+
+body > .container{
+    height:100px;
+}
+
+body > .container .row{
+     background: #1f1f1f;
+     background:#262C36;
+opacity: 0.87;
+opacity:1;
+  
+     background: white;
+color: #333;
+/*-moz-box-shadow: rgba(0,0,0,0.91) -10px -3px 32px inset;
+-webkit-box-shadow: rgba(0,0,0,0.91) -10px -3px 32px inset;
+box-shadow: rgba(0,0,0,0.91) -10px -3px 32px inset;*/
+
+height:100px;
+
+}
+
+.row .content, .row #biomart-topnav{
+    max-width:960px;
+    margin:0 auto;  
+    width:100%;
+    padding:0 20px;
+}
+
+.row #biomart-topnav ul{
+
+    list-style:none;
+    margin:0;
+    padding:0;
+    float:left;
+    
+    margin-top: 10px;
+font-size: 12px;
+color: #fff;
+color:#333;
+}
+
+.row #biomart-topnav ul a{
+    color: #8ab4b5;
+      color:rgb(57, 105, 150);
+    text-decoration: none;
+}
+
+.row #biomart-topnav .others{
+    float:right;
+}
+
+.row #biomart-topnav ul li{
+    display:inline;
+}
+
+.row #biomart-topnav #biomart-breadcrumbs li{
+    padding-left:20px;
+    position:relative;
+}
+
+.row #biomart-topnav #biomart-breadcrumbs li:before{
+    content:">";
+    position:absolute;
+    top:0px;
+    left:5px;
+}
+
+.row #biomart-topnav #biomart-breadcrumbs li:first-child{
+    padding-left:0;
+}
+
+.row #biomart-topnav #biomart-breadcrumbs li:first-child:before{
+    display:none;
+}
+
+.row .content p{
+    margin:0 !important;
+    float:none !important;
+    color:rgb(57, 105, 150) !important;
+    font-size:20px !important;
+    padding-top:30px;
+}
+
+.ng-scope > .container.ng-scope{
+    background-color: #dee9e9;
+    position: relative;
+    margin-top: 0px;
+    width: 100%;
+    -webkit-box-shadow: white 0px 1px 0px inset, rgba(0,0,0,0.15) 0px -28px 29px -29px;
+    -moz-box-shadow: white 0px 1px 0px inset, rgba(0,0,0,0.15) 0px -28px 29px -29px;
+    box-shadow: white 0px 1px 0px inset, rgba(0,0,0,0.15) 0px -28px 29px -29px;
+    
+    /*box-shadow: white 0px 1px 0px inset, rgba(0,0,0,0.15) 0px -28px 29px -29px;*/
+    
+    float:left;
+    min-height:820px;
+    height:auto;
+}
+
+
+
+
+.container.ng-scope .enrichment{
+    /*background:pink;*/
+    max-width:960px;
+    padding:0 20px;
+    margin:0 auto;
+    
+    color:#333;
+    float:none;
+    width:100%;
+}
+
+.container.ng-scope .enrichment h1{
+    margin-top:0;
+    padding-top:30px;
+    font-size:30px;
+}
+
+.container.ng-scope .enrichment .row{
+     background: rgb(255, 255, 255);
+    background:rgba(255,255,255,0.75);
+    padding:10px;
+    margin-bottom:20px;
+    position:relative;
+}
+
+
+
+.container.ng-scope .enrichment .row{ 
+    width:45%;
+    float:left;
+    height:auto;
+}
+
+.container.ng-scope .enrichment .row.mve-species{
+    margin-bottom:55px;
+    width:100%;
+}
+
+
+
+.container.ng-scope .enrichment .row + .row + .row{
+    float:right;
+    clear:right;
+}
+
+.tabbable .nav-tabs{
+    list-style:none;
+    padding:0;
+    margin:0;
+    position:absolute;
+    width:100%;
+    left:0;
+    top:-35px;
+}
+
+.tabbable .nav-tabs li{
+    display:inline-block;
+    
+    padding:0px 10px;
+    margin-right:3px;
+     background:rgba(255,255,255,0.5);
+     padding-top:2px;
+}
+
+.tabbable .nav-tabs li a{
+    cursor:pointer;
+}
+
+.tabbable .nav-tabs li.active{
+background:rgba(255,255,255,0.75);
+}
+
+.tabbable .nav-tabs li h3{
+    width:auto;
+    display:inline-block;
+    margin:0;
+    font-size:13px;
+    text-transform: uppercase;
+    text-shadow: none;
+    line-height:30px;
+    font-weight:normal;
+}
+
+.tabbable .tab-content .tab-pane{
+    display:none;
+}
+
+.tabbable .tab-content .tab-pane.active{
+    display:block;
+}
+
+.tabbable .tab-content .tab-pane .lead{
+    /*display:none;*/
+    font-size: 12px;
+text-shadow: none;
+border-bottom: 1px solid #eee;
+padding-bottom: 5px;
+
+}
+
+.tabbable .tab-content .tab-pane .mve-filter{
+    margin-bottom: 40px;
+}
+
+.container.ng-scope .enrichment .row select,
+.container.ng-scope .enrichment .row textarea,
+.container.ng-scope .enrichment .row input[type="text"]{ 
+    width:100%;
+}
+
+.tabbable .tab-content .tab-pane label{
+    font-size: 12px;
+float: right;
+padding-top: 7px;
+text-shadow:none;
+}
+
+hr{
+    display:none;
+}
+
+.container.ng-scope .enrichment .row .tabbable .nav-justified{
+    list-style:none;
+    margin:0;
+    padding:0;
+}
+
+.container.ng-scope .enrichment .row .tabbable .nav-justified h3{
+    margin:0;
+    
+    text-transform: uppercase;
+font-size: 13px;
+text-shadow: none;
+font-weight: normal;
+position:relative;
+padding-left:20px;
+}
+
+.container.ng-scope .enrichment .row .tabbable .nav-justified h3 span{ 
+margin-right: 4px;
+/* color: #999; */
+font-weight: bold;
+color: #8ab4b5;
+/* font-size: 18px; */
+position:absolute;
+left:0;
+top:0;
+font-size: 20px;
+position: absolute;
+left: 0;
+top: -4px;
+text-shadow: rgba(50, 50, 0, 0.75) 0px 1px 1px;
+top: 50%;
+margin-top: -13px;
+}
+
+
+
+.container.ng-scope .enrichment .row .tabbable .nav-justified li a{
+    cursor:pointer;
+}
+
+.container.ng-scope .enrichment .row .tabbable .collapse{
+    height:0;
+    overflow:hidden;
+}
+
+.container.ng-scope .enrichment .row .tabbable .collapse.in{
+    height:auto;
+}
+
+.container.ng-scope .enrichment .row .tabbable .collapse > div{
+    margin-top:30px;
+}
+
+span.ng-binding{
+    font-size: 13px;
+text-shadow: none;
+}
+
+input[type="checkbox"]{
+    margin-right:10px;
+}
+
+.btn-default{
+    background:black;
+    border:none;
+    color:#fff;
+    text-transform: uppercase;
+    font-size:13px;
+     padding:5px 10px;
+     cursor:pointer;
+}
+
+.btn-danger{
+    background:#F9541C;
+    border:none;
+    text-transform: uppercase;
+    font-size:13px;
+    padding:5px 10px;
+    cursor:pointer;
+}
+
+.button-container{
+    text-align:right;
+    margin-bottom:20px;
+    clear:both;
+    width:100%;
+    float:left;
+}
+
+@media (max-width: 640px){ 
+   
+    
+    .container.ng-scope .enrichment .row{
+        width:100%;
+        float:none;
+    }
+    
+    .row #biomart-topnav ul{
+        float:none;
+        display:block;
+        width:100%;
+    }
+    
+    body > .container, body > .container .row{
+    height:120px;
+}
+
+
+}

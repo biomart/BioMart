@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+        
+<hibernate-configuration>
+  <session-factory>
+        
+    <!-- SQL dialect -->
+    <property name="dialect">org.hibernate.dialect.MySQL5Dialect</property>
+        
+    <!-- Database connection settings -->
+    <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="connection.url">jdbc:mysql://localhost/netbox</property>
+    <property name="connection.username">root</property>
+    <property name="connection.password"></property>
+    <property name="connection.shutdown">true</property>
+        
+    <!-- JDBC connection pool (use the built-in one) -->
+    <property name="connection.pool_size">1</property>
+        
+    <!-- Enable Hibernate's automatic session context management -->
+    <property name="current_session_context_class">thread</property>
+        
+    <!-- Disable the second-level cache  -->
+    <property
+     name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
+        
+    <!-- Don't echo all executed SQL to stdout -->
+    <property name="show_sql">false</property>
+    
+    <!-- disable batching so HSQLDB will propagate errors correctly. -->
+    <property name="jdbc.batch_size">0</property>
+
+    <!-- Drop and re-create the database schema on startup -->
+    <property name="hbm2ddl.auto">update</property>
+    
+    <!-- List all the annotated classes we're using -->
+    <mapping class="org.mskcc.netbox.model.Gene"/>
+    <mapping class="org.mskcc.netbox.model.Interaction"/>
+    <mapping class="org.mskcc.netbox.model.NetworkStats"/>
+      
+  </session-factory>
+</hibernate-configuration>

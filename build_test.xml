@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<project name="BioMart" basedir="." default="test">
+  <target name="-load.properties" description="Load">
+    <property file="ant.properties"/>
+    <path id="build.classpath">
+      <fileset dir="${dist.dir}/lib">
+        <patternset id="project.test.jars">
+          <include name="*.jar"/>
+          <include name="test/*.jar"/>
+        </patternset>
+      </fileset>
+    </path>
+    <path id="run.classpath">
+      <pathelement location="${build.instr}" />
+      <pathelement location="${build.test}" />
+      <path refid="build.classpath"/>  
+    </path>
+    <path id="instr.classpath">
+      <pathelement location="${build.main}"/>
+    </path>
+    <path id="emma.lib" >
+      <pathelement location="${lib.dir}/test/emma.jar"/>
+      <pathelement location="${lib.dir}/test/emma_ant.jar"/>
+    </path>
+    <taskdef resource="emma_ant.properties" classpathref="emma.lib"/>
+  </target>
+  <target name="-init" depends="-load.properties">
+    <mkdir dir="${build.test}"/>
+  </target>
+  <target name="clean" depends="-init">
+    <delete file="coverage.ec"/>
+    <delete dir="${reports.dir}"/>
+    <delete dir="${build.test}"/>
+    <delete dir="${build.instr}"/>
+    <delete>
+      <fileset dir="${testoutput.dir}">
+        <include name="TEST-*.xml"/>
+      </fileset>
+    </delete>
+  </target>
+  <target name="compile.test" depends="-init">
+    <javac destdir="${build.test}" deprecation="${build.deprecation}" depend="no" debug="true" source="1.6" includeantruntime="no">
+      <src path="${src.dir}"/>
+      <src path="${test.dir}"/>
+      <classpath>
+        <path refid="run.classpath"/>
+      </classpath>
+    </javac>
+  </target>
+  <target name="report" depends="-init">
+    <java classname="org.biomart.configurator.test.OpenUrl" fork="true">
+      <classpath>
+        <path refid="run.classpath"/>
+      </classpath>
+    </java>
+  </target>
+  <target name="test.configurator" depends="compile.test,coverage.instr">
+    <junit showoutput="true">
+      <jvmarg value="-Demma.coverage.out.file=${coverage.dir}/coverage.emma" />
+      <jvmarg value="-Demma.coverage.out.dir=true" />
+      <classpath>
+        <path refid="run.classpath"/>
+      </classpath>
+      <formatter type="xml"/>
+      <sysproperty key="test.subset" value="${test.subset}"/>
+      <test name="org.biomart.configurator.test.McTest" outfile="${testoutput.dir}/TEST-McUnitTest"/>
+    </junit>
+  </target>
+  <target name="test.api" depends="compile.test,coverage.instr">
+    <junit showoutput="true">
+      <jvmarg value="-Demma.coverage.out.file=${coverage.dir}/coverage.emma" />
+      <jvmarg value="-Demma.coverage.out.merge=true" />
+      <classpath>
+        <path refid="run.classpath"/>
+      </classpath>
+      <formatter type="xml"/>
+      <test name="org.biomart.api.PortalTest" outfile="${testoutput.dir}/TEST-PortalTest"/>
+      <test name="org.biomart.api.QueryTest" outfile="${testoutput.dir}/TEST-QueryTest"/>
+      <test name="org.biomart.api.MartApiTest" outfile="${testoutput.dir}/TEST-MartApiTest"/>
+      <!--<test name="org.biomart.api.SourceSchemaApiTest" outfile="${testoutput.dir}/TEST-SourceSchemaApiTest"/>-->
+      <test name="org.biomart.api.rest.PortalResourceTest" outfile="${testoutput.dir}/TEST-PortalResourceTest"/>
+      <!--<test name="org.biomart.api.rest.RestApplicationSPARQLTest" outfile="${testoutput.dir}/TEST-RestApplicationSPARQLTest"/>-->
+    </junit>
+  </target>
+  <target name="test.query" depends="compile.test,coverage.instr">
+    <junit showoutput="true">
+      <jvmarg value="-Demma.coverage.out.file=${coverage.dir}/coverage.emma" />
+      <jvmarg value="-Demma.coverage.out.merge=true" />
+      <classpath>
+        <path refid="run.classpath"/>
+      </classpath>
+      <formatter type="xml"/>
+      <test name="org.biomart.event.EventTest" outfile="${testoutput.dir}/TEST-EventTest"/>
+      <test name="org.biomart.queryEngine.v2.ConnectionManagerTest" outfile="${testoutput.dir}/TEST-ConnectionManagerTest"/>
+      <test name="org.biomart.queryEngine.v2.ProcessTest" outfile="${testoutput.dir}/TEST-ProcessTest"/>
+      <test name="org.biomart.queryEngine.v2.base.QueryTaskTest" outfile="${testoutput.dir}/TEST-QueryTaskTest"/>
+    </junit>
+  </target>
+  <target name="test.report" depends="-init">
+    <junitreport todir="${testreport.dir}">
+      <fileset dir="${testoutput.dir}">
+        <include name="TEST-*.xml"/>
+      </fileset>
+      <report format="frames" todir="${testreport.dir}"/>
+    </junitreport>
+    <antcall target="report"/>
+  </target>
+  <target name="-cleanreports" depends="-init">
+    <!-- Delete and remake report directories -->
+    <delete dir="${testoutput.dir}" failonerror="false"/>
+    <delete dir="${testreport.dir}" failonerror="false"/>
+    <delete dir="${build.instr}" failonerror="false"/>
+    <mkdir dir="${testoutput.dir}"/>
+    <mkdir dir="${testreport.dir}"/>
+    <delete file="coverage.ec"/>
+  </target>
+  <target name="test" depends="-cleanreports,test.api,test.configurator,test.report"/>
+  <target name="testforhudson" depends="compile.test,coverage.instr">
+    <junit showoutput="true">
+      <classpath>
+        <path refid="run.classpath"/>
+      </classpath>
+      <jvmarg value="-Demma.coverage.out.file=${coverage.dir}/coverage.emma" />
+      <jvmarg value="-Demma.coverage.out.merge=true" />
+      <formatter type="xml"/>
+      <test name="org.biomart.configurator.test.McTest" outfile="${testoutput.dir}/TEST-McUnitTest"/>
+    </junit>
+  </target>
+  <!-- Emma coverage reports -->
+  <target name="with.emma" depends="-init">
+    <property name="emma.enabled" value="true"/>
+    <mkdir dir="${coverage.dir}" />
+  </target>
+  <target name="coverage.instr" depends="compile.test" if="emma.enabled" >
+    <emma>
+      <instr instrpathref="instr.classpath" destdir="${build.instr}" metadatafile="${build.dir}/metadata.emma" merge="true">
+        <filter excludes="org.biomart.*Test*"/>
+      </instr>
+    </emma>
+  </target>
+  <target name="coverage.report" depends="with.emma">
+    <emma>
+      <report sourcepath="${src.dir}" >
+        <fileset dir="${basedir}" >
+          <include name="coverage.ec"/>
+        </fileset>
+        <fileset dir="${build.dir}" >
+          <include name="*.emma" />
+        </fileset>
+        <html outfile="${coverage.dir}/coverage.html" />
+      </report>
+    </emma>
+  </target>
+</project>

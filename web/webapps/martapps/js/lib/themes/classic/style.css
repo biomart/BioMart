@@ -1,0 +1,35 @@
+/* LOCKED */
+.tree-classic .locked li a { color:gray; }
+/* DOTS */
+.tree-classic ul { background-position:6px 1px; background-repeat:repeat-y; background-image:url(data:image/gif;base64,R0lGODlhAgACAIAAAB4dGf///yH5BAEAAAEALAAAAAACAAIAAAICRF4AOw==); _background-image:url("dot_for_ie.gif"); *background-image:url("dot_for_ie.gif"); }
+.tree-classic li { background-position:-64px -16px; background-repeat:no-repeat; background-image:url("icons.png"); }
+/* NO DOTS */
+.tree-classic .no_dots, .tree-classic .no_dots ul { background:transparent; }
+.tree-classic .no_dots li.leaf { background-image:none; background-color:transparent; }
+/* OPEN or CLOSED */
+.tree-classic li.open { background: transparent url(icons.png) no-repeat scroll -32px -48px; }
+.tree-classic li.closed { background: transparent url(icons.png) no-repeat scroll -48px -32px; }
+/* DEFAULT, HOVER, CLICKED, LOADING STATES */
+.tree-classic li a.clicked, .tree-classic li span.clicked { background: #0d3a6f; color:#fff; padding:0px 3px 0px 3px; }
+/* ICONS */
+.tree-classic ins { background-image:url(../../../../css/ui/aristo/images/ui-icons_6da8d5_256x240.png); background-position:0 -96px; background-repeat:no-repeat; }
+.tree-classic a:hover ins { background-image:url(../../../../css/ui/aristo/images/ui-icons_217bc0_256x240.png); }
+.tree-classic ul li a.loading ins { background-image:url("throbber.gif") !important; background-position:0 0 !important; } /* UL is added to make selector stronger */
+.tree-classic li.closed a ins, .tree-classic li.leaf a ins { background-position:0 0px; } /* UL is added to make selector stronger */
+.tree-classic ul li a.loading ins { background-image:url("throbber.gif"); background-position:0 0; } /* UL is added to make selector stronger */
+.tree-classic li a ins.forbidden { background-position:-16px -16px; }
+.tree-classic .locked li a ins { background-position:0 -48px; }
+.tree-classic li span ins { background-position:-16px 0; }
+
+/* CUSTOM */
+.tree-classic li.open a ins { background-position: -16px -96px; }
+.tree-classic li.closed a ins { background-position: 0 -96px; }
+.tree-classic li.leaf a ins { background-position: 0 -96px; }
+.tree-classic li.leaf a.clicked ins { background-position: -16px -96px; }
+.tree-classic li.linkable a { color: #0050af; }
+.tree-classic li.linkable a.clicked { color: #fff; }
+.tree-classic li.linkable > a ins { background-position: -112px -80px; }
+.tree-classic li.linkable > a.clicked ins { background-position: -112px -80px; }
+.tree-classic li.loader a ins { background: transparent url(throbber.gif) no-repeat 0 0; }
+.tree-classic li.loader a.clicked ins { background: transparent url(throbber.gif) no-repeat 0 0; }
+

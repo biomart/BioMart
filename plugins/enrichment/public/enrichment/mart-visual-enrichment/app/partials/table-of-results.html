@@ -1,0 +1,16 @@
+<table class="table table-condensed table-hover">
+    <thead>
+        <tr>
+            <th>Description</th>
+            <th>P-Value</th>
+            <th>Corrected P-Value</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="term in results">
+            <td>{{term.description}}</td>
+            <td>{{term.pvalue}}</td>
+            <td>{{term.bpvalue}}</td>
+        </tr>
+    </tbody>
+</table>

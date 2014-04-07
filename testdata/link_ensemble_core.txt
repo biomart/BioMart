@@ -1,0 +1,15 @@
+Analysis id 1021	Pathway stable ID	Pathway name
+8071	REACT_6932	Complement cascade
+8071	REACT_8024	Initial triggering of complement
+8071	REACT_8012	Creation of C4 and C2 activators
+8071	REACT_6802	Innate Immunity Signaling
+8071	REACT_6900	Signaling in Immune system
+8071	REACT_7956	Classical antibody-mediated complement activation
+8071	REACT_11152	Immunoregulatory interactions between a Lymphoid and a non-Lymphoid cell
+8071	REACT_12526	TCR signaling
+8071	REACT_12555	Downstream TCR signaling
+8071	REACT_12582	Phosphorylation of CD3 and TCR zeta chains
+8071	REACT_12596	Translocation of ZAP-70 to Immunological synapse
+8071	REACT_12623	Generation of second messenger molecules
+8071	REACT_19344	Costimulation by the CD28 family
+8071	REACT_19324	PD-1 signaling

@@ -1,0 +1,179 @@
+.biomart {
+    padding: 10px;
+    background-color: #999;
+}
+header {
+    border-top: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+}
+header h1 {
+    font-size: 36px;
+    color: #897048;
+    font-weight: normal;
+    text-shadow: 0 0 2px #ccc;
+}
+#biomart-wrapper {
+    border: 1px solid #333;
+    -moz-box-shadow: 2px 2px 5px #000; -webkit-box-shadow: 2px 2px 5px #000; box-shadow: 2px 2px 5px #000; width: 1000px;
+    margin: 0 auto;
+}
+#biomart-content {
+    background-color: #fff;
+    border-top: none;
+    border-bottom: none;
+    font-size: 14px;
+    padding: .5em;
+}
+footer {
+    border-bottom: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+}
+
+dl {
+    line-height: 1.2em;
+}
+dt {
+    clear: left;
+    float: left;
+    margin-right: .5em;
+    font-weight: bold;
+}
+dd {
+    float: left;
+}
+li.empty {
+    border: none;
+    color: #999;
+}
+
+#oauth-consumers h3 {
+    text-align: center;
+    margin-bottom: .5em;
+    font-size: 22px;
+    color: #555;
+    text-shadow: 1px 1px 3px #ccc;
+}
+#oauth-consumers li {
+    border: 1px solid #ccc;
+    width: 30em;
+    padding: 1em;
+    float :left;
+    margin: .5em;
+    position: relative;
+}
+#oauth-consumers li:hover {
+    border-color: #999;
+    background-color: #f7f7f7;
+}
+#oauth-consumers li .ui-icon-close {
+    position: absolute;
+    right: 3px;
+    top: 3px;
+}
+#oauth-consumers .accessor {
+    background: transparent url(../../images/icon-user-32x32.png) 100% 5px no-repeat;
+    border: 1px solid #999;
+    font-size: 12px;
+    padding: 1em;
+    margin: .5em;
+    color: #555;
+    -moz-box-shadow: 1px 1px 3px #ccc; -webkit-box-shadow: 1px 1px 3px #ccc; box-shadow: 1px 1px 3px #ccc;
+    -webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px;
+}
+#oauth-consumers .accessor:hover {
+    color: #000;
+    border-color: #000;
+    background-color: #fff;
+}
+.oauth-new-form .actions {
+    margin-top: 15px;
+    float: right;
+}
+.oauth-new-form button.add {
+    font-size: 16px;
+}
+.oauth-new-form .cancel {
+    cursor: pointer;
+    color: #999;
+    text-decoration: underline;
+    margin-left: 1em;
+}
+.oauth-new-form label,
+.oauth-new-form input,
+.oauth-new-form textarea {
+    display: block;
+    margin: .5em 0;
+}
+.oauth-new-form label {
+    font-weight: bold;
+}
+.oauth-new-form input,
+.oauth-new-form textarea {
+    margin-left: 2em;
+    border: 1px solid #999;
+    line-height: 1.2em;
+    font-size: 12px;
+    padding: .1em;
+}
+.oauth-new-form input:focus,
+.oauth-new-form textarea:focus {
+    border-color: #555;
+    -moz-box-shadow: 0 0 3px #999; -webkit-box-shadow: 0 0 3px #999; box-shadow: 0 0 3px #999;
+}
+button.box {
+    font-size: 12px;
+    border: 1px solid #999;
+    background-color: #eee;
+}
+#oauth-consumers li button {
+    clear: left;
+    float: right;
+    margin-top: 1em;
+}
+.oauth {
+    padding: 1em;
+    text-align: center;
+}
+.oauth.ui-dialog {
+    padding: 0;
+    overflow: hidden;
+}
+.oauth.ui-dialog * {
+    font-size: 14px;
+}
+.oauth p {
+    margin: 1em 0;
+}
+.oauth.ui-dialog .ui-dialog-titlebar {
+    display: none;
+}
+.oauth button.box {
+    font-size: 16px;
+}
+.oauth button.continue {
+    background-color: #555;
+    color: #fff;
+    border-color: #000;
+}
+.oauth dl {
+    margin-bottom: 1em;
+}
+.oauth dt {
+    width: 12em;
+    text-align: left;
+}
+.oauth .cancel {
+    text-decoration: underline;
+    color: #999;
+    font-size: 12px;
+    cursor: pointer;
+    margin-left: 1em;
+}
+dd.access-token,
+dd.access-token-secret,
+dd.secret,
+dd.key {
+    color: #9f571d;
+}

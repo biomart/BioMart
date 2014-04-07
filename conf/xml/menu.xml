@@ -1,0 +1,87 @@
+<MartconfiguratorMenu>
+	<MenuBar>
+		<Menu Text="File">
+			<MenuItem Text="New">
+				<Listener id="newportal"/>
+			</MenuItem>
+			<MenuItem Text="Open">
+				<Listener id="openportal"/>
+			</MenuItem>
+			<Separator/>
+			<MenuItem Text="Import">
+				<Listener id="importportal"/>
+			</MenuItem>
+			<Separator/>
+			<MenuItem Text="Save">
+				<Listener id="save"/>
+			</MenuItem>
+
+			<MenuItem Text="Save As ...">
+				<Listener id="saveportalas"/>
+			</MenuItem>
+			<!-- <MenuItem Text="Export ..." Disabled="true">
+				<Listener id="export"/>
+			</MenuItem>
+			<Separator/>
+			<MenuItem Text="Validate">
+				<Listener id="validateportal"/>
+			</MenuItem> -->
+			<Separator/>
+			<MenuItem Text="Exit">
+				<Listener id="exit"/>
+			</MenuItem>		
+		</Menu>
+		<!--<Menu Text="Edit">
+			<MenuItem Text="Accept Changes" Disabled="true">
+				<Listener id="acceptchanges"/>
+			</MenuItem>
+		</Menu>
+		<Menu Text="Search">
+			<MenuItem Text="Search ...">
+				<Listener id="search"/>
+			</MenuItem>
+		</Menu>
+		
+		<Menu Text="Config">
+			<MenuItem Text="Hide Hidden Mart" Type="checkbox" Property="hidehiddenmart">
+				<Listener id="hidehiddenmart"/>
+			</MenuItem>
+			<MenuItem Text="Hide Hidden Container" Type="checkbox" Property="hidehiddencontainer">
+				<Listener id="hidehiddencontainer"/>
+			</MenuItem>
+			<MenuItem Text="Hide Hidden Attribute" Type="checkbox" Property="hidehiddenattribute">
+				<Listener id="hidehiddenattribute"/>
+			</MenuItem>
+			<MenuItem Text="Hide Hidden Filter" Type="checkbox" Property="hidehiddenfilter">
+				<Listener id="hidehiddenfilter"/>
+			</MenuItem>
+			<MenuItem Text="Public Config" Type="checkbox" Property="public">
+				<Listener id="public"/>
+			</MenuItem>	
+			<MenuItem Text="Hide Imp/Exp" Type="checkbox" Property="impexp.hide">
+				<Listener id="impexp.hide"/>
+			</MenuItem>		
+			
+		</Menu> -->
+<!--	<Menu Text="Tool">
+			<MenuItem Text="Clean Options">
+				<Listener id="cleanoptions"/>
+			</MenuItem>
+			<MenuItem Text="Generate Key" Disabled="true">
+				<Listener id="generatekey"/>
+			</MenuItem>
+			<MenuItem Text="Clean XML">
+			<Listener id="cleanxml"/>
+			</MenuItem>
+		</Menu>
+		<Menu Text="User">
+			<MenuItem Text="Add User">
+				<Listener id="adduser"/>
+			</MenuItem>
+			<MenuItem Text="User Management">
+				<Listener id="usermanagement"/>
+			</MenuItem> 
+		</Menu> -->
+
+	</MenuBar>
+</MartconfiguratorMenu>

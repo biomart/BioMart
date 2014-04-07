@@ -1,0 +1,17 @@
+<HTML>
+  <head>
+    <script type="text/javascript" src="consumer.js"></script>
+  </head>
+  <body onLoad="consumer.initializeForm(document.request, document.etc, 'userAuthorization')">
+    <form name="request" method="GET" action="" onSubmit="this.action=document.etc.URL.value" style="margin:0">
+        <input type="submit" value="Authorize"/><br/>
+        request token:    <input name="oauth_token"            type="text" size="64"/><br/>
+    </form>
+    <form name="etc" style="margin:0">
+        <select name="selector" onChange="consumer.initializeForm(document.request, document.etc, 'userAuthorization')" style="display:none">
+            <option value="example">Example Provider
+        </select>
+        URL:              <input name="URL"                    type="text" size="80"/><br/>
+    </form>
+  </body>
+</HTML>

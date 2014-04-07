@@ -1,0 +1,17 @@
+#biomart-content {
+    line-height: 1.2em;
+}
+#biomart-content p {
+    margin: 1em 0;
+}
+#biomart-content ul {
+    padding-left: 30px;
+    list-style-type: disc;
+}
+#biomart-content li {
+    margin: .5em 0;
+}
+#biomart-content li a {
+    font-weight: bold;
+}
+

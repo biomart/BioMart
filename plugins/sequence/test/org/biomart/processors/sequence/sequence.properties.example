@@ -1,0 +1,4 @@
+org.biomart.baseDir = /home/testuser/biomart-java/trunk
+test.jdbcURL = jdbc:mysql://localhost:3306/sequence_mart_61
+test.username = fakeuser
+test.password = fakepassword
