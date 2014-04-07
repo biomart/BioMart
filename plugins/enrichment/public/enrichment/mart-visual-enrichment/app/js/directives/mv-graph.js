@@ -40,7 +40,8 @@ function style(cy) {
             "text-opacity": 0
         }).
         selector("edge").css({
-            "line-color": "#2316BA"
+            "line-color": "#2316BA",
+            "curve-style": "haystack"
         }).
         selector(".link-hightlight").css({
             "line-color": "#FF185A"
@@ -49,7 +50,8 @@ function style(cy) {
             "selection-box-color": "#FAB8D8",
             "selection-box-opacity": 0.5,
             "selection-box-border-color": "#E273B1",
-            "selection-box-border-width": 3
+            "selection-box-border-width": 3,
+            "min-zoomed-font-size": 10
         });
 }
 
@@ -87,7 +89,7 @@ function truncateDescr(eles) {
 function ready(scope) {
     return function () {
         var cy = scope.cy = this, eles = cy.elements();
-        // eles.unselectify();
+        eles.edges().unselectify();
 
         cy.on("tap", "node", function (e) {
             var node = e.cyTarget,
