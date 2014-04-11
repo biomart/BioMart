@@ -1,7 +1,7 @@
 *{
-    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
-	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
-	-o-box-sizing: border-box;    /* Firefox, other Gecko */
+    -webkit-box-sizing: border-box; 
+	-moz-box-sizing: border-box;   
+	-o-box-sizing: border-box;   
 	box-sizing: border-box;   
         -webkit-font-smoothing:antialiased;
 }
@@ -216,6 +216,7 @@ background:rgba(255,255,255,0.75);
 
 .tabbable .tab-content .tab-pane{
     display:none;
+    display:block;
 }
 
 .tabbable .tab-content .tab-pane.active{
@@ -267,6 +268,7 @@ text-shadow: none;
 font-weight: normal;
 position:relative;
 padding-left:20px;
+text-align:left;
 }
 
 .container.ng-scope .enrichment .row .tabbable .nav-justified h3 span{ 
@@ -342,16 +344,64 @@ input[type="checkbox"]{
     float:left;
 }
 
+
+/*fixes*/
+.col-md-6 {
+width: 100%;
+padding-left:0;
+padding-right:0;
+}
+
+.container.ng-scope .enrichment .row .tabbable .nav-justified h3 span {
+    margin-top:-10px;
+}
+
+.nav > li > a:hover, .nav > li > a:focus {
+background: none;
+}
+
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+    background: none;
+border: none;
+padding: 0;
+}
+
+.tabbable .nav-tabs {
+    border-bottom:0;
+}
+
+.container.ng-scope .enrichment .row {
+    margin-left:0;
+    margin-right:0;
+}
+
+.tabbable .nav-tabs li a {
+cursor: pointer;
+background: none;
+border: none;
+padding: 0;
+}
+
+.tabbable .nav-tabs {
+left: -10px;
+top: -45px;
+}
+
+/*a {
+    color:#333 !important;
+}*/
+/*end fixes*/
+
 @media (max-width: 640px){ 
    
     
     .container.ng-scope .enrichment .row{
         width:100%;
-        float:none;
+        float:left;
     }
     
     .row #biomart-topnav ul{
-        float:none;
+        float:left;
         display:block;
         width:100%;
     }
@@ -361,4 +411,28 @@ input[type="checkbox"]{
 }
 
 
+}
+
+
+/*visualisation*/
+
+.container-fluid .tabbable{
+    padding-top:100px;
+    position:relative;
+}
+
+.container-fluid .tabbable .nav.nav-tabs{
+    left:0;
+    top:10px;
+}
+
+.container-fluid .tabbable .nav.nav-tabs li > a{
+    padding: 10px;
+color: white;
+background: #333;
+color:#fff !important;
+}
+
+.container-fluid .tabbable .nav.nav-tabs li > a a{
+    color:#fff !important;
 }
