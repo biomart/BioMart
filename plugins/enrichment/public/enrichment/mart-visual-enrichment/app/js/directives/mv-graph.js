@@ -24,7 +24,9 @@ var graph = (function (d3) {
     var genes = coll[0];
     edges = coll[1];
     var geneTipProps = Object.keys(genes[0]);
-    var termTipProps = Object.keys(terms[0]);
+    var termTipProps = Object.keys(terms[0]).filter(function (k) {
+      return k[0] !== "$" && k[0] !== "_";
+    });
     coll = null;
 
     // zoom: mousewheel
