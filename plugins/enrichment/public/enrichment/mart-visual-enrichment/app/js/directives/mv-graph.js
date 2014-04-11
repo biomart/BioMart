@@ -7,7 +7,7 @@ var graph = (function (d3) {
 
   return function graph (nodes, edges, options) {
     options = options || {};
-    var container = options.container || "body";
+    var container = d3.select(options.container || "body");
     var nthTerms = options.showNth || 5;
     var margin = options.margin || { top: 20, right: 30, bottom: 20, left: 30 };
     var width = (options.width || 1200) - margin.right - margin.left;
@@ -36,7 +36,7 @@ var graph = (function (d3) {
         .scaleExtent([0, 4])
         .on("zoom", zooming);
 
-    var svg = d3.select(container).append("svg:svg")
+    var svg = container.append("svg:svg")
         .attr({
           "class": "enrichment-svg",
           width: width + margin.right + margin.left,
@@ -111,7 +111,7 @@ var graph = (function (d3) {
       .on("tick", fociTick)
       .on("end", fixEles)
       .start()
-      .alpha(0.028);
+      .alpha(0.02);
 
     var drag = force.drag()
       .on("dragstart", dragstarted)
@@ -229,7 +229,7 @@ var graph = (function (d3) {
       // NOTE: maybe nodes must unfixed before?
       var x = d.x - d.px;
       var y = d.y - d.py;
-      d3.selectAll(".node-selected")
+      container.selectAll(".node-selected")
         .attr("cx", function (sd) {
           if (d !== sd) {
             sd.px = sd.x;
@@ -434,7 +434,7 @@ var graph = (function (d3) {
 
       remove: function () {
           vis.remove();
-          d3.select("svg").remove();
+          container.select("svg").remove();
       },
 
 
@@ -455,6 +455,7 @@ var graph = (function (d3) {
     };
   };
 }).call(this, d3);
+
 
 angular.module("martVisualEnrichment.directives").
 
