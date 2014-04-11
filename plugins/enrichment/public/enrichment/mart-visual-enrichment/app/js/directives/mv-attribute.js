@@ -29,7 +29,7 @@ app.directive("mvAttribute", [
                         if (i !== -1) {
                             ann.splice(i, 1);
                         }
-                        qs.attr(scope.attr.name);
+                        qs.attr(scope.attr.name, null);
                     }
                     $loc.search(fnValue, ann);
                 };

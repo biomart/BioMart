@@ -73,11 +73,11 @@ function queryValidator($loc) {
             }
             return false;
         }
-        if (undef(elm.cutoff)) {
-            this.err = "The cutoff must be provided.";
+        if (undef(elm.cutoff) || +elm.cutoff != parseFloat(elm.cutoff)) {
+            this.err = "The cutoff must be provided and a number.";
             return false;
         }
-        if (undef(elm.annotation)) {
+        if (undef(elm.annotation) || angular.isArray(elm.annotation) && !elm.annotation.length) {
             this.err = "Atleast one annotation must be selected, please.";
             return false;
         }
