@@ -33,6 +33,11 @@
                         </div>
 
                         <div class="col-md-9 right-panel" ng-controller="GraphCtrl">
+                            <ul>
+                                <li><span class="glyphicon glyphicon-zoom-in"></span> Use the mousewheel or double click to zoom</li>
+                                <li><span class="glyphicon glyphicon-screenshot"></span> Mouse over a table entry to find the corresponding node</li>
+                                <li><span class="glyphicon glyphicon-hand-up"></span> Nodes are draggable</li>
+                            </ul>
                             <mv-graph nodes="nodes" edges="edges" filter-pattern="search"></mv-graph>
                         </div>
                     </div>

@@ -60,7 +60,8 @@
     <script src="mart-visual-enrichment/app/js/directives/mv-filter.js"></script>
     <script src="mart-visual-enrichment/app/js/directives/mv-attribute.js"></script>
 
-    <script src="mart-visual-enrichment/app/lib/cytoscape.js"></script>
+    <script src="mart-visual-enrichment/app/lib/d3/d3.js"></script>
+    <script src="mart-visual-enrichment/app/lib/d3-tip/index.js"></script>
 
     <!-- visualizations -->
     <script src="mart-visual-enrichment/app/js/services/terms-async.js"></script>
@@ -70,6 +71,7 @@
     <script src="mart-visual-enrichment/app/js/controllers/progress.js"></script>
     <script src="mart-visual-enrichment/app/js/controllers/visualization.js"></script>
     <script src="mart-visual-enrichment/app/js/controllers/results-table.js"></script>
+    <link rel="stylesheet" type="text/css" href="mart-visual-enrichment/app/css/graph.css">
     <script src="mart-visual-enrichment/app/js/controllers/graph.js"></script>
 
     <script src="mart-visual-enrichment/app/js/directives/mv-graph.js"></script>

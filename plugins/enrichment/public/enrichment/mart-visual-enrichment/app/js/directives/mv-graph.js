@@ -1,136 +1,460 @@
-;(function (angular) {
+;(function (angular, d3) {
 "use strict";
 
-function style(cy) {
-    return cy.stylesheet().
-        selector("node").css({
-            "font-family": "helvetica",
-            "font-size": 7,
-            "text-valign": "center",
-            "text-outline-width": 1,
-            "color": "#fff",
-            "text-outline-opacity": 1,
-            "border-width": 2
-        }).
-        selector(":selected").css({
-            "background-color": "#2316BA"
-        }).
-        selector("node[type='term']").css({
-            "content": "data(shortDesc)",
-            "text-outline-color": "#000078",
-            "background-color": "#FF1FA1",
-            "border-color": "#F668C5",
-            "width": "mapData(pvalue, 0, 1, 3, 60)",
-            "height": "mapData(pvalue, 0, 1, 3, 60)"
-        }).
-        selector("node[type='gene']").css({
-            "content": "data(id)",
-            "background-color": "#00D57F",
-            "border-color": "#64FC3F",
-            "text-outline-color": "#000078",
-            "width": 15,
-            "height": 15
-        }).
-        selector(":active").css({
-            "background-color": "#f00",
-            "line-color": "#FFFD1E"
-        }).
-        selector(".faded").css({
-            "opacity": 0.25,
-            "text-opacity": 0
-        }).
-        selector("edge").css({
-            "line-color": "#2316BA",
-            "curve-style": "haystack"
-        }).
-        selector(".link-hightlight").css({
-            "line-color": "#FF185A"
-        }).
-        selector("core").css({
-            "selection-box-color": "#FAB8D8",
-            "selection-box-opacity": 0.5,
-            "selection-box-border-color": "#E273B1",
-            "selection-box-border-width": 3,
-            "min-zoomed-font-size": 10
-        });
-}
+var graph = (function (d3) {
 
+  "use strict";
 
-function container($cont) {
-    return $cont[0];
-}
+  return function graph (nodes, edges, options) {
+    options = options || {};
+    var container = options.container || "body";
+    var nthTerms = options.showNth || 5;
+    var margin = options.margin || { top: 20, right: 30, bottom: 20, left: 30 };
+    var width = (options.width || 1200) - margin.right - margin.left;
+    var height = (options.height || 800) - margin.top - margin.bottom;
+    // Replace ids with reference to node object
+    putSourceTargetRef(nodes, edges);
 
-function formatEles(eles) {
-    var strip = /\W/g;
-    return eles.map(function (e) {
-        /* jshint sub:true */
-        var id = e["id"];
-        if (id) {
-            e._id = id;
-            e["id"] = id.replace(strip, '');
-        }
-        if (e.target && e.source) {
-            e.target = e.target.replace(strip, '');
-            e.source = e.source.replace(strip, '');
-        }
-        return { data: e };
-    });
-}
+    // Terms are sorted per pvalue in increasing order.
+    // Take the first n.
+    var terms = nodes.filter(onlyTerm).splice(0, nthTerms);
+    var pvalueExtent = d3.extent(terms, getPvalue);  //[getPvalue(terms[0]), getPvalue(terms[terms.length - 1])];
+    // Genes connected to these terms.
+    var coll = connections(terms, edges);
+    var genes = coll[0];
+    edges = coll[1];
+    var geneTipProps = Object.keys(genes[0]);
+    var termTipProps = Object.keys(terms[0]);
+    coll = null;
 
-function truncateDescr(eles) {
-    eles.forEach(function (e) {
-        var l = 16;
-        e.shortDesc = e.description.length > l ?
-            e.description.substr(0, l - 1) + "..." : e.description;
-    });
-}
+    // zoom: mousewheel
+    // pan: right button click
+    // drag of nodes: click
+    // selection: click
 
+    var zoom = d3.behavior.zoom()
+        .scaleExtent([0, 4])
+        .on("zoom", zooming);
 
-function ready(scope) {
-    return function () {
-        var cy = scope.cy = this, eles = cy.elements();
-        eles.edges().unselectify();
+    var svg = d3.select(container).append("svg:svg")
+        .attr({
+          "class": "enrichment-svg",
+          width: width + margin.right + margin.left,
+          height: height + margin.top + margin.bottom
+        })
+      .append("svg:g")
+        .attr("transform", ["translate(", margin.left, ",", margin.top, ")"].join(''))
+        .call(zoom)
+        // remove pan
+        .on("mousedown.zoom", null);
 
-        cy.on("tap", "node", function (e) {
-            var node = e.cyTarget,
-                neighborhood = node.neighborhood().add(node),
-                edges = neighborhood.filter("edge");
+    // var canvasImage = svg.append("svg:text")
+    //   .attr({
+    //     x: width - 30, y: margin.top + 30
+    //   })
+    //   .style("cursor", "pointer")
+    //   .text("Get Image")
+    //   .on("click", createImage);
 
-            cy.elements().addClass("faded");
-            neighborhood.removeClass("faded");
-            edges.addClass("link-hightlight");
+    var rect = svg.append("rect")
+        .attr("width", width)
+        .attr("height", height)
+        .style("fill", "none")
+        .style("pointer-events", "all");
+
+    var tip = d3.tip()
+      .attr('class', 'd3-tip')
+      .offset([-10, 0])
+      .html(function(d) {
+        var props = d.type === "gene" ? geneTipProps : termTipProps;
+        return props.reduce(function (s, p) {
+            return s + '<strong class="d3-tip-prop">'+p+"</strong>: "+d[p] + "<br/>";
+          }, "");
+      });
+
+    var vis = svg.append("svg:g")
+        .attr({
+          "class": "enrichment-vis",
+          transform: ["translate(", margin.left, ",", margin.top, ")"].join('')
         });
 
-        cy.on("tap", function (e) {
-            if (e.cyTarget === cy) {
-                cy.elements().removeClass("faded link-hightlight");
-            }
-        });
+    // var brush = vis.append("g")
+    //     .attr("class", "brush")
+    //     .call(d3.svg.brush()
+    //       .x(d3.scale.identity().domain([0, width]))
+    //       .y(d3.scale.identity().domain([0, height]))
+    //       .on("brush", function() {
+    //         function nodeSelected (d) {
+    //           return d.selected = (extent[0][0] <= d.x && d.x < extent[1][0] && extent[0][1] <= d.y && d.y < extent[1][1]);
+    //         }
+    //         var extent = d3.event.target.extent();
+    //         geneNodes.classed("node-selected", nodeSelected);
+    //         termNodes.classed("node-selected", nodeSelected);
+    //       })
+    //       .on("brushend", function() {
+    //         d3.event.target.clear();
+    //         d3.select(this).call(d3.event.target);
+    //       }));
 
-        scope.state.setState(scope.state.states.NETWORK);
-    };
-}
+    var linkDistance = termRadius({pvalue: pvalueExtent[0]}) * 3.5;
+    placeAlongCircle(terms, { centre: [width/2, height/2], radius: 5, offset: 5 });
+    placeAlongCircle(genes, { centre: [width/2, height/2], radius: linkDistance, offset: 5 });
+    var force = d3.layout.force()
+      .size([width, height])
+      .linkDistance(linkDistance)
+      .nodes(terms.concat(genes))
+      .links(edges)
+      .gravity(0.2)
+      .charge(function (node, idx) {
+        return node.type === "gene" ? -400 : -100 * node.weight;
+      })
+      .on("tick", fociTick)
+      .on("end", fixEles)
+      .start()
+      .alpha(0.028);
 
+    var drag = force.drag()
+      .on("dragstart", dragstarted)
+      // .on("drag", dragging)
+      .on("dragend", dragended);
 
-function initOpts(o) {
-    o.layout = { name: "cose", padding: 20, hideEdgesOnViewport: true };
-    o.showOverlay = false;
-    o.elements = {};
-    return o;
-}
+    nodes = force.nodes();
 
+    var links = vis.selectAll(".line")
+      .data(edges)
+    .enter().append("line")
+      .attr("class", "line")
+      .attr("id", function (d, i) {
+        d.index = i;
+        return "link" + i;
+      });
 
-function updateGraph(scope, pattern) {
-    var nodes = null;
-    if (pattern === "" || !pattern) {
-        scope.cy.elements().show();
-    } else {
-        scope.cy.elements().hide();
-        nodes = scope.cy.nodes("[type='term']").nodes("[description@*='"+pattern+"']");
-        nodes.neighborhood().add(nodes).show();
+    vis.selectAll(".term")
+      .data(terms)
+    .enter().append("circle")
+      .attr("r", termRadius)
+      .attr("id", nodeId)
+      .classed({term: true, node: true})
+      .call(drag);
+
+    vis.selectAll(".gene")
+      .data(genes)
+    .enter().append("circle")
+      .attr("r", function (d) { return d.r = d.pr = 10; })
+      .attr("id", nodeId)
+      .classed({gene: true, node: true})
+      .call(drag)
+      .call(tip);
+
+    var bubbles = vis.selectAll(".node");
+    bubbles
+      .on("mouseover.node.tip", tip.show)
+      .on("mouseout.node.tip", tip.hide)
+      .on("mouseover.node.transition", highlightNode)
+      .on("mouseout.node.transition", restoreNode);
+
+    //   .on("click.node.highlight", function (d) {
+    //     // Ignore drag
+    //     if (d3.event.defaultPrevented) {
+    //       return;
+    //     }
+    //     highlightNeighbors(d);
+    //   });
+
+    // d3.select(window)
+    //   .on("click.node.highlight", function () {
+    //     unhighlightNeighbors();
+    //   });
+
+    var textGroup = vis.append("svg:g").attr("class", "node-text");
+
+    textGroup.selectAll(".term-label")
+      .data(terms)
+    .enter()
+      .append("svg:g")
+      .append("svg:text")
+      .attr("class", "term-label")
+      .text(function (d) {
+        return d.description.length > 28 ? d.description.substr(0, 25) + "..." : d.description;
+      });
+
+    textGroup.selectAll(".gene-label")
+      .data(genes)
+    .enter()
+      .append("svg:g")
+      .append("svg:text")
+      .attr("class", "gene-label")
+      .text(function (d) {
+        return d.id;
+      });
+
+    var text = textGroup.selectAll("g");
+
+    // function highlightNeighbors(d) {
+    //   bubbles.classed("obscure", true);
+    //   links.classed("obscure", true);
+    //   text.classed("obscure", true);
+    //   var ne = getAllNeighbors(d.index);
+    //   ne.forEach(function (el) {
+    //     if (el.type) {
+    //       // it's a node
+    //       nodes[0][el.index]
+    //     }
+    //   });
+    // }
+
+    // function unhighlightNeighbors() {}
+
+    function nodeId (d) { return normalizeId(d.id); }
+
+    function onlyTerm(n) {
+      return n.type === "term";
     }
-}
 
+    function getPvalue (t) {
+      return t.pvalue;
+    }
+
+    function zooming() {
+      vis.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+    }
+
+    function dragstarted(d) {
+      /*jshint validthis:true */
+      d3.event.sourceEvent.stopPropagation();
+      d3.select(this).classed("dragging", true);
+    }
+
+    function dragging(d) {
+      // NOTE: maybe nodes must unfixed before?
+      var x = d.x - d.px;
+      var y = d.y - d.py;
+      d3.selectAll(".node-selected")
+        .attr("cx", function (sd) {
+          if (d !== sd) {
+            sd.px = sd.x;
+            sd.x += x;
+          }
+          return sd.x;
+        })
+        .attr("cy", function (sd) {
+          if (d !== sd) {
+            sd.py = sd.y;
+            sd.y += y;
+          }
+          return sd.y;
+        });
+    }
+
+    function dragended(d) {
+      /*jshint validthis:true */
+      d3.select(this).classed("dragging", false);
+    }
+
+    function connections(terms, edges) {
+      var genesAndEdges = takeTermsNeighbors(terms, edges);
+      return genesAndEdges;
+    }
+
+    function putSourceTargetRef(nodes, edges) {
+      for (var i = 0, ii = edges.length; i < ii; ++i) {
+        replaceIdWithReference(nodes, edges[i]);
+      }
+    }
+
+    function replaceIdWithReference(nodes, edge) {
+      var s = edge.source, t = edge.target, i = 0, n, ii = nodes.length, id;
+      while(i < ii && (typeof s === "string" || typeof t === "string")) {
+        n = nodes[i];
+        id = n.id;
+        if (s === id) {
+          edge.source = s = n;
+        } else if (t === id) {
+          edge.target = t = n;
+        }
+        ++i;
+      }
+    }
+
+    function takeTermsNeighbors(terms, edges) {
+      var term, edge, q = [], pushed = false, cmplE = 0, tmp;
+      for (var t = 0, tt = terms.length; t < tt; ++t) {
+        term = terms[t];
+        for (var i = 0 + cmplE, ii = edges.length; i < ii; ++i) {
+          edge = edges[i];
+          if (edge.target === term && q.indexOf(edge.target) === -1) {
+            q.push(edge.source);
+            pushed = true;
+          } else if (edge.source === term && q.indexOf(edge.source) === -1) {
+            q.push(edge.target);
+            pushed = true;
+          }
+
+          if (pushed) {
+            // This edge cannot add any other gene so put it at the beginning
+            // instead of remove it.
+            pushed = false;
+            tmp = edges[cmplE];
+            edges[cmplE] = edge;
+            edges[i] = tmp;
+            ++cmplE;
+          }
+        }
+      }
+      return [q, cmplE > 0 ? edges.slice(0, cmplE) : []];
+    }
+
+    function termRadius(d) {
+      return d.r = d.pr = (1 - (d.pvalue - pvalueExtent[0]) / (pvalueExtent[1] - pvalueExtent[0])) * 30 + 13;
+    }
+
+    // function getNeighbors (nodeIndex) {
+    //   // From d3's src/layout/force.js
+    //   var ne = neighbors, ee = neighborEdges, n, m, j;
+    //   if (!ne.length) {
+    //     // All the nodes: terms + genes
+    //     n = nodes.length;
+    //     m = edges.length;
+    //     ne = new Array(n);
+    //     for (j = 0; j < n; ++j) {
+    //       ne[j] = [];
+    //       ee[j] = [];
+    //     }
+    //     for (j = 0; j < m; ++j) {
+    //       var o = edges[j];
+    //       ne[o.source.index].push(o.target);
+    //       ne[o.target.index].push(o.source);
+    //       ee[o.source.index].push(o);
+    //       ee[o.target.index].push(o);
+    //     }
+    //   }
+    //   return ne[nodeIndex];
+    // }
+
+    // function getAllNeighbors (nodeIndex) {
+    //   var ee = neighborEdges;
+    //   return getNeighbors(nodeIndex).concat(ee[nodeIndex]);
+    // }
+
+    /**
+     * Places elements along a circle perimenter at equal distance from each other.
+     *
+     * @param {Array.<Object>} nodes - elements on which set coordinates.
+     * @param {Object} circle - e.g.
+     * {
+     *    centre: [0, 0],
+     *    radius: 50,
+     *    offset: 20
+     * }
+     */
+    function placeAlongCircle(nodes, circle) {
+      var k = nodes.length, dist = 360/k * Math.PI/180, pos = dist;
+      var centre = circle.centre || [0, 0];
+      var r = circle.radius || 50;
+      var offset = circle.offset || 20;
+
+      nodes.forEach(function(d, i) {         // (-offset, offset): add error to the position
+        d.x = centre[0] + r * Math.cos(pos) + (-offset + Math.random() * 2 * offset);
+        d.y = centre[1] + r * Math.sin(pos) + (-offset + Math.random() * 2 * offset);
+        pos += dist;
+      });
+    }
+
+    function cx (d) { return d.x; }
+    function cy (d) { return d.y; }
+
+    function fociTick (e) {
+      bubbles.attr({
+        cx: cx, cy: cy
+      });
+
+      links.attr({
+        x1: function(d) { return d.source.x; },
+        y1: function(d) { return d.source.y; },
+        x2: function(d) { return d.target.x; },
+        y2: function(d) { return d.target.y; }
+      });
+
+      text.attr("transform", function (d) {
+        return "translate(" + d.x + "," + d.y + ")";
+      });
+    }
+
+    function fixEles() {
+      force.nodes().forEach(function (d) {
+        d.fixed = true;
+      });
+    }
+
+    function highlightNode (d) {
+      if (d.pr === d.r) {
+        /* jshint validthis:true */
+        var n = d3.select(this);
+        n.transition().attr("r", d.r = d.r * 1.5);
+        n.classed("node-selected", true);
+      }
+    }
+
+    function restoreNode (d) {
+      /* jshint validthis:true */
+      var n = d3.select(this);
+      d3.select(this).transition().attr("r", d.r = d.pr);
+      n.classed("node-selected", false);
+    }
+
+    function normalizeId(id) {
+      return id.replace(/[:;,\.]*/g, "");
+    }
+
+    // function createImage() {
+    //   var svgString = new XMLSerializer().serializeToString(document.querySelector('svg'));
+    //   var canvas = d3.select("body").append("canvas") //document.getElementById("canvas");
+    //     .attr("width", 800)
+    //     .attr("height", 400)
+    //     .style({
+    //       position: "fixed",
+    //       top: -1000
+    //     });
+    //   var ctx = canvas.getContext("2d");
+    //   var DOMURL = self.URL || self.webkitURL || self;
+    //   var img = new Image();
+    //   var svg = new Blob([svgString], {type: "image/svg+xml;charset=utf-8"});
+    //   var url = DOMURL.createObjectURL(svg);
+    //   img.onload = function() {
+    //       ctx.drawImage(img, 0, 0);
+    //       var png = canvas.toDataURL("image/png");
+    //       document.querySelector('#png-container').innerHTML = '<img src="'+png+'"/>';
+    //       DOMURL.revokeObjectURL(png);
+    //   };
+    //   img.src = url;
+    // }
+
+    return {
+      hn: [],
+
+      remove: function () {
+          vis.remove();
+          d3.select("svg").remove();
+      },
+
+
+      highlightNode: function (id) {
+        var n = document.querySelector("#"+normalizeId(id));
+        if (n) {
+          highlightNode.call(n, n.__data__);
+          this.hn.push(n);
+        }
+      },
+
+      restoreNodes: function () {
+        this.hn.forEach(function (n, i) {
+          restoreNode.call(n, n.__data__);
+        });
+        this.hn = [];
+      }
+    };
+  };
+}).call(this, d3);
 
 angular.module("martVisualEnrichment.directives").
 
@@ -139,22 +463,25 @@ directive("mvGraph",
           function ($rootScope, state, $timeout) {
     /* global cytoscape: false */
     function link (scope, iElement, iAttrs) {
-        scope.state = state;
-        $rootScope.$on("term.mouseover", function (evt, term) {
-            /* jshint sub:true */
-            cy.$("node#"+term["id"]).select();
+        var vis = null;
+        window.setTimeout(function () {
+          vis = graph(scope.nodes, scope.edges, {
+            container: iElement[0],
+            width: iElement.width(),
+            height: iElement.height()
+          });
+        }, 200);
+        state.setState(state.states.NETWORK);
+        var moHandler = $rootScope.$on("term.mouseover", function (evt, term) {
+            vis.highlightNode(term["id"]);
         });
-        $rootScope.$on("term.mouseout", function (evt, term) {
-            /* jshint sub:true */
-            cy.$("node#"+term["id"]).unselect();
+        var moutHandler = $rootScope.$on("term.mouseout", function (evt, term) {
+            vis.restoreNodes(term["id"]);
         });
         scope.$on("$destroy", function () {
-            scope.cy.elements().remove();
-        });
-        angular.element(window).on("resize", function () {
-            iElement.css("height", angular.element(window).prop("innerHeight") + "px");
-            iElement.css("width", angular.element(window).prop("innerWidth") + "px");
-            cy.forceRender();
+            vis.remove();
+            moHandler();
+            moutHandler();
         });
 
         var angularInitialization = true;
@@ -165,23 +492,11 @@ directive("mvGraph",
                 angularInitialization = false;
             } else {
                 if (newPattern !== oldPattern) {
-                    updateGraph(scope, newPattern);
+                    // updateGraph(scope, newPattern);
                 }
             }
         });
 
-        var o = initOpts({});
-        o.style = style(cytoscape);
-        o.container = container(iElement);
-        o.ready = ready(scope);
-        truncateDescr(scope.nodes);
-        o.elements.edges = formatEles(scope.edges);
-        o.elements.nodes = formatEles(scope.nodes);
-        o.pan = {
-            x: iElement.prop("clientWidth") / 2,
-            y: iElement.prop("clientHeight") / 2
-        };
-        var cy = cytoscape(o);
 
     }
     return {
@@ -201,4 +516,4 @@ directive("mvGraph",
     };
 }]);
 
-})(angular, cytoscape);
+})(angular, d3);
