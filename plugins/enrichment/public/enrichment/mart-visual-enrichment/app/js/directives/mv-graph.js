@@ -307,7 +307,8 @@ var graph = (function (d3) {
     }
 
     function termRadius(d) {
-      return d.r = d.pr = (1 - (d.pvalue - pvalueExtent[0]) / (pvalueExtent[1] - pvalueExtent[0])) * 30 + 13;
+      var den = pvalueExtent[1] - pvalueExtent[0];
+      return d.r = d.pr = den === 0 ? 13 : (1 - (d.pvalue - pvalueExtent[0]) / (pvalueExtent[1] - pvalueExtent[0])) * 30 + 13;
     }
 
     // function getNeighbors (nodeIndex) {
