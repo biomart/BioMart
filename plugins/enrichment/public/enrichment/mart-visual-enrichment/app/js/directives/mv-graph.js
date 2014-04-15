@@ -406,7 +406,8 @@ var graph = (function (d3) {
     }
 
     function normalizeId(id) {
-      return id.replace(/[:;,\.]*/g, "");
+      // a number is not a valid id...
+      return "e"+id.replace(/[:;,\.]*/g, "");
     }
 
     // function createImage() {
