@@ -158,7 +158,7 @@ public class PortalResource implements PortalService {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Cache(maxAge = MAX_AGE)
-    public Map<String,List<Dataset>> getMappedDatasetsAsJson(@QueryParam("mart") String martNames) {
+    public Map<String,List<Dataset>> getMappedDatasetsAsJson(@QueryParam("config") String martNames) {
         return getPortal().getDatasetMapByMarts(martNames);
     }
 

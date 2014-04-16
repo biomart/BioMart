@@ -27,7 +27,7 @@ $.namespace('biomart.martform', function(self) {
     biomart.renderer.renderInvalid = true;
 
     /*
-     * PUBLIC 
+     * PUBLIC
      */
     self.setMart = function(mart, fn) {
         var martParam,
@@ -59,12 +59,12 @@ $.namespace('biomart.martform', function(self) {
                 self.setDatasets(biomart._state.mart, json);
 
                 queue.dequeue();
-            }, {mart: martParam});
+            }, {config: martParam});
         });
 
         queue.queue(function() {
             if (biomart._state.datasets.length === 0) {
-                return; 
+                return;
             }
 
             // Don't allow partial attribute lists to be returned
@@ -83,7 +83,7 @@ $.namespace('biomart.martform', function(self) {
 
         queue.queue(function() {
             if (biomart._state.datasets.length === 0) {
-                return; 
+                return;
             }
 
             var params = {datasets: biomart._state.datasets};
@@ -144,7 +144,7 @@ $.namespace('biomart.martform', function(self) {
         } else {
             // For keep tracking of first dataset among all marts
             var num = 0;
-            
+
             for (var k in d) {
                 var datasets = d[k],
                     mart;
@@ -184,7 +184,7 @@ $.namespace('biomart.martform', function(self) {
         } else {
             _elements.datasetList.singleselect('destroy');
         }
-        
+
         if (multiselect) {
             _elements.datasetList.data({multiple: true});
             _elements.datasets.find('p.info').show();
@@ -219,7 +219,7 @@ $.namespace('biomart.martform', function(self) {
                 mart = biomart._state.mart;
             }
 
-            if (mart.config) 
+            if (mart.config)
                 biomart._state.config = mart.config;
         })();
     };
@@ -273,7 +273,7 @@ $.namespace('biomart.martform', function(self) {
         }
 
         queryMart.attributes = hash;
-        
+
         function iterate(attributes, dataset) {
             for (var i=0, a; a=attributes[i]; i++) {
                 if (a.isHidden) continue;
@@ -288,7 +288,7 @@ $.namespace('biomart.martform', function(self) {
                     }
                 } else {
                     if (dataset && a.attributes.length) {
-                        a.datasets = [dataset]; 
+                        a.datasets = [dataset];
                     }
                     $node = biomart.renderer.attribute('li', a, false);
                     if (a.independent !== true) $node.simplerattribute({radio:true});
@@ -389,7 +389,7 @@ $.namespace('biomart.martform', function(self) {
 
             _elements.views = biomart.makeMartSelect(json.marts, {
                 selected: self.params.getMart(),
-                each: function(mart) { 
+                each: function(mart) {
                     if (biomart.utils.hasGroupedMarts(mart)) {
                         martsHash[mart[0].group] = mart;
                         for (var i=0, m; m=mart[i]; i++) {
@@ -435,7 +435,7 @@ $.namespace('biomart.martform', function(self) {
                     }
 
                     $select.siblings('.ui-prettybox').children('input').attr('size', displayName.length + 10);
-                    
+
                     self.params.setMart(biomart.utils.hasGroupedMarts(m) ? m[0].group : m.name);
                 });
 
@@ -618,7 +618,7 @@ $.namespace('biomart.martform', function(self) {
                 if (config.limit == "none") {
                 	QUERY_LIMIT = -1;
                 }
-                
+
                 var options = {
                         queries: prepareXML('TSVX', QUERY_LIMIT, true, queryClient, independent),
                         downloadXml: prepareXML('TSV', -1, true, queryClient),
@@ -635,12 +635,12 @@ $.namespace('biomart.martform', function(self) {
                     sort = self.params.getSort(),
                     config = configs[mart.name],
                     datasets = [];
-                    
-                
+
+
                 options.displayType = config.rendering;
                 options.dataAggregation = config.aggregation;
                 options.displayOptions = config.options;
-                
+
                 var colTypes = [];
                 for(var name in queryMart.attributes){
                 	colTypes.push(queryMart.attributes[name].dataType);
@@ -652,7 +652,7 @@ $.namespace('biomart.martform', function(self) {
                 _elements.heading.slideUp({
                     duration: ANIMATION_TIME/2
                 });
-                _elements.datasetList.children('.ui-selected').each(function() { 
+                _elements.datasetList.children('.ui-selected').each(function() {
                     datasets.push($(this).data('dataset').displayName);
                 });
                 var title = biomart.utils.hasGroupedMarts(mart) ? mart[0].group : mart.displayName;
@@ -706,7 +706,7 @@ $.namespace('biomart.martform', function(self) {
 
                 if ($.isArray(value)) valid = !!value[0] && !!value[1];
                 else valid = !!value;
-                
+
                 if (valid) {
                     $li.addClass('ui-active');
                     setQueryFilter(name, value);
@@ -754,7 +754,7 @@ $.namespace('biomart.martform', function(self) {
             unblockElements();
         });
 
-        // Independent querying means we need to get attributes for each dataset 
+        // Independent querying means we need to get attributes for each dataset
         queue.queue(function() {
             // Don't allow partial attribute lists to be returned
             var params = { datasets: biomart._state.datasets, independent: independent, allowPartialList: false };
@@ -802,12 +802,12 @@ $.namespace('biomart.martform', function(self) {
                 mart = biomart._state.mart;
             }
 
-            if (mart.config) 
+            if (mart.config)
                 biomart._state.config = mart.config;
         })();
     }
-    
-    
+
+
     function prepareXML(processor, QUERY_LIMIT, header, client, perDataset) {
         queryMart.config = biomart._state.config;
 

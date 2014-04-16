@@ -943,7 +943,7 @@ $.namespace('biomart.martexplorer', function(self) {
             _elements.steps.eq(0).data('loaded', true);
 
             if (callback) callback();
-        }, {mart: martParam});
+        }, {config: martParam});
     }
 
     function findContainer(node, name) {
