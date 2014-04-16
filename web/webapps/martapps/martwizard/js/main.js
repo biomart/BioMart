@@ -8,7 +8,7 @@
  * The workflow starts from the biomart.martwizard.init function, and ends with _stepCallback function.
  *
  * The _stepCallback function has an array (bound by closure) that maps to each of the four steps.
- * Each step callback contains its own specific logic (e.g. Results requires >= 1 attributes, or else 
+ * Each step callback contains its own specific logic (e.g. Results requires >= 1 attributes, or else
  * goes back to Output step)
  *
  * _elements hold all jQuery DOM elements that are used multiple times
@@ -102,17 +102,17 @@ $.namespace('biomart.martwizard', function(self) {
                 },
 
                 function() {
-                	var colTypes = [];
+                    var colTypes = [];
                     for(var attr in biomart._state.queryMart.attributes){
-                    	var item = biomart._state.queryMart.attributes[attr];
-                    	colTypes.push(item.type);
+                        var item = biomart._state.queryMart.attributes[attr];
+                        colTypes.push(item.type);
                     }
-                    
+
                     console.log(colTypes);
-                    
+
                     _elements.contentWrapper.slideUp();
                     _elements.toolbar.slideUp();
-                    _elements.results.resultsPanel('run', 
+                    _elements.results.resultsPanel('run',
                         biomart.utils.hasGroupedMarts() ? biomart._state.mart[0].group : biomart._state.mart.displayName,
                         $.extend({
                             queries: getXml('TSVX', QUERY_LIMIT, true, QUERY_CLIENT),
@@ -131,10 +131,10 @@ $.namespace('biomart.martwizard', function(self) {
                 if (callback) callback();
             };
         })();
-    
+
     biomart._state = {
         queryMart: {datasets:null, attributes:{}, filters:{}},
-        activeStep: 1    
+        activeStep: 1
     };
 
     // Invalid filters will show as disabled controls
@@ -285,7 +285,7 @@ $.namespace('biomart.martwizard', function(self) {
         _elements.stepsContainer.scrollTop(0);
         $.publish('biomart.change', 'step', num);
     };
-    
+
     self.invalidateResults = function() {
     };
 
@@ -299,11 +299,11 @@ $.namespace('biomart.martwizard', function(self) {
             self.step(parseInt(biomart.params.step));
         }
     };
-    
+
     self.updateSummary = function(type) {
         var item, value;
         switch (type) {
-            case 'mart': 
+            case 'mart':
                 item = arguments[1];
                 _elements.summaryMart.html(['<li>', biomart.utils.hasGroupedMarts() ?  item[0].group : item.displayName, '</li>'].join(''));
                 break;
@@ -321,7 +321,7 @@ $.namespace('biomart.martwizard', function(self) {
                         .append(['<li class="empty">', _('empty_value'), '</li>'].join(''));
                 } else {
                     for (var i=0, ds; ds=item[i]; i++) {
-                        $(['<li class="', ds.name, '">', 
+                        $(['<li class="', ds.name, '">',
                             ds.displayName,
                         '</li>'].join(''))
                             .appendTo(_elements.summaryDatasets)
@@ -383,7 +383,7 @@ $.namespace('biomart.martwizard', function(self) {
                 } else {
                     if (arguments[2] /* add */) {
                         if (!_elements.summaryAttributes.children('li.' + biomart.renderer.makeClassName(item.name)).length) {
-                            $(['<li class="', biomart.renderer.makeClassName(item.name), '">', item.displayName, 
+                            $(['<li class="', biomart.renderer.makeClassName(item.name), '">', item.displayName,
                                     '<span class="ui-icon ui-icon-circle-close" title="Remove"/></li>'].join(''))
                                 .data('item', item)
                                 .appendTo(_elements.summaryAttributes);
@@ -524,7 +524,7 @@ $.namespace('biomart.martwizard', function(self) {
         _elements.stepInfo.bind('click.martwizard', function() {
             var $this = $(this);
             if (!$this.hasClass('ui-state-disabled')) {
-                updateParam('step', $this.attr('data-step-number')); 
+                updateParam('step', $this.attr('data-step-number'));
             }
         });
         _elements.newButton.bind('click.martwizard', function() {
@@ -611,7 +611,7 @@ $.namespace('biomart.martwizard', function(self) {
 
                 if ($.isArray(value)) valid = !!value[0] && !!value[1];
                 else valid = !!value;
-                
+
                 if (valid) {
                     $div.addClass('ui-active');
                     setQueryFilter(item, value);
@@ -620,7 +620,7 @@ $.namespace('biomart.martwizard', function(self) {
                     removeQueryFilter(item);
                 }
             });
-        
+
         // attributes changed
         _elements.steps.eq(2)
             .delegate('input.checkbox', 'click.martwizard', function(ev) {
@@ -772,7 +772,7 @@ $.namespace('biomart.martwizard', function(self) {
         updateAttributeParam();
         $.publish('biomart.change', 'attributes', item, true);
     }
-    
+
     function removeQueryAttribute(item) {
         delete biomart._state.queryMart.attributes[item.name];
         updateAttributeParam();
@@ -814,12 +814,12 @@ $.namespace('biomart.martwizard', function(self) {
             if (!isMapped) {
                 multiple = biomart._state.mart.operation == biomart.OPERATION.MULTI_SELECT;
             }
-            
+
             if (_elements.datasetSelect) {
                 _elements.datasetSelect.prettybox('destroy').remove();
             }
 
-            _elements.datasetSelect = $(['<select ', multiple ? 'multiple size="10"' : '', ' class="datasets" id="', 
+            _elements.datasetSelect = $(['<select ', multiple ? 'multiple size="10"' : '', ' class="datasets" id="',
                 biomart.uuid() , '"/>'].join('')).appendTo(_elements.datasetSelectBox);
 
             if (!isMapped) {
@@ -828,8 +828,8 @@ $.namespace('biomart.martwizard', function(self) {
                         d.mart = biomart._state.mart;
                         selected = (dsArr.length && $.inArray(d.name, dsArr) != -1) || (!dsArr.length && i==0);
                         $([
-                            '<option value="', d.name, '"', selected ? ' selected="selected"' : '', '>', 
-                                d.displayName, 
+                            '<option value="', d.name, '"', selected ? ' selected="selected"' : '', '>',
+                                d.displayName,
                             '</option>'
                         ].join('')).data('item', d).appendTo(_elements.datasetSelect);
                     }
@@ -866,17 +866,17 @@ $.namespace('biomart.martwizard', function(self) {
             _elements.steps.eq(0).data('loaded', true);
 
             if (callback) callback();
-        }, {mart: martParam});
+        }, {config: martParam});
     }
 
     function loadFilters() {
         var params = {
-            datasets: biomart._state.queryMart.datasets.join(','), 
-            withfilters: true, 
+            datasets: biomart._state.queryMart.datasets.join(','),
+            withfilters: true,
             withattributes: false
         };
 
-        if (biomart._state.queryMart.config) 
+        if (biomart._state.queryMart.config)
             params.config = biomart._state.queryMart.config;
 
         _elements.steps.eq(1).data('loaded', true);
@@ -890,8 +890,8 @@ $.namespace('biomart.martwizard', function(self) {
 
     function drawFilterContainer(element, container, level) {
         biomart.renderer.container({
-            tagName:'div', 
-            item: container, 
+            tagName:'div',
+            item: container,
             mode: biomart.renderer.FILTERS,
             selectedFilters: biomart._state.selectedFilters,
             onFilterSelect: function(item, value) {
@@ -904,12 +904,12 @@ $.namespace('biomart.martwizard', function(self) {
 
     function loadAttributes(callback) {
         var params = {
-            datasets: biomart._state.queryMart.datasets.join(','), 
-            withfilters: false, 
+            datasets: biomart._state.queryMart.datasets.join(','),
+            withfilters: false,
             withattributes: true
         };
 
-        if (biomart._state.queryMart.config) 
+        if (biomart._state.queryMart.config)
             params.config = biomart._state.queryMart.config;
 
         _elements.steps.eq(2).data('loaded', true);
@@ -925,8 +925,8 @@ $.namespace('biomart.martwizard', function(self) {
 
     function drawAttributeContainer(element, container, level, extraClassNames) {
         biomart.renderer.container({
-            tagName:'div', 
-            item: container, 
+            tagName:'div',
+            item: container,
             mode: biomart.renderer.ATTRIBUTES,
             extraClassNames: extraClassNames || '',
             selectedAttributes: biomart._state.selectedAttributes,
@@ -948,7 +948,7 @@ $.namespace('biomart.martwizard', function(self) {
                             var list = panel.find('.attribute-container.ui-active'),
                                 n = list.length;
                             while (n--) {
-                                removeQueryAttribute(list.eq(n).data('item')); 
+                                removeQueryAttribute(list.eq(n).data('item'));
                             }
                         });
                 }

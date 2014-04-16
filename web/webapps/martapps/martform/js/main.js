@@ -267,7 +267,7 @@ $.namespace('biomart.martform', function(self) {
                     } else {
                         var el = biomart._state.martGroupMap[mart.group];
                         if (!el) {
-                            biomart._state.martGroupMap[mart.group] = $(['<option value="', mart.name, '"', 
+                            biomart._state.martGroupMap[mart.group] = $(['<option value="', mart.name, '"',
                                         biomart._state.martName == mart.group ? ' selected' : '', '>', mart.group, '</option>'].join(''))
                                     .data('item', [mart])
                                     .data('group', mart.group)
@@ -374,7 +374,7 @@ $.namespace('biomart.martform', function(self) {
             }
             if (callback) callback();
             $.publish('biomart.ready');
-        }, {mart: martParam});
+        }, {config: martParam});
     };
     _loader.containers = function() {
         var reqParams = {datasets: biomart._state.datasets};
@@ -409,10 +409,10 @@ $.namespace('biomart.martform', function(self) {
 
             for (var i=0, container; container=containers[i]; i++) {
                 biomart.renderer.container({
-                    tagName:'div', 
+                    tagName:'div',
                     selectedFilters: selectedFilters,
                     headerTagName: 'h4',
-                    item: container, 
+                    item: container,
                     mode: biomart.renderer.FILTERS,
                     appendTo: filterContainers
                 });
@@ -434,9 +434,9 @@ $.namespace('biomart.martform', function(self) {
 
             for (var i=0, container; container=containers[i]; i++) {
                 biomart.renderer.container({
-                    tagName:'div', 
+                    tagName:'div',
                     headerTagName: 'h4',
-                    item: container, 
+                    item: container,
                     mode: biomart.renderer.ATTRIBUTES,
                     onAttributeSelect: function(attribute) {
                         biomart._state.attributes[attribute.name] = attribute;
@@ -503,20 +503,20 @@ $.namespace('biomart.martform', function(self) {
         } else {
             title = _elements.field.marts.children(':selected').eq(0).data('group');
         }
-        
+
         var colTypes = [];
         for(var name in mart.attributes){
-        	colTypes.push(mart.attributes[name].type);
+            colTypes.push(mart.attributes[name].type);
         }
-        
+
         console.log(colTypes);
-        
+
         _elements.submit.addClass('hidden');
         _elements.header.slideUp('fast');
         _elements.content.slideUp({
             duration: 'fast',
             complete: function() {
-                _elements.results.resultsPanel('run', 
+                _elements.results.resultsPanel('run',
                     title,
                     $.extend({
                         queries: xml,
@@ -597,7 +597,7 @@ $.namespace('biomart.martform', function(self) {
                 }
             }
         }
-        
+
         for (var k in biomart._state.attributes) {
             var item = biomart._state.attributes[k];
             mart.attributes[item.name] = {name: item.name, type: item.dataType};
