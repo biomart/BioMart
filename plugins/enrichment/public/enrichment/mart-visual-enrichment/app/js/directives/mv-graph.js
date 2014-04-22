@@ -469,25 +469,27 @@ directive("mvGraph",
     /* global cytoscape: false */
     function link (scope, iElement, iAttrs) {
         var vis = null;
-        window.setTimeout(function () {
+        $timeout(function () {
           vis = graph(scope.nodes, scope.edges, {
             container: iElement[0],
             width: iElement.width(),
             height: iElement.height()
           });
+
+          var moHandler = $rootScope.$on("term.mouseover", function (evt, term) {
+              vis.highlightNode(term["id"]);
+          });
+          var moutHandler = $rootScope.$on("term.mouseout", function (evt, term) {
+              vis.restoreNodes(term["id"]);
+          });
+          scope.$on("$destroy", function () {
+              vis.remove();
+              moHandler();
+              moutHandler();
+          });
         }, 200);
+
         state.setState(state.states.NETWORK);
-        var moHandler = $rootScope.$on("term.mouseover", function (evt, term) {
-            vis.highlightNode(term["id"]);
-        });
-        var moutHandler = $rootScope.$on("term.mouseout", function (evt, term) {
-            vis.restoreNodes(term["id"]);
-        });
-        scope.$on("$destroy", function () {
-            vis.remove();
-            moHandler();
-            moutHandler();
-        });
 
         var angularInitialization = true;
         scope.$watch(function (scope) {

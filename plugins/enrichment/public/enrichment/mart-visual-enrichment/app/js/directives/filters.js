@@ -208,7 +208,7 @@ app.directive("multiSelectFilter", [
                     scope.filter.value = vs.join(",");
                     qs.filter(scope.filter.name, scope.filter.value);
                 } else {
-                    qs.filter(scope.filter.name);
+                    qs.filter(scope.filter.name, null);
                 }
             };
             scope.onSelect = function select (value) {
@@ -250,9 +250,11 @@ app.directive("singleSelectBooleanFilter", [
                 if (filter) {
                     $loc.search(scope.filter.function, filter.name);
                     qs.filter(filter.name, "only");
+                } else {
+                    $loc.search(prevSelected.function, null);
                 }
                 if (prevSelected) {
-                    qs.filter(prevSelected.name);
+                    qs.filter(prevSelected.name, null);
                 }
                 scope.selected = prevSelected = filter;
             };
