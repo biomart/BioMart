@@ -157,9 +157,6 @@
         <exclude name="**/src/**"/>
       </fileset>
     </copy>
-    <exec executable="make" dir="${dist.conf.dir}/dinos/enrichment">
-      <arg value="hypg"/>
-    </exec>
   </target>
   <target name="compile.icgc" depends="jar.start">
     <javac srcdir="${icgc.dir}" destdir="${build.classes}/icgc" deprecation="${build.deprecation}" depend="no" debug="true" source="1.6" includeantruntime="no">
