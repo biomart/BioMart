@@ -10,7 +10,6 @@ service("bmservice",
     var url = config.url, queryUrl = config.queryUrl,
         baseOpts = {
             cache: true,
-            method: "GET",
             timeout: 1e6
         };
 
@@ -46,13 +45,11 @@ service("bmservice",
 
     this.query = function (xml, opt) {
         var opts = angular.extend({
-            params: { query: xml },
-            // data: "query="+xml,
             headers: {
-                "Content-Type": "application/xml"
+                "Content-Type": "application/x-www-form-urlencoded"
             }
-        }, baseOpts,  opt);
-        return $http.get(queryUrl, opts);
+        }, baseOpts);
+        return $http.post(queryUrl, $.param({query: xml}), opts);
     };
 
 }]);
