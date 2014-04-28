@@ -6,12 +6,7 @@ describe("queryStore service", function () {
     beforeEach(module("martVisualEnrichment.services"));
     beforeEach(module(function ($provide) {
         store = {
-            db: {
-                // "qs.filters": null,
-                // "qs.attrs": null,
-                // "qs.config": null,
-                // "qs.dataset": null
-            }
+            db: {}
         };
         $provide.value("$localForage", store);
     }));
@@ -31,31 +26,20 @@ describe("queryStore service", function () {
         }
 
         store.removeItem = function (key) {
+            console.log("removeItem invoked")
+            delete this.db[key];
             return $q.when();
         }
 
+        store.clear = function () {
+            this.db = {};
+        }
+
         qs = $injector.get("queryStore");
-        db = qs._getDb();
+        db = qs.getDb();
         $rootScope.$apply();
     }));
 
-    function testAllFilters(val) {
-        return function (fn) {
-            qs.allFilters().then(function (fls) {
-                expect(fls).to.eql(val);
-                fn && fn();
-            });
-        }
-    }
-
-    function testAllAttrs(val) {
-        return function (fn) {
-            qs.allAttrs().then(function (fls) {
-                expect(fls).to.eql(val);
-                fn && fn();
-            });
-        }
-    }
 
     it ("initially has an empty list of filters", function (done) {
         testAllFilters({})(done);
@@ -69,6 +53,43 @@ describe("queryStore service", function () {
         }, done);
         $rootScope.$apply();
     });
+
+
+    describe("#config(name)", dcTest("config"));
+    describe("#dataset(name)", dcTest("dataset"));
+    describe("#filter(name, value)", elemTest("filter", testAllFilters));
+    describe("#attr(name, value)", elemTest("attr", testAllAttrs));
+    it ("#clear()", function (done) {
+        qs.filter("foo", 42).then(function () {
+            qs.clear().then(function () {
+                qs.allFilters().then(function (coll) {
+                    expect(coll).to.eql({});
+                    done();
+                });
+            })
+        });
+        $rootScope.$apply();
+    });
+
+    function testAllFilters(val) {
+        return function (fn) {
+            qs.allFilters().then(function (fls) {
+                expect(fls).to.eql(val);
+                fn && fn();
+            });
+        }
+    }
+
+
+    function testAllAttrs(val) {
+        return function (fn) {
+            qs.allAttrs().then(function (fls) {
+                expect(fls).to.eql(val);
+                fn && fn();
+            });
+        }
+    }
+
 
     function dcTest(method) {
         return function () {
@@ -99,12 +120,10 @@ describe("queryStore service", function () {
         }
     }
 
-    describe("#config(name)", dcTest("config"));
-    describe("#dataset(name)", dcTest("dataset"));
 
     function elemTest(storeMethod, collTest) {
         return function () {
-            it ("returns null if there not an element with that name", function (done) {
+            it ("returns null if there is not an element with that name", function (done) {
                 qs[storeMethod]("foo").then(function (val) {
                     expect(val).to.be.null;
                     collTest({})(done);
@@ -112,7 +131,7 @@ describe("queryStore service", function () {
                 $rootScope.$apply();
             })
 
-            it ("store a new element", function (done) {
+            it ("stores a new element", function (done) {
                 var v = [1, "2"];
                 qs[storeMethod]("foo", v).then(function (val) {
                     expect(val).to.eql(v);
@@ -121,7 +140,7 @@ describe("queryStore service", function () {
                 $rootScope.$apply();
             })
 
-            it ("store multiple elements", function (done) {
+            it ("stores multiple elements", function (done) {
                 var v1 = [1, "2"], v2 = { frak: "u" };
                 $q.all([
                     qs[storeMethod]("foo", v1),
@@ -134,20 +153,39 @@ describe("queryStore service", function () {
                 $rootScope.$apply();
             })
 
-            it ("replace a element value", function (done) {
-                var v = [1, "2"];
+            it ("replaces an element value", function (done) {
                 $q.all([
                     qs[storeMethod]("foo", "booom"),
-                    qs[storeMethod]("foo", v)
+                    qs[storeMethod]("bar", 10),
+                    qs[storeMethod]("foo", 2)
                 ]).then(function (values) {
-                    expect(values[1]).to.eql(v);
-                    collTest({foo: v})(done);
+                    expect(values[2]).to.eql(2);
+                    collTest({foo: 2, bar: 10})(done);
                 })
                 $rootScope.$apply();
             })
+
+            it ("serializes actions", function (done) {
+                qs[storeMethod]("foo", 1)
+                qs[storeMethod]("bar", 10)
+                qs[storeMethod]("foo", 2)
+                qs[storeMethod]("bar", 9)
+
+                $rootScope.$apply();
+                collTest({ foo: 2, bar: 9 })(done);
+                $rootScope.$apply();
+            })
+
+            it ("removes an element when value is null", function (done) {
+                qs[storeMethod]("foo", 1)
+                qs[storeMethod]("bar", 10)
+                qs[storeMethod]("foo", 2)
+                qs[storeMethod]("bar", null)
+
+                $rootScope.$apply();
+                collTest({ foo: 2 })(done);
+                $rootScope.$apply();
+            });
         }
     }
-
-    describe("#filter(name, value)", elemTest("filter", testAllFilters));
-    describe("#attr(name, value)", elemTest("attr", testAllAttrs));
 });

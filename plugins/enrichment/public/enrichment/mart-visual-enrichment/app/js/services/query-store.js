@@ -17,24 +17,26 @@ function QueryStore($q, $loc, $localForage) {
     this.$q = $q;
     this.$loc = $loc;
     this.$localForage = $localForage;
-    this.init();
 }
 
 
 QueryStore.prototype = {
 
-    init: function () {
+    _ready: function () {
         var self = this, db = this.getDb();
-        db.getItem(this._attrKeys).then(function (val) {
-            if (!self._hasValue(val)) {
-                db.setItem(self._attrKeys, []);
-            }
-        });
-        db.getItem(this._filterKeys).then(function (val) {
-            if (!self._hasValue(val)) {
-                db.setItem(self._filterKeys, []);
-            }
-        });
+        return this.$q.all([
+            db.getItem(this._attrKeys).then(function (val) {
+                if (!val) {
+                    db.setItem(self._attrKeys, []);
+                }
+            }),
+            db.getItem(this._filterKeys).then(function (val) {
+                if (!val) {
+                    db.setItem(self._filterKeys, []);
+                }
+            }),
+            this.lastAction = this.$q.when(42)
+        ]);
     },
 
     _filterKeys: "qs.filters",
@@ -45,19 +47,16 @@ QueryStore.prototype = {
 
     _datasetKey: "qs.dataset",
 
-    _hasValue: function hasValue(value) {
-        return !(angular.isUndefined(value) || value === null);
-    },
-
     _coll: function _coll(collKey) {
         var db = this.getDb(), self = this;
-        return db.getItem(collKey).then(function keysFn (keys) {
-            keys || (keys = []);
-            var values = keys.reduce(function pValue(m, k) {
-                m[k] = db.getItem(k);
-                return m;
-            }, {});
-            return self.$q.all(values);
+        return this._ready().then(function () {
+            return db.getItem(collKey).then(function keysFn (keys) {
+                var values = keys.reduce(function pValue(m, k) {
+                    m[k] = db.getItem(k);
+                    return m;
+                }, {});
+                return self.$q.all(values);
+            });
         });
     },
 
@@ -67,41 +66,59 @@ QueryStore.prototype = {
         }
     },
 
-    _param: function _slParam (key, value) {
+
+    _addItem: function (collKey, eKey, eVal, idx) {
         var db = this.getDb();
-        return this._hasValue(name) ?
-                // create/replace it, otheiwise remove it
-                db.setItem(key, value) : db.removeItem(key);
-    },
-
-    _elem: function (collKey, eKey, eVal) {
-        var self = this, db = this.getDb(), idx;
-        return db.getItem(collKey).then(function aColl (aKeys) {
-            var inColl;
-            aKeys || (aKeys = []);
-            idx = aKeys.indexOf(eKey);
-            inColl = idx !== -1;
-
-            if (eVal === null && inColl) {
-                // Remove
-                aKeys.splice(idx, 1);
-                return db.removeItem(eKey);
-            } else if (angular.isDefined(eVal)) {
-                // add, replace
-                if (!inColl) {
-                    aKeys.push(eKey);
-                    db.setItem(collKey, aKeys);
-                }
-                return db.setItem(eKey, eVal);
+        return db.getItem(collKey).then(function aColl (keys) {
+            if (idx !== -1) {
+                return db.setItem(eKey, eVal);                        
             } else {
-                // get
-                return db.getItem(eKey);
+                keys.push(eKey);        
+                return db.setItem(collKey, keys).then(function () {
+                    return db.setItem(eKey, eVal);
+                });
             }
         });
     },
 
-    getDb: function _getIt () {
+    _removeItem: function (collKey, eKey, idx) {
+        var db = this.getDb();
+        return db.getItem(collKey).then(function (keys) {
+            keys.splice(idx, 1);
+            return db.setItem(collKey, keys).then(function () {
+                return db.removeItem(eKey);
+            });
+        });
+    },
+
+    _elem: function (collKey, eKey, eVal) {
+        var db = this.getDb(), self = this;
+        return this.lastAction = this.lastAction.then(function () {
+            return db.getItem(collKey).then(function aColl (keys) {
+                var p, idx = keys.indexOf(eKey);
+
+                if (eVal !== null && angular.isDefined(eVal)) {
+                    // add, replace
+                    p = self._addItem(collKey, eKey, eVal, idx);
+                } else if (eVal === null && idx !== -1) {
+                    p = self._removeItem(collKey, eKey, idx);
+                } else {
+                    // get
+                    p = db.getItem(eKey);
+                }
+                return p;
+            });
+        });
+    },
+
+    getDb: function () {
         return this.$localForage;
+    },
+
+    clear: function () {
+        this.getDb().clear();
+        var self = this;
+        return this._ready().then(function () { return self; });
     },
 
     // Getter/Setter.
@@ -113,12 +130,18 @@ QueryStore.prototype = {
     // name String
     // value Any
     filter: function (name, value) {
+        var self = this;
         this._checkName(name);
-        return this._elem(this._filterKeys, name, value);
+        return this._ready().then(function () {
+            return self._elem(self._filterKeys, name, value);
+        });
     },
 
     allFilters: function() {
-        return this._coll(this._filterKeys);
+        var self = this;
+        return this._ready().then(function () {
+            return self._coll(self._filterKeys);
+        });
     },
 
     // Getter/Setter.
@@ -126,12 +149,18 @@ QueryStore.prototype = {
     // name String
     // value Any
     attr: function (name, value) {
+        var self = this;
         this._checkName(name);
-        return this._elem(this._attrKeys, name, value);
+        return this._ready().then(function () {
+            return self._elem(self._attrKeys, name, value);
+        });
     },
 
     allAttrs: function () {
-        return this._coll(this._attrKeys);
+        var self = this;
+        return this._ready().then(function() {
+            return self._coll(self._attrKeys);
+        });
     },
 
     // Getter/Setter
@@ -143,13 +172,16 @@ QueryStore.prototype = {
     // name String
     config: function (name) {
         var db = this.getDb();
-        if (angular.isString(name)) {
-            return db.setItem(this._configKey, name);
-        } else if (name === null || angular.isUndefined(name)) {
-            return db.getItem(this._configKey);
-        } else {
-            throw new Error("`name` must be a string, null or undefined");
-        }
+        var self = this;
+        return this._ready().then(function () {
+            if (angular.isString(name)) {
+                return db.setItem(self._configKey, name);
+            } else if (name === null || angular.isUndefined(name)) {
+                return db.getItem(self._configKey);
+            } else {
+                throw new Error("`name` must be a string, null or undefined");
+            }
+        });
     },
 
     // Getter/Setter.
@@ -157,13 +189,16 @@ QueryStore.prototype = {
     // name String
     dataset: function (name) {
         var db = this.getDb();
-        if (angular.isString(name)) {
-            return db.setItem(this._datasetKey, name);
-        } else if (name === null || angular.isUndefined(name)) {
-            return db.getItem(this._datasetKey);
-        } else {
-            throw new Error("`name` must be a string, null or undefined");
-        }
+        var self = this;
+        return this._ready().then(function () {
+            if (angular.isString(name)) {
+                return db.setItem(self._datasetKey, name);
+            } else if (name === null || angular.isUndefined(name)) {
+                return db.getItem(self._datasetKey);
+            } else {
+                throw new Error("`name` must be a string, null or undefined");
+            }
+        });
     }
 
 };
