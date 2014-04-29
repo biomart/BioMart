@@ -24,20 +24,20 @@
                             <tab-heading>
                                 <h3>Gene List</h3>
                             </tab-heading>
-                            <div mv-filter="{{enr.getFilter('sets')}}">
+                            <div class="mve-sets-form" mv-filter="{{enr.getFilter('sets')}}">
                             </div>
                         </tab>
                         <tab>
                             <tab-heading>
                                 <h3>BED File</h3>
                             </tab-heading>
-                            <div class="col-md-6"
+                            <div class="mve-bed-form col-md-6"
                                  mv-filter="{{enr.getFilter('bed_regions')}}">
                              </div>
                              <div class="col-md-4">
-                                <div mv-filter="{{enr.getFilter('upstream')}}">
+                                <div class="mve-upstream" mv-filter="{{enr.getFilter('upstream')}}">
                                  </div>
-                                <div mv-filter="{{enr.getFilter('downstream')}}">
+                                <div class="mve-downstream" mv-filter="{{enr.getFilter('downstream')}}">
                                  </div>
                              </div>
                         </tab>
@@ -67,7 +67,7 @@
             </div>
 
             <!-- cutoff and the rest -->
-            <div class="row mve-cutoff">
+            <div class="row mve-filters">
                 <div class="col-md-6">
                     <hr/>
                     <tabset type="pills" justified="true">
@@ -81,8 +81,8 @@
                                 </h3>
                             </tab-heading>
                             <div collapse="enr.cutoffIsCollapsed">
-                                <div mv-filter="{{enr.getFilter('cutoff')}}"></div>
-                                <div mv-filter="{{enr.getFilter('bonferroni')}}"></div>
+                                <div class="mve-cutoff" mv-filter="{{enr.getFilter('cutoff')}}"></div>
+                                <div class="mve-bonferroni" mv-filter="{{enr.getFilter('bonferroni')}}"></div>
                                 <div mv-filter="{{enr.getFilter('gene_type')}}"></div>
                                 <div mv-filter="{{enr.getFilter('gene_limit')}}"></div>
                                 <div mv-filter="{{enr.getFilter('homolog')}}"></div>

@@ -62,8 +62,19 @@ function queryValidator($loc) {
         return !def(el);
     }
 
+    function getElms () {
+        var setsTxt = angular.element(".mve-sets-form textarea");
+        var bedTxt = angular.element(".mve-bed-form textarea");
+
+        return angular.extend($loc.search(), {
+            dataset: $loc.search().species,
+            sets: setsTxt ? setsTxt.val() : undefined,
+            bed: bedTxt ? bedTxt.val() : undefined
+        });
+    }
+
     this.validate = function validate () {
-        var elm = $loc.search();
+        var elm = this.getElms();
         // 1. sets and bed_regions cannot be set at the same time or both missing
         if (! (def(elm.sets) ^ def(elm.bed_regions))) {
             if (def(elm.sets)) {

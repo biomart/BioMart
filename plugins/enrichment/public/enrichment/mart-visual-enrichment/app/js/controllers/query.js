@@ -46,11 +46,10 @@ QueryCtrl.prototype = {
 
     clear: function () {
         var ctrl = this;
-        ctrl.qs.getDb().clear().then(function () {
+        ctrl.qs.clear().then(function () {
             var s = ctrl.$loc.search(), newS = {};
             newS.config = s.config;
             newS.species = s.species;
-            // $loc.url("/gui/Enrichment");
             ctrl.$loc.search(newS);
             ctrl.$route.reload();
         });

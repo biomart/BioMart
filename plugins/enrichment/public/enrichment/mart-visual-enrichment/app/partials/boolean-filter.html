@@ -2,7 +2,7 @@
     <p class="lead">{{filter.displayName}}</p>
     <!--<p>{{filter.description}}</p>-->
     <form>
-        <input type="radio" ng-model="choice" value="only" ng-click="set('only')"> Yes
-        <input type="radio" ng-model="choice" value="excluded" ng-click="set('excluded')"> No
+        <input type="radio" ng-model="filter.value" value="only" ng-click="set('only')"> Yes
+        <input type="radio" ng-model="filter.value" value="excluded" ng-click="set('excluded')"> No
     </form>
 </div>

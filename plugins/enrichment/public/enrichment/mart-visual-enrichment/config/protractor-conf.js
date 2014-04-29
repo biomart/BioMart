@@ -9,11 +9,11 @@ exports.config = {
         "browserName": "chrome"
     },
 
-    baseUrl: "http://localhost:8000/test/",
+    baseUrl: "http://localhost:9000/",
 
     framework: "jasmine",
 
     jasmineNodeOpts: {
-        defaultTimeoutInterval: 30000
+        defaultTimeoutInterval: 5000
     }
 };

@@ -27,12 +27,12 @@ QueryStore.prototype = {
         return this.$q.all([
             db.getItem(this._attrKeys).then(function (val) {
                 if (!val) {
-                    db.setItem(self._attrKeys, []);
+                    return db.setItem(self._attrKeys, []);
                 }
             }),
             db.getItem(this._filterKeys).then(function (val) {
                 if (!val) {
-                    db.setItem(self._filterKeys, []);
+                    return db.setItem(self._filterKeys, []);
                 }
             }),
             this.lastAction = this.$q.when(42)
@@ -118,7 +118,7 @@ QueryStore.prototype = {
     clear: function () {
         this.getDb().clear();
         var self = this;
-        return this._ready().then(function () { return self; });
+        return this._ready().then(function () { return null; });
     },
 
     // Getter/Setter.

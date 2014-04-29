@@ -33,6 +33,7 @@ app.directive("mvAttribute", [
                     }
                     $loc.search(fnValue, ann);
                 };
+                scope.setAttribute(scope.ckValue);
             }
         };
     }
