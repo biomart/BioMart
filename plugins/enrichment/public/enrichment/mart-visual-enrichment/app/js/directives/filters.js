@@ -110,10 +110,6 @@ function TextFilter(scope) {
     var self = this;
 
     scope.onTextChange = function (text) {
-        // return self.pushStateToStore(text).then(function () {
-        //     self.pushStateToUrl(text);
-        // });
-
         self.pushStateToUrl(text);
     }
 }
@@ -127,7 +123,6 @@ function SelectFilter(scope) {
         if (scope.prevSelected !== selected) {
             self.pushStateToStore(null);
             scope.prevSelected = scope.selected = selected;
-            // self.pushStateToStore(scope.filter.value);
             self.pushStateToUrl(scope.options.indexOf(selected));
         }
     };
@@ -140,13 +135,10 @@ function UploadFilter(scope) {
 
     scope.onTextChange = function (value) {
         self.setBindings(value);
-        // self.pushStateToStore(value);
     }
 
     scope.onFileUpload = function (evt) {
         function save (val) {
-            self.pushStateToUrl(val);
-            // self.pushStateToStore(val);
             self.setBindings(val);
         }
         putTextPromise(self.$q, evt).then(function then(text) {     
@@ -375,122 +367,6 @@ app.directive("singleSelectBooleanFilter", [
         }
     };
 }]);
-
-
-// function UploadFilter($q, qs, sanitize, scope, elm, attrs) {
-//     var self = this;
-//     this.qs = qs;
-//     this.sanitize = sanitize;
-//     scope.filter = scope.$parent.$eval(attrs.filter);
-
-
-//     scope.onTextChange = function (value) {
-//         self.storeFilterValue(scope.filter.name, value);
-//     }
-
-//     self.getFilterValue = function (name) {
-//         self.qs.filter(name).then(function (text) {
-//             self.setFilterValue(text);
-//         });
-//     }
-
-//     self.bindInputHandler = function () {
-//         var rmInputHandler = elm.find("input").on("change", function onChange(evt) {
-//             putTextPromise(self.$q, evt).then(function then(text) {
-//                 var v = text ? self.sanitize.stripTags(text) : null;
-//                 self.setFilterValue(v);
-//                 self.storeFilterValue(v);
-//             }).catch(function rejected(reason) {
-//                 self.setFilterValue(reason);
-//                 self.storeFilterValue(null);
-//             });
-//         });
-
-//         scope.$on("$destroy", rmInputHandler);
-//     }
-
-//     self.setFilterValue = function (value) {
-//         scope.filter.value = value;
-//     };
-
-//     self.storeFilterValue = function (value) {
-//         self.qs.filter(scope.filter.name, value);
-//     };
-// } 
-
-
-// app.directive("uploadFilter",
-//           ["$q", "queryStore", "sanitize", function ($q, qs, sanitize) {
-//     return {
-//         restrict: "E",
-//         templateUrl: partialsDir + "/upload-filter.html",
-//         scope: {},
-//         link: function (scope, iElement, attrs) {
-//             UploadFilter.call(this, $q, qs, sanitize, scope, iElement, attrs);
-//             this.getFilterValue(scope.filter.name);
-//             this.bindInputHandler();
-//         }
-//     };
-// }]);
-
-
-
-
-
-
-// app.directive("singleSelectUploadFilter",
-//           ["$q", "queryStore", "sanitize", "$location", function ($q, qs, sanitize, $loc) {
-//     return {
-//         restrict: "E",
-//         templateUrl: partialsDir + "/single-select-upload-filter.html",
-//         scope: {},
-//         link: function (scope, iElement, attrs) {
-//             var self = this;
-//             UploadFilter.call(self, $q, qs, sanitize, scope, iElement, attrs);
-//             self.$loc = $loc;
-            
-
-//             self.setUrlQuery =  function (fn, value) {
-//                 self.$loc.search(fn, value);
-//             };
-
-//             self.storeFilterValue = function (value) {
-//                 self.qs.filter(prevSelected.name, value);
-//             };
-
-//             scope.onTextChange = function (value) {
-//                 self.storeFilterValue(scope.selected, value);
-//             };
-
-//             scope.onSelect = function (selected) {
-//                 if (prevSelected !== selected) {
-//                     self.storeFilterValue(null);
-//                     prevSelected = selected;
-//                     self.storeFilterValue(scope.filter.value);
-//                     self.setUrlQuery(scope.filter.function, 
-//                                      scope.options.indexOf(selected));
-//                 }
-//             };
-
-//             scope.options = scope.filter.filters;
-//             var search = $loc.search(), prevSelected, oi;
-            
-//             if (angular.isNumber(oi = search[scope.filter.function])) {
-//                 scope.selected = scope.options[oi];
-//             } else {
-//                 scope.selected = scope.options[0];
-//                 self.setUrlQuery(scope.filter.function, 0);
-//             }
-
-//             prevSelected = scope.selected;
-
-//             self.getFilterValue(prevSelected.name);
-//             self.bindInputHandler();
-//         }
-
-//     };
-// }]);
-
 
 
 
