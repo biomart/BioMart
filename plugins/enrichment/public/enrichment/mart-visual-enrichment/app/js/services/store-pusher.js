@@ -15,7 +15,7 @@
 			onStoreState: function (ln) {
 				lns.push(ln)
 				return function () {
-					lns.slice(lns.indexOf(ln), 1);
+					lns.splice(lns.indexOf(ln), 1);
 				}
 			},
 

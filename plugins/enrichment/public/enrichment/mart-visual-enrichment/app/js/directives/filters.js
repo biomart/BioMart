@@ -62,7 +62,7 @@ var SelectFilterCreator = {
 
 var StoreStateFilterCreator = {
     call: function (self, scope) {
-        scope.$on("destory", self.storePusher.onStoreState(function () {
+        scope.$on("$destroy", self.storePusher.onStoreState(function () {
             return self.pushStateToStore(self.getVal());
         }));
     }
