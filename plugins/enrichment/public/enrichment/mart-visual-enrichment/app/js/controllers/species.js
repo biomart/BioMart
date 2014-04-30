@@ -21,7 +21,7 @@ app.controller("SpeciesCtrl", ["$scope", "$location", "$route", "queryStore",
         newS.species = species.name;
         // $loc.url("/gui/Enrichment");
         $loc.search(newS);
-        qs.getDb().clear().then(function () {
+        qs.clear().then(function () {
             $route.reload();
         });
     };

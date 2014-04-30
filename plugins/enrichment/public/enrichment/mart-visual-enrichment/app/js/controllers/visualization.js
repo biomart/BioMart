@@ -37,8 +37,8 @@ app.controller("VisualizationCtrl",
     tabs.then(function (tabs) {
         $scope.mvTabs = tabs;
         ctrl.state.setState(ctrl.state.states.PROCESSING);
-    }, function (reason) {
-        $scope.errorMessage = reason;
+    }, function (resp) {
+        $scope.errorMessage = resp.status;
         $scope.progressbarValue = 100;
         ctrl.state.setState(ctrl.state.states.ERROR);
     });

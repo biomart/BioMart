@@ -1,5 +1,7 @@
 <div class="mv-text-filter">
     <p class="lead">{{filter.displayName}}</p>
     <!-- <p>{{filter.description}}</p> -->
-    <input type="text" ng-model="filter.value" ng-change="setFilterValue(filter.value)">
+    <input type="text" 
+    			 ng-model="filter.value" 
+    			 ng-blur="onTextChange(filter.value)">
 </div>

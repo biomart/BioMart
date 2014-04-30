@@ -5,8 +5,8 @@ var app = angular.module("martVisualEnrichment.controllers");
 
 app.controller("QueryCtrl", QueryCtrl);
 
-QueryCtrl.$inject = [ "$scope", "$location", "$window", "queryValidator", "queryBuilder", "bmservice", "mvConfig", "$modal", "queryStore", "$route"];
-function QueryCtrl($scope, $loc, win, qv, qb, bm, config, $modal, qs, $route) {
+QueryCtrl.$inject = [ "$scope", "$location", "$window", "queryValidator", "queryBuilder", "$rootScope", "mvConfig", "$modal", "queryStore", "$route", "storePusher"];
+function QueryCtrl($scope, $loc, win, qv, qb, $rootScope, config, $modal, qs, $route, storePusher) {
     var ctrl = this;
 
     ctrl.win = win;
@@ -14,18 +14,29 @@ function QueryCtrl($scope, $loc, win, qv, qb, bm, config, $modal, qs, $route) {
     ctrl.qv = qv;
     ctrl.qb = qb;
     ctrl.$loc = $loc;
-    ctrl.bm = bm;
+    ctrl.$rootScope = $rootScope;
     ctrl.config = config;
     ctrl.qs = qs;
     ctrl.$route = $route;
+    ctrl.storePusher = storePusher;
+
+    $scope.$on("$destroy", ctrl.storePusher.onStoreState(function () {
+        var s = ctrl.$loc.search(), cfg = s.config;
+        return ctrl.qs.config(cfg);
+    }));
+    $scope.$on("$destroy", ctrl.storePusher.onStoreState(function () {
+        var s = ctrl.$loc.search(), spec = s.species;
+        return ctrl.qs.dataset(spec);
+    }));
 }
 
 QueryCtrl.prototype = {
     submit: function submit() {
         var ctrl = this;
         if (ctrl.validate()) {
-            ctrl.buildQuery();
-            ctrl.$loc.url(ctrl.config.visualizationUrl);
+            ctrl.buildQuery().then(function () {
+                ctrl.$loc.url(ctrl.config.visualizationUrl);
+            });
         } else {
             ctrl.showError(ctrl.qv.errMessage());
         }
@@ -62,28 +73,25 @@ QueryCtrl.prototype = {
 
 
     buildQuery: function build () {
-        var ctrl = this, params = ctrl.getBuildParamters();
-        ctrl.qb.build.apply(ctrl.qb, params);
-    },
-
-
-    getBuildParamters: function bparams () {
-        var ctrl = this, s = ctrl.$loc.search(), spec = s.species,
-            cfg = s.config;
-        ctrl.qs.config(cfg);
-        ctrl.qs.dataset(spec);
-        return [spec, cfg];
+        var ctrl = this;
+        return ctrl.storePusher.broadcast().then(function () {
+            return ctrl.qb.build();
+        });
     },
 
 
     showQuery: function showQuery() {
         var ctrl = this;
         if (ctrl.validate()) {
-            ctrl.qb.show(ctrl.getBuildParamters()).then(function (xml) {
-                ctrl.openModal(xml);
+            return ctrl.qs.clear().then(function () {
+                return ctrl.storePusher.broadcast().then(function () {
+                    return ctrl.qb.show().then(function (xml) {
+                        ctrl.openModal(xml);
+                    });
+                });
             });
         } else {
-            ctrl.showError(ctrl.qv.errMessage());
+            return ctrl.showError(ctrl.qv.errMessage());
         }
     }
 };

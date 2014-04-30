@@ -48,6 +48,7 @@
     <script src="mart-visual-enrichment/app/js/services/query-builder.js"></script>
     <script src="mart-visual-enrichment/app/js/services/query-validator.js"></script>
     <script src="mart-visual-enrichment/app/js/services/sanitize.js"></script>
+    <script type="text/javascript" src="mart-visual-enrichment/app/js/services/store-pusher.js"></script>
 
     <script src="mart-visual-enrichment/app/js/controllers.js"></script>
     <script src="mart-visual-enrichment/app/js/controllers/species.js"></script>

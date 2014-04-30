@@ -1,7 +1,7 @@
 var gulp = require("gulp")
 var shell = require("shelljs/global")
 var jshint = require('gulp-jshint')
-var srcPaths = "app/**/*.{js,css,html}"
+var srcPaths = ["app/**/*.{js,css,html}", "app/*.{js,css,html}"]
 
 gulp.task("compile", function () {
     var currDir = pwd();

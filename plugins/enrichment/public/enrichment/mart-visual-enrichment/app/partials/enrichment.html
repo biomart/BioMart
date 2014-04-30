@@ -20,14 +20,16 @@
             <div class="row mve-sets">
                 <div class="col-md-6">
                     <tabset>
-                        <tab active>
+                        <tab active="enr.geneTabActive"
+                             select="enr.selectTab(1)">
                             <tab-heading>
                                 <h3>Gene List</h3>
                             </tab-heading>
                             <div class="mve-sets-form" mv-filter="{{enr.getFilter('sets')}}">
                             </div>
                         </tab>
-                        <tab>
+                        <tab active="enr.bedTabActive" 
+                             select="enr.selectTab(2)">
                             <tab-heading>
                                 <h3>BED File</h3>
                             </tab-heading>

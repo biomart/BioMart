@@ -3,41 +3,54 @@
 
 var app = angular.module("martVisualEnrichment.directives");
 
-app.directive("mvAttribute", [
-    "queryStore", "$location",
-    function (qs, $loc) {
+MvAttribute.$inject = ["queryStore", "$location", "storePusher"];
+app.directive("mvAttribute", MvAttribute);
 
-        function norm (ann) {
-            return angular.isArray(ann) ? ann : angular.isDefined(ann) ? [ann] : [];
-        }
-        return {
-            restrict: "A",
-            scope: {},
-            templateUrl: "mart-visual-enrichment/app/partials/attribute.html",
-            link: function (scope, elem, attrs) {
-                scope.attr = scope.$parent.$eval(attrs.mvAttribute);
-                var fnValue = scope.attr.function;
-                var ann = $loc.search()[fnValue];
-                scope.ckValue = ann && ann.indexOf(scope.attr.name) !== -1 || scope.attr.selected;
-                scope.setAttribute = function (checked) {
-                    ann = norm($loc.search()[fnValue]);
-                    if (checked) {
-                        ann.push(scope.attr.name);
-                        qs.attr(scope.attr.name, scope.attr.name);
-                    } else {
-                        var i = ann.indexOf(scope.attr.name);
-                        if (i !== -1) {
-                            ann.splice(i, 1);
-                        }
-                        qs.attr(scope.attr.name, null);
-                    }
-                    $loc.search(fnValue, ann);
-                };
-                scope.setAttribute(scope.ckValue);
-            }
-        };
+function MvAttribute(qs, $loc, storePusher) {
+
+    function norm (ann) {
+        return angular.isArray(ann) ? ann : angular.isDefined(ann) ? [ann] : [];
     }
-]);
+
+    return {
+        restrict: "A",
+        scope: {},
+        templateUrl: "mart-visual-enrichment/app/partials/attribute.html",
+        link: function (scope, elem, attrs) {
+            scope.attr = scope.$parent.$eval(attrs.mvAttribute);
+
+            scope.$on("$destroy", storePusher.onStoreState(function () {
+                if (scope.checked) {
+                    return qs.attr(scope.attr.name, scope.attr.name);
+                }
+            }));
+
+            scope.$on("$routeUpdate", function () {
+                scope.checked = getUrlVal();
+            });
+
+            scope.setAttribute = function (checked) {
+                var ann = norm($loc.search()[scope.attr.function]);
+
+                if (checked) {
+                    ann.push(scope.attr.name);
+                } else {
+                    ann.splice(ann.indexOf(scope.attr.name), 1);
+                }
+                $loc.search(scope.attr.function, ann);
+            };
+
+            function getUrlVal() {
+                var ann = $loc.search()[scope.attr.function];
+                return ann && 
+                       ann.indexOf(scope.attr.name) !== -1 || 
+                       scope.attr.selected;                
+            }
+
+            scope.checked = getUrlVal();
+        }
+    };
+}
 
 
 })(angular);

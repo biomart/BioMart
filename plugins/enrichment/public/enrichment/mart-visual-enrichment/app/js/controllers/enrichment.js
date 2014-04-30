@@ -23,50 +23,79 @@ function EnrichmentCtrl($scope, $loc, $log, bm, find, store) {
     ctrl.find = find;
     ctrl.store = store;
     ctrl.containers = $scope.containers;
+
+    $scope.$on("$routeUpdate", function () {
+        ctrl.expandCollapsable();
+    });
+
     ctrl.init();
 
 }
 
 EnrichmentCtrl.prototype = {
     init: function init() {
-        var ctrl = this;
-        ctrl.reqs = ["cutoff", "bonferroni", "bed_regions", "sets", "background", "upstream", "downstream", "gene_type",
+        var ctrl = this,
+            search = ctrl.$loc.search();
+        ctrl.reqs = ["cutoff", "bonferroni", "bed_regions", "sets", "background", 
+                     "upstream", "downstream", "gene_type",
                      "gene_limit", "homolog", "annotation"];
         ctrl.enElementValues = ctrl.findElements(ctrl.containers);
-        ctrl.backgroundIsCollapsed = ctrl.cutoffIsCollapsed = ctrl.annotationIsCollapsed = true;
-        // ctrl.store.getItem("background.collapsed").then(function (c) {
-        //     var v = true;
-        //     if (c === false) { v = false; }
-        //     ctrl.backgroundIsCollapsed = v;
-        // });
-        // ctrl.store.getItem("cutoff.collapsed").then(function (c) {
-        //     var v = true;
-        //     if (c === false) { v = false; }
-        //     ctrl.cutoffIsCollapsed = v;
-        // });
-        // ctrl.store.getItem("annotation.collapsed").then(function (c) {
-        //     var v = true;
-        //     if (c === false) { v = false; }
-        //     ctrl.annotationIsCollapsed = v;
-        // });
+        ctrl.expandCollapsable();
+        ctrl.selectTab(+search[ctrl.ACTIVE_TAB]);
+    },
+
+    BK_COLLAPSED: "background.show",
+
+    ANN_COLLAPSED: "annotation.show",
+
+    CUTOFF_COLLAPSED: "cutoff.show",
+
+    ACTIVE_TAB: "tab",
+
+    expandCollapsable: function () {
+        var ctrl = this;
+        ctrl.backgroundIsCollapsed = ctrl._isCollapsed(ctrl.BK_COLLAPSED);
+        ctrl.cutoffIsCollapsed = ctrl._isCollapsed(ctrl.CUTOFF_COLLAPSED);
+        ctrl.annotationIsCollapsed = ctrl._isCollapsed(ctrl.ANN_COLLAPSED);
+    },
+
+    selectTab: function (idx) {
+        var ctrl = this;
+        ctrl.bedTabActive = ctrl.geneTabActive = false;
+        if (idx === 2) {
+            ctrl.bedTabActive = true;
+        } else {
+            ctrl.geneTabActive = true;
+        }
+        ctrl._updateUrl(this.ACTIVE_TAB, idx);
+    },
+
+    _updateUrl: function (key, val) {
+        this.$loc.search(key, val.toString());
+    },
+
+    _isCollapsed: function (tab) {
+        var ctrl = this, search = ctrl.$loc.search();
+        return !(search[tab] === "true");
     },
 
     onClickBackground: function () {
         var ctrl = this;
-        ctrl.backgroundIsCollapsed = !ctrl.backgroundIsCollapsed;
-        ctrl.store.setItem("background.collapsed", ctrl.backgroundIsCollapsed);
+        // ctrl.backgroundIsCollapsed = !ctrl.backgroundIsCollapsed;
+        ctrl._updateUrl(ctrl.BK_COLLAPSED, ctrl._isCollapsed(ctrl.BK_COLLAPSED));
     },
 
     onClickCutoff: function () {
         var ctrl = this;
-        ctrl.cutoffIsCollapsed = !ctrl.cutoffIsCollapsed;
-        ctrl.store.setItem("cutoff.collapsed", ctrl.cutoffIsCollapsed);
+        // ctrl.cutoffIsCollapsed = !ctrl.cutoffIsCollapsed;
+        ctrl._updateUrl(ctrl.CUTOFF_COLLAPSED, ctrl.cutoffIsCollapsed);
     },
 
     onClickAnnotation: function () {
         var ctrl = this;
-        ctrl.annotationIsCollapsed = !ctrl.annotationIsCollapsed;
-        ctrl.store.setItem("annotation.collapsed", ctrl.annotationIsCollapsed);
+        // ctrl.annotationIsCollapsed = !ctrl.annotationIsCollapsed;
+        ctrl._updateUrl(ctrl.ANN_COLLAPSED, ctrl.annotationIsCollapsed);
+
     },
 
 

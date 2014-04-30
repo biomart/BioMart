@@ -29,13 +29,7 @@ var TextFilterCreator = {
     call: function (self, scope) {
         var val = self.getUrlVal(); 
         if (val) {
-            self.pushStateToStore(val);
             self.setBindings(val);
-        } else {
-            self.getStoredVal().then(function (val) {
-                self.pushStateToUrl(val);
-                self.setBindings(val);
-            });
         }
     }
 }
@@ -46,6 +40,10 @@ var UploadFilterCreator = {
         scope.$on("$destroy", function () {
             elm.off("change");
         });
+
+        self.getStoredVal().then(function (val) {
+            self.setBindings(val);
+        });
     }
 }
 
@@ -53,30 +51,29 @@ var SelectFilterCreator = {
     call: function (self, scope) {
         var search = self.$loc.search();
         var idx = +search[self.getQueryParam()];
-        var oi = angular.isNumber(idx) && !isNaN(idx) ? 
-                    search[self.getQueryParam()] : 0;
+        var oi = angular.isNumber(idx) && !isNaN(idx) ? idx : 0;
+        if (!isNaN(idx) && idx !== oi) {
+            self.pushStateToUrl(oi);
+        }
         scope.prevSelected = scope.selected = scope.options[oi];
-        self.pushStateToUrl(oi);
-        self.getStoredVal().then(function (val) {
-            self.setBindings(val);
-        });
     }
 }
 
-// var UpdateOnRouteChangeFilterCreator = {
-//     call: function (self, scope) {
-//         scope.$on("$destory", scope.$on("$routeChange", function () {
-//             self.getUrlVal
-//         }));
-//     }
-// }
+
+var StoreStateFilterCreator = {
+    call: function (self, scope) {
+        scope.$on("destory", self.storePusher.onStoreState(function () {
+            return self.pushStateToStore(self.getVal());
+        }));
+    }
+}
 
 /**
  *  requires these methods:
  *  + getFilterKey() 
  *  + getQueryParam()
  *  + setBindings() */
-function Filter() {
+function Filter(scope) {
     var val = null, self = this;
 
     this.pushStateToStore = function (val) {
@@ -102,6 +99,23 @@ function Filter() {
     this.getStoredVal = function () {
         return self.qs.filter(self.getFilterKey())
     }
+
+    this.getVal = function () {
+        return scope.filter.value;
+    }
+}
+
+
+function TextFilter(scope) {
+    var self = this;
+
+    scope.onTextChange = function (text) {
+        // return self.pushStateToStore(text).then(function () {
+        //     self.pushStateToUrl(text);
+        // });
+
+        self.pushStateToUrl(text);
+    }
 }
 
 
@@ -113,7 +127,7 @@ function SelectFilter(scope) {
         if (scope.prevSelected !== selected) {
             self.pushStateToStore(null);
             scope.prevSelected = scope.selected = selected;
-            self.pushStateToStore(scope.filter.value);
+            // self.pushStateToStore(scope.filter.value);
             self.pushStateToUrl(scope.options.indexOf(selected));
         }
     };
@@ -126,25 +140,26 @@ function UploadFilter(scope) {
 
     scope.onTextChange = function (value) {
         self.setBindings(value);
-        self.pushStateToStore(value);
+        // self.pushStateToStore(value);
     }
 
     scope.onFileUpload = function (evt) {
+        function save (val) {
+            self.pushStateToUrl(val);
+            // self.pushStateToStore(val);
+            self.setBindings(val);
+        }
         putTextPromise(self.$q, evt).then(function then(text) {     
             return text ? self.sanitize.stripTags(text) : null;
         }, function (reason) {
             return null;
-        }, function (val) {
-            self.pushStateToUrl(val);
-            self.pushStateToStore(val);
-            self.setBindings(val);
-        });
+        }).then(save, save);
     }
 }
 
 
 app.directive("uploadFilter",
-          ["$q", "queryStore", "sanitize", function ($q, qs, sanitize) {
+          ["storePusher", "$q", "queryStore", "sanitize", function (storePusher, $q, qs, sanitize) {
 
     return {
         restrict: "E",
@@ -157,6 +172,7 @@ app.directive("uploadFilter",
             self.$q = $q;
             self.qs = qs;
             self.sanitize = sanitize;            
+            self.storePusher = storePusher;
 
             self.getFilterKey = function () {
                 return scope.filter.name;
@@ -169,8 +185,11 @@ app.directive("uploadFilter",
                 scope.filter.value = value; //value && value !== "" ? value : null;
             };
 
-            Filter.call(self);
+            
+
+            Filter.call(self, scope);
             UploadFilter.call(self, scope);
+            StoreStateFilterCreator.call(self, scope);
             TextFilterCreator.call(self, scope);
             UploadFilterCreator.call(self, scope, iElement.find("input"));
         }
@@ -179,7 +198,8 @@ app.directive("uploadFilter",
 
 
 app.directive("singleSelectUploadFilter",
-          ["$q", "queryStore", "sanitize", "$location", function ($q, qs, sanitize, $loc) {
+          ["storePusher", "$q", "queryStore", "sanitize", "$location", 
+          function (storePusher, $q, qs, sanitize, $loc) {
     return {
         restrict: "E",
         templateUrl: partialsDir + "/single-select-upload-filter.html",
@@ -193,6 +213,7 @@ app.directive("singleSelectUploadFilter",
             self.qs = qs;
             self.sanitize = sanitize;            
             self.$loc = $loc;
+            self.storePusher = storePusher;
 
             scope.options = scope.filter.filters;
 
@@ -209,11 +230,14 @@ app.directive("singleSelectUploadFilter",
                 scope.filter.value = value; // value && value !== "" ? value : null;
             };
 
-            Filter.call(self);
+            
+
+            Filter.call(self, scope);
             SelectFilter.call(self, scope);
             UploadFilter.call(self, scope, iElement);
             // At the moment, unfortunately, the order of the following calls
             // is important.
+            StoreStateFilterCreator.call(self, scope);
             SelectFilterCreator.call(self, scope);
             UploadFilterCreator.call(self, scope, iElement.find("input"));
         }
@@ -223,7 +247,8 @@ app.directive("singleSelectUploadFilter",
 
 
 app.directive("textFilter",
-          ["queryStore", "$location", "sanitize", function (qs, $loc, sanitize) {
+          ["storePusher", "queryStore", "$location", "sanitize", 
+          function (storePusher, qs, $loc, sanitize) {
     return {
         restrict: "E",
         templateUrl: partialsDir + "/text-filter.html",
@@ -235,22 +260,29 @@ app.directive("textFilter",
             self.$loc = $loc;
             self.qs = qs;
             self.sanitize = sanitize;
+            self.storePusher = storePusher;
 
             self.getFilterKey = function () {
                 return scope.filter.name;
-            }
+            };
 
             self.getQueryParam = function () {
                 return scope.filter.function;
-            }
+            };
 
             self.setBindings = function (value) {
                 value = angular.isString(value) && value !== "" ?
                     sanitize.stripTags(value) : null;
                 scope.filter.value = value;
-            }
+            };
 
-            Filter.call(self);
+            scope.$on("$routeUpdate", function () {
+                self.setBindings(self.getUrlVal());
+            });
+
+            Filter.call(self, scope);
+            TextFilter.call(self, scope);
+            StoreStateFilterCreator.call(self, scope);
             TextFilterCreator.call(self, scope);
         }
     };
@@ -258,7 +290,8 @@ app.directive("textFilter",
 
 
 app.directive("booleanFilter",
-          ["queryStore", "$location", function booleanFilter (qs, $loc) {
+          ["storePusher", "queryStore", "$location", 
+          function booleanFilter (storePusher, qs, $loc) {
     return {
         restrict: "E",
         templateUrl: partialsDir + "/boolean-filter.html",
@@ -267,6 +300,10 @@ app.directive("booleanFilter",
             scope.filter = scope.$parent.$eval(attrs.filter);
             var self = {};
 
+            self.$loc = $loc;
+            self.qs = qs;
+            self.storePusher = storePusher;
+
             self.getFilterKey = function () {
                 return scope.filter.name;
             };
@@ -279,11 +316,20 @@ app.directive("booleanFilter",
                 scope.filter.value = value;
             };
 
+            scope.$on("$routeUpdate", function () {
+                self.setBindings(self.getUrlVal());
+            });
+
+            
+
             var self = self;
             scope.set = function (value) {
                 self.pushStateToUrl(value);
-                self.pushStateToStore(value);
+                // self.pushStateToStore(value);
             }
+
+            Filter.call(self, scope);
+            StoreStateFilterCreator.call(self, scope);
 
 
 
@@ -293,8 +339,8 @@ app.directive("booleanFilter",
 }]);
 
 app.directive("singleSelectBooleanFilter", [
-              "queryStore", "$location",
-              function multiSelectFilter (qs, $loc) {
+              "storePusher", "queryStore", "$location",
+              function multiSelectFilter (storePusher, qs, $loc) {
 
     return {
         restrict: "E",
@@ -303,6 +349,9 @@ app.directive("singleSelectBooleanFilter", [
         link: function link(scope, elem, attrs) {
             scope.filter = scope.$parent.$eval(attrs.filter);
             var self = {};
+
+            self.$loc = $loc;
+            self.qs = qs;
 
             self.getFilterKey = function () {
                 return scope.prevSelected.name;
@@ -316,8 +365,13 @@ app.directive("singleSelectBooleanFilter", [
                 scope.filter.value = "only";
             };
 
-            Filter.call(self);
+            scope.$on("$routeUpdate", function () {
+                self.setBindings(self.getUrlVal());
+            });
+            
+            Filter.call(self, scope);
             SelectFilter.call(self, scope);
+            StoreStateFilterCreator.call(self, scope);
         }
     };
 }]);

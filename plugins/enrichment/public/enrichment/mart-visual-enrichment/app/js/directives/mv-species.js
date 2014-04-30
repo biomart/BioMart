@@ -14,7 +14,7 @@ app.directive("mvSpecies", ["$location", function ($loc) {
             scope.species = scope.$parent.$eval(attrs.species);
             updateCurrentSpecies();
             // This event is broadcasted when the app has loaded and species promise fulfilled
-            scope.$on("$locationChangeSuccess", updateCurrentSpecies);
+            scope.$on("$routeUpdate", updateCurrentSpecies);
 
 
             scope.updateSpecies = function (species) {

@@ -3,7 +3,7 @@
 
 var app = angular.module("martVisualEnrichment.services");
 
-QueryStore.$inject = ["$q", "$location", "$localForage"];
+QueryStore.$inject = ["$q", "$location", "$localForage", "$rootScope"];
 app.service("queryStore", QueryStore);
 // It handles the storage of filter values, attributes names, configuration and
 // dataset to persist the state of parameters selected by the deployer and the user.
@@ -13,10 +13,11 @@ app.service("queryStore", QueryStore);
 
 // All the names for filters, attributes, configurations, datasets must be unique
 // or they'll clash.
-function QueryStore($q, $loc, $localForage) {
+function QueryStore($q, $loc, $localForage, $rootScope) {
     this.$q = $q;
     this.$loc = $loc;
     this.$localForage = $localForage;
+    this._lastAction = this.$q.when(42)
 }
 
 
@@ -38,7 +39,7 @@ QueryStore.prototype = {
                 }
             }),
 
-            this._lastAction = this.$q.when(42)
+            this._lastAction
         ]);
 
         return this._readyPromise;
@@ -99,34 +100,27 @@ QueryStore.prototype = {
     _elem: function (collKey, eKey, eVal) {
         var db = this.getDb(), self = this;
         return this._lastAction = this._lastAction.then(function () {
-            return db.getItem(collKey).then(function aColl (keys) {
-                var p, idx = keys.indexOf(eKey);
+            return self._ready().then(function () {
+                return db.getItem(collKey).then(function aColl (keys) {
+                    var p, idx = keys.indexOf(eKey);
 
-                if (eVal !== null && angular.isDefined(eVal)) {
-                    // add, replace
-                    p = self._addItem(collKey, eKey, eVal, idx);
-                } else if (eVal === null && idx !== -1) {
-                    p = self._removeItem(collKey, eKey, idx);
-                } else {
-                    // get
-                    p = db.getItem(eKey);
-                }
-                return p;
+                    if (eVal !== null && angular.isDefined(eVal)) {
+                        // add, replace
+                        p = self._addItem(collKey, eKey, eVal, idx);
+                    } else if (eVal === null && idx !== -1) {
+                        p = self._removeItem(collKey, eKey, idx);
+                    } else {
+                        // get
+                        p = db.getItem(eKey);
+                    }
+                    return p;
+                });
             });
         });
     },
 
     getDb: function () {
         return this.$localForage;
-    },
-
-    clear: function () {
-        var self = this;
-        return this._ready().then(function () { 
-            return self.getDb().clear().then(function () {
-                self._readyPromise = null;
-            });
-        });
     },
 
     // Getter/Setter.
@@ -207,6 +201,17 @@ QueryStore.prototype = {
                 throw new Error("`name` must be a string, null or undefined");
             }
         });
+    },
+
+    clear: function () {
+        var self = this;
+        return self._ready().then(function () {
+            return self._lastAction = self._lastAction.then(function () { 
+                return self.getDb().clear().then(function () {
+                    self._readyPromise = null;
+                });
+            });
+        })
     }
 
 };
