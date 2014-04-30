@@ -23,20 +23,25 @@ function QueryStore($q, $loc, $localForage) {
 QueryStore.prototype = {
 
     _ready: function () {
-        var self = this, db = this.getDb();
-        return this.$q.all([
-            db.getItem(this._attrKeys).then(function (val) {
+        var self = this;
+
+        this._readyPromise = this._readyPromise || this.$q.all([ 
+            this.getDb().getItem(this._attrKeys).then(function (val) {
                 if (!val) {
-                    return db.setItem(self._attrKeys, []);
+                    return self.getDb().setItem(self._attrKeys, []);
                 }
             }),
-            db.getItem(this._filterKeys).then(function (val) {
+
+            this.getDb().getItem(this._filterKeys).then(function (val) {
                 if (!val) {
-                    return db.setItem(self._filterKeys, []);
+                    return self.getDb().setItem(self._filterKeys, []);
                 }
             }),
-            this.lastAction = this.$q.when(42)
+
+            this._lastAction = this.$q.when(42)
         ]);
+
+        return this._readyPromise;
     },
 
     _filterKeys: "qs.filters",
@@ -93,7 +98,7 @@ QueryStore.prototype = {
 
     _elem: function (collKey, eKey, eVal) {
         var db = this.getDb(), self = this;
-        return this.lastAction = this.lastAction.then(function () {
+        return this._lastAction = this._lastAction.then(function () {
             return db.getItem(collKey).then(function aColl (keys) {
                 var p, idx = keys.indexOf(eKey);
 
@@ -116,9 +121,12 @@ QueryStore.prototype = {
     },
 
     clear: function () {
-        this.getDb().clear();
         var self = this;
-        return this._ready().then(function () { return null; });
+        return this._ready().then(function () { 
+            return self.getDb().clear().then(function () {
+                self._readyPromise = null;
+            });
+        });
     },
 
     // Getter/Setter.
