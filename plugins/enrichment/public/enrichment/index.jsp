@@ -14,7 +14,7 @@
   <c:import url="/conf/config.jsp" context="/"/>
     <title>${labels.document_title}</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link rel="stylesheet" type="text/css" href="mart-visual-enrichment/app/css/bootstrap/bootstrap.mod.css">
+    <link rel="stylesheet" type="text/css" href="mart-visual-enrichment/app/css/bootstrap/bootstrap.mod.min.css">
     <link rel="stylesheet" href="mart-visual-enrichment/app/css/screen.core.css"/>
     <c:import url="/_head.jsp?path=../" context="/"/>
 </head>
@@ -31,10 +31,31 @@
     </div>
     <ng-view></ng-view>
 
-    <script src="mart-visual-enrichment/app/lib/jquery.js"></script>
-    <script src="mart-visual-enrichment/app/lib/angular/angular.js"></script>
-    <script src="mart-visual-enrichment/app/lib/angular/angular-route.js"></script>
-    <script src="mart-visual-enrichment/app/lib/ui-bootstrap-tpls-0.10.0.js"></script>
+
+
+
+
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>    
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular-route.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.10.0/ui-bootstrap-tpls.min.js"></script>
+
+    <script src="//d3js.org/d3.v3.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="mart-visual-enrichment/app/css/graph.css">
+
+    <script type="text/javascript" src="mart-visual-enrichment/dist/mart-visual-enrichment.min.js"></script>
+
+
+
+
+<!--
+
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>    
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular-route.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.10.0/ui-bootstrap-tpls.min.js"></script>
+
     <script src="mart-visual-enrichment/app/lib/localforage.js"></script>
     <script src="mart-visual-enrichment/app/lib/angular-localForage.js"></script>
 
@@ -64,7 +85,7 @@
     <script src="mart-visual-enrichment/app/lib/d3/d3.js"></script>
     <script src="mart-visual-enrichment/app/lib/d3-tip/index.js"></script>
 
-    <!-- visualizations -->
+
     <script src="mart-visual-enrichment/app/js/services/terms-async.js"></script>
     <script src="mart-visual-enrichment/app/js/services/terms.js"></script>
     <script src="mart-visual-enrichment/app/js/services/progress-state.js"></script>
@@ -77,7 +98,7 @@
 
     <script src="mart-visual-enrichment/app/js/directives/mv-graph.js"></script>
     <script src="mart-visual-enrichment/app/js/directives/mv-results-table.js"></script>
-
+-->
 
 </body>
 </html>
