@@ -121,11 +121,19 @@ function SelectFilter(scope) {
 
     scope.onSelect = function (selected) {
         if (scope.prevSelected !== selected) {
-            self.pushStateToStore(null);
+            // self.pushStateToStore(null);
             scope.prevSelected = scope.selected = selected;
             self.pushStateToUrl(scope.options.indexOf(selected));
         }
     };
+
+    scope.$on("$destroy", scope.$on("$routeUpdate", function () {
+        var i = +self.$loc.search()[self.getQueryParam()];
+
+        if (angular.isNumber(i) && !isNaN(i)) {
+            scope.onSelect(scope.options[i]);
+        }
+    }));
 }
 
 
