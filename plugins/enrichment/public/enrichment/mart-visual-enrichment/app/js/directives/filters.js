@@ -27,7 +27,7 @@ function putTextPromise($q, evt) {
 
 var TextFilterCreator = {
     call: function (self, scope) {
-        var val = self.getUrlVal(); 
+        var val = self.getUrlVal();
         if (val) {
             self.setBindings(val);
         }
@@ -52,9 +52,9 @@ var SelectFilterCreator = {
         var search = self.$loc.search();
         var idx = +search[self.getQueryParam()];
         var oi = angular.isNumber(idx) && !isNaN(idx) ? idx : 0;
-        if (!isNaN(idx) && idx !== oi) {
-            self.pushStateToUrl(oi);
-        }
+        // if (!isNaN(idx) && idx !== oi) {
+        self.pushStateToUrl(oi);
+        // }
         scope.prevSelected = scope.selected = scope.options[oi];
     }
 }
@@ -70,7 +70,7 @@ var StoreStateFilterCreator = {
 
 /**
  *  requires these methods:
- *  + getFilterKey() 
+ *  + getFilterKey()
  *  + getQueryParam()
  *  + setBindings() */
 function Filter(scope) {
@@ -149,7 +149,7 @@ function UploadFilter(scope) {
         function save (val) {
             self.setBindings(val);
         }
-        putTextPromise(self.$q, evt).then(function then(text) {     
+        putTextPromise(self.$q, evt).then(function then(text) {
             return text ? self.sanitize.stripTags(text) : null;
         }, function (reason) {
             return null;
@@ -171,7 +171,7 @@ app.directive("uploadFilter",
 
             self.$q = $q;
             self.qs = qs;
-            self.sanitize = sanitize;            
+            self.sanitize = sanitize;
             self.storePusher = storePusher;
 
             self.getFilterKey = function () {
@@ -185,7 +185,7 @@ app.directive("uploadFilter",
                 scope.filter.value = value; //value && value !== "" ? value : null;
             };
 
-            
+
 
             Filter.call(self, scope);
             UploadFilter.call(self, scope);
@@ -198,7 +198,7 @@ app.directive("uploadFilter",
 
 
 app.directive("singleSelectUploadFilter",
-          ["storePusher", "$q", "queryStore", "sanitize", "$location", 
+          ["storePusher", "$q", "queryStore", "sanitize", "$location",
           function (storePusher, $q, qs, sanitize, $loc) {
     return {
         restrict: "E",
@@ -211,7 +211,7 @@ app.directive("singleSelectUploadFilter",
 
             self.$q = $q;
             self.qs = qs;
-            self.sanitize = sanitize;            
+            self.sanitize = sanitize;
             self.$loc = $loc;
             self.storePusher = storePusher;
 
@@ -230,7 +230,7 @@ app.directive("singleSelectUploadFilter",
                 scope.filter.value = value; // value && value !== "" ? value : null;
             };
 
-            
+
 
             Filter.call(self, scope);
             SelectFilter.call(self, scope);
@@ -247,7 +247,7 @@ app.directive("singleSelectUploadFilter",
 
 
 app.directive("textFilter",
-          ["storePusher", "queryStore", "$location", "sanitize", 
+          ["storePusher", "queryStore", "$location", "sanitize",
           function (storePusher, qs, $loc, sanitize) {
     return {
         restrict: "E",
@@ -290,7 +290,7 @@ app.directive("textFilter",
 
 
 app.directive("booleanFilter",
-          ["storePusher", "queryStore", "$location", 
+          ["storePusher", "queryStore", "$location",
           function booleanFilter (storePusher, qs, $loc) {
     return {
         restrict: "E",
@@ -320,7 +320,7 @@ app.directive("booleanFilter",
                 self.setBindings(self.getUrlVal());
             });
 
-            
+
 
             var self = self;
             scope.set = function (value) {
@@ -368,7 +368,7 @@ app.directive("singleSelectBooleanFilter", [
             scope.$on("$routeUpdate", function () {
                 self.setBindings(self.getUrlVal());
             });
-            
+
             Filter.call(self, scope);
             SelectFilter.call(self, scope);
             StoreStateFilterCreator.call(self, scope);
