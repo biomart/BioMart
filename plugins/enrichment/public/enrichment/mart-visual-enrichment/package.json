@@ -2,7 +2,7 @@
   "name": "mart-visual-enrichment",
   "description": "Visualization tool for BioMart Enrichment Analysis",
   "devDependencies": {
-    "protractor": "~0.17.0",
+    "protractor": "~0.22.0",
     "karma-junit-reporter": "~0.2.1",
     "mocha": "~1.17.1",
     "karma-mocha": "~0.1.1",

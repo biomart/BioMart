@@ -74,22 +74,18 @@ QueryCtrl.prototype = {
 
     buildQuery: function build () {
         var ctrl = this;
-        return ctrl.storePusher.broadcast().then(function () {
-            return ctrl.qb.build();
-        });
+        return ctrl.qs.clear()
+            .then(function () { return ctrl.storePusher.broadcast(); });
     },
 
 
     showQuery: function showQuery() {
         var ctrl = this;
         if (ctrl.validate()) {
-            return ctrl.qs.clear().then(function () {
-                return ctrl.storePusher.broadcast().then(function () {
-                    return ctrl.qb.show().then(function (xml) {
-                        ctrl.openModal(xml);
-                    });
-                });
-            });
+            return ctrl.qs.clear()
+                .then(function () { return ctrl.storePusher.broadcast(); })
+                .then(function () { return ctrl.qb.show() })
+                .then(function (xml) { return ctrl.openModal(xml); });
         } else {
             return ctrl.showError(ctrl.qv.errMessage());
         }
