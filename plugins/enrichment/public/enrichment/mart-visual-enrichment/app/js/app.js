@@ -17,10 +17,14 @@ app.config(["$routeProvider",
         reloadOnSearch: false,
         controller: [
             "$scope",
+            "$location",
+            "mvConfig",
             "coll",
-            function MainCtlr ($scope, coll) {
+            function MainCtlr ($scope, $loc, config, coll) {
                 $scope.species = coll.species;
                 $scope.containers = coll.containers;
+                var query = angular.extend($loc.search(), config.defaults);
+                $loc.search(query);
             }
         ],
         templateUrl: "mart-visual-enrichment/app/partials/enrichment.html",

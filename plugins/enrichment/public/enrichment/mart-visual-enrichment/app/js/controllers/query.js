@@ -58,9 +58,12 @@ QueryCtrl.prototype = {
     clear: function () {
         var ctrl = this;
         ctrl.qs.clear().then(function () {
-            var s = ctrl.$loc.search(), newS = {};
-            newS.config = s.config;
-            newS.species = s.species;
+            var s = ctrl.$loc.search(), newS = {
+                config: s.config,
+                species: s.species,
+                cutoff: ctrl.config.defaults.cutoff,
+                annotation: ctrl.config.defaults.annotation
+            };
             ctrl.$loc.search(newS);
             ctrl.$route.reload();
         });

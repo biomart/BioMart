@@ -271,8 +271,13 @@ app.directive("textFilter",
             };
 
             self.setBindings = function (value) {
-                value = angular.isString(value) && value !== "" ?
-                    sanitize.stripTags(value) : null;
+                if (angular.isDefined(value) && !isNaN(+value)) {
+                    value = angular.isString(value) && value.trim() !== "" ?
+                        sanitize.stripTags(value) : value;
+                } else {
+                    value = null;
+                }
+
                 scope.filter.value = value;
             };
 

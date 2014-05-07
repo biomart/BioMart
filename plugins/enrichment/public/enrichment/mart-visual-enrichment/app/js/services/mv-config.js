@@ -10,7 +10,11 @@ factory("mvConfig",
         config = {
             url: "/martservice",
             queryUrl: "/martservice/results",
-            visualizationUrl: "/visualization/"
+            visualizationUrl: "/visualization/",
+            defaults: {
+                cutoff: 0.05,
+                annotation: ["Gene Ontology (GO)"]
+            }
         };
 
     if (elem) {
