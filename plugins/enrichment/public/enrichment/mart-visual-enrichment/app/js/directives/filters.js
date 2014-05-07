@@ -83,8 +83,8 @@ function Filter(scope) {
     this.pushStateToUrl = function (val) {
         var key = self.getQueryParam();
         if (key) {
+            if (angular.isString(val) && val.trim() === "") { val = null; }
             this.$loc.search(key, val);
-            // return self.$q.when(val);
         }
     };
 
@@ -184,8 +184,6 @@ app.directive("uploadFilter",
                 value = value ? sanitize.stripTags(value) : null;
                 scope.filter.value = value; //value && value !== "" ? value : null;
             };
-
-
 
             Filter.call(self, scope);
             UploadFilter.call(self, scope);
