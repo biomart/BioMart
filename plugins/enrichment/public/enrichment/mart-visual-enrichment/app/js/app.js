@@ -23,7 +23,12 @@ app.config(["$routeProvider",
             function MainCtlr ($scope, $loc, config, coll) {
                 $scope.species = coll.species;
                 $scope.containers = coll.containers;
-                var query = angular.extend($loc.search(), config.defaults);
+                var defaults = config.defaults || {};
+                var defaultKeys = Object.keys(defaults);
+                var query = $loc.search();
+                defaultKeys.forEach(function (key) {
+                    if (!(key in query)) { query[key] = defaults[key]; }
+                });
                 $loc.search(query);
             }
         ],
