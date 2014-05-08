@@ -724,7 +724,7 @@ public class EnrichmentDino implements Dino {
         }
     }
     
-    public JsonNode getAnnotationOpt() throws ConfigException {
+    private JsonNode getAnnotationOpt() throws ConfigException {
     	JsonNode display = getOpt(config, DISPL_OPT);
         JsonNode displayAnnOpt = getOpt(display, ANN_OPT);
         return getOpt(displayAnnOpt, annotation);
@@ -774,17 +774,21 @@ public class EnrichmentDino implements Dino {
     }
     
     
-    private Map<String, String> getAnnotationFilters() throws ConfigException {
+    private Map<String, String> getAnnotationFilters() {
     	
-    	JsonNode ann = getAnnotationOpt();
-    	JsonNode filters = getOpt(ann, "filters");
-    	Iterator<Entry<String, JsonNode>> filterFields = filters.fields();
     	Map<String, String> m = new HashMap<String, String>();
-    	Entry<String, JsonNode> e; 
-    	
-    	while(filterFields.hasNext()) {
-    		e = filterFields.next();
-    		m.put(e.getKey(), e.getValue().asText());
+    	try {
+    		JsonNode ann = getAnnotationOpt();
+        	JsonNode filters = getOpt(ann, "filters");
+        	Iterator<Entry<String, JsonNode>> filterFields = filters.fields();
+        	Entry<String, JsonNode> e; 
+        	
+        	while(filterFields.hasNext()) {
+        		e = filterFields.next();
+        		m.put(e.getKey(), e.getValue().asText());
+        	}
+    	} catch (ConfigException e) {
+    		Log.error(e);
     	}
     	
     	return m;
