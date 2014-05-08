@@ -12,8 +12,10 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.apache.commons.lang.StringUtils;
 import org.biomart.common.exceptions.TechnicalException;
@@ -40,12 +42,14 @@ import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectReader;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 
 /**
- * NOTE This implementation assumes the incoming query has only one attribute!
+ * 
+ * NOTE: This is an early draft implementation. 
  *
  * @author luca
  *
@@ -63,7 +67,7 @@ public class EnrichmentDino implements Dino {
                                GENE_A_OPT = "gene_attribute",
                                ANN_A_OPT = "annotation_attribute",
                                DESC_A_OPT = "description_attribute",
-                               FILT_OPT = "filter",
+                               FILT_OPT = "filters",
                                OTHER_A_OPT = "other_attributes",
                                APP_OPT = "front-end",
                                
@@ -487,7 +491,8 @@ public class EnrichmentDino implements Dino {
                 this.initQueryBuilder();
                 qbuilder.setHeader(false)
                         .setDataset(annotationDatasetName, annotationConfigName)
-                        .addAttribute("ensembl_gene_id");
+                        .addAttribute("ensembl_gene_id")
+                        .addFilter("with_ox_goslim_goa", "only");
                 this.addFfFilters(qbuilder);
                 
                 OutputStream out = null;
@@ -705,9 +710,7 @@ public class EnrichmentDino implements Dino {
     private void createAnnotationCacheInstance(String key) throws ConfigException, IOException {
         
         if (cache.get(key) == null) {
-            JsonNode display = getOpt(config, DISPL_OPT);
-            JsonNode displayAnnOpt = getOpt(display, ANN_OPT);
-            JsonNode ann = getOpt(displayAnnOpt, annotation);
+            JsonNode ann = getAnnotationOpt();
             
             QueryBuilder qb = qbuilder.clone();
             initQueryBuilder(qb);
@@ -719,6 +722,12 @@ public class EnrichmentDino implements Dino {
             Cache c = new Cache(qb, new AnnotationCallback()).getResults();
             cache.put(key, c);
         }
+    }
+    
+    public JsonNode getAnnotationOpt() throws ConfigException {
+    	JsonNode display = getOpt(config, DISPL_OPT);
+        JsonNode displayAnnOpt = getOpt(display, ANN_OPT);
+        return getOpt(displayAnnOpt, annotation);
     }
     
     
@@ -762,6 +771,23 @@ public class EnrichmentDino implements Dino {
             throw new ConfigException("Cannot find "+ k + " within the configuration");
         
         return n;
+    }
+    
+    
+    private Map<String, String> getAnnotationFilters() throws ConfigException {
+    	
+    	JsonNode ann = getAnnotationOpt();
+    	JsonNode filters = getOpt(ann, "filters");
+    	Iterator<Entry<String, JsonNode>> filterFields = filters.fields();
+    	Map<String, String> m = new HashMap<String, String>();
+    	Entry<String, JsonNode> e; 
+    	
+    	while(filterFields.hasNext()) {
+    		e = filterFields.next();
+    		m.put(e.getKey(), e.getValue().asText());
+    	}
+    	
+    	return m;
     }
 
 
@@ -923,6 +949,30 @@ public class EnrichmentDino implements Dino {
 
         return path;
     }
+    
+    
+//    private void getAnnotaions(File outFile) {
+//        // 1.1 get annotations and put them on disk
+//        org.biomart.dino.SkipEmptyOutputStream oStream = null;
+//        try {
+//            oStream = new org.biomart.dino.SkipEmptyOutputStream(
+//            		new BufferedOutputStream(new FileOutputStream(annotationFile)));
+//            submitAnnotationsQuery(datasetName,
+//                                   configName,
+//                                   a2.getName(),
+//                                   oStream);
+//
+//        } catch (IOException ex) {
+//            Log.error(this.getClass().getName()
+//                    + "#getAnnotationsFilePath(" + attributeList
+//                    + ") impossible to write on temporary file.", ex);
+//            return "";
+//        } finally {
+//            if (oStream != null) {
+//                oStream.close();
+//            }
+//        }    	
+//    }
 
 
     private boolean isSpecieTranslation(Attribute attrListElem) {
@@ -959,12 +1009,19 @@ public class EnrichmentDino implements Dino {
     private void submitAnnotationsQuery(String dataset,
                                         String config,
                                         String attribute,
-                                        OutputStream o) {
+                                        OutputStream o) throws ConfigException {
         initQueryBuilder();
         qbuilder.setDataset(dataset, config)
                 .addAttribute("ensembl_gene_id")
-                .addAttribute(attribute)
-                .getResults(o);
+                .addAttribute(attribute);
+        
+        Map<String, String> filters = getAnnotationFilters();
+        
+        for (String key : filters.keySet()) {
+        	qbuilder.addFilter(key, filters.get(key));
+        }
+        
+        qbuilder.getResults(o);
     }
 
     

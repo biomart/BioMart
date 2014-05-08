@@ -13,35 +13,33 @@
         "annotation": {
 
             "Gene Ontology (GO)": {
-                "filter": "goslim_goa_accession",
+                "filters": {
+                    "with_ox_goslim_goa": "only"
+                },
                 "annotation_attribute": "goslim_goa_accession",
                 "description_attribute": "goslim_goa_description",
                 "other_attributes": []
             },
 
             "MIM (Human)": {
-                "filter": "mims__mim_morbid_accession_101",
                 "annotation_attribute": "mims__mim_morbid_accession_101",
                 "description_attribute": "mims__mim_morbid_description_101",
                 "other_attributes": []
             },
 
             "MIM": {
-                "filter": "mim_morbid_accession",
                 "annotation_attribute": "mim_morbid_accession",
                 "description_attribute": "mim_morbid_description",
                 "other_attributes": []
             },
 
             "Reactome (Human)": {
-                "filter": "reactome_human__pathway_id_101",
                 "annotation_attribute": "reactome_human__pathway_id_101",
                 "description_attribute": "reactome_human__pathway_name_101",
                 "other_attributes": []
             },
 
             "Reactome": {
-                "filter": "pathway_id_list",
                 "annotation_attribute": "stableidentifier_identifier",
                 "description_attribute": "_displayname",
                 "other_attributes": []
