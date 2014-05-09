@@ -112,6 +112,10 @@ public class BedDino extends RegionsDino {
         this.doFormatAndDelegate();
     }
 
+    @Override
+    public String getContentType() {
+        return null;
+    }
 }
 
 

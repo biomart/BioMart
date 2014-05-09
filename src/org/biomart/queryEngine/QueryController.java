@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.Date;
 
 import org.biomart.common.exceptions.FunctionalException;
+import org.biomart.dino.dinos.Dino;
 import org.biomart.objects.objects.MartRegistry;
 import org.biomart.common.resources.Log;
 import org.jdom.Document;
@@ -65,6 +66,7 @@ public final class QueryController {
 	private final MartRegistry registryObj;
     private final String userGroup;
     private final ProcessorInterface processorObj;
+    private final Dino dino;
 	private final Document queryXMLobject;
 	private final QueryValidator queryValidator;
 	private final Query query;
@@ -102,10 +104,6 @@ public final class QueryController {
             queryValidator = new QueryValidator(queryXMLobject, registryObj, userGroup);
             queryValidator.validateProcessor();
 
-            processorObj = initializeProcessor();
-            processorObj.preprocess(queryXMLobject); // do any preprocessing on the XML before passing to validator
-            processorObj.accepts(mimes); // figure out content type
-
 			org.jdom.Attribute count = queryXMLobject.getRootElement().getAttribute("count");
 			if ( count != null && ("1".equals(count.getValue()) || "true".equals(count.getValue())) ) {
 				this.isCountQuery = true;
@@ -115,8 +113,16 @@ public final class QueryController {
             queryValidator.validateQuery();
             
             if (queryValidator.hasDino() && queryValidator.getUseDino()) {
-                    query = null;
+                query = new Query(queryValidator, false);
+                dino = getDino();
+                dino.accepts(mimes);
+                dino.setQuery(query);
+                processorObj = null;
             } else {
+                dino = null;
+                processorObj = initializeProcessor();
+                processorObj.preprocess(queryXMLobject); // do any preprocessing on the XML before passing to validator
+                processorObj.accepts(mimes); // figure out content type
                 query = splitQuery();
                 
                 Log.debug("Unplanned: " + query);
@@ -141,6 +147,16 @@ public final class QueryController {
         this(xml, registryObj, user, ArrayUtils.EMPTY_STRING_ARRAY, isCountQuery);
     }
 
+    private Dino getDino() throws ClassNotFoundException {
+        try {
+            return DinoHandler.getDino(query.getDino());
+        } catch (ClassNotFoundException e) {
+            Log.error(e.getMessage());
+            throw e;
+        }
+    }
+
+
     public void runQuery(OutputStream outputHandle) throws TechnicalException, IOException {
         long start = new Date().getTime();
 
@@ -151,11 +167,12 @@ public final class QueryController {
         // 5. Call done (cleanup) on Processor
         try {
         		if (queryValidator.hasDino() && queryValidator.getUseDino()) {
-        			Query q = new Query(queryValidator, false);
-        			DinoHandler.runDino(q, user, mimes, outputHandle);
+                    dino.run(outputHandle);
         		} else {
                     QueryRunner queryRunnerObj = new QueryRunner(query,
-                            processorObj.getCallback(), processorObj.getErrorHandler(), isCountQuery);
+                                                                 processorObj.getCallback(),
+                                                                 processorObj.getErrorHandler(),
+                                                                 isCountQuery);
     
                     processorObj.setQuery(queryRunnerObj.query);
                     processorObj.setOutputStream(outputHandle);
@@ -172,14 +189,17 @@ public final class QueryController {
             throw new TechnicalException(e);
         } catch (InterruptedException e) {
             throw new TechnicalException(e);
-		} finally {
+		} catch (Exception e) {
+            Log.error(e.getMessage());
+            throw new TechnicalException(e);
+        } finally {
             long end = new Date().getTime();
             Log.info(String.format("Total query time is %s ms", end-start));
         }
 	}
 
     public String getContentType() {
-        return processorObj.getContentType();
+        return dino == null ? dino.getContentType() : processorObj.getContentType();
     }
 
     private Query splitQuery() throws FunctionalException {

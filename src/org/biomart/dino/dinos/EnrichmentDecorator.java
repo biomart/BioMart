@@ -54,16 +54,16 @@ public class EnrichmentDecorator implements Dino {
         this.out = out;
         bed.setOutputFilterName(bedOutFilter)
            .setMetaData(new Binding())
-           .setMimes(mimes)
+           .accepts(mimes)
            .setQuery(q)
            .run(out);
         udd.setOutputFilterName(upDownOutFilter)
             .setMetaData(new Binding())
-            .setMimes(mimes)
+            .accepts(mimes)
             .setQuery(q)
             .run(out);
         en.setMetaData(new Binding())
-            .setMimes(mimes)
+            .accepts(mimes)
             .setQuery(q)
             .run(out);
     }
@@ -81,9 +81,13 @@ public class EnrichmentDecorator implements Dino {
     }
 
     @Override
-    public Dino setMimes(String[] mimes) {
-        this.mimes = mimes;
-        return this;
+    public Dino accepts(String[] mimes) {
+        return null;
+    }
+
+    @Override
+    public String getContentType() {
+        return en.getContentType();
     }
 
     @Override

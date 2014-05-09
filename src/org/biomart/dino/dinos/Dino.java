@@ -11,5 +11,6 @@ public interface Dino {
 	public Dino setQuery(Query query);
 	public Query getQuery();
 	public Dino setMetaData(Binding metaData);
-	public Dino setMimes(String[] mimes);
+	public Dino accepts(String[] mimes);
+    public String getContentType();
 }

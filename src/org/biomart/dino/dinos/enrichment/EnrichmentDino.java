@@ -1080,13 +1080,19 @@ public class EnrichmentDino implements Dino {
     @Override
     public Dino setQuery(org.biomart.queryEngine.Query query) {
         q = query;
-        client = this.q.getClient();
+        initialize();
 
         return this;
     }
 
+    private void initialize() {
+        client = q.getClient();
+        
+
+    }
+
     @Override
-    public Dino setMimes(String[] mimes) {
+    public Dino accepts(String[] mimes) {
         return this;
     }
 
@@ -1106,6 +1112,10 @@ public class EnrichmentDino implements Dino {
 
     private boolean isGuiClient() {
         return Boolean.valueOf(client) || client.equalsIgnoreCase("webbrowser");
+    }
+
+    private boolean isWebService() {
+        return !isGuiClient();
     }
 
     @Override

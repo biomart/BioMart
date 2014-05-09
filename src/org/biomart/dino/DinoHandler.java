@@ -41,14 +41,21 @@ public class DinoHandler {
     static boolean initialize = false;
     static Injector inj;
 
-    private DinoHandler() {
-    }
+
 
     private static void init() {
         if (!initialize) {
             inj = Guice.createInjector(new DinoModule(),
                     new XmlMartRegistryModule());
         }
+    }
+
+    public static Dino getDino(String dinoName) throws ClassNotFoundException {
+        Class<? extends Dino> dinoClass;
+        dinoClass = getDinoClass(dinoName);
+        Dino dino = inj.getInstance(dinoClass);
+        dino.setMetaData(new Binding());
+        return dino;
     }
 
     public static void runDino(Query q, String user, String[] mimes,
@@ -77,9 +84,9 @@ public class DinoHandler {
 //                    setFieldValues(dino, fields, q.getQueryElementList());
 //            Binding md = new Binding()
 //                .setBindings(fields, boundEls);
-            
+
             dino.setQuery(q)
-                .setMimes(mimes)
+                .accepts(mimes)
                 .setMetaData(new Binding())
                 .run(o);
 

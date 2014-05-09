@@ -77,7 +77,7 @@ abstract public class RegionsDino implements Dino {
     }
 
     @Override
-    public Dino setMimes(String[] mimes) {
+    public Dino accepts(String[] mimes) {
         this.mimes = mimes;
         return this;
     }
