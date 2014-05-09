@@ -46,8 +46,6 @@
             }
         }
 
-    },
-
-    "front-end": "conf/dinos/enrichment/app/index.html"
+    }
 }
 
