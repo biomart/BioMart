@@ -36,7 +36,7 @@
 
 
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>    
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular-route.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.10.0/ui-bootstrap-tpls.min.js"></script>
 
@@ -84,6 +84,11 @@
     <script src="mart-visual-enrichment/app/js/controllers/progress.js"></script>
     <script src="mart-visual-enrichment/app/js/controllers/visualization.js"></script>
     <script src="mart-visual-enrichment/app/js/controllers/results-table.js"></script>
+    <script type="text/javascript" src="mart-visual-enrichment/app/lib/file-saver.js"></script>
+    <script type="text/javascript" src="mart-visual-enrichment/app/lib/canvg-1.3/rgbcolor.js"></script>
+    <script type="text/javascript" src="mart-visual-enrichment/app/lib/canvg-1.3/StackBlur.js"></script>
+    <script type="text/javascript" src="mart-visual-enrichment/app/lib/canvg-1.3/canvg.js"></script>
+    <script type="text/javascript" src="mart-visual-enrichment/app/lib/canvas-toBlob.js"></script>
     <link rel="stylesheet" type="text/css" href="mart-visual-enrichment/app/css/graph.css">
     <script src="mart-visual-enrichment/app/js/controllers/graph.js"></script>
 

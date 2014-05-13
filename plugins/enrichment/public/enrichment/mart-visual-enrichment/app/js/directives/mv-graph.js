@@ -1,13 +1,65 @@
 ;(function (angular, d3) {
 "use strict";
 
+//
+// https://github.com/densitydesign/raw/blob/41192997a407f79f4891523ead152f880007cc63/js/directives.js#L526
+//
+function downloadSvg(container){
+  container = d3.select(container);
+  var BB = window.Blob || window.WebKitBlob || window.MozBlob;
+
+  var html = container.select("svg")
+    .attr("version", 1.1)
+    .attr("xmlns", "http://www.w3.org/2000/svg")
+    .node().parentNode.innerHTML;
+
+  var isSafari = (navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') == -1);
+
+  if (isSafari) {
+    var img = "data:image/svg+xml;utf8," + html;
+    var newWindow = window.open(img, 'download');
+  } else {
+    var blob = new BB([html], { type: "data:image/svg+xml" });
+    saveAs(blob, "EnrichmentNetwork.svg");
+  }
+
+}
+
+
+function downloadPng(container){
+  container = d3.select(container);
+  var content = d3.select("body").append("canvas")
+      .attr("id", "canvas")
+      .style("display","none")
+
+  var html = container.select("svg")
+      .node().parentNode.innerHTML;
+
+  canvg('canvas', html);
+  var canvas = document.getElementById("canvas");
+
+  var isSafari = (navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') == -1);
+
+  if (isSafari) {
+    var img = canvas.toDataURL("image/png;base64");
+    var newWindow = window.open(img, 'download');
+  } else {
+    canvas.toBlob(function (blob) {
+      saveAs(blob, "EnrichmentNetwork.png");
+    }, "image/png");
+  }
+
+  d3.select("#canvas").remove();
+}
+
+
 var graph = (function (d3) {
 
   "use strict";
 
   return function graph (nodes, edges, options) {
     options = options || {};
-    var container = d3.select(options.container || "body");
+    var container = d3.select(options.container);
     var nthTerms = options.showNth || 5;
     var margin = options.margin || { top: 20, right: 30, bottom: 20, left: 30 };
     var width = (options.width || 1200) - margin.right - margin.left;
@@ -40,10 +92,13 @@ var graph = (function (d3) {
 
     var svg = container.append("svg:svg")
         .attr({
-          "class": "enrichment-svg",
+          "title": "test2",
+          "version": 1.1,
+          "xmlns": "http://www.w3.org/2000/svg",
           width: width + margin.right + margin.left,
           height: height + margin.top + margin.bottom
         })
+        .style("cursor", "pointer")
       .append("svg:g")
         .attr("transform", ["translate(", margin.left, ",", margin.top, ")"].join(''))
         .call(zoom)
@@ -106,7 +161,7 @@ var graph = (function (d3) {
       .linkDistance(linkDistance)
       .nodes(terms.concat(genes))
       .links(edges)
-      .gravity(0.2)
+      .gravity(0.4)
       .charge(function (node, idx) {
         return node.type === "gene" ? -400 : -100 * node.weight;
       })
@@ -126,6 +181,10 @@ var graph = (function (d3) {
       .data(edges)
     .enter().append("line")
       .attr("class", "line")
+      .style({
+        stroke: "#556270",
+        "shape-rendering": "geometricPrecision"
+      })
       .attr("id", function (d, i) {
         d.index = i;
         return "link" + i;
@@ -137,6 +196,12 @@ var graph = (function (d3) {
       .attr("r", termRadius)
       .attr("id", nodeId)
       .classed({term: true, node: true})
+      .style({
+        opacity: 0.9,
+        fill: "#4ECDC4",
+        stroke: "#4194cd",
+        "stroke-width": 2
+      })
       .call(drag);
 
     vis.selectAll(".gene")
@@ -145,6 +210,12 @@ var graph = (function (d3) {
       .attr("r", function (d) { return d.r = d.pr = 10; })
       .attr("id", nodeId)
       .classed({gene: true, node: true})
+      .style({
+        opacity: 0.9,
+        fill: "#C7F464",
+        stroke: "#67c822",
+        "stroke-width": 2
+      })
       .call(drag)
       .call(tip);
 
@@ -176,6 +247,10 @@ var graph = (function (d3) {
       .append("svg:g")
       .append("svg:text")
       .attr("class", "term-label")
+      .style({
+        "text-anchor": "middle",
+        "shape-rendering": "crispEdges"
+      })
       .text(function (d) {
         return d.description.length > 28 ? d.description.substr(0, 25) + "..." : d.description;
       });
@@ -186,6 +261,11 @@ var graph = (function (d3) {
       .append("svg:g")
       .append("svg:text")
       .attr("class", "gene-label")
+      .style({
+        "text-anchor": "middle",
+        "shape-rendering": "crispEdges",
+        "font-size": "0.7em"
+      })
       .text(function (d) {
         return d.id;
       });
@@ -470,10 +550,19 @@ directive("mvGraph",
     function link (scope, iElement, iAttrs) {
         var vis = null;
         $timeout(function () {
+          var container = iElement.find("div").eq(0)
           vis = graph(scope.nodes, scope.edges, {
-            container: iElement[0],
+            container: container[0],
             width: iElement.width(),
             height: iElement.height()
+          });
+
+          iElement.find(".save-png").on("click", function () {
+            downloadPng(iElement.find("div").eq(0)[0]);
+          });
+
+          iElement.find(".save-svg").on("click", function () {
+            downloadSvg(iElement.find("div").eq(0)[0]);
           });
 
           var moHandler = $rootScope.$on("term.mouseover", function (evt, term) {

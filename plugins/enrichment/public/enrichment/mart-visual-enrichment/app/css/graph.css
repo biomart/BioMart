@@ -1,22 +1,22 @@
-.enrichment-svg {
+/*.enrichment-svg {
   cursor: pointer;
 }
-
+*/
 .node.node-selected {
   stroke-width: 7px;
   cursor: move;
 }
 
-.line {
+/*.line {
   stroke: #556270;
   shape-rendering: geometricPrecision;
-}
+}*/
 
-.term, .gene {
+/*.term, .gene {
   opacity: 0.9;
-}
+}*/
 
-.term {
+/*.term {
   fill: #4ECDC4;
   stroke: #4194cd;
   stroke-width: 2px;
@@ -26,16 +26,16 @@
   fill: #C7F464;
   stroke: #67c822;
   stroke-width: 2px;
-}
+}*/
 
-.gene-label, .term-label {
+/*.gene-label, .term-label {
   text-anchor: middle;
   shape-rendering: crispEdges;
 }
 
 .gene-label {
   font-size: 0.7em;
-}
+}*/
 
 .d3-tip {
   line-height: 1;
