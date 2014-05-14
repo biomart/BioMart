@@ -75,9 +75,20 @@ public class HypgRunner extends ShellRunner {
         }
         
         Collections.sort(results, new Comparator<List<String>>() {
+
+            private double toDouble(String s) {
+                try {
+                    return Double.parseDouble(s);
+                } catch (NumberFormatException e) {
+                    Log.error(e);
+                    throw e;
+                }
+            }
+
             @Override
             public int compare(List<String> a, List<String> b) {
-                return a.get(1).compareTo(b.get(1));
+                double aa = toDouble(a.get(1)), bb = toDouble(b.get(1));
+                return aa < bb ? -1 : aa == bb ? 0 : 1;
             }
         });
         
