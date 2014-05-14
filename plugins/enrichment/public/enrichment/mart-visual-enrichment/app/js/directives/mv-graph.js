@@ -20,11 +20,42 @@ function downloadSvg(container){
     var newWindow = window.open(img, 'download');
   } else {
     var blob = new BB([html], { type: "data:image/svg+xml" });
-    saveAs(blob, "EnrichmentNetwork.svg");
+    saveAs(blob, "enrichment-network.svg");
   }
-
 }
 
+function downloadJson (graph) {
+  var nodes = graph.nodes.map(function () {
+
+  })
+  var json = JSON.stringify(graph);
+  var blob = new Blob([json], { type: "data:text/json;charset=utf-8" });
+  saveAs(blob, "enrichment-network.json")
+}
+
+function downloadTsv (graph) {
+  var terms = {};
+  for (var i = 0, ii = graph.edges.length; i < ii; ++i) {
+    var e = graph.edges[i];
+    (terms[e.target.id] || (terms[e.target.id] = [])).push(e.source.id);
+  }
+
+  var tsv = "", sep = "\t";
+  for (var termId in terms) {
+    var termList = graph.nodes.filter(function findTermById(n) {
+        return n.id === termId;
+      }),
+      term = termList[0];
+    tsv += [
+      termId,
+      term.description,
+      terms[termId].join(","),
+      term.pvalue
+    ].join(sep) + "\n";
+  }
+  var blob = new Blob([tsv], { type: "data:text/plain;charset=utf-8" });
+  saveAs(blob, "enrichment-network.tsv");
+}
 
 function downloadPng(container){
   container = d3.select(container);
@@ -45,7 +76,7 @@ function downloadPng(container){
     var newWindow = window.open(img, 'download');
   } else {
     canvas.toBlob(function (blob) {
-      saveAs(blob, "EnrichmentNetwork.png");
+      saveAs(blob, "enrichment-network.png");
     }, "image/png");
   }
 
@@ -563,6 +594,14 @@ directive("mvGraph",
 
           iElement.find(".save-svg").on("click", function () {
             downloadSvg(iElement.find("div").eq(0)[0]);
+          });
+
+          iElement.find(".save-json").on("click", function () {
+            downloadJson({ nodes: scope.nodes, edges: scope.edges });
+          });
+
+          iElement.find(".save-tsv").on("click", function () {
+            downloadTsv({ nodes: scope.nodes, edges: scope.edges });
           });
 
           var moHandler = $rootScope.$on("term.mouseover", function (evt, term) {
