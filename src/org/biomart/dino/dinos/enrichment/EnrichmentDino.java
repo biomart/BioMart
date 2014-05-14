@@ -666,11 +666,14 @@ public class EnrichmentDino implements Dino {
                             .addNode();
                 // end building
                     }
+
                     Map<String, Object> edge = new HashMap<String, Object>(2);
                     edge.put(linkSourceHeader, geneId);
                     edge.put(linkTargetHeader, annId);
-                    
-                    graph.addEdge(edge);
+
+                    if (!graph.containsEdge(edge)) {
+                        graph.addEdge(edge);
+                    }
                 }
             }
         }

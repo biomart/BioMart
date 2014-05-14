@@ -78,8 +78,8 @@ public class Graph {
         n.put(k, v);
         return this;
     }
-    
-    
+
+
     public boolean containsNode(String key, Object value) {
         Object v = null;
         for (Map<String, Object> o : nodes) {
@@ -87,7 +87,29 @@ public class Graph {
                 return true;
             }
         }
-        
+
+        return false;
+    }
+
+    public boolean containsNode(Object node) {
+        Object v = null;
+        for (Map<String, Object> o : nodes) {
+            if (o.equals(node)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public boolean containsEdge(Object edge) {
+        Object v = null;
+        for (Map<String, Object> o : edges) {
+            if (o.equals(edge)) {
+                return true;
+            }
+        }
+
         return false;
     }
 }
