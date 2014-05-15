@@ -429,9 +429,26 @@ top: -45px;
 .container-fluid .tabbable .nav.nav-tabs li > a{
     padding: 10px;
 color: white;
-background: #333;
+background: #999;
 color:#fff !important;
+position:relative;
+
+box-shadow:inset 0px -13px 23px -1px rgba(0,0,0,0.4);
 }
+
+.container-fluid .tabbable .nav.nav-tabs li.active > a{
+    background:#000;
+}
+
+/*.container-fluid .tabbable .nav.nav-tabs li > a:after{
+    content:"";
+    display:block;
+    border-bottom: 2px solid #000;
+    width:200px;
+    position:absolute;
+    bottom:-2px;
+    left:0;
+}*/
 
 .container-fluid .tabbable .nav.nav-tabs li > a a{
     color:#fff !important;
@@ -485,7 +502,7 @@ box-shadow: 0px 0px 5px -1px rgba(0,0,0,0.4);
 .right-panel[ng-controller="GraphCtrl"] .mv-vis-links h2{
 position: absolute;
 right: 30px;
-top: 80px;
+top: 90px;
 width: 405px;
 }
 
