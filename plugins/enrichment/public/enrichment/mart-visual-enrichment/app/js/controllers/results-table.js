@@ -11,7 +11,7 @@ app.controller("ResultsTableCtrl",
     var init = true;
     $scope.terms = terms.get($q.when($scope.mvTab.nodes));
     $scope.terms.all().then(function (ts) {
-        $scope.results = ts;
+        $scope.results = angular.copy(ts);
     });
 
     $scope.filterByDescription = function (desc) {

@@ -25,9 +25,6 @@ function downloadSvg(container){
 }
 
 function downloadJson (graph) {
-  var nodes = graph.nodes.map(function () {
-
-  })
   var json = JSON.stringify(graph);
   var blob = new Blob([json], { type: "data:text/json;charset=utf-8" });
   saveAs(blob, "enrichment-network.json")
@@ -101,7 +98,7 @@ var graph = (function (d3) {
     // Terms are sorted per pvalue in increasing order.
     // Take the first n.
     var terms = nodes.filter(onlyTerm).splice(0, nthTerms);
-    var pvalueExtent = d3.extent(terms, getPvalue);  //[getPvalue(terms[0]), getPvalue(terms[terms.length - 1])];
+    var pvalueExtent = d3.extent(terms, getPvalue);
     // Genes connected to these terms.
     var coll = connections(terms, edges);
     var genes = coll[0];
@@ -325,7 +322,7 @@ var graph = (function (d3) {
     }
 
     function getPvalue (t) {
-      return t.pvalue;
+      return parseFloat(t.pvalue);
     }
 
     function zooming() {
@@ -419,7 +416,7 @@ var graph = (function (d3) {
 
     function termRadius(d) {
       var den = pvalueExtent[1] - pvalueExtent[0];
-      return d.r = d.pr = den === 0 ? 13 : (1 - (d.pvalue - pvalueExtent[0]) / (pvalueExtent[1] - pvalueExtent[0])) * 30 + 13;
+      return d.r = d.pr = den === 0 ? 13 : (1 - (parseFloat(d.pvalue) - pvalueExtent[0]) / (pvalueExtent[1] - pvalueExtent[0])) * 30 + 13;
     }
 
     // function getNeighbors (nodeIndex) {
@@ -521,29 +518,6 @@ var graph = (function (d3) {
       return "e"+id.replace(/[:;,\.]*/g, "");
     }
 
-    // function createImage() {
-    //   var svgString = new XMLSerializer().serializeToString(document.querySelector('svg'));
-    //   var canvas = d3.select("body").append("canvas") //document.getElementById("canvas");
-    //     .attr("width", 800)
-    //     .attr("height", 400)
-    //     .style({
-    //       position: "fixed",
-    //       top: -1000
-    //     });
-    //   var ctx = canvas.getContext("2d");
-    //   var DOMURL = self.URL || self.webkitURL || self;
-    //   var img = new Image();
-    //   var svg = new Blob([svgString], {type: "image/svg+xml;charset=utf-8"});
-    //   var url = DOMURL.createObjectURL(svg);
-    //   img.onload = function() {
-    //       ctx.drawImage(img, 0, 0);
-    //       var png = canvas.toDataURL("image/png");
-    //       document.querySelector('#png-container').innerHTML = '<img src="'+png+'"/>';
-    //       DOMURL.revokeObjectURL(png);
-    //   };
-    //   img.src = url;
-    // }
-
     return {
       hn: [],
 
@@ -582,10 +556,12 @@ directive("mvGraph",
         var vis = null;
         $timeout(function () {
           var container = iElement.find("div").eq(0)
-          vis = graph(scope.nodes, scope.edges, {
-            container: container[0],
-            width: iElement.width(),
-            height: iElement.height()
+          vis = graph(
+            scope.nodes, 
+            scope.edges, 
+            { container: container[0],
+              width: iElement.width(),
+              height: iElement.height()
           });
 
           iElement.find(".save-png").on("click", function () {
