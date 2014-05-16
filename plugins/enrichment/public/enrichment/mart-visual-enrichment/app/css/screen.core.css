@@ -479,7 +479,7 @@ box-shadow:inset 0px -13px 23px -1px rgba(0,0,0,0.4);
 
 
 .right-panel[ng-controller="GraphCtrl"]{
-    padding-top:150px;
+    padding-top:50px;
 }
 
 
@@ -487,22 +487,39 @@ box-shadow:inset 0px -13px 23px -1px rgba(0,0,0,0.4);
     width: auto;
 position: absolute;
 right: 20px;
-top: 0;
+top: 50px;
 text-align: left;
 background: #D5EFF7;
-padding: 15px 15px 60px 15px;
+padding: 15px 15px 15px 15px;
 width: 450px;
 box-shadow: 0px 0px 5px -1px rgba(0,0,0,0.4);
+
+ -webkit-transition: right 0.5s ease-out 2s;
+    -moz-transition: right 0.5s ease-out 2s;
+    -o-transition: right 0.5s ease-out 2s;
+    transition: right 0.5s ease-out 2s;
+}
+
+html.js .right-panel[ng-controller="GraphCtrl"] ul{
+right:-425px;
+}
+
+html.js .right-panel[ng-controller="GraphCtrl"] ul:hover{
+    right:20px;
 }
 
 /*.mv-vis-links{
     margin-top:150px;
 }*/
 
+html.js .right-panel[ng-controller="GraphCtrl"] .mv-vis-links h2{
+    right:-415px;
+}
+
 .right-panel[ng-controller="GraphCtrl"] .mv-vis-links h2{
 position: absolute;
 right: 30px;
-top: 90px;
+top: 0px;
 width: 405px;
 }
 
@@ -514,7 +531,7 @@ color: #fff;
 background: #ffcc00;
 padding: 7px 9px;
 background: #000;
-margin-right: 15px;
+margin-right: 5px;
 /* color: #000; */
 box-shadow: 0px 0px 7px 0px rgba(0,0,0,0.8);
 border-radius: 6px;
