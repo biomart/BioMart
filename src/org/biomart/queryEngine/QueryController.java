@@ -199,7 +199,11 @@ public final class QueryController {
 	}
 
     public String getContentType() {
-        return dino == null ? dino.getContentType() : processorObj.getContentType();
+        if (dino != null) {
+            return  dino.getContentType();
+        } else {
+            return processorObj.getContentType();
+        }
     }
 
     private Query splitQuery() throws FunctionalException {

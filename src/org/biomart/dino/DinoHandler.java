@@ -41,19 +41,21 @@ public class DinoHandler {
     static boolean initialize = false;
     static Injector inj;
 
-
-
     private static void init() {
         if (!initialize) {
-            inj = Guice.createInjector(new DinoModule(),
-                    new XmlMartRegistryModule());
+            inj = Guice.createInjector(new DinoModule(), new XmlMartRegistryModule());
         }
+    }
+
+    private static Injector getInjector() {
+        init();
+        return inj;
     }
 
     public static Dino getDino(String dinoName) throws ClassNotFoundException {
         Class<? extends Dino> dinoClass;
         dinoClass = getDinoClass(dinoName);
-        Dino dino = inj.getInstance(dinoClass);
+        Dino dino = getInjector().getInstance(dinoClass);
         dino.setMetaData(new Binding());
         return dino;
     }

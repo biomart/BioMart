@@ -140,6 +140,12 @@ public class UpstreamDownstreamDino extends RegionsDino {
         return out.toString();
     }
 
+	@Override
+	public String getContentType() {
+		// TODO Auto-generated method stub
+		return "*/*";
+	}
+
 
 }
 
