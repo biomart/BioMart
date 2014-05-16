@@ -494,10 +494,10 @@ padding: 15px 15px 15px 15px;
 width: 450px;
 box-shadow: 0px 0px 5px -1px rgba(0,0,0,0.4);
 
- -webkit-transition: right 0.5s ease-out 0s;
-    -moz-transition: right 0.5s ease-out 0s;
-    -o-transition: right 0.5s ease-out 0s;
-    transition: right 0.5s ease-out 0s;
+ -webkit-transition: right 0.5s ease-out 2s;
+    -moz-transition: right 0.5s ease-out 2s;
+    -o-transition: right 0.5s ease-out 2s;
+    transition: right 0.5s ease-out 2s;
 }
 
 html.js .right-panel[ng-controller="GraphCtrl"] ul{
@@ -506,10 +506,10 @@ right:-425px;
 
 html.js .right-panel[ng-controller="GraphCtrl"] ul:hover{
     right:20px;
-     -webkit-transition: right 0.5s ease-out 2s;
-    -moz-transition: right 0.5s ease-out 2s;
-    -o-transition: right 0.5s ease-out 2s;
-    transition: right 0.5s ease-out 2s;
+     -webkit-transition: right 0.5s ease-out 0s;
+    -moz-transition: right 0.5s ease-out 0s;
+    -o-transition: right 0.5s ease-out 0s;
+    transition: right 0.5s ease-out 0s;
 }
 
 /*.mv-vis-links{
