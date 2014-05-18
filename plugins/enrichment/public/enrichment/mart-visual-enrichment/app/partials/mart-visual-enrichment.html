@@ -34,17 +34,7 @@
 
                         <div class="col-lg-9 right-panel" ng-controller="GraphCtrl">
                             <ul>
-                                <li class="close-legend" onclick="
-                                $('html').removeClass('close-trigger'); 
-                                console.log('first');
-                                $('.right-panel[ng-controller='GraphCtrl'] ul').css('background','pink');
-                              console.log('second');
-                              $('.right-panel[ng-controller='GraphCtrl'] ul').animate({
-    right: '-425px'
-  }, 2000, function() {
-    $('html').addClass('close-trigger');
-  });
-  ">
+                                <li class="close-legend" onclick="close_legend();">
                                     x
                                 </li>
                                 <li><span class="glyphicon glyphicon-zoom-in"></span> Use the mousewheel or double click to zoom</li>
@@ -59,3 +49,17 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    function close_legend(){
+        alert('here');
+        $('html').removeClass('close-trigger'); 
+                                console.log('first');
+                                $('.right-panel[ng-controller='GraphCtrl'] ul').css('background','pink');
+                              console.log('second');
+                              $('.right-panel[ng-controller='GraphCtrl'] ul').animate({
+    right: '-425px'
+  }, 2000, function() {
+    $('html').addClass('close-trigger');
+  });
+    }
+</script>
