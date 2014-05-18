@@ -34,7 +34,7 @@
 
                         <div class="col-lg-9 right-panel" ng-controller="GraphCtrl">
                             <ul>
-                                <li class="close-legend" onclick="$('html').removeClass('close-trigger'); $( this ).animate({
+                                <li class="close-legend" onclick="$('html').removeClass('close-trigger'); $('.right-panel[ng-controller='GraphCtrl'] ul').animate({
     right: "-425px"
   }, 2000, function() {
     $('html').addClass('close-trigger');
