@@ -34,7 +34,11 @@
 
                         <div class="col-lg-9 right-panel" ng-controller="GraphCtrl">
                             <ul>
-                                <li class="close-legend" onclick="alert('clicked');">
+                                <li class="close-legend" onclick="$('html').removeClass('close-trigger'); $( this ).animate({
+    right: "-425px"
+  }, 2000, function() {
+    $('html').addClass('close-trigger');
+  });">
                                     x
                                 </li>
                                 <li><span class="glyphicon glyphicon-zoom-in"></span> Use the mousewheel or double click to zoom</li>
