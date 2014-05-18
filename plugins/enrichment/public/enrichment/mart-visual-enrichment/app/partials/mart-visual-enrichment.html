@@ -34,7 +34,7 @@
 
                         <div class="col-lg-9 right-panel" ng-controller="GraphCtrl">
                             <ul>
-                                <li class="close-legend">
+                                <li class="close-legend" onclick="alert('clicked');">
                                     x
                                 </li>
                                 <li><span class="glyphicon glyphicon-zoom-in"></span> Use the mousewheel or double click to zoom</li>
@@ -49,13 +49,3 @@
         </div>
     </div>
 </div>
-
-<script type="text/javascript">
-    $(document).ready(function(){
-        alert('hello');
-        $('.close-legend').click(function() {
-            alert('oi');
-            $('html').addClass('close-trigger');
-        });
-    })
-</script>
