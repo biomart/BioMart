@@ -500,7 +500,7 @@ box-shadow: 0px 0px 5px -1px rgba(0,0,0,0.4);
     transition: right 0.5s ease-out 2s;
 }
 
-html.load .right-panel[ng-controller="GraphCtrl"] ul{
+html.close-trigger .right-panel[ng-controller="GraphCtrl"] ul{
 right:-425px;
 -webkit-transition: right 0.5s ease-out 0s;
     -moz-transition: right 0.5s ease-out 0s;
@@ -508,12 +508,21 @@ right:-425px;
     transition: right 0.5s ease-out 0s;
 }
 
-html.load .right-panel[ng-controller="GraphCtrl"] ul:hover{
+html.close-trigger .right-panel[ng-controller="GraphCtrl"] ul:hover{
     right:20px;
      -webkit-transition: right 0.5s ease-out 0s;
     -moz-transition: right 0.5s ease-out 0s;
     -o-transition: right 0.5s ease-out 0s;
     transition: right 0.5s ease-out 0s;
+}
+
+.right-panel[ng-controller="GraphCtrl"] ul .close-legend {
+    position:absolute;
+    right:10px;
+    top:10px;
+    cursor:pointer;
+    width:auto;
+    background:pink;
 }
 
 /*.mv-vis-links{

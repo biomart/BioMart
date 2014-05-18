@@ -34,6 +34,9 @@
 
                         <div class="col-lg-9 right-panel" ng-controller="GraphCtrl">
                             <ul>
+                                <li class="close-legend">
+                                    x
+                                </li>
                                 <li><span class="glyphicon glyphicon-zoom-in"></span> Use the mousewheel or double click to zoom</li>
                                 <li><span class="glyphicon glyphicon-screenshot"></span> Mouse over a table entry to find the corresponding node</li>
                                 <li><span class="glyphicon glyphicon-hand-up"></span> Nodes are draggable</li>
@@ -46,3 +49,11 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('.close-legend').click(function() {
+            $('html').addClass('close-trigger');
+        });
+    })
+</script>
