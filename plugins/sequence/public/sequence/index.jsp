@@ -2,10 +2,10 @@
 <%@ page language="java" %>
 <%@ page session="false" %>
 <%@ page contentType="text/html;charset=UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="/WEB-INF/bmtaglib.tld" prefix="bm" %>
-<%@ taglib prefix="biomart" tagdir="/WEB-INF/tags" %> 
+<%@ taglib prefix="biomart" tagdir="/WEB-INF/tags" %>
 <html lang="en-ca">
 <c:set var="currentPage" scope="request">
   Sequence
@@ -16,10 +16,10 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <c:import url="/_head.jsp?path=../" context="/"/>
 </head>
-<!--[if lt IE 7 ]> <body id="converter" class="biomart layout1 ie6 "> <![endif]--> 
-<!--[if IE 7 ]>    <body id="converter" class="biomart layout1 ie7 "> <![endif]--> 
-<!--[if IE 8 ]>    <body id="converter" class="biomart layout1 ie8 "> <![endif]--> 
-<!--[if !IE]><!--> <body id="converter" class="biomart layout1"> <!--<![endif]--> 
+<!--[if lt IE 7 ]> <body id="converter" class="biomart layout1 ie6 "> <![endif]-->
+<!--[if IE 7 ]>    <body id="converter" class="biomart layout1 ie7 "> <![endif]-->
+<!--[if IE 8 ]>    <body id="converter" class="biomart layout1 ie8 "> <![endif]-->
+<!--[if !IE]><!--> <body id="converter" class="biomart layout1"> <!--<![endif]-->
 <div id="biomart-top-wrapper" class="ui-corner-all clearfix">
   <div id="biomart-header">
     <div class="content">
@@ -29,7 +29,7 @@
   <c:import url="/_context.jsp?path=../" context="/"/>
   <div id="biomart-wrapper" class="ui-corner-all clearfix">
     <biomart:getGuiContainer name="${param.gui}" var="gui"/>
-    <header class="gradient-grey-reverse ui-corner-top clearfix"> 
+    <header class="gradient-grey-reverse ui-corner-top clearfix">
     <h2>${gui.displayName}</h2>
     </header>
     <div id="biomart-content" class="ui-widget-content clearfix">
@@ -90,7 +90,7 @@
         <div class="content" id="attribute-list" style="display:none"></div>
       </section>
       <section id="biomart-submit">
-        <form id="biomart-form" action="${siteUrl}martservice/results" method="POST" target="streaming">
+        <form id="biomart-form" action="/martservice/results" method="POST" target="streaming">
           <input type="hidden" name="query"/>
         </form>
         <button class="large green awesome"><bm:message code="go" capitalize="true"/> &raquo;</button>
@@ -128,7 +128,7 @@
 	</p>
 	<span class="loading"></span>
 </div>
-<form style="visibility: hidden; height: 1px" id="biomart-download-form" action="${siteUrl}martservice/results" target="_blank" method="POST">
+<form style="visibility: hidden; height: 1px" id="biomart-download-form" action="/martservice/results" target="_blank" method="POST">
   <input type="hidden" name="query"/>
   <input type="hidden" name="download" value="true"/>
 </form>
@@ -140,7 +140,7 @@
   window.DATASETS = ${datasetsJson};
 
 	$(document).ready(function() {
-		$.publish('biomart.login');	
+		$.publish('biomart.login');
     $.subscribe('biomart.restart', {refresh:function(){location=location.href}}, 'refresh');
 	});
 </script>
