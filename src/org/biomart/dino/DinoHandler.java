@@ -60,46 +60,6 @@ public class DinoHandler {
         return dino;
     }
 
-    public static void runDino(Query q, String user, String[] mimes,
-            OutputStream o) throws IOException {
-        Log.debug("DinoHandler#runDino() invoked");
-
-        init();
-
-        Class<? extends Dino> dinoClass;
-        Dino dino;
-        String dinoName = q.getDino();
-
-        try {
-
-            // Get the class
-            dinoClass = getDinoClass(dinoName);
-            // Get the fields to bing to
-//            List<Field> fields = getAnnotatedFields(dinoClass);
-//            Log.debug("DinoHandler::runDino() number of annotated fields from class "+dinoClass.getName()+" is "+fields.size());
-            Log.debug("DinoHandler::runDino() number query elements is "+ q.getQueryElementList().size());
-            // Create an Dino instance
-            dino = inj.getInstance(dinoClass);
-
-            // Set the field values
-//            List<QueryElement> boundEls = 
-//                    setFieldValues(dino, fields, q.getQueryElementList());
-//            Binding md = new Binding()
-//                .setBindings(fields, boundEls);
-
-            dino.setQuery(q)
-                .accepts(mimes)
-                .setMetaData(new Binding())
-                .run(o);
-
-        } catch (Exception e) {
-            Log.error("DinoHandler#runDino ", e);
-            o.write(e.getMessage().getBytes());
-            o.close();
-            throw new IOException(e);
-        }
-    }
-
     public static Class<? extends Dino> getDinoClass(String dinoClassName)
             throws ClassNotFoundException {
         Log.debug("DinoHandler#getDinoClass() invoked");
@@ -118,23 +78,66 @@ public class DinoHandler {
         return dinoClass;
     }
 
-    public static Dino getDinoInstance(Class<? extends Dino> klass)
-            throws IllegalArgumentException, InstantiationException,
-            IllegalAccessException, InvocationTargetException {
-        Log.debug("DinoHandler#getDinoInstance() invoked");
 
-        Constructor<?>[] ctors = klass.getConstructors();
-        Constructor<?> ctor = null;
-        for (int i = 0; i < ctors.length; ++i) {
-            ctor = ctors[i];
-            if (ctor.getGenericParameterTypes().length == 0) {
-                break;
-            }
-        }
 
-        ctor.setAccessible(true);
-        Dino dino = Dino.class.cast(ctor.newInstance());
 
-        return dino;
-    }
+//    public static void runDino(Query q, String user, String[] mimes,
+//                               OutputStream o) throws IOException {
+//        Log.debug("DinoHandler#runDino() invoked");
+//
+//        init();
+//
+//        Class<? extends Dino> dinoClass;
+//        Dino dino;
+//        String dinoName = q.getDino();
+//
+//        try {
+//
+//            // Get the class
+//            dinoClass = getDinoClass(dinoName);
+//            // Get the fields to bing to
+////            List<Field> fields = getAnnotatedFields(dinoClass);
+////            Log.debug("DinoHandler::runDino() number of annotated fields from class "+dinoClass.getName()+" is "+fields.size());
+//            Log.debug("DinoHandler::runDino() number query elements is "+ q.getQueryElementList().size());
+//            // Create an Dino instance
+//            dino = inj.getInstance(dinoClass);
+//
+//            // Set the field values
+////            List<QueryElement> boundEls =
+////                    setFieldValues(dino, fields, q.getQueryElementList());
+////            Binding md = new Binding()
+////                .setBindings(fields, boundEls);
+//
+//            dino.setQuery(q)
+//                    .accepts(mimes)
+//                    .setMetaData(new Binding())
+//                    .run(o);
+//
+//        } catch (Exception e) {
+//            Log.error("DinoHandler#runDino ", e);
+//            o.write(e.getMessage().getBytes());
+//            o.close();
+//            throw new IOException(e);
+//        }
+//    }
+
+//    public static Dino getDinoInstance(Class<? extends Dino> klass)
+//            throws IllegalArgumentException, InstantiationException,
+//            IllegalAccessException, InvocationTargetException {
+//        Log.debug("DinoHandler#getDinoInstance() invoked");
+//
+//        Constructor<?>[] ctors = klass.getConstructors();
+//        Constructor<?> ctor = null;
+//        for (int i = 0; i < ctors.length; ++i) {
+//            ctor = ctors[i];
+//            if (ctor.getGenericParameterTypes().length == 0) {
+//                break;
+//            }
+//        }
+//
+//        ctor.setAccessible(true);
+//        Dino dino = Dino.class.cast(ctor.newInstance());
+//
+//        return dino;
+//    }
 }

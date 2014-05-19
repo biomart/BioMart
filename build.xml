@@ -208,7 +208,7 @@
       <classpath>
         <path refid="project.classpath"/>
         <fileset dir="${dist.dir}/lib">
-          <include name="biomart-0.8.jar"/>
+          <include name="biomart-0.9.jar"/>
         </fileset>
       </classpath>
     </javac>

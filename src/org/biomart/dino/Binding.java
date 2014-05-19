@@ -30,7 +30,7 @@ public class Binding {
      * @param fields
      *            fields bound to the query elements. From them we can retrieve
      *            the Function field values.
-     * @param qel
+     * @param queryElements
      *            QueryElements from the query, bound to dino fields.
      */
     public Binding setBindings(List<Field> fields, List<QueryElement> queryElements) {
@@ -68,7 +68,7 @@ public class Binding {
     /**
      * Bind a single Element e to a field in the fields list.
      * 
-     * @param e
+     * @param q
      * @param fields
      * @return the field that should be bound to this element, null otherwise.
      */
