@@ -43,10 +43,8 @@
     <script src="//d3js.org/d3.v3.min.js"></script>
 
     <link rel="stylesheet" type="text/css" href="mart-visual-enrichment/app/css/graph.css">
-<!--
     <script type="text/javascript" src="mart-visual-enrichment/dist/mart-visual-enrichment.min.js"></script>
--->
-
+    <!--
     <script src="mart-visual-enrichment/app/lib/localforage.js"></script>
     <script src="mart-visual-enrichment/app/lib/angular-localForage.js"></script>
 
@@ -94,6 +92,6 @@
 
     <script src="mart-visual-enrichment/app/js/directives/mv-graph.js"></script>
     <script src="mart-visual-enrichment/app/js/directives/mv-results-table.js"></script>
-
+    -->
 </body>
 </html>
