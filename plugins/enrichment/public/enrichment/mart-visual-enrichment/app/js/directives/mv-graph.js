@@ -4,6 +4,9 @@
 //
 // https://github.com/densitydesign/raw/blob/41192997a407f79f4891523ead152f880007cc63/js/directives.js#L526
 //
+
+var isSafari = (navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') == -1);
+
 function downloadSvg(container){
   container = d3.select(container);
   var BB = window.Blob || window.WebKitBlob || window.MozBlob;
@@ -13,11 +16,9 @@ function downloadSvg(container){
     .attr("xmlns", "http://www.w3.org/2000/svg")
     .node().parentNode.innerHTML;
 
-  var isSafari = (navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') == -1);
-
   if (isSafari) {
     var img = "data:image/svg+xml;utf8," + html;
-    var newWindow = window.open(img, 'download');
+    window.open(img, "_blank");
   } else {
     var blob = new BB([html], { type: "data:image/svg+xml" });
     saveAs(blob, "enrichment-network.svg");
@@ -26,8 +27,13 @@ function downloadSvg(container){
 
 function downloadJson (graph) {
   var json = JSON.stringify(graph);
-  var blob = new Blob([json], { type: "data:text/json;charset=utf-8" });
-  saveAs(blob, "enrichment-network.json")
+  if (isSafari) {
+    var jsonDownloadable = "data:application/json;utf8," + json;
+    window.open(jsonDownloadable, "_blank");
+  } else {
+    var blob = new Blob([json], { type: "data:application/json;charset=utf-8" });
+    saveAs(blob, "enrichment-network.json")
+  }
 }
 
 function downloadTsv (graph) {
@@ -50,8 +56,14 @@ function downloadTsv (graph) {
       term.pvalue
     ].join(sep) + "\n";
   }
-  var blob = new Blob([tsv], { type: "data:text/plain;charset=utf-8" });
-  saveAs(blob, "enrichment-network.tsv");
+
+  if (isSafari) {
+    var tsvDownloadable = "data:application/json;utf8," + tsv;
+    window.open(tsvDownloadable, "_blank");
+  } else {
+    var blob = new Blob([tsv], { type: "data:text/plain;charset=utf-8" });
+    saveAs(blob, "enrichment-network.tsv");
+  }
 }
 
 function downloadPng(container){
@@ -557,8 +569,8 @@ directive("mvGraph",
         $timeout(function () {
           var container = iElement.find("div").eq(0)
           vis = graph(
-            scope.nodes, 
-            scope.edges, 
+            scope.nodes,
+            scope.edges,
             { container: container[0],
               width: iElement.width(),
               height: iElement.height()
