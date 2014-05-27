@@ -16,14 +16,19 @@ app.controller("VisualizationCtrl",
             }
         }).then(function then (res) {
             var graphs = res.data.graphs;
-            return Object.keys(graphs).map(function (tabTitle) {
-                var g = graphs[tabTitle];
-                return {
-                    title: tabTitle,
-                    nodes: g.nodes,
-                    edges: g.edges
-                };
-            });
+            if (graphs) {
+                return Object.keys(graphs).map(function (tabTitle) {
+                    var g = graphs[tabTitle];
+                    return {
+                        title: tabTitle,
+                        nodes: g.nodes,
+                        edges: g.edges
+                    };
+                });
+            } else {
+                // Should not throw sync error but it works..
+                throw new Error(res.data);
+            }
         });
     });
 
@@ -38,7 +43,7 @@ app.controller("VisualizationCtrl",
         $scope.mvTabs = tabs;
         ctrl.state.setState(ctrl.state.states.PROCESSING);
     }, function (resp) {
-        $scope.errorMessage = resp.status;
+        $scope.errorMessage = resp.status || resp.message;
         $scope.progressbarValue = 100;
         ctrl.state.setState(ctrl.state.states.ERROR);
     });

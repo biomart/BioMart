@@ -69,3 +69,13 @@
 .d3-tip-prop {
   color: red;
 }
+
+.brush .extent {
+  fill-opacity: .1;
+  stroke: #fff;
+  shape-rendering: crispEdges;
+}
+
+.node.selected {
+  fill: red !important;
+}
