@@ -96,6 +96,8 @@ var graph = (function (d3) {
     var margin = options.margin || { top: 20, right: 30, bottom: 20, left: 30 };
     var width = (options.width || 1200) - margin.right - margin.left;
     var height = (options.height || 800) - margin.top - margin.bottom;
+    var neighbors = [];
+    var neighborEdges = [];
     // Replace ids with reference to node object
     putSourceTargetRef(nodes, edges);
 
@@ -230,7 +232,15 @@ var graph = (function (d3) {
       .on("mouseover.node.tip", tip.show)
       .on("mouseout.node.tip", tip.hide)
       .on("mouseover.node.transition", highlightNode)
-      .on("mouseout.node.transition", restoreNode);
+      .on("mouseout.node.transition", restoreNode)
+      .on("click.hightlightneighbors", function (d, i) {
+        var els = getAllNeighbors(i).concat([d]);
+        nodes.forEach(deselect);
+        edges.forEach(deselect);
+        els.forEach(select);
+        bubbles.classed("selected", function (d) { return d.selected; })
+        links.classed("selected", function (d) { return d.selected })
+      })
 
     var brusher = d3.svg.brush()
       .x(d3.scale.identity().domain([0, width]))
@@ -238,6 +248,9 @@ var graph = (function (d3) {
       .on("brushend", function () {
         d3.event.target.clear();
         d3.select(this).call(d3.event.target);
+      })
+      .on("brush.clear", function () {
+        links.classed("selected", deselect);
       })
       .on("brush", function() {
         function nodeSelected (d) {
@@ -291,6 +304,9 @@ var graph = (function (d3) {
     var text = textGroup.selectAll("g");
 
     function nodeId (d) { return normalizeId(d.id); }
+
+    function deselect (el) { el.selected = false }
+    function select (el) { el.selected = true }
 
     function onlyTerm(n) {
       return n.type === "term";
@@ -524,6 +540,37 @@ var graph = (function (d3) {
     function normalizeId(id) {
       // a number is not a valid id...
       return "e"+id.replace(/[:;,\.]*/g, "");
+    }
+
+    function getNeighbors (nodeIndex) {
+      // From d3's src/layout/force.js
+      var ne = neighbors || (neighbors = []),
+          ee = neighborEdges || (neighborEdges = []),
+          n, m, j;
+      if (!ne.length) {
+        // All the nodes: terms + genes
+        n = nodes.length;
+        m = edges.length;
+        ne = new Array(n);
+        for (j = 0; j < n; ++j) {
+          ne[j] = [];
+          ee[j] = [];
+        }
+        for (j = 0; j < m; ++j) {
+          var o = edges[j];
+          ne[o.source.index].push(o.target);
+          ne[o.target.index].push(o.source);
+          ee[o.source.index].push(o);
+          ee[o.target.index].push(o);
+        }
+      }
+      return ne[nodeIndex];
+    }
+
+    function getAllNeighbors (nodeIndex) {
+      var ne = getNeighbors(nodeIndex);
+      var ee = neighborEdges;
+      return ne.concat(ee[nodeIndex]);
     }
 
     return {
