@@ -139,8 +139,7 @@ var graph = (function (d3) {
 
     svg = svg.append("svg:g")
         .attr("transform", [
-          "translate(", margin.left, ",", margin.top, ")",
-          "scale(0.75,0.75)"].join(''))
+          "translate(", margin.left, ",", margin.top, ")"].join(''))
         .call(zoom)
         // remove pan
         .on("mousedown.zoom", null);
@@ -214,7 +213,7 @@ var graph = (function (d3) {
     vis.selectAll(".gene")
       .data(genes)
     .enter().append("circle")
-      .attr("r", function (d) { return d.r = d.pr = 10; })
+      .attr("r", function (d) { return d.r = d.pr = 8; })
       .attr("id", nodeId)
       .classed({gene: true, node: true})
       .style({
@@ -387,7 +386,7 @@ var graph = (function (d3) {
 
     function termRadius(d) {
       var den = pvalueExtent[1] - pvalueExtent[0];
-      return d.r = d.pr = den === 0 ? 13 : (1 - (parseFloat(d.pvalue) - pvalueExtent[0]) / (pvalueExtent[1] - pvalueExtent[0])) * 30 + 20;
+      return d.r = d.pr = den === 0 ? 13 : (1 - (parseFloat(d.pvalue) - pvalueExtent[0]) / (pvalueExtent[1] - pvalueExtent[0])) * 13 + 10;
     }
 
     /**
@@ -447,16 +446,28 @@ var graph = (function (d3) {
       bubbles.each(function (d) {
         d3.select(this).attr({
           cx: function () {
-            if (d.type === "term" && e) {
-              return d.x = d.x + (width/2 - d.x) * (1 + 0.71) * e.alpha;
+            // Simulation ongoing
+            if (e) {
+              if (d.type === "term") {
+                d.x = d.x + (width/2 - d.x) * (1 + 0.71) * e.alpha;
+              } else {
+                d.x = Math.max(d.r, Math.min(width - d.r, d.x))
+              }
             }
-            return d.x = Math.max(d.r, Math.min(width - d.r, d.x))
+
+            return d.x;
           },
           cy: function () {
-            if (d.type === "term" && e) {
-              return d.y = d.y + (height/2 - d.y) * (1 + 0.71) * e.alpha;
+            // Simulation ongoing
+            if (e) {
+              if (d.type === "term") {
+                d.y = d.y + (height/2 - d.y) * (1 + 0.71) * e.alpha;
+              } else {
+                d.y = Math.max(d.r, Math.min(height - d.r, d.y));
+              }
+
             }
-            return d.y = Math.max(d.r, Math.min(height - d.r, d.y))
+            return d.y;
           }
         })
       })
