@@ -104,6 +104,9 @@ var graph = (function (d3) {
     var margin = options.margin || { top: 20, right: 30, bottom: 20, left: 30 };
     var width = (options.width || 1200) - margin.right - margin.left;
     var height = (options.height || 800) - margin.top - margin.bottom;
+    var neighbors = [];
+    var neighborEdges = [];
+    var alphaThreshold = 0.08;
     // Replace ids with reference to node object
     putSourceTargetRef(nodes, edges);
 
@@ -116,15 +119,9 @@ var graph = (function (d3) {
     var genes = coll[0];
     edges = coll[1];
     var geneTipProps = Object.keys(genes[0]);
-    var termTipProps = Object.keys(terms[0]).filter(function (k) {
-      return k[0] !== "$" && k[0] !== "_";
-    });
+    var termTipProps = Object.keys(terms[0]);
     coll = null;
 
-    // zoom: mousewheel
-    // pan: right button click
-    // drag of nodes: click
-    // selection: click
 
     var zoom = d3.behavior.zoom()
         .scaleExtent([0, 4])
@@ -138,30 +135,30 @@ var graph = (function (d3) {
           width: width + margin.right + margin.left,
           height: height + margin.top + margin.bottom
         })
-        .style("cursor", "pointer")
-      .append("svg:g")
-        .attr("transform", ["translate(", margin.left, ",", margin.top, ")"].join(''))
-        .call(zoom)
-        // remove pan
-        .on("mousedown.zoom", null);
+        .style("cursor", "pointer");
 
-    // var canvasImage = svg.append("svg:text")
-    //   .attr({
-    //     x: width - 30, y: margin.top + 30
-    //   })
-    //   .style("cursor", "pointer")
-    //   .text("Get Image")
-    //   .on("click", createImage);
+    svg.append("rect")
+      .attr("width", "100%")
+      .attr("height", "100%")
+      .style("fill", "#fff");
+
+    svg = svg.append("svg:g")
+        .attr("transform", [
+          "translate(", margin.left, ",", margin.top, ")"].join(''))
+        .call(zoom)
+        // remove pan and double click zoom
+        .on("mousedown.zoom", null)
+        .on("dblclick.zoom", null);
 
     var rect = svg.append("rect")
         .attr("width", width)
         .attr("height", height)
-        .style("fill", "none")
+        .style("fill", "white")
         .style("pointer-events", "all");
 
     var tip = d3.tip()
       .attr('class', 'd3-tip')
-      .offset([-10, 0])
+      .offset([-20, 0])
       .html(function(d) {
         var props = d.type === "gene" ? geneTipProps : termTipProps;
         return props.reduce(function (s, p) {
@@ -170,65 +167,28 @@ var graph = (function (d3) {
       });
 
     var vis = svg.append("svg:g")
-        .attr({
-          "class": "enrichment-vis",
-          transform: ["translate(", margin.left, ",", margin.top, ")"].join('')
-        });
+      .attr("class", "enrichment-vis")
+      .style("visibility", "hidden");
 
-    // var brush = vis.append("g")
-    //     .attr("class", "brush")
-    //     .call(d3.svg.brush()
-    //       .x(d3.scale.identity().domain([0, width]))
-    //       .y(d3.scale.identity().domain([0, height]))
-    //       .on("brush", function() {
-    //         function nodeSelected (d) {
-    //           return d.selected = (extent[0][0] <= d.x && d.x < extent[1][0] && extent[0][1] <= d.y && d.y < extent[1][1]);
-    //         }
-    //         var extent = d3.event.target.extent();
-    //         geneNodes.classed("node-selected", nodeSelected);
-    //         termNodes.classed("node-selected", nodeSelected);
-    //       })
-    //       .on("brushend", function() {
-    //         d3.event.target.clear();
-    //         d3.select(this).call(d3.event.target);
-    //       }));
-
-    var linkDistance = termRadius({pvalue: pvalueExtent[0]}) * 3.5;
+    var linkDistance = termRadius({pvalue: pvalueExtent[0]}) ;
     placeAlongCircle(terms, { centre: [width/2, height/2], radius: 5, offset: 5 });
-    placeAlongCircle(genes, { centre: [width/2, height/2], radius: linkDistance, offset: 5 });
-    var force = d3.layout.force()
-      .size([width, height])
-      .linkDistance(linkDistance)
-      .nodes(terms.concat(genes))
-      .links(edges)
-      .gravity(0.4)
-      .charge(function (node, idx) {
-        return node.type === "gene" ? -400 : -100 * node.weight;
-      })
-      .on("tick", fociTick)
-      .on("end", fixEles)
-      .start()
-      .alpha(0.02);
-
-    var drag = force.drag()
-      .on("dragstart", dragstarted)
-      // .on("drag", dragging)
-      .on("dragend", dragended);
-
-    nodes = force.nodes();
+    placeAlongCircle(genes, { centre: [width/2, height/2], radius: linkDistance * 5, offset: 5 });
+    nodes = terms.concat(genes);
 
     var links = vis.selectAll(".line")
       .data(edges)
     .enter().append("line")
       .attr("class", "line")
       .style({
-        stroke: "#556270",
+        stroke: "#F28882",
         "shape-rendering": "geometricPrecision"
       })
       .attr("id", function (d, i) {
         d.index = i;
         return "link" + i;
       });
+
+    var color = d3.scale.category20();
 
     vis.selectAll(".term")
       .data(terms)
@@ -238,46 +198,99 @@ var graph = (function (d3) {
       .classed({term: true, node: true})
       .style({
         opacity: 0.9,
-        fill: "#4ECDC4",
-        stroke: "#4194cd",
+        fill: function (d) {return color(d.pvalue); } ,
+        stroke: "#333",
         "stroke-width": 2
       })
-      .call(drag);
 
     vis.selectAll(".gene")
       .data(genes)
     .enter().append("circle")
-      .attr("r", function (d) { return d.r = d.pr = 10; })
+      .attr("r", function (d) { return d.r = d.pr = 11; })
       .attr("id", nodeId)
       .classed({gene: true, node: true})
       .style({
         opacity: 0.9,
-        fill: "#C7F464",
-        stroke: "#67c822",
+        fill: "#D7D2AE",
+        stroke: "#F28882",
         "stroke-width": 2
       })
-      .call(drag)
       .call(tip);
 
     var bubbles = vis.selectAll(".node");
     bubbles
+      .call(dragBehavior)
       .on("mouseover.node.tip", tip.show)
       .on("mouseout.node.tip", tip.hide)
       .on("mouseover.node.transition", highlightNode)
-      .on("mouseout.node.transition", restoreNode);
+      .on("mouseout.node.transition", restoreNode)
+      .on("dblclick.hightlightneighbors", function (d, i) {
+        clearTools();
+        if (d3.event.target.tagName === "circle") {
+          var els = getAllNeighbors(i).concat([d]);
+          els.forEach(select);
+          bubbles.classed("selected", function (d) { return d.selected; });
+          links.classed("selected", function (d) { return d.selected });
+        }
+      });
 
-    //   .on("click.node.highlight", function (d) {
-    //     // Ignore drag
-    //     if (d3.event.defaultPrevented) {
-    //       return;
-    //     }
-    //     highlightNeighbors(d);
-    //   });
+    var force = d3.layout.force()
+      .size([width, height])
+      .linkDistance(linkDistance * 3)
+      .nodes(nodes)
+      .links(edges)
+      .gravity(0.5)
+      .charge(function (node, idx) {
+        return node.type === "gene" ? -400 : -150 * node.weight;
+      })
+      .on("tick", fociTick)
+      .on("start", function () {
+        bubbles.transition()
+          .duration(2350)
+          // .ease("circle")
+          .attrTween("r", function (d) {
+            var i = d3.interpolate(5, d.r);
+            return function (t) { return d.r = i(t); };
+          })
+      })
+      .start()
+      // .alpha(0.0087)
 
-    // d3.select(window)
-    //   .on("click.node.highlight", function () {
-    //     unhighlightNeighbors();
-    //   });
+
+    function getScreenCoords(x, y, ctm) {
+      var xn = ctm.e + x*ctm.a;
+      var yn = ctm.f + y*ctm.d;
+      return { x: xn, y: yn };
+    }
+
+    var brusher = d3.svg.brush()
+      .x(d3.scale.identity().domain([0, width]))
+      .y(d3.scale.identity().domain([0, height]))
+      .on("brushend", function () {
+        d3.event.target.clear();
+        d3.select(this).call(d3.event.target);
+      })
+      .on("brush.clear", function () {
+        links.classed("selected", deselect);
+      })
+      .on("brush", function() {
+        function nodeSelected (d) {
+          var coo = getScreenCoords(d.x, d.y, this.getCTM());
+          return d.selected = (extent[0][0] <= coo.x && coo.x < extent[1][0] &&
+                               extent[0][1] <= coo.y && coo.y < extent[1][1]);
+        }
+
+        var extent = d3.event.target.extent();
+        bubbles.classed("selected", nodeSelected);
+      });
+
+    var brush = svg.insert("g", ".enrichment-vis")
+      .attr("class", "brush")
+      .call(brusher);
+
+    // Like this we'll have images with a nice white background
+    svg.select(".brush .background")
+      .style("fill", "white");
 
     var textGroup = vis.append("svg:g").attr("class", "node-text");
 
@@ -312,22 +325,10 @@ var graph = (function (d3) {
 
     var text = textGroup.selectAll("g");
 
-    // function highlightNeighbors(d) {
-    //   bubbles.classed("obscure", true);
-    //   links.classed("obscure", true);
-    //   text.classed("obscure", true);
-    //   var ne = getAllNeighbors(d.index);
-    //   ne.forEach(function (el) {
-    //     if (el.type) {
-    //       // it's a node
-    //       nodes[0][el.index]
-    //     }
-    //   });
-    // }
-
-    // function unhighlightNeighbors() {}
-
     function nodeId (d) { return normalizeId(d.id); }
+
+    function deselect (el) { el.selected = false }
+    function select (el) { el.selected = true }
 
     function onlyTerm(n) {
       return n.type === "term";
@@ -341,41 +342,32 @@ var graph = (function (d3) {
       vis.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
     }
 
-    function dragstarted(d) {
-      /*jshint validthis:true */
-      d3.event.sourceEvent.stopPropagation();
-      d3.select(this).classed("dragging", true);
-    }
+    function dragBehavior() {
+      function move (d) {
+        d.px = d.x; d.py = d.y;
+        d.x += d3.event.dx; d.y += d3.event.dy;
+      }
 
-    function dragging(d) {
-      // NOTE: maybe nodes must unfixed before?
-      var x = d.x - d.px;
-      var y = d.y - d.py;
-      container.selectAll(".node-selected")
-        .attr("cx", function (sd) {
-          if (d !== sd) {
-            sd.px = sd.x;
-            sd.x += x;
-          }
-          return sd.x;
-        })
-        .attr("cy", function (sd) {
-          if (d !== sd) {
-            sd.py = sd.y;
-            sd.y += y;
-          }
-          return sd.y;
-        });
-    }
+      function dragmove (d) {
+        if (d.selected) {
+          var selected = bubbles.filter(function (d) { return d.selected })
+          selected.each(move)
+        } else {
+          move(d);
+        }
+        updateGraph();
+      }
 
-    function dragended(d) {
-      /*jshint validthis:true */
-      d3.select(this).classed("dragging", false);
+      var drag = d3.behavior.drag()
+        .origin(function (d) { return d })
+        .on("drag.graph", dragmove);
+
+      this.on(".drag", null);
+      this.call(drag);
     }
 
     function connections(terms, edges) {
-      var genesAndEdges = takeTermsNeighbors(terms, edges);
-      return genesAndEdges;
+      return takeTermsNeighbors(terms, edges);
     }
 
     function putSourceTargetRef(nodes, edges) {
@@ -404,12 +396,16 @@ var graph = (function (d3) {
         term = terms[t];
         for (var i = 0 + cmplE, ii = edges.length; i < ii; ++i) {
           edge = edges[i];
-          if (edge.target === term && q.indexOf(edge.target) === -1) {
-            q.push(edge.source);
+          if (edge.target === term) {
             pushed = true;
-          } else if (edge.source === term && q.indexOf(edge.source) === -1) {
-            q.push(edge.target);
+            if (q.indexOf(edge.source) === -1) {
+              q.push(edge.source);
+            }
+          } else if (edge.source === term) {
             pushed = true;
+            if (q.indexOf(edge.target) === -1) {
+              q.push(edge.target);
+            }
           }
 
           if (pushed) {
@@ -428,36 +424,8 @@ var graph = (function (d3) {
 
     function termRadius(d) {
       var den = pvalueExtent[1] - pvalueExtent[0];
-      return d.r = d.pr = den === 0 ? 13 : (1 - (parseFloat(d.pvalue) - pvalueExtent[0]) / (pvalueExtent[1] - pvalueExtent[0])) * 30 + 13;
+      return d.r = d.pr = den === 0 ? 20 : (1 - (parseFloat(d.pvalue) - pvalueExtent[0]) / (pvalueExtent[1] - pvalueExtent[0])) * 20 + 20;
     }
-
-    // function getNeighbors (nodeIndex) {
-    //   // From d3's src/layout/force.js
-    //   var ne = neighbors, ee = neighborEdges, n, m, j;
-    //   if (!ne.length) {
-    //     // All the nodes: terms + genes
-    //     n = nodes.length;
-    //     m = edges.length;
-    //     ne = new Array(n);
-    //     for (j = 0; j < n; ++j) {
-    //       ne[j] = [];
-    //       ee[j] = [];
-    //     }
-    //     for (j = 0; j < m; ++j) {
-    //       var o = edges[j];
-    //       ne[o.source.index].push(o.target);
-    //       ne[o.target.index].push(o.source);
-    //       ee[o.source.index].push(o);
-    //       ee[o.target.index].push(o);
-    //     }
-    //   }
-    //   return ne[nodeIndex];
-    // }
-
-    // function getAllNeighbors (nodeIndex) {
-    //   var ee = neighborEdges;
-    //   return getNeighbors(nodeIndex).concat(ee[nodeIndex]);
-    // }
 
     /**
      * Places elements along a circle perimenter at equal distance from each other.
@@ -483,13 +451,64 @@ var graph = (function (d3) {
       });
     }
 
-    function cx (d) { return d.x; }
-    function cy (d) { return d.y; }
+    function collide(node) {
+      var padding = 10,
+          r = node.r + padding,
+          nx1 = node.x - r,
+          nx2 = node.x + r,
+          ny1 = node.y - r,
+          ny2 = node.y + r;
+      return function(quad, x1, y1, x2, y2) {
+        if (quad.point && (quad.point !== node)) {
+          var x = node.x - quad.point.x,
+              y = node.y - quad.point.y,
+              l = Math.sqrt(x * x + y * y),
+              r = node.r + quad.point.r + padding;
+          if (l < r) {
+            l = (l - r) / l * .5;
+            node.x -= x *= l;
+            node.y -= y *= l;
+            quad.point.x += x;
+            quad.point.y += y;
+          }
+        }
+        return x1 > nx2
+            || x2 < nx1
+            || y1 > ny2
+            || y2 < ny1;
+      };
+    }
 
-    function fociTick (e) {
-      bubbles.attr({
-        cx: cx, cy: cy
-      });
+    function updateGraph(e) {
+
+      bubbles.each(function (d) {
+        d3.select(this).attr({
+          cx: function () {
+            // Simulation ongoing
+            if (e) {
+              if (d.type === "term") {
+                d.x = d.x + (width/2 - d.x) * (1 + 0.71) * e.alpha;
+              } else {
+                d.x = Math.max(d.r, Math.min(width - d.r, d.x))
+              }
+            }
+
+            return d.x;
+          },
+          cy: function () {
+            // Simulation ongoing
+            if (e) {
+              if (d.type === "term") {
+                d.y = d.y + (height/2 - d.y) * (1 + 0.71) * e.alpha;
+              } else {
+                d.y = Math.max(d.r, Math.min(height - d.r, d.y));
+              }
+
+            }
+            return d.y;
+          }
+        })
+      })
 
       links.attr({
         x1: function(d) { return d.source.x; },
@@ -501,6 +520,22 @@ var graph = (function (d3) {
       text.attr("transform", function (d) {
         return "translate(" + d.x + "," + d.y + ")";
       });
+    }
+
+    var networkVisible = false;
+    vis.style("visibility", null);
+    function fociTick (e) {
+      var q = d3.geom.quadtree(nodes),
+        i = 0,
+        n = nodes.length;
+
+      while (++i < n) q.visit(collide(nodes[i]));
+
+      // if (e.alpha < alphaThreshold && !networkVisible) {
+      //   vis.style("visibility", null);
+      //   networkVisible = true;
+      // }
+      updateGraph(e);
     }
 
     function fixEles() {
@@ -528,6 +563,43 @@ var graph = (function (d3) {
     function normalizeId(id) {
       // a number is not a valid id...
       return "e"+id.replace(/[:;,\.]*/g, "");
+    }
+
+    function getNeighbors (nodeIndex) {
+      // From d3's src/layout/force.js
+      var ne = neighbors || (neighbors = []),
+          ee = neighborEdges || (neighborEdges = []),
+          n, m, j;
+      if (!ne.length) {
+        // All the nodes: terms + genes
+        n = nodes.length;
+        m = edges.length;
+        ne = new Array(n);
+        for (j = 0; j < n; ++j) {
+          ne[j] = [];
+          ee[j] = [];
+        }
+        for (j = 0; j < m; ++j) {
+          var o = edges[j];
+          ne[o.source.index].push(o.target);
+          ne[o.target.index].push(o.source);
+          ee[o.source.index].push(o);
+          ee[o.target.index].push(o);
+        }
+      }
+      return ne[nodeIndex];
+    }
+
+    function getAllNeighbors (nodeIndex) {
+      var ne = getNeighbors(nodeIndex);
+      var ee = neighborEdges;
+      return ne.concat(ee[nodeIndex]);
+    }
+
+    function clearTools () {
+      nodes.forEach(deselect);
+      edges.forEach(deselect);
+      tip.hide();
     }
 
     return {

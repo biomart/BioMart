@@ -69,3 +69,17 @@
 .d3-tip-prop {
   color: red;
 }
+
+.brush .extent {
+  fill-opacity: .1;
+  stroke: #fff;
+  shape-rendering: crispEdges;
+}
+
+.selected {
+  /* I had to use !important because almost all styles are inlined such that
+    they're included into the images */
+  stroke: #FFD04D !important;
+  stroke-width: 3px !important;
+  fill: #C5DA20 !important;
+}
