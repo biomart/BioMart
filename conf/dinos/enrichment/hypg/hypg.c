@@ -271,6 +271,7 @@ int main(int argc, char *argv[]) {
         }
     }
 
+    fclose(fset);
     free_colls();
 
     return 0;
@@ -298,6 +299,7 @@ void free_colls() {
         n = sizeof anno_term / sizeof *anno_term;
         for (i = 0; i < n; ++i) { free(anno_term[i]); }
         free(anno_term);
+        anno_term = NULL;
     }
     if (gen_prev != NULL) free(gen_prev);
 }
