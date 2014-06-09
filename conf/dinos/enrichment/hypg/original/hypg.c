@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include <unistd.h>
+#include <time.h>
 
 #define MAX 2000
 #define UNDEF "NA"
@@ -134,6 +135,9 @@ int main(int argc, char *argv[]) {
     }
     // report input
 
+    // performance test
+    char *log_file = fopen("/tmp/hypg.log", "a");
+    clock_t start = clock(), diff;
 
     // read genome
     fgen = fopen(genfile, "r");
@@ -148,6 +152,10 @@ int main(int argc, char *argv[]) {
     }
     fclose(fgen);
 
+    diff = clock() - start;
+    int msec = diff * 1000 / CLOCKS_PER_SEC;
+    fprintf(log_file, "\nReading the genome took %d seconds %d milliseconds\n", msec/1000, msec%1000);
+
     n_anno = (int *) malloc(ngene * sizeof(int));
     for (i = 0; i < ngene; ++i) {
         n_anno[i] = 0;
@@ -160,6 +168,8 @@ int main(int argc, char *argv[]) {
         maxsize = ngene;
     }
 
+    start = clock();
+
     // read annotation
     fann = fopen(annfile, "r");
     if (fann == NULL) {
@@ -171,6 +181,11 @@ int main(int argc, char *argv[]) {
         addanno(gname, anno);
     }
     fclose(fann);
+
+    diff = clock() - start;
+    msec = diff * 1000 / CLOCKS_PER_SEC;
+    fprintf(log_file, "\nReading annotations took %d seconds %d milliseconds\n", msec/1000, msec%1000);
+
 
     // compute the number of used annotations (for multiple testing)
     ntotanno = 0;
@@ -197,6 +212,8 @@ int main(int argc, char *argv[]) {
     gene_list = (int **) malloc(nanno * sizeof(int *));
     flag = (int *) malloc(nanno * sizeof(int));
 
+    start = clock();
+
     fset = fopen(setfile, "r");
     if (fset == NULL) {
         fprintf(stderr, "Error opening %s\n", setfile);
@@ -222,6 +239,13 @@ int main(int argc, char *argv[]) {
     }
 
     rewind(fset);
+
+    diff = clock() - start;
+    msec = diff * 1000 / CLOCKS_PER_SEC;
+    fprintf(log_file, "\nFirst read of the set took %d seconds %d milliseconds\n", msec/1000, msec%1000);
+
+    start = clock();
+
 
     fprintf(fout_report, "annotations:\t%d\n", ntotanno);
     fprintf(fout_report, "sets:\t%d\n", ntotset);
@@ -266,6 +290,12 @@ int main(int argc, char *argv[]) {
             }
         }
     }
+
+    diff = clock() - start;
+    msec = diff * 1000 / CLOCKS_PER_SEC;
+    fprintf(log_file, "\nAnalysis took %d seconds %d milliseconds\n", msec/1000, msec%1000);
+    fclose(log_file);
+
     fclose(fout_pv);
     fclose(fout_list);
     fclose(fout_report);

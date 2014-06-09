@@ -18,11 +18,12 @@ public class HypgCommand implements ShellCommand {
 			"-g", getBackground().getPath(),
 			"-s", getSets().getPath(),
 			"-a", getAnnotations().getPath(),
-			"-c", getCutoff()
+			"-c", getCutoff(),
+			" > hypg.pv"
 		}, " ");
 	}
-	
-	
+
+
 
 	public boolean isBonferroni() {
         return bonferroni;
