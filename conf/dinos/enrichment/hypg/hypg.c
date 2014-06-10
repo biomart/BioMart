@@ -59,6 +59,7 @@ int *def_cut = NULL;
 int **gene_list = NULL;
 int *flag = NULL;
 
+FILE *fout_pv = NULL;
 
 int main(int argc, char *argv[]) {
 
@@ -202,6 +203,10 @@ int main(int argc, char *argv[]) {
         }
     }
 
+    strcpy(pv_file, prefix);
+    strcat(pv_file, ".pv");
+    fout_pv = fopen(pv_file, "w");
+
     // read and analyze sets
     set_prev = (int *) malloc(nanno * sizeof(int));
     gene_list = (int **) malloc(nanno * sizeof(int *));
@@ -272,6 +277,8 @@ int main(int argc, char *argv[]) {
     }
 
     fclose(fset);
+    fclose(fout_pv);
+
     free_colls();
 
     return 0;
@@ -415,13 +422,13 @@ void analyze(int set_S, int set_b, int set_B, int set_i) {
                 // }
 
                 // New format:
-                printf("%s\t%g\t%g", anno_term[i], pv, adjpv);
-                if (set_prev[i]) printf("\t");
+                fprintf(fout_pv, "%s\t%g\t%g", anno_term[i], pv, adjpv);
+                if (set_prev[i]) fprintf(fout_pv, "\t");
                 for (j = 0; j < set_prev[i]; ++j) {
-                    printf("%s", g.genes[gene_list[i][j]]);
-                    if (j < set_prev[i] - 1) printf("\t");
+                    fprintf(fout_pv, "%s", g.genes[gene_list[i][j]]);
+                    if (j < set_prev[i] - 1) fprintf(fout_pv, "\t");
                 }
-                printf("\n");
+                fprintf(fout_pv, "\n");
             }
         }
 
@@ -442,13 +449,13 @@ void analyze(int set_S, int set_b, int set_B, int set_i) {
                 // }
 
                 // New format:
-                printf("%s\t%g\t%g", anno_term[i], pv, adjpv);
-                if (set_prev[i]) printf("\t");
+                fprintf(fout_pv, "%s\t%g\t%g", anno_term[i], pv, adjpv);
+                if (set_prev[i]) fprintf(fout_pv, "\t");
                 for (j = 0; j < set_prev[i]; ++j) {
-                    printf("%s", g.genes[gene_list[i][j]]);
-                    if (j < set_prev[i] - 1) printf("\t");
+                    fprintf(fout_pv, "%s", g.genes[gene_list[i][j]]);
+                    if (j < set_prev[i] - 1) fprintf(fout_pv, "\t");
                 }
-                printf("\n");
+                fprintf(fout_pv, "\n");
             }
         }
 

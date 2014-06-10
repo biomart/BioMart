@@ -18,8 +18,7 @@ public class HypgCommand implements ShellCommand {
 			"-g", getBackground().getPath(),
 			"-s", getSets().getPath(),
 			"-a", getAnnotations().getPath(),
-			"-c", getCutoff(),
-			" > hypg.pv"
+			"-c", getCutoff()
 		}, " ");
 	}
 
