@@ -21,8 +21,8 @@ public class HypgCommand implements ShellCommand {
 			"-c", getCutoff()
 		}, " ");
 	}
-	
-	
+
+
 
 	public boolean isBonferroni() {
         return bonferroni;

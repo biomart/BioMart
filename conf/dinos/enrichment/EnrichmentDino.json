@@ -1,5 +1,5 @@
 {
-    "enrichment_bin": "conf/dinos/enrichment/hypg",
+    "enrichment_bin": "conf/dinos/enrichment/hypg/hypg.run",
 
     "display": {
 

@@ -234,6 +234,7 @@ var graph = (function (d3) {
         }
       });
 
+    var startTick = +new Date(), symTime = 5000;
     var force = d3.layout.force()
       .size([width, height])
       .linkDistance(linkDistance * 3)
@@ -246,10 +247,10 @@ var graph = (function (d3) {
       .on("tick", fociTick)
       .on("start", function () {
         bubbles.transition()
-          .duration(2350)
+          .duration(2000)
           // .ease("circle")
           .attrTween("r", function (d) {
-            var i = d3.interpolate(5, d.r);
+            var i = d3.interpolate(1, d.r);
             return function (t) { return d.r = i(t); };
           })
       })
@@ -522,7 +523,7 @@ var graph = (function (d3) {
       });
     }
 
-    var networkVisible = false;
+
     vis.style("visibility", null);
     function fociTick (e) {
       var q = d3.geom.quadtree(nodes),
@@ -530,6 +531,10 @@ var graph = (function (d3) {
         n = nodes.length;
 
       while (++i < n) q.visit(collide(nodes[i]));
+
+      if ((+new Date()) - startTick > symTime) {
+        force.stop();
+      }
 
       // if (e.alpha < alphaThreshold && !networkVisible) {
       //   vis.style("visibility", null);
@@ -630,6 +635,7 @@ var graph = (function (d3) {
 }).call(this, d3);
 
 
+
 angular.module("martVisualEnrichment.directives").
 
 directive("mvGraph",
@@ -637,23 +643,40 @@ directive("mvGraph",
           function ($rootScope, state, $timeout) {
     /* global cytoscape: false */
     function link (scope, iElement, iAttrs) {
+
+        function getContainer() {
+          return iElement.find("div").eq(0)[0];
+        }
+
+        function getOptions() {
+          return {
+              container: getContainer(),
+              width: iElement.width(),
+              height: iElement.height()
+          };
+        }
+
+        function filterNodes(nodes, pattern) {
+          return nodes.filter(function (n) {
+            return n.type === "gene" ||
+                   (n.description && n.description.search(pattern) > -1);
+          });
+        }
+
         var vis = null;
         $timeout(function () {
-          var container = iElement.find("div").eq(0)
           vis = graph(
             scope.nodes,
             scope.edges,
-            { container: container[0],
-              width: iElement.width(),
-              height: iElement.height()
-          });
+            getOptions()
+          );
 
           iElement.find(".save-png").on("click", function () {
-            downloadPng(iElement.find("div").eq(0)[0]);
+            downloadPng(getContainer());
           });
 
           iElement.find(".save-svg").on("click", function () {
-            downloadSvg(iElement.find("div").eq(0)[0]);
+            downloadSvg(getContainer());
           });
 
           iElement.find(".save-json").on("click", function () {
@@ -687,7 +710,11 @@ directive("mvGraph",
                 angularInitialization = false;
             } else {
                 if (newPattern !== oldPattern) {
-                    // updateGraph(scope, newPattern);
+                    vis.remove();
+                    vis = graph(
+                      filterNodes(scope.nodes, newPattern),
+                      scope.edges,
+                      getOptions());
                 }
             }
         });
