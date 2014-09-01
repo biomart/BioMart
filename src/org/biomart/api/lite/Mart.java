@@ -37,9 +37,9 @@ import org.jdom.output.XMLOutputter;
 
 
 @XmlRootElement(name="mart")
-@JsonPropertyOrder({"name", "displayName", "description", "config", "isHidden", "operation", "meta"})
+@JsonPropertyOrder({"name", "displayName", "description", "config", "isHidden", "operation", "meta", "default"})
 public class Mart extends LiteMartConfiguratorObject implements Serializable {
-	
+
 	private static final long serialVersionUID = 7412915241915040487L;
 
 	private MartPointer martpointerObject;
@@ -62,8 +62,8 @@ public class Mart extends LiteMartConfiguratorObject implements Serializable {
 		return this.martpointerObject.getConfig().getRDFClasses();
 	}
 	/**
-	 * 
-	 * @return a list of datasets belong to current mart. 
+	 *
+	 * @return a list of datasets belong to current mart.
 	 */
     @JsonIgnore
 	public ArrayList<Dataset> getDatasets() {
@@ -90,12 +90,12 @@ public class Mart extends LiteMartConfiguratorObject implements Serializable {
 //		}
 //		return result;
 //	}
-	
+
 	@Override
 	public String getDisplayName() {
 		return this.martpointerObject.getConfig().getDisplayName();
 	}
-	
+
 	/**
 	 * get all processors in a specified processorGroup
 	 * @param pg
@@ -124,7 +124,7 @@ public class Mart extends LiteMartConfiguratorObject implements Serializable {
 //
 //		return group.getProcessorList();
 //	}
-	
+
 	/**
 	 * get all processors within all processorGroups
 	 * @return
@@ -150,7 +150,7 @@ public class Mart extends LiteMartConfiguratorObject implements Serializable {
 //        }
 //        return null;
 //    }
-	
+
     @JsonIgnore
 	public String getQueryOperation() {
 		return operation;
@@ -165,9 +165,9 @@ public class Mart extends LiteMartConfiguratorObject implements Serializable {
 		String[] datasets = datasetName.split(",");
 		return getLinkableDatasets(new ArrayList<String>(Arrays.asList(datasets)));
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @param datasetNameList
 	 * @return
 	 */
@@ -192,7 +192,7 @@ public class Mart extends LiteMartConfiguratorObject implements Serializable {
 					for(String item: ss) {
 						org.biomart.objects.objects.Dataset ds = link.getPointedMart().getDatasetByName(item);
 						result.add(new Dataset(ds));
-					}					
+					}
 				}
 			}else {
 				String[] ss = pointeddataset.split(",");
@@ -203,12 +203,12 @@ public class Mart extends LiteMartConfiguratorObject implements Serializable {
 			}
 			List<org.biomart.objects.objects.Dataset> dsList = link.getPointedMart().getDatasetList();
 			for(org.biomart.objects.objects.Dataset ds: dsList) {
-				result.add(new Dataset(ds));	
+				result.add(new Dataset(ds));
 			}
 		}
 		return result;
 	}
-	
+
     @JsonIgnore
 	public Dataset getDatasetByName(String datasetName) {
 		for (Dataset dataset : this.getDatasets()) {
@@ -218,9 +218,9 @@ public class Mart extends LiteMartConfiguratorObject implements Serializable {
 		}
 		return null;
 	}
-	
+
 	/**
-	 * get the root container 
+	 * get the root container
 	 * @param datasetName can be multiple datasets separate by ","
 	 * @param includeAttributes
 	 * @param includeFilters
@@ -232,14 +232,14 @@ public class Mart extends LiteMartConfiguratorObject implements Serializable {
 		List<String> dsList = null;
 		if(McUtils.isStringEmpty(datasetName))
 			dsList = new ArrayList<String>();
-		else 
+		else
 			dsList = Arrays.asList(datasetName.split(","));
 
 		org.biomart.objects.objects.Container container = this.martpointerObject.getConfig().getRootContainer();
 		Container rootContainer = new Container(container, dsList, includeAttributes, includeFilters, false, this.currentUser, allowPartialList);
 		return rootContainer;
     }
-	
+
     @XmlTransient @JsonIgnore
 	public String getRDF() {
 		return this.martpointerObject.getConfig().getPropertyValue(XMLElements.RDF);
@@ -275,7 +275,7 @@ public class Mart extends LiteMartConfiguratorObject implements Serializable {
 	public List<Attribute> getAttributes(String datasetName, boolean allowPartialList) {
 		return getAttributes(datasetName,false, allowPartialList);
 	}
-	
+
     @JsonIgnore
 	public List<Attribute> getAttributes(String datasetName, boolean includeHiddenAttributes, boolean allowPartialList) {
 		List<String> dslist = new ArrayList<String>();
@@ -283,11 +283,11 @@ public class Mart extends LiteMartConfiguratorObject implements Serializable {
 			String[] datasets = datasetName.split(",");
 			dslist.addAll(Arrays.asList(datasets));
 		}
-		return getAttributes(dslist, includeHiddenAttributes, includeHiddenAttributes,true, allowPartialList);		
+		return getAttributes(dslist, includeHiddenAttributes, includeHiddenAttributes,true, allowPartialList);
 	}
-	
+
     /**
-     * 
+     *
      * @param datasetNames
      * @param includeHiddenContainers
      * @param includeHiddenAttriubtes
@@ -296,7 +296,7 @@ public class Mart extends LiteMartConfiguratorObject implements Serializable {
      * @return
      */
     @JsonIgnore
-	private List<Attribute> getAttributes(List<String> datasetNames, boolean includeHiddenContainers, boolean includeHiddenAttriubtes, 
+	private List<Attribute> getAttributes(List<String> datasetNames, boolean includeHiddenContainers, boolean includeHiddenAttriubtes,
 			boolean setField, boolean allowPartialList) {
 		List<org.biomart.api.lite.Attribute> liteAttributeList = new ArrayList<org.biomart.api.lite.Attribute>();
 		List<org.biomart.objects.objects.Attribute> fullAttributeList = this.martpointerObject.getConfig().getAttributes(datasetNames,includeHiddenContainers,includeHiddenAttriubtes);
@@ -322,10 +322,10 @@ public class Mart extends LiteMartConfiguratorObject implements Serializable {
 				String ptRef = ptRefList.get(1);
 				String ptName = McUtils.getPartitionTableName(ptRef);
 				PartitionTable pt = this.martpointerObject.getMart().getPartitionTableByName(ptName);
-				//use first row			
+				//use first row
 				for(int i=0; i<pt.getTotalRows(); i++) {
 					String dsName = null;
-					if(pt.getPartitionType() == PartitionType.SCHEMA) 
+					if(pt.getPartitionType() == PartitionType.SCHEMA)
 						dsName = pt.getValue(i, PartitionUtils.DATASETNAME);
 					else
 						dsName = pt.getValue(i, 0);
@@ -344,7 +344,7 @@ public class Mart extends LiteMartConfiguratorObject implements Serializable {
 						break;
 					}
 				}
-				
+
 			} else { //no partition binding
 				org.biomart.api.lite.Attribute liteAttribute = null;
 				if(setField)
@@ -354,7 +354,7 @@ public class Mart extends LiteMartConfiguratorObject implements Serializable {
 				liteAttribute.setRange(datasetNames);
 				liteAttribute.setAllowPartialList(allowPartialList);
 				liteAttributeList.add(liteAttribute);
-			}		
+			}
 		}
 		return liteAttributeList;
 	}
@@ -375,7 +375,7 @@ public class Mart extends LiteMartConfiguratorObject implements Serializable {
 		}
 		return result;
 	}
-	
+
 	/**
 	 * if datasetName is empty, get the union of filters
 	 * @param datasetName
@@ -391,7 +391,7 @@ public class Mart extends LiteMartConfiguratorObject implements Serializable {
 		String[] datasets = datasetName.split(",");
 		return this.getFilters(new ArrayList<String>(Arrays.asList(datasets)), includeHiddenContainer,includeHiddenFilter);
 	}
-	
+
 	/**
 	 * if datasetNames is empty, get the union of filters
 	 * @param datasetNames
@@ -424,13 +424,13 @@ public class Mart extends LiteMartConfiguratorObject implements Serializable {
 				//use first row
 				for(int i=0; i<pt.getTotalRows(); i++) {
 					String dsName = null;
-					if(pt.getPartitionType() == PartitionType.SCHEMA) 
+					if(pt.getPartitionType() == PartitionType.SCHEMA)
 						dsName = pt.getValue(i, PartitionUtils.DATASETNAME);
 					else
 						dsName = pt.getValue(i, 0);
 					if(!datasetNames.contains(dsName))
 						continue;
-					
+
 					String realName = McUtils.replacePartitionReferences(pt, i, ptRefList);
 					if(realName !=null) {
 						org.biomart.api.lite.Filter liteFilter = null;
@@ -440,19 +440,19 @@ public class Mart extends LiteMartConfiguratorObject implements Serializable {
 						break;
 					}
 				}
-				
+
 			} else { //no partition binding
 
 
 				org.biomart.api.lite.Filter liteFilter = new org.biomart.api.lite.Filter(liteContainer,filter);
 				liteFilter.setRange(datasetNames);
 				liteFilterList.add(liteFilter);
-			 
+
 			}
 		}
 		return liteFilterList;
 	}
-	
+
     @XmlAttribute(name="isHidden")
     @JsonProperty("isHidden")
 	public boolean isHidden() {
@@ -478,6 +478,13 @@ public class Mart extends LiteMartConfiguratorObject implements Serializable {
     public String getConfigName() {
     	org.biomart.objects.objects.Config cfg = this.martpointerObject.getConfig();
         return cfg.getName();
+    }
+
+    @XmlAttribute(name="default")
+    @JsonProperty("default")
+    public boolean isDefaultConfig() {
+    	org.biomart.objects.objects.Config cfg = this.martpointerObject.getConfig();
+    	return cfg.isDefaultConfig();
     }
 
     @JsonIgnore
@@ -522,7 +529,7 @@ public class Mart extends LiteMartConfiguratorObject implements Serializable {
     public String getGroupName() {
         return this.martpointerObject.getGroupName();
     }
-    
+
 	@Override
 	protected Jsoml generateExchangeFormat(boolean xml) throws FunctionalException {
 		Jsoml jsoml = new Jsoml(xml, McNodeType.MART.toString());
@@ -541,5 +548,5 @@ public class Mart extends LiteMartConfiguratorObject implements Serializable {
         }
 		return jsoml;
 	}
-	
+
 }
