@@ -432,6 +432,7 @@ public class ObjectController {
                 Config newConfig = new Config(configElement);
                 newConfig.setName(mart.getName());
                 newConfig.setMaster(true);
+                newConfig.setDefaultConfig(true);
                 mart.addConfig(newConfig);
                 newConfig.synchronizedFromXML();
             }
@@ -1072,6 +1073,7 @@ public class ObjectController {
 
     public Config addEmptyConfig(Mart mart, String configName, UserGroup user, GuiContainer gc) {
         Config newConfig = new Config(configName);
+        newConfig.setDefaultConfig(true);
         newConfig.setMaster(false);
         newConfig.setHideValue(false);
 
@@ -1091,6 +1093,7 @@ public class ObjectController {
         Config masterConfig = mart.getMasterConfig();
         Element configElement = masterConfig.generateXml(false);
         Config newConfig = new Config(configElement);
+        newConfig.setDefaultConfig(true);
         newConfig.setName(configName);
         newConfig.setDisplayName(configName);
         newConfig.setMaster(false);
