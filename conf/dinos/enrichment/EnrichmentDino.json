@@ -5,7 +5,7 @@
 
         "gene": {
             "filter": "ensembl_gene_id",
-            "gene_attribute": "external_gene_id",
+            "gene_attribute": "external_gene_name",
             "description_attribute": "description",
             "other_attributes": ["status", "gene_biotype", "chromosome_name", "start_position", "end_position", "strand", "transcript_count"]
         },
@@ -14,7 +14,7 @@
 
             "Gene Ontology (GO)": {
                 "filters": {
-                    "with_ox_goslim_goa": "only"
+                    "with_goslim_goa": "only"
                 },
                 "annotation_attribute": "goslim_goa_accession",
                 "description_attribute": "goslim_goa_description",
