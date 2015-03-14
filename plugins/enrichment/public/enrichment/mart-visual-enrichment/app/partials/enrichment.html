@@ -123,3 +123,26 @@
             </div>
         </div>
 </div>
+
+
+
+<script type="text/javascript">
+	var check_load_example = function(){
+		if($('#load_example').length>0){
+			$('#load_example').click(function(){		
+				$(this).parent().find('textarea').val('AURKA, AURKB, AURKC, PLK1, CDK1, CDK4');
+				$(this).parent().find('textarea').text('AURKA, AURKB, AURKC, PLK1, CDK1, CDK4');
+				$(this).parent().find('textarea').change();		
+			});
+		}
+		else {
+			setTimeout(check_load_example,200);
+		}
+	}
+
+	$(document).ready(function(){
+		check_load_example();
+	});
+</script>
+
+
