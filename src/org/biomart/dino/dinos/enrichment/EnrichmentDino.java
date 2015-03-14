@@ -492,7 +492,7 @@ public class EnrichmentDino implements Dino {
                 qbuilder.setHeader(false)
                         .setDataset(annotationDatasetName, annotationConfigName)
                         .addAttribute("ensembl_gene_id")
-                        .addFilter("with_ox_goslim_goa", "only");
+                        .addFilter("with_goslim_goa", "only");
                 this.addFfFilters(qbuilder);
                 
                 OutputStream out = null;
