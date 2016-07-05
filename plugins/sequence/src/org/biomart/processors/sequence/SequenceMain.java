@@ -131,7 +131,7 @@ public class SequenceMain {
 
 		long timestamp1 = printTimestamp(">");
 		FileOutputStream seqOut = new FileOutputStream(new File(outputFile));
-		portal.executeQuery(xmlQuery, seqOut);
+		portal.executeQuery(xmlQuery, seqOut,false);
 		seqOut.close();
 		long timestamp2 = printTimestamp("<");
 		int timestampMin = (int)((timestamp2-timestamp1)/60000);
