@@ -34,28 +34,28 @@ import static com.google.common.base.Strings.isNullOrEmpty;
  *
  */
 public class Sequence extends ProcessorImpl implements SequenceConstants {
-    private Connection conn = null;
+    protected Connection conn = null;
 
     // Parser lookup map
-    private static final Map<String,Class<? extends SequenceParser>> lookup;
+    protected static final Map<String,Class<? extends SequenceParser>> lookup;
 
     // Track count
-    private int limit = Integer.MAX_VALUE;
-    private int total = 0;
-    private boolean hasResults = false;
-    private boolean isDone = false;
+    protected int limit = Integer.MAX_VALUE;
+    protected int total = 0;
+    protected boolean hasResults = false;
+    protected boolean isDone = false;
 
-    private String databaseTableName;
-    private int headerAttributes = 0;
+    protected String databaseTableName;
+    protected int headerAttributes = 0;
 
-    private SequenceParser parser;
+    protected SequenceParser parser;
 
     // Cache rows until BATCH_SIZE is reached, then do the actual sequence retrieval
-    private static final int BATCH_SIZE = 100;
-    private List<String[]> buffer = new ArrayList<String[]>();
-    private int count = 0;
+    protected static final int BATCH_SIZE = 100;
+    protected List<String[]> buffer = new ArrayList<String[]>();
+    protected int count = 0;
 
-    protected class SequenceCallback implements Function<String[],Boolean>, OutputConstants {
+    private class SequenceCallback implements Function<String[],Boolean>, OutputConstants {
         @Override
         public Boolean apply(String[] row) {
             hasResults = true;
@@ -281,7 +281,7 @@ public class Sequence extends ProcessorImpl implements SequenceConstants {
         closeSilently(conn);
     }
 
-    private void validateDatabaseSettings() {
+    protected void validateDatabaseSettings() {
         if (isNullOrEmpty(this.jdbcConnectionURL.value)) {
             this.jdbcConnectionURL.value = System.getProperty("processors.sequence.connection");
         }

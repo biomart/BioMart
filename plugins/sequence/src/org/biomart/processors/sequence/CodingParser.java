@@ -49,7 +49,7 @@ public class CodingParser extends SequenceParser {
 
     private HashSet<String> seqEdit = new HashSet<String>();
 
-    public CodingParser() { this(false, 12); }
+    public CodingParser() { this(false, 14); }
     public CodingParser(boolean isProtein, int i) {
         super(i);
         this.isProtein = isProtein;
